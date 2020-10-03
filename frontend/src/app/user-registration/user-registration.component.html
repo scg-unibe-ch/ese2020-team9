@@ -3,6 +3,7 @@
 
     <mat-form-field>
       <input matInput placeholder="User Name" [(ngModel)]="userName" name="userName">
+      <div *ngIf="true" class="invalid-feedback">*First Name is required </div>
     </mat-form-field>
 
     <mat-form-field>
@@ -35,7 +36,5 @@
 
 
     <button mat-flat-button color="primary" (click)="registration()">Registration</button>
-
-
 
 </mat-card>

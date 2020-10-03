@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-registration',
@@ -22,7 +23,7 @@ export class UserRegistrationComponent implements OnInit {
   }
 
   registration(): void {
-      this.httpClient.post(environment.endpointURL + 'user/login', {
+      this.httpClient.post(environment.endpointURL + 'user/registration', {
         userName: this.userName,
         password: this.password,
 
@@ -31,8 +32,6 @@ export class UserRegistrationComponent implements OnInit {
       });
     }
 
-   validate():{
 
-   }
 
 }

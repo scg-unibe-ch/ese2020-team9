@@ -7,6 +7,7 @@ import { Optional, Model, Sequelize, DataTypes, IntegerDataType } from 'sequeliz
 export interface UserAttributes {
     userId: number;
     admin: boolean;
+    wallet: number;
     userName: string;
     password: string;
     userMail: string;
@@ -25,6 +26,7 @@ export interface UserCreationAttributes extends Optional<UserAttributes, 'userId
 export class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
     userId!: number;
     admin!: boolean;
+    wallet!: number;
     userName!: string;
     password!: string;
     userMail!: string;
@@ -49,6 +51,10 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
                 type: DataTypes.BOOLEAN,
                 defaultValue: false,
                 allowNull: false
+            },
+            wallet: {
+                type: DataTypes.INTEGER,
+                defaultValue: 500,
             },
             userName: {
                 type: DataTypes.STRING,

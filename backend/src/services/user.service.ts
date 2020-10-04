@@ -13,14 +13,18 @@ export class UserService {
 
     public login(loginRequestee: LoginRequest): Promise<User | LoginResponse> {
         const secret = process.env.JWT_SECRET;
+        const { Op } = require('sequelize');
         return User.findOne({
-            where: {
-                userName: loginRequestee.userName
+            where:  {
+                [Op.or]: [
+                {userName: loginRequestee.userName},
+                {userMail: loginRequestee.userName}
+                ]
             }
         })
         .then(user => {
-            if (bcrypt.compareSync(loginRequestee.password, user.password)) {// compares the hash with the password from the lognin request
-                const token: string = jwt.sign({ userName: user.userName, userId: user.userId }, secret, { expiresIn: '2h' });
+            if (bcrypt.compareSync(loginRequestee.password, user.password)) {// compares the hash with the password from the login request
+                const token: string = jwt.sign({ userName: user.userName, userId: user.userId, admin: user.admin }, secret, { expiresIn: '2h' });
                 return Promise.resolve({ user, token });
             } else {
                 return Promise.reject({ message: 'not authorized' });

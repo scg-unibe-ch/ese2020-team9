@@ -16,8 +16,11 @@ export class UserRegistrationComponent implements OnInit {
   lastName = '';
   gender = '';
   telephoneNumber = '';
-  address = '';
-  check = false;
+  street = '';
+  zipCode = '';
+  city = '';
+  country = '';
+
 
   constructor(private httpClient: HttpClient) { }
 
@@ -36,25 +39,25 @@ export class UserRegistrationComponent implements OnInit {
     }
 
 
-  evaluate(userName):b{
+  evaluate(userName):boolean{
     if (userName.length > 0) return true
     else return false
   }
 
   //check if field is empty
-  empty(o):b{
+  empty(o):boolean{
       if (o === "") return true;
       else return false
     }
 
   //password is at least 7 characters
-  passwordLength(pw):b{
+  passwordLength(pw):boolean{
       if (pw.length >= 7) return true;
       else return false
     }
 
   // Numbers
-  passwordHasNumber(pw):b{
+  passwordHasNumber(pw):boolean{
       let numberOfElements = 0;
       numberOfElements = /.*[0-9].*/.test(pw) ? ++numberOfElements : numberOfElements;
       if (numberOfElements >= 1) return true;
@@ -62,7 +65,7 @@ export class UserRegistrationComponent implements OnInit {
   }
 
   //
-  passwordContainsMixedLetters(pw):b{
+  passwordContainsMixedLetters(pw):boolean{
         let numberOfElementsLow = 0;
         numberOfElementsLow = /.*[a-z].*/.test(pw) ? ++numberOfElementsLow : numberOfElementsLow;      // Lowercase letters
          let numberOfElementsUp = 0;
@@ -71,7 +74,8 @@ export class UserRegistrationComponent implements OnInit {
            else return false
    }
   // Special Chars
-  passwordContainsSpecialChar(pw):b{
+  passwordContainsSpecialChar(pw):boolean{
+
       var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
 
       if(format.test(pw)){
@@ -82,9 +86,17 @@ export class UserRegistrationComponent implements OnInit {
 
   }
 
+  lala(){
+    return true
+  }
+
   //make register button visible
-  allFieldsAreFilled():b{
-    return false
+  allFieldsAreFilled():boolean{
+    var x = true
+    if (x){ return true}
+    else {
+      return false
+    }
   }
 
 }

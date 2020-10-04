@@ -63,7 +63,7 @@
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput placeholder="Zip code" [(ngModel)]="zipcode" name="zipcode">
+    <input matInput placeholder="Zip code" [(ngModel)]="zipCode" name="zipCode">
   </mat-form-field>
 
   <mat-form-field>
@@ -78,5 +78,5 @@
 </mat-card>
 
 <div >
-  <button mat-flat-button color="primary" (click)="registration()" [disabled]="allFieldsAreFilled()">Registration</button>
+  <button mat-flat-button color="primary" (click)="registration()" [disabled]="!allFieldsAreFilled()">Registration</button>
 </div>

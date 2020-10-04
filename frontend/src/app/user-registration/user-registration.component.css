@@ -1,3 +1,6 @@
 .invalid-feedback {
    color: DarkRed;
    }
+hr {
+    height: 1px;
+}

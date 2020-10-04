@@ -86,14 +86,19 @@ export class UserRegistrationComponent implements OnInit {
 
   }
 
-  lala(){
-    return true
-  }
+
 
   //make register button visible
   allFieldsAreFilled():boolean{
-    var x = true
-    if (x){ return true}
+    let un = this.evaluate(this.userName);
+    let fn = this.evaluate(this.firstName);
+    let ln = this.evaluate(this.lastName);
+    let pw1 = this.passwordLength(this.password);
+    let pw2 = this.passwordHasNumber(this.password);
+    let pw3 = this.passwordHasNumber(this.password);
+    let pw4 = this.passwordContainsMixedLetters(this.password);
+    let pw5 = this.passwordContainsSpecialChar(this.password);
+    if (un&&fn&&ln&&pw1&&pw2&&pw3&&pw4&&pw5){ return true}
     else {
       return false
     }

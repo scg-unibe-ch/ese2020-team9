@@ -2,7 +2,7 @@
 
 This documents describes in detail the endpoints provided by the backend.
 
-## User API (legacy!)
+## User API
 
 ### register a user `"/user/register"` (POST)
 
@@ -249,8 +249,20 @@ Needs an Authorization header with a valid token in the request. Will return eit
 
 ## Product API (draft!)
 
-### add a product
+### add a product `"/products/"` (POST)
 
-### change a product
+- Request-Body n/a
 
-### delete a product
+- Response-Body n/a
+
+### change a product `"/products/:id"` (PUT) (for example "/products/2")
+
+- Request-Body n/a
+
+- Response-Body n/a
+
+### delete a product `"/products/:id"` (DELETE) (for example "/products/2")
+
+- Request-Body n/a
+
+- Response-Body n/a

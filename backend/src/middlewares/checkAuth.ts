@@ -20,8 +20,6 @@ export function verifyToken(req: Request, res: Response, next: any) {
 export function verifyAdmin(req: Request, res: Response, next: any) {
     try {
         const {admin} = decodeToken(req, res);
-        const decoded = decodeToken(req, res);
-
         if (admin === true) {
             next();
         } else {

@@ -7,6 +7,6 @@ export interface LoginResponse {
 }
 
 export interface LoginRequest {
-    userName: string;            // could be either E-Mail or UserName
+    userLogin: string;            // could be either E-Mail or UserName
     password: string;
 }

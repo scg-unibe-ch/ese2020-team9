@@ -17,8 +17,8 @@ export class UserService {
         return User.findOne({
             where:  {
                 [Op.or]: [
-                {userName: loginRequestee.userName},
-                {userMail: loginRequestee.userName}
+                {userName: loginRequestee.userLogin},
+                {userMail: loginRequestee.userLogin}
                 ]
             }
         })

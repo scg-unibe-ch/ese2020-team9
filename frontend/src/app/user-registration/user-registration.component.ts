@@ -33,14 +33,25 @@ export class UserRegistrationComponent implements OnInit {
         userName: this.userName,
         password: this.password,
 
+        //email = this.email,
+        //firstName = this.firstName,
+        //lastName = this.lastName,
+        //gender = this.gender,
+        //telephoneNumber = this.telephoneNumber,
+        //street = this.street,
+        //zipCode = this.zipCode,
+        //city = this.city,
+        //country = this.country,
+
+
       }).subscribe((res: any) => {
 
       });
     }
 
 
-  evaluate(userName):boolean{
-    if (userName.length > 0) return true
+  evaluate(o):boolean{
+    if (o.length > 0) return true
     else return false
   }
 
@@ -56,7 +67,7 @@ export class UserRegistrationComponent implements OnInit {
       else return false
     }
 
-  // Numbers
+  // password contains Number
   passwordHasNumber(pw):boolean{
       let numberOfElements = 0;
       numberOfElements = /.*[0-9].*/.test(pw) ? ++numberOfElements : numberOfElements;
@@ -64,7 +75,7 @@ export class UserRegistrationComponent implements OnInit {
       else return false
   }
 
-  //
+  // password contains Mixed Letters
   passwordContainsMixedLetters(pw):boolean{
         let numberOfElementsLow = 0;
         numberOfElementsLow = /.*[a-z].*/.test(pw) ? ++numberOfElementsLow : numberOfElementsLow;      // Lowercase letters
@@ -73,7 +84,7 @@ export class UserRegistrationComponent implements OnInit {
         if (numberOfElementsLow > 0 && numberOfElementsUp > 0) return true;
            else return false
    }
-  // Special Chars
+  //password contains Special Chars
   passwordContainsSpecialChar(pw):boolean{
 
       var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;

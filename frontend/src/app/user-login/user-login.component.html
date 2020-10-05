@@ -14,7 +14,10 @@
 
   <div *ngIf="loggedIn">
     <button mat-flat-button color="warn" (click)="logout()">Logout</button>
-    You are currently logged in as {{ userName }}
+    You are currently logged in as {{ userName }}<br>
+    Are you Admin User?
+    {{isAdmin}}
+
   </div>
 </mat-card>
 

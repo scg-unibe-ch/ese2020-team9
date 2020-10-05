@@ -13,9 +13,10 @@ export class UserLoginComponent implements OnInit {
   password = '';
 
   userToken: string;
-  isAdmin = false;
-  loggedIn = false;
 
+  loggedIn = false;
+  isAdmin:  boolean;
+  userId : number;
   secureEndpointResponse = '';
 
   constructor(private httpClient: HttpClient) { }
@@ -42,6 +43,8 @@ export class UserLoginComponent implements OnInit {
       localStorage.setItem('userToken', res.token);
       localStorage.setItem('userName', res.user.userName);
       localStorage.setItem('isAdmin', res.user.isAdmin);
+      this.isAdmin = res.user.isAdmin;
+      this.userId = res.user.userId;
       this.checkUserStatus();
     });
   }

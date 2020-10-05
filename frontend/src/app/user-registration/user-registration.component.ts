@@ -29,10 +29,9 @@ export class UserRegistrationComponent implements OnInit {
   }
 
   registration(): void {
-      this.httpClient.post(environment.endpointURL + 'user/registration', {
+      this.httpClient.post(environment.endpointURL + 'user/register', {
         userName: this.userName,
         password: this.password,
-
         //email = this.email,
         //firstName = this.firstName,
         //lastName = this.lastName,
@@ -45,6 +44,9 @@ export class UserRegistrationComponent implements OnInit {
 
 
       }).subscribe((res: any) => {
+          // Set user data in local storage
+           localStorage.setItem('userToken', res.token);
+           localStorage.setItem('userName', user.userName);
 
       });
     }

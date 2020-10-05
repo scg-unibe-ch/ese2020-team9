@@ -1,0 +1,83 @@
+
+<mat-card>
+  <mat-form-field>
+    <input matInput placeholder="Email" [(ngModel)]="email" name="email">
+    <div *ngIf="!evaluate(email)" class="invalid-feedback">Email is required </div>
+
+  </mat-form-field>
+
+
+
+    <mat-form-field>
+      <input matInput placeholder="Password" [(ngModel)]="password" name="password" type="password">
+      <ng-template [ngIf]="empty(password)" [ngIfElse]="error">
+        <div class="invalid-feedback">Password is required</div>
+      </ng-template>
+      <ng-template #error>
+        <div *ngIf="!passwordContainsMixedLetters(password)" class="invalid-feedback"> Use capital and small letters
+        </div>
+        <div *ngIf="!passwordHasNumber(password)" class="invalid-feedback"> Use at least one number
+        </div>
+        <div *ngIf="!passwordContainsSpecialChar(password)" class="invalid-feedback"> Use at least one special character
+        </div>
+        <div *ngIf="!passwordLength(password)" class="invalid-feedback"> Use at least 7 characters
+        </div>
+      </ng-template>
+
+    </mat-form-field>
+    <br>
+
+  <mat-form-field>
+    <input matInput placeholder="User Name" [(ngModel)]="userName" name="userName" (change)="evaluate(userName)">
+
+    <div *ngIf="!evaluate(userName)" class="invalid-feedback">User Name is required </div>
+
+  </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="First Name" [(ngModel)]="firstName" name="firstName">
+      <div *ngIf="!evaluate(firstName)" class="invalid-feedback">First Name is required </div>
+
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Last Name" [(ngModel)]="lastName" name="lastName">
+      <div *ngIf="!evaluate(lastName)" class="invalid-feedback">Last Name is required </div>
+
+    </mat-form-field>
+</mat-card>
+
+<hr>
+<mat-card>
+    <mat-form-field>
+      <input matInput placeholder="Gender" [(ngModel)]="gender" name="gender">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Telephone Number" [(ngModel)]="telephoneNumber" name="telephoneNumber">
+    </mat-form-field>
+</mat-card>
+
+<mat-card>
+  <mat-form-field>
+    <input matInput placeholder="Street" [(ngModel)]="street" name="street">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Zip code" [(ngModel)]="zipCode" name="zipCode">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="City" [(ngModel)]="city" name="city">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Country" [(ngModel)]="country" name="country">
+  </mat-form-field>
+
+
+</mat-card>
+
+<div >
+  <button mat-flat-button color="primary" (click)="registration()" [disabled]="!allFieldsAreFilled()">Registration</button>
+</div>

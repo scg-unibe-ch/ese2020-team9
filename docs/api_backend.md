@@ -11,7 +11,16 @@ This documents describes in detail the endpoints provided by the backend.
     ```json
     {
         "userName": "string",
-        "password": "string"
+        "password": "string",
+        "userMail": "string",
+        "firstName": "string",
+        "lastName": "string",
+        "gender":   "string",
+        "phoneNumber": "number",
+        "adressStreet": "string",
+        "adressPin": "string",
+        "adressCity": "string",
+        "adressCountry": "string"
     }
     ```
 
@@ -19,9 +28,20 @@ This documents describes in detail the endpoints provided by the backend.
 
     ```json
     {
+        "admin":  "boolean",
+        "wallet": "number",
         "userId": "number",
         "userName": "string",
-        "password": "string (Hash)"
+        "password": "string (Hash)",
+        "userMail": "string",
+        "firstName": "string",
+        "lastName": "string",
+        "gender":   "string",
+        "phoneNumber": "number",
+        "adressStreet": "string",
+        "adressPin": "string",
+        "adressCity": "string",
+        "adressCountry": "string"
     }
     ```
 
@@ -31,7 +51,7 @@ This documents describes in detail the endpoints provided by the backend.
 
     ```json
     {
-        "userName": "string",
+        "userLogin": "string",
         "password": "string"
     }
     ```
@@ -42,8 +62,21 @@ This documents describes in detail the endpoints provided by the backend.
     {
         "user" : {
             "userId": "number",
+            "admin":  "boolean",
+            "wallet": "number",
             "userName": "string",
-            "userPassword": "string (Hash)"
+            "password": "string (Hash)",
+            "userMail": "string",
+            "firstName": "string",
+            "lastName": "string",
+            "gender":   "string",
+            "phoneNumber": "number",
+            "adressStreet": "string",
+            "adressPin": "string",
+            "adressCity": "string",
+            "adressCountry": "string",
+            "createdAt" : "string",
+            "updatedAt" : "string",
         },
         "token": "string"
     }
@@ -59,13 +92,39 @@ Requires authorization header with a valid token in the request!
     [
         {
             "userId": "number",
+            "admin":  "boolean",
+            "wallet": "number",
             "userName": "string",
-            "userPassword": "string (Hash)"
+            "password": "string (Hash)",
+            "userMail": "string",
+            "firstName": "string",
+            "lastName": "string",
+            "gender":   "string",
+            "phoneNumber": "number",
+            "adressStreet": "string",
+            "adressPin": "string",
+            "adressCity": "string",
+            "adressCountry": "string",
+            "createdAt" : "string",
+            "updatedAt" : "string",
         },
         {
             "userId": "number",
+            "admin":  "boolean",
+            "wallet": "number",
             "userName": "string",
-            "userPassword": "string (Hash)"
+            "password": "string (Hash)",
+            "userMail": "string",
+            "firstName": "string",
+            "lastName": "string",
+            "gender":   "string",
+            "phoneNumber": "number",
+            "adressStreet": "string",
+            "adressPin": "string",
+            "adressCity": "string",
+            "adressCountry": "string",
+            "createdAt" : "string",
+            "updatedAt" : "string",
         },
         ...
     ]

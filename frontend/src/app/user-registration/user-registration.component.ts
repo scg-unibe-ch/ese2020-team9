@@ -11,7 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class UserRegistrationComponent implements OnInit {
   userName = '';
   password = '';
-  email = '';
+  userMail = '';
   firstName = '';
   lastName = '';
   gender = '';
@@ -34,7 +34,7 @@ export class UserRegistrationComponent implements OnInit {
       this.httpClient.post(environment.endpointURL + 'user/register', {
         userName: this.userName,
         password: this.password,
-        userMail: this.email,
+        userMail: this.userMail,
         firstName: this.firstName,
         lastName: this.lastName,
         gender: this.gender,
@@ -67,6 +67,11 @@ export class UserRegistrationComponent implements OnInit {
     if (o.length > 0) return true
     else return false
   }
+
+  emailFormat(e):boolean{
+  if (e.includes('@')) return true
+      else return false
+      }
 
   //check if field is empty
   empty(o):boolean{

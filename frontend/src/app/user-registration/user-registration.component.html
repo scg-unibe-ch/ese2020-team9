@@ -1,8 +1,8 @@
 
 <mat-card>
   <mat-form-field>
-    <input matInput placeholder="Email" [(ngModel)]="email" name="email">
-    <div *ngIf="!evaluate(email)" class="invalid-feedback">Email is required </div>
+    <input matInput placeholder="Email" [(ngModel)]="userMail" name="userMail">
+    <div *ngIf="!emailFormat(userMail)" class="invalid-feedback">Email is required </div>
 
   </mat-form-field>
 

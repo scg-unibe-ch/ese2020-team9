@@ -32,21 +32,21 @@ export class UserRegistrationComponent implements OnInit {
       this.httpClient.post(environment.endpointURL + 'user/register', {
         userName: this.userName,
         password: this.password,
-        //email = this.email,
-        //firstName = this.firstName,
-        //lastName = this.lastName,
-        //gender = this.gender,
-        //telephoneNumber = this.telephoneNumber,
-        //street = this.street,
-        //zipCode = this.zipCode,
-        //city = this.city,
-        //country = this.country,
+        userMail: this.email,
+        firstName: this.firstName,
+        lastName: this.lastName,
+        gender: this.gender,
+        telephoneNumber: this.telephoneNumber,
+        street: this.street,
+        zipCode: this.zipCode,
+        city: this.city,
+        country: this.country,
 
 
       }).subscribe((res: any) => {
           // Set user data in local storage
            localStorage.setItem('userToken', res.token);
-           localStorage.setItem('userName', user.userName);
+
 
       });
     }

@@ -16,10 +16,10 @@ export class UserRegistrationComponent implements OnInit {
   lastName = '';
   gender = '';
   telephoneNumber = '';
-  street = '';
-  zipCode = '';
-  city = '';
-  country = '';
+  adressStreet = '';
+  adressPin = '';
+  adressCity = '';
+  adressCountry = '';
   userId = '';
   errorMessage = '';
   test:boolean
@@ -39,10 +39,10 @@ export class UserRegistrationComponent implements OnInit {
         lastName: this.lastName,
         gender: this.gender,
         telephoneNumber: this.telephoneNumber,
-        street: this.street,
-        zipCode: this.zipCode,
-        city: this.city,
-        country: this.country,
+        adressStreet: this.adressStreet,
+        adressPin: this.adressPin,
+        adressCity: this.adressCity,
+        adressCountry: this.adressCountry,
 
 
       }).subscribe((res: any) => {

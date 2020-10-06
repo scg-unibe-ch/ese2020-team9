@@ -20,7 +20,9 @@ export class UserRegistrationComponent implements OnInit {
   zipCode = '';
   city = '';
   country = '';
-
+  userId = '';
+  errorMessage = '';
+  test:boolean
 
   constructor(private httpClient: HttpClient) { }
 
@@ -46,11 +48,20 @@ export class UserRegistrationComponent implements OnInit {
       }).subscribe((res: any) => {
           // Set user data in local storage
            localStorage.setItem('userToken', res.token);
-
+           localStorage.setItem('userId', res.userId);
+           this.userId = res.userId;
+           if (this.userId ===''){
+           this.errorMessage = 'We are sorry. Something went wrong and we could not complete your registration'
+           } else {this.errorMessage = ''}
 
       });
     }
 
+  registrationComplete():boolean{
+    if (this.userId ===''){
+       return false
+       } else {return true}
+  }
 
   evaluate(o):boolean{
     if (o.length > 0) return true

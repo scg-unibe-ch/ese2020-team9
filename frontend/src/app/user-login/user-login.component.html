@@ -9,14 +9,14 @@
     </mat-form-field>
     <button mat-flat-button color="primary" (click)="login()">Login</button>
 
-
   </div>
 
   <div *ngIf="loggedIn">
     <button mat-flat-button color="warn" (click)="logout()">Logout</button>
     You are currently logged in as {{ userName }}<br>
-    Are you Admin User? {{isAdmin}}
-///////
+    Are you Admin User? :{{isUser}} :
+
+
   </div>
 </mat-card>
 

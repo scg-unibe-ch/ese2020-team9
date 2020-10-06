@@ -76,8 +76,21 @@
   </mat-form-field>
 
 
+
+
 </mat-card>
 
-<div >
-  <button mat-flat-button color="primary" (click)="registration()" [disabled]="!allFieldsAreFilled()">Registration</button>
+<div>
+  <ng-template [ngIf]="!registrationComplete()" [ngIfElse]="successMessage">
+
+    <button mat-flat-button color="primary" (click)="registration()" [disabled]="!allFieldsAreFilled()">Registration</button>
+
+  </ng-template>
+  <ng-template #successMessage>
+    <div *ngIf="registrationComplete()" class="invalid-feedback"> Your registration is now complete
+    </div>
+
+  </ng-template>
 </div>
+<hr>
+<h3>{{errorMessage}}</h3>

@@ -9,7 +9,7 @@ import { environment } from '../../environments/environment';
 })
 export class UserLoginComponent implements OnInit {
 
-  userName = '';
+  userLogin = '';
   password = '';
 
   userToken: string;
@@ -28,7 +28,7 @@ export class UserLoginComponent implements OnInit {
   checkUserStatus(): void {
     // Get user data from local storage
     this.userToken = localStorage.getItem('userToken');
-    this.userName = localStorage.getItem('userName');
+    this.userLogin = localStorage.getItem('userLogin');
 
     // Set boolean whether a user is logged in or not
     this.loggedIn = !!(this.userToken);
@@ -36,12 +36,12 @@ export class UserLoginComponent implements OnInit {
 
   login(): void {
     this.httpClient.post(environment.endpointURL + 'user/login', {
-      userName: this.userName,
+      userLogin: this.userLogin,
       password: this.password
     }).subscribe((res: any) => {
       // Set user data in local storage
       localStorage.setItem('userToken', res.token);
-      localStorage.setItem('userName', res.user.userName);
+      localStorage.setItem('userName', res.user.userLogin);
       localStorage.setItem('isAdmin', res.user.isAdmin);
       this.isAdmin = res.user.isAdmin;
       this.userId = res.user.userId;

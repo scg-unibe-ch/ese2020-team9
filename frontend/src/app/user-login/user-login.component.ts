@@ -14,9 +14,9 @@ export class UserLoginComponent implements OnInit {
 
   userToken: string;
   userName: string;
+  admin: boolean;
 
   loggedIn = false;
-  isAdmin:  boolean;
 
   userAuth = '';
   secureEndpointResponse = '';
@@ -47,11 +47,13 @@ export class UserLoginComponent implements OnInit {
     }).subscribe((res: any) => {
       // Set user data in local storage
       localStorage.setItem('userToken', res.token);
-      localStorage.setItem('userName', res.user.userLogin);
-      localStorage.setItem('isAdmin', res.user.isAdmin);
+      localStorage.setItem('userName', res.user.userName);
+      localStorage.setItem('admin', res.user.admin);
+      localStorage.setItem('userId', res.user.userId);
+      this.admin = res.user.admin;
       this.userName = res.user.userName;
       this.checkUserStatus()}, (error: any) => {
-        this.userAuth = 'Your Username/ Email or Password is wrong,try again!';
+        this.userAuth = 'Your Username/ Email or Password is wrong, try again!';
       });
   }
 
@@ -63,6 +65,8 @@ export class UserLoginComponent implements OnInit {
 
     this.checkUserStatus();
   }
+
+
 
   /**
    * Function to access a secure endpoint that can only be accessed by logged in users by providing their token.

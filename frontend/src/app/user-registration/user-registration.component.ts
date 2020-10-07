@@ -21,11 +21,13 @@ export class UserRegistrationComponent implements OnInit {
   adressCity = '';
   adressCountry = '';
 
-  userId = '';
-  errorMessage = '';
   test: boolean;
-  registeredIn: boolean;
+  userId = '';
+  registeredIn = false;
   userToken: string;
+  admin: boolean;
+
+  userAuth = '';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -66,12 +68,9 @@ export class UserRegistrationComponent implements OnInit {
            localStorage.setItem('userToken', res.token);
            localStorage.setItem('userId', res.userId);
            localStorage.setItem('userName', res.userName);
-
-           this.userId = res.userId;
-           if (this.userId ===''){
-           this.errorMessage = 'We are sorry. Something went wrong and we could not complete your registration'
-           } else {this.errorMessage = ''}
-
+           localStorage.setItem('admin', res.admin);
+           }, (error: any) => {
+            this.userAuth = 'Your Registration is invalid!';
       });
     }
 

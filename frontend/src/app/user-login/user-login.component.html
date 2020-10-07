@@ -13,11 +13,16 @@
     {{userAuth}}
   </div>
 
+
   <div *ngIf="loggedIn">
     You are currently logged in as {{ userName }}!
+    <p *ngIf="admin">
+    Are you Admin User? {{admin}}
+    </p>
     <button mat-flat-button color="primary" (click)="logout()">Logout</button>
     <button mat-flat-button color="primary" (click)="refresh()">Refresh</button>
   </div>
+
 </mat-card>
 
 <mat-card>

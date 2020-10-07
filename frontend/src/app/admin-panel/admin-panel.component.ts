@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminPanelComponent implements OnInit {
 
-  isAdmin: any;
+  admin: any;
   userId: any;
 
   constructor() { }
@@ -18,7 +18,7 @@ export class AdminPanelComponent implements OnInit {
 
 
   checkAdminStatus(): void {
-    this.isAdmin = localStorage.getItem('isAdmin');
+    this.admin = localStorage.getItem('admin');
   }
 
 

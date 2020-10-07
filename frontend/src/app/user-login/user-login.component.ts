@@ -11,11 +11,13 @@ export class UserLoginComponent implements OnInit {
 
   userLogin = '';
   password = '';
+  userName = '';
+  errorMessage = '';
 
   userToken: string;
 
   loggedIn = false;
-  isAdmin:  boolean;
+  admin:  boolean;
   userId : number;
   secureEndpointResponse = '';
 
@@ -41,11 +43,18 @@ export class UserLoginComponent implements OnInit {
     }).subscribe((res: any) => {
       // Set user data in local storage
       localStorage.setItem('userToken', res.token);
-      localStorage.setItem('userName', res.user.userLogin);
-      localStorage.setItem('isAdmin', res.user.isAdmin);
-      this.isAdmin = res.user.isAdmin;
+      localStorage.setItem('userName', res.user.userName);
+      localStorage.setItem('admin', res.user.admin);
+      localStorage.setItem('userId', res.user.userId);
+      this.admin = res.user.admin;
+      this.userName = res.user.userName
       this.userId = res.user.userId;
+
       this.checkUserStatus();
+      if (this.userId ===''){
+                 this.errorMessage = 'We are sorry. Something went wrong and we could not complete your registration'
+                 } else {this.errorMessage = ''}
+
     });
   }
 
@@ -56,6 +65,8 @@ export class UserLoginComponent implements OnInit {
 
     this.checkUserStatus();
   }
+
+
 
   /**
    * Function to access a secure endpoint that can only be accessed by logged in users by providing their token.

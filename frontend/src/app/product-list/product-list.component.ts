@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductListComponent implements OnInit {
 
-  userToke: string;
+  userToken: string;
   statusLoggedIn = false;
 
   constructor() { }
@@ -18,10 +18,10 @@ export class ProductListComponent implements OnInit {
 
   checkStatus(): void {
     // Get user data from local storage
-    this.userToke = localStorage.getItem('userToken');
+    this.userToken = localStorage.getItem('userToken');
 
     // Set boolean whether a user is logged or not
-    this.statusLoggedIn = !!(this.userToke);
+    this.statusLoggedIn = !!(this.userToken);
   }
 
   buyProduct(){

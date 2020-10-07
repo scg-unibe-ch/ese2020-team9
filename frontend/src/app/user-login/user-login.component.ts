@@ -13,6 +13,7 @@ export class UserLoginComponent implements OnInit {
   password = '';
 
   userToken: string;
+  userName: string;
 
   loggedIn = false;
   isAdmin:  boolean;
@@ -30,7 +31,6 @@ export class UserLoginComponent implements OnInit {
     // Get user data from local storage
     this.userToken = localStorage.getItem('userToken');
     this.userLogin = localStorage.getItem('userLogin');
-
     // Set boolean whether a user is logged in or not
     this.loggedIn = !!(this.userToken);
   }
@@ -49,8 +49,9 @@ export class UserLoginComponent implements OnInit {
       localStorage.setItem('userToken', res.token);
       localStorage.setItem('userName', res.user.userLogin);
       localStorage.setItem('isAdmin', res.user.isAdmin);
+      this.userName = res.user.userName;
       this.checkUserStatus()}, (error: any) => {
-        this.userAuth = 'You are not a user, register first!!!';
+        this.userAuth = 'Your Username/ Email or Password is wrong,try again!';
       });
   }
 

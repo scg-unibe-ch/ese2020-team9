@@ -50,7 +50,6 @@ export class UserLoginComponent implements OnInit {
       localStorage.setItem('userName', res.user.userName);
       localStorage.setItem('admin', res.user.admin);
       localStorage.setItem('userId', res.user.userId);
-      this.admin = res.user.admin;
       this.checkUserStatus()}, (error: any) => {
         this.userAuth = 'Your Username/ Email or Password is wrong, try again!';
       });
@@ -62,7 +61,6 @@ export class UserLoginComponent implements OnInit {
     localStorage.removeItem('userName');
     localStorage.removeItem('admin');
     localStorage.removeItem('userId');
-
     this.checkUserStatus();
   }
 

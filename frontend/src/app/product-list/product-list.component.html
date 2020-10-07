@@ -1,27 +1,34 @@
+<div>
+  <br>
+  <h1>Product List</h1>
+</div>
+
 <mat-card>
-  <mat-list>
-    <mat-list-item>
-      <br>
-      <h1>Product List</h1>
-      <br>
-        <h4>Buy Fresh Fruit</h4>
-      <img matListAvatar src="/assets/fresh_fruits.png" alt="Fresh Fruits To Buy">
-      <div *ngIf="statusLoggedIn">
-        <button mat-flat-button color="primary" (click)="buyProduct()">BUY</button>
-      </div>
-      <br>
+  <mat-card-header>
+    <img mat-card-avatar src="/assets/unknown_profilepicture.png" alt="Profile Picture">
+    <mat-card-title>Buy Fresh Fruits</mat-card-title>
+    <mat-card-subtitle>posted by Nora</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="/assets/fresh_fruits.png" alt="Fresh Fruits To Buy">
+  <mat-card-content>
+    <p>I'm selling fresh fruits from my garden. Picked yesterday!!</p>
+    <div *ngIf="statusLoggedIn">
+      <button mat-flat-button color="primary" (click)="buyProduct()">BUY</button>
+    </div>
+  </mat-card-content>
+</mat-card>
 
-      <br>
-
-
-    </mat-list-item>
-    <mat-list-item>
-        <h4>Service for Shoveling Snow</h4>
-        <img matListAvatar src="/assets/shoveling_snow.png" alt="Service for Shoveling Snow">
-        <div *ngIf="statusLoggedIn">
-          <button mat-flat-button color="primary" (click)="buyProduct()">BUY</button>
-        </div>
-
-    </mat-list-item>
-  </mat-list>
+<mat-card>
+  <mat-card-header>
+    <img mat-card-avatar src="/assets/unknown_profilepicture.png" alt="Profile Picture">
+    <mat-card-title>Service for Shoveling Your Driveway</mat-card-title>
+    <mat-card-subtitle>posted by Nora</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="/assets/snow_shoveling.png" alt="Service for Shoveling Snow">
+  <mat-card-content>
+    <p>Winter is coming!! If you need someone to shovel your driveway, let me know.</p>
+    <div *ngIf="statusLoggedIn">
+      <button mat-flat-button color="primary" (click)="buyProduct()">BUY</button>
+    </div>
+  </mat-card-content>
 </mat-card>

@@ -69,6 +69,7 @@ export class UserRegistrationComponent implements OnInit {
            localStorage.setItem('userId', res.userId);
            localStorage.setItem('userName', res.userName);
            localStorage.setItem('admin', res.admin);
+           this.userId = res.userId;
            }, (error: any) => {
             this.userAuth = 'Your Registration is invalid!';
       });

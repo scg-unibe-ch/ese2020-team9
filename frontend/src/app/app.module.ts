@@ -18,6 +18,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { ProductListComponent } from './product-list/product-list.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { UserRegistrationComponent } from './user-registration/user-registration
     TodoListComponent,
     TodoItemComponent,
     UserLoginComponent,
-    UserRegistrationComponent
+    UserRegistrationComponent,
+    AdminPanelComponent,
+    ProductListComponent
   ],
   imports: [
     BrowserModule,

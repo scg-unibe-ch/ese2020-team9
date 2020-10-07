@@ -2,21 +2,21 @@
   <div *ngIf="!loggedIn">
 
     <mat-form-field>
-      <input matInput placeholder="User Name(Email /Username)" [(ngModel)]="userLogin" name="userLogin">
+      <input matInput placeholder="Email /Username" [(ngModel)]="userLogin" name="userLogin">
     </mat-form-field>
     <mat-form-field>
       <input matInput placeholder="Password" [(ngModel)]="password" name="password" type="password">
     </mat-form-field>
     <button mat-flat-button color="primary" (click)="login()">Login</button>
-
+    <button mat-flat-button color="primary" (click)="refresh()">Refresh</button>
+    <br>
+    {{userAuth}}
   </div>
 
   <div *ngIf="loggedIn">
-    <button mat-flat-button color="warn" (click)="logout()">Logout</button>
-    You are currently logged in as {{ userName }}<br>
-    Are you Admin User? :{{isUser}} :
-
-
+    You are currently logged in as {{ userName }}!
+    <button mat-flat-button color="primary" (click)="logout()">Logout</button>
+    <button mat-flat-button color="primary" (click)="refresh()">Refresh</button>
   </div>
 </mat-card>
 

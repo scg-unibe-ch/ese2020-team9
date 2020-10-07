@@ -1,12 +1,10 @@
-
+<div *ngIf="!registeredIn">
 <mat-card>
   <mat-form-field>
     <input matInput placeholder="Email" [(ngModel)]="userMail" name="userMail">
     <div *ngIf="!emailFormat(userMail)" class="invalid-feedback">Email is required </div>
 
   </mat-form-field>
-
-
 
     <mat-form-field>
       <input matInput placeholder="Password" [(ngModel)]="password" name="password" type="password">
@@ -48,6 +46,7 @@
 </mat-card>
 
 <hr>
+
 <mat-card>
     <mat-form-field>
       <input matInput placeholder="Gender" [(ngModel)]="gender" name="gender">
@@ -75,9 +74,6 @@
     <input matInput placeholder="Country" [(ngModel)]="adressCountry" name="adressCountry">
   </mat-form-field>
 
-
-
-
 </mat-card>
 
 <div>
@@ -87,10 +83,16 @@
 
   </ng-template>
   <ng-template #successMessage>
+
     <div *ngIf="registrationComplete()" class="invalid-feedback"> Your registration is now complete
     </div>
 
   </ng-template>
+
 </div>
-<hr>
-<h3>{{errorMessage}}</h3>
+  <br>
+  <button mat-flat-button color="primary" (click)="refresh()">Refresh</button>
+
+  <h3>{{errorMessage}}</h3>
+
+</div>

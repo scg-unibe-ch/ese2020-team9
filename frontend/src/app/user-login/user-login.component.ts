@@ -16,7 +16,8 @@ export class UserLoginComponent implements OnInit {
 
   loggedIn = false;
   isAdmin:  boolean;
-  userId : number;
+
+  userAuth = '';
   secureEndpointResponse = '';
 
   constructor(private httpClient: HttpClient) { }
@@ -34,6 +35,11 @@ export class UserLoginComponent implements OnInit {
     this.loggedIn = !!(this.userToken);
   }
 
+  //refresh browser window
+  refresh(): void {
+    window.location.reload();
+  }
+
   login(): void {
     this.httpClient.post(environment.endpointURL + 'user/login', {
       userLogin: this.userLogin,
@@ -43,16 +49,16 @@ export class UserLoginComponent implements OnInit {
       localStorage.setItem('userToken', res.token);
       localStorage.setItem('userName', res.user.userLogin);
       localStorage.setItem('isAdmin', res.user.isAdmin);
-      this.isAdmin = res.user.isAdmin;
-      this.userId = res.user.userId;
-      this.checkUserStatus();
-    });
+      this.checkUserStatus()}, (error: any) => {
+        this.userAuth = 'You are not a user, register first!!!';
+      });
   }
 
   logout(): void {
     // Remove user data from local storage
     localStorage.removeItem('userToken');
     localStorage.removeItem('userName');
+    localStorage.removeItem('isAdmin');
 
     this.checkUserStatus();
   }

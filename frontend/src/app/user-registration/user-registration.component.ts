@@ -20,14 +20,30 @@ export class UserRegistrationComponent implements OnInit {
   adressPin = '';
   adressCity = '';
   adressCountry = '';
+
   userId = '';
   errorMessage = '';
-  test:boolean
+  test: boolean;
+  registeredIn: boolean;
+  userToken: string;
 
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit(): void {
+    this.checkRegistrationStatus()
+  }
 
+  checkRegistrationStatus(): void {
+    // Get user data from local storage
+    this.userToken = localStorage.getItem('userToken');
+
+    // Set boolean whether a user is registered or not
+    this.registeredIn = !!(this.userToken);
+  }
+
+  //refresh browser window
+  refresh(): void {
+    window.location.reload();
   }
 
   registration(): void {
@@ -49,6 +65,8 @@ export class UserRegistrationComponent implements OnInit {
           // Set user data in local storage
            localStorage.setItem('userToken', res.token);
            localStorage.setItem('userId', res.userId);
+           localStorage.setItem('userName', res.userName);
+
            this.userId = res.userId;
            if (this.userId ===''){
            this.errorMessage = 'We are sorry. Something went wrong and we could not complete your registration'

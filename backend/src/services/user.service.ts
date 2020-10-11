@@ -8,7 +8,23 @@ export class UserService {
     public register(user: UserAttributes): Promise<UserAttributes> {
         const saltRounds = 12;
         user.password = bcrypt.hashSync(user.password, saltRounds); // hashes the password, never store passwords as plaintext
-        return User.create(user).then(inserted => Promise.resolve(inserted)).catch(err => Promise.reject(err));
+        const { Op } = require('sequelize');
+        return User.findOne({
+            where:  {
+                [Op.or]: [
+                {userName: user.userName},
+                {userMail: user.userMail}
+                ]
+            }
+        }).then(function(userFound) {
+            if (userFound) {
+            return Promise.reject({message: 'This user already exists!'});
+            }
+            return User.create(user).then(inserted => Promise.resolve(inserted)).catch(err => Promise.reject(err));
+        })
+        .catch(err => Promise.reject({ message: err }));
+
+
     }
 
     public login(loginRequestee: LoginRequest): Promise<User | LoginResponse> {

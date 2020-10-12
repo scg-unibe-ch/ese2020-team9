@@ -1,5 +1,6 @@
 import { Product } from './product.model';
 import { Optional, Model, Sequelize, DataTypes } from 'sequelize';
+import { Wallet } from './wallet.model';
 
 
 export interface UserAttributes {
@@ -13,10 +14,10 @@ export interface UserAttributes {
     lastName: string;
     gender: string;
     phoneNumber: number;
-    adressStreet: string;
-    adressPin: string;
-    adressCity: string;
-    adressCountry: string;
+    addressStreet: string;
+    addressPin: string;
+    addressCity: string;
+    addressCountry: string;
 }
 
 export interface UserCreationAttributes extends Optional<UserAttributes, 'userId'> { }
@@ -32,10 +33,10 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
     lastName!: string;
     gender!: string;
     phoneNumber!: number;
-    adressStreet!: string;
-    adressPin!: string;
-    adressCity!: string;
-    adressCountry!: string;
+    addressStreet!: string;
+    addressPin!: string;
+    addressCity!: string;
+    addressCountry!: string;
 
 
     public static initialize(sequelize: Sequelize) {
@@ -82,19 +83,19 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
                 type: DataTypes.INTEGER,
                 allowNull: true
             },
-            adressStreet: {
+            addressStreet: {
                 type: DataTypes.STRING,
                 allowNull: true
             },
-            adressPin: {
+            addressPin: {
                 type: DataTypes.STRING,
                 allowNull: true
             },
-            adressCity: {
+            addressCity: {
                 type: DataTypes.STRING,
                 allowNull: true
             },
-            adressCountry: {
+            addressCountry: {
                 type: DataTypes.STRING,
                 allowNull: true
             }
@@ -109,6 +110,9 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
 
     public static createAssociations() {
         User.hasMany(Product, {
+            foreignKey: 'userId'
+        });
+        User.hasOne(Wallet, {
             foreignKey: 'userId'
         });
     }

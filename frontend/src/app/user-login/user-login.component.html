@@ -8,7 +8,6 @@
       <input matInput placeholder="Password" [(ngModel)]="password" name="password" type="password">
     </mat-form-field>
     <button mat-flat-button color="primary" (click)="login()">Login</button>
-    <button mat-flat-button color="primary" (click)="refresh()">Refresh</button>
     <br>
     {{userAuth}}
   </div>
@@ -17,7 +16,6 @@
   <div *ngIf="loggedIn">
     You are currently logged in!
     <button mat-flat-button color="primary" (click)="logout()">Logout</button>
-    <button mat-flat-button color="primary" (click)="refresh()">Refresh</button>
   </div>
 
 </mat-card>

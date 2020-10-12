@@ -42,11 +42,6 @@ export class UserRegistrationComponent implements OnInit {
     this.registeredIn = !!(this.userToken);
   }
 
-  //refresh browser window
-  refresh(): void {
-    window.location.reload();
-  }
-
   registration(): void {
       this.httpClient.post(environment.endpointURL + 'user/register', {
         userName: this.userName,
@@ -56,10 +51,10 @@ export class UserRegistrationComponent implements OnInit {
         lastName: this.lastName,
         gender: this.gender,
         telephoneNumber: this.telephoneNumber,
-        adressStreet: this.adressStreet,
-        adressPin: this.adressPin,
-        adressCity: this.adressCity,
-        adressCountry: this.adressCountry,
+        addressStreet: this.adressStreet,
+        addressPin: this.adressPin,
+        addressCity: this.adressCity,
+        addressCountry: this.adressCountry,
 
 
       }).subscribe((res: any) => {
@@ -70,7 +65,7 @@ export class UserRegistrationComponent implements OnInit {
            localStorage.setItem('admin', res.admin);
            this.userId = res.userId;
            }, (error: any) => {
-            this.userAuth = 'Your Registration is invalid!';
+            this.userAuth = 'Your registration is invalid!';
       });
     }
 

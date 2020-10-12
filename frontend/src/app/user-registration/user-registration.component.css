@@ -1,5 +1,8 @@
 .invalid-feedback {
-   color: DarkRed;
+   color: #DA0B0B;
    }
+.valid-feedback{
+  color: #3CAF19;
+}
 hr {
 }

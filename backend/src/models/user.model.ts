@@ -1,11 +1,11 @@
 import { Product } from './product.model';
 import { Optional, Model, Sequelize, DataTypes } from 'sequelize';
-import { Wallet } from './wallet.model';
 
 
 export interface UserAttributes {
     userId: number;
     admin: boolean;
+    wallet: number;
     userName: string;
     password: string;
     userMail: string;
@@ -36,6 +36,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
     addressPin!: string;
     addressCity!: string;
     addressCountry!: string;
+    balance: number;
 
 
     public static initialize(sequelize: Sequelize) {
@@ -49,6 +50,10 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
                 type: DataTypes.BOOLEAN,
                 defaultValue: false,
                 allowNull: false
+            },
+            wallet: {
+                type: DataTypes.INTEGER,
+                defaultValue: 500,
             },
             userName: {
                 type: DataTypes.STRING,
@@ -105,9 +110,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
 
     public static createAssociations() {
         User.hasMany(Product, {
-            foreignKey: 'userId'
-        });
-        User.hasOne(Wallet, {
+            as: 'products',
             foreignKey: 'userId'
         });
     }

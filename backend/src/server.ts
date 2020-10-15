@@ -27,7 +27,7 @@ export class Server {
             this.server.listen(this.port, () => {                                   // start server on specified port
                 console.log(`server listening at http://localhost:${this.port}`);   // indicate that the server has started
             });
-        });
+        }).catch(error => console.log(error));
     }
 
     private configureServer(): Application {

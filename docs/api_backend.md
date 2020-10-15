@@ -23,8 +23,8 @@ This documents describes in detail the endpoints provided by the backend.
         "adressCountry": "string"
     }
     ```
-
-- Response-Body
+- If userName or userMail is already being used, it will return a HTTP_STATUS_CODE 500 with error message: 'This username or email adress is already being used!'
+- Response-Body (if successful)
 
     ```json
     {

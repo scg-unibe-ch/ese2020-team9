@@ -13,7 +13,7 @@ import { User } from './models/user.model';
 import cors from 'cors';
 import { ProductController } from './controllers/product.controller';
 
-export class ExpressServer {
+export class Server {
     private server: Application;
     private sequelize: Sequelize;
     private port = process.env.PORT || 3000;
@@ -91,10 +91,10 @@ export class ExpressServer {
 
 }
 
-const server = new ExpressServer(); // starts the server
+const server = new Server();
 
-export const app = server.getServer();
+export const app = server.getServer(); // for test purposes only
 
 if (process.env.NODE_ENV === 'local') {
-    server.start();
+    server.start(); // starts the server
 }

@@ -17,10 +17,10 @@ This documents describes in detail the endpoints provided by the backend.
         "lastName": "string",
         "gender":   "string",
         "phoneNumber": "number",
-        "adressStreet": "string",
-        "adressPin": "string",
-        "adressCity": "string",
-        "adressCountry": "string"
+        "addressStreet": "string",
+        "addressPin": "string",
+        "addressCity": "string",
+        "addressCountry": "string"
     }
     ```
 
@@ -38,10 +38,10 @@ This documents describes in detail the endpoints provided by the backend.
         "lastName": "string",
         "gender":   "string",
         "phoneNumber": "number",
-        "adressStreet": "string",
-        "adressPin": "string",
-        "adressCity": "string",
-        "adressCountry": "string"
+        "addressStreet": "string",
+        "addressPin": "string",
+        "addressCity": "string",
+        "addressCountry": "string"
     }
     ```
 
@@ -71,10 +71,10 @@ This documents describes in detail the endpoints provided by the backend.
             "lastName": "string",
             "gender":   "string",
             "phoneNumber": "number",
-            "adressStreet": "string",
-            "adressPin": "string",
-            "adressCity": "string",
-            "adressCountry": "string",
+            "addressStreet": "string",
+            "addressPin": "string",
+            "addressCity": "string",
+            "addressCountry": "string",
             "createdAt" : "string",
             "updatedAt" : "string",
         },
@@ -101,10 +101,10 @@ Requires authorization header with a valid token in the request!
             "lastName": "string",
             "gender":   "string",
             "phoneNumber": "number",
-            "adressStreet": "string",
-            "adressPin": "string",
-            "adressCity": "string",
-            "adressCountry": "string",
+            "addressStreet": "string",
+            "addressPin": "string",
+            "addressCity": "string",
+            "addressCountry": "string",
             "createdAt" : "string",
             "updatedAt" : "string",
         },
@@ -119,133 +119,16 @@ Requires authorization header with a valid token in the request!
             "lastName": "string",
             "gender":   "string",
             "phoneNumber": "number",
-            "adressStreet": "string",
-            "adressPin": "string",
-            "adressCity": "string",
-            "adressCountry": "string",
+            "addressStreet": "string",
+            "addressPin": "string",
+            "addressCity": "string",
+            "addressCountry": "string",
             "createdAt" : "string",
             "updatedAt" : "string",
         },
         ...
     ]
     ```
-
-## TodoList API (deprecated!)
-
-### add a list `"/todolist/"` (POST)
-
-- Request-Body
-
-    ```json
-    {
-        "name": "string"
-    }
-    ```
-
-- Response-Body
-
-    ```json
-    {
-        "todoListId": "number",
-        "name": "string"
-    }
-    ```
-
-### change a list `"/todolist/:id"` (PUT) (for example `/todolist/7`)
-
-- Request-Body
-
-    ```json
-    {
-        "name": "string"
-    }
-    ```
-
-- Response-Body
-
-    ```json
-    {
-        "todoListId": "number",
-        "name": "string"
-    }
-    ```
-
-### delete a list `"/todolist/:id"` (DELETE) (for example `/todolist/7`)
-
-No Request-Body; success will return a HTTP_STATUS_CODE 200
-
-### get all lists `"/todolist/"` (GET)
-
-- Response-Body
-
-    ```json
-    [
-        {
-            "todoListId": "number",
-            "name": "string",
-            "todoItems": "TodoItem[]"
-        },
-        ...
-    ]
-    ```
-
-## TodoItem API (deprecated!)
-
-### add an item `"/todoitem/"` (POST)
-
-- Request-Body
-
-    ```json
-    {
-        "name": "string",
-        "done": "boolean",
-        "todoListId": "number"
-    }
-    ```
-
-- Response-Body
-
-    ```json
-    {
-        "todoItemId": "number",
-        "name": "string",
-        "done": "boolean",
-        "todoListId": "number"
-    }
-    ```
-
-### change an item `"/todoitem/:id"` (PUT) (for example `/todoitem/3`)
-
-- Request-Body
-
-    ```json
-    {
-        "name": "string",
-        "done": "boolean",
-        "todoListId": "number"
-    }
-    ```
-
-- Response-Body
-
-    ```json
-    {
-        "todoItemId": "number",
-        "name": "string",
-        "done": "boolean",
-        "todoListId": "number"
-    }
-    ```
-
-### delete an item `"/todoitem/:id"` (DELETE) (for example `/todoitem/3`)
-
-No Request-Body; success will return a HTTP_STATUS_CODE 200
-
-## Secured Enpoint API (deprecated!)
-
-### access the secured endpoint `"/secured/"` (GET)
-
-Needs an Authorization header with a valid token in the request. Will return either a 200 if valid token or a 403 if unauthorized.
 
 ## Product API (draft!)
 

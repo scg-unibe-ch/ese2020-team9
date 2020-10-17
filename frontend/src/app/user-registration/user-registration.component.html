@@ -8,10 +8,7 @@
 
     <mat-form-field>
       <input matInput placeholder="Password" [(ngModel)]="password" name="password" type="password">
-      <ng-template [ngIf]="empty(password)" [ngIfElse]="error">
-        <div class="invalid-feedback">Password is required</div>
-      </ng-template>
-      <ng-template #error>
+      <ng-template [ngIf]="!empty(password)">
         <div *ngIf="!passwordContainsMixedLetters(password)" class="invalid-feedback"> Use capital and small letters
         </div>
         <div *ngIf="!passwordHasNumber(password)" class="invalid-feedback"> Use at least one number

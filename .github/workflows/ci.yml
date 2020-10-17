@@ -2,9 +2,11 @@ name: Testrunner - BE
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, 'backend-**' ]
+    paths-ignore: [ 'docs/**', 'frontend/**', 'deliverables/**', '.github/**' ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, 'backend-**' ]
+    paths-ignore: [ 'docs/**', 'frontend/**', 'deliverables/**', '.github/**' ]
     
 jobs:
   build:

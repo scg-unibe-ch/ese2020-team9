@@ -23,6 +23,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import {MatIconModule} from '@angular/material/icon';
+import { ProductItemComponent } from './product-list/product-item/product-item.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import {MatIconModule} from '@angular/material/icon';
     AdminPanelComponent,
     ProductListComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ProductItemComponent
   ],
   imports: [
     BrowserModule,

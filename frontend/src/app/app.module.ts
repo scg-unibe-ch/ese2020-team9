@@ -20,6 +20,10 @@ import { UserLoginComponent } from './user-login/user-login.component';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { ProductListComponent } from './product-list/product-list.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import {MatIconModule} from '@angular/material/icon';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +33,9 @@ import { ProductListComponent } from './product-list/product-list.component';
     UserLoginComponent,
     UserRegistrationComponent,
     AdminPanelComponent,
-    ProductListComponent
+    ProductListComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +48,8 @@ import { ProductListComponent } from './product-list/product-list.component';
     MatCheckboxModule,
     MatCardModule,
     MatTabsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatIconModule
   ],
   providers: [
     {

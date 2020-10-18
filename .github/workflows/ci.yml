@@ -1,0 +1,30 @@
+name: Testrunner - BE
+
+on:
+  push:
+    branches: [ master, 'backend-**' ]
+    paths-ignore: [ 'docs/**', 'frontend/**', 'deliverables/**', '.github/**' ]
+  pull_request:
+    branches: [ master ]
+    paths-ignore: [ 'docs/**', 'frontend/**', 'deliverables/**', '.github/**', 'backend/**' ]
+    
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: cd backend && npm install
+    - run: cd backend && npm run build --if-present
+    - run: cd backend && npm test
+      env:
+        CI: true

@@ -15,10 +15,10 @@ export class UserRegistrationComponent implements OnInit {
   lastName = '';
   gender = '';
   telephoneNumber = '';
-  adressStreet = '';
-  adressPin = '';
-  adressCity = '';
-  adressCountry = '';
+  addressStreet = '';
+  addressPin = '';
+  addressCity = '';
+  addressCountry = '';
 
   test: boolean;
   userId = '';
@@ -51,10 +51,10 @@ export class UserRegistrationComponent implements OnInit {
         lastName: this.lastName,
         gender: this.gender,
         telephoneNumber: this.telephoneNumber,
-        addressStreet: this.adressStreet,
-        addressPin: this.adressPin,
-        addressCity: this.adressCity,
-        addressCountry: this.adressCountry,
+        addressStreet: this.addressStreet,
+        addressPin: this.addressPin,
+        addressCity: this.addressCity,
+        addressCountry: this.addressCountry,
 
 
       }).subscribe((res: any) => {
@@ -76,12 +76,12 @@ export class UserRegistrationComponent implements OnInit {
   }
 
   evaluate(o):boolean{
-    if (o.length > 0) return true
+    if (o.length >= 0) return true
     else return false
   }
 
   emailFormat(e):boolean{
-  if (e.includes('@')) return true
+  if (e.includes('@') || e.length == '') return true
       else return false
       }
 

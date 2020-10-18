@@ -5,8 +5,8 @@ on:
     branches: [ master, 'backend-**' ]
     paths-ignore: [ 'docs/**', 'frontend/**', 'deliverables/**', '.github/**' ]
   pull_request:
-    branches: [ master, 'backend-**' ]
-    paths-ignore: [ 'docs/**', 'frontend/**', 'deliverables/**', '.github/**' ]
+    branches: [ master ]
+    paths-ignore: [ 'docs/**', 'frontend/**', 'deliverables/**', '.github/**', 'backend/**' ]
     
 jobs:
   build:

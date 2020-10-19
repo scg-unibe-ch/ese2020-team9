@@ -4,6 +4,7 @@
     "exec": "npm start",
     "env":{
         "PORT":3000,
-        "JWT_SECRET":"not_secure"
+        "JWT_SECRET":"not_secure",
+        "NODE_ENV": "local"
     }
 }

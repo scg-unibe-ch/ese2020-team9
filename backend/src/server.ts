@@ -22,12 +22,6 @@ export class Server {
         Product.initialize(this.sequelize);
         User.createAssociations();
         Product.createAssociations();
-
-        this.sequelize.sync().then(() => {                           // create connection to the database
-            this.server.listen(this.port, () => {                                   // start server on specified port
-                console.log(`server listening at http://localhost:${this.port}`);   // indicate that the server has started
-            });
-        }).catch(error => console.log(error));
     }
 
     private configureServer(): Application {
@@ -59,12 +53,37 @@ export class Server {
     }
 
     private configureSequelize(): Sequelize {
+        if (process.env.NODE_ENV === 'test') {
+            return new Sequelize({
+                dialect: 'sqlite',
+                logging: true
+            });
+        }
         return new Sequelize({
             dialect: 'sqlite',
             storage: 'db.sqlite',
             logging: false // can be set to true for debugging
         });
     }
+
+    public start() {
+        this.sequelize.sync().then(() => {                           // create connection to the database
+            this.server.listen(this.port, () => {                                   // start server on specified port
+                console.log(`server listening at http://localhost:${this.port}`);   // indicate that the server has started
+            });
+        });
+    }
+
+    public getServer() {
+        return this.server;
+    }
+
 }
 
-const server = new Server(); // starts the server
+const server = new Server();
+
+export const app = server.getServer(); // for test purposes only
+
+if (process.env.NODE_ENV === 'local') {
+    server.start(); // starts the server
+}

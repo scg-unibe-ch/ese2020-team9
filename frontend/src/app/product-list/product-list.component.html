@@ -6,16 +6,17 @@
 <mat-card>
   <mat-card-header>
     <img mat-card-avatar src="/assets/unknown_profilepicture.png" alt="Profile Picture">
-    <mat-card-title>Buy Fresh Fruits</mat-card-title>
+    <mat-card-title>
+      <a href="">Buy Fresh Fruits</a></mat-card-title>
     <mat-card-subtitle>posted by Nora</mat-card-subtitle>
   </mat-card-header>
   <img mat-card-image src="/assets/fresh_fruits.png" alt="Fresh Fruits To Buy">
   <mat-card-content>
     <p>I'm selling fresh fruits from my garden. Picked yesterday!!</p>
-    <div *ngIf="statusLoggedIn">
-      <button mat-flat-button color="primary" (click)="buyProduct()">BUY</button>
-    </div>
   </mat-card-content>
+  <mat-card-actions *ngIf="statusLoggedIn">
+    <button mat-flat-button color="primary" (click)="buyProduct()">BUY</button>
+  </mat-card-actions>
 </mat-card>
 
 <mat-card>
@@ -27,8 +28,8 @@
   <img mat-card-image src="/assets/snow_shoveling.png" alt="Service for Shoveling Snow">
   <mat-card-content>
     <p>Winter is coming!! If you need someone to shovel your driveway, let me know.</p>
-    <div *ngIf="statusLoggedIn">
-      <button mat-flat-button color="primary" (click)="buyProduct()">BUY</button>
-    </div>
   </mat-card-content>
+  <mat-card-actions *ngIf="statusLoggedIn">
+    <button mat-flat-button color="primary" (click)="buyProduct()">BUY</button>
+  </mat-card-actions>
 </mat-card>

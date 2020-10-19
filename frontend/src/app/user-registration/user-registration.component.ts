@@ -15,10 +15,10 @@ export class UserRegistrationComponent implements OnInit {
   lastName = '';
   gender = '';
   telephoneNumber = '';
-  adressStreet = '';
-  adressPin = '';
-  adressCity = '';
-  adressCountry = '';
+  addressStreet = '';
+  addressPin = '';
+  addressCity = '';
+  addressCountry = '';
 
   test: boolean;
   userId = '';
@@ -42,11 +42,6 @@ export class UserRegistrationComponent implements OnInit {
     this.registeredIn = !!(this.userToken);
   }
 
-  //refresh browser window
-  refresh(): void {
-    window.location.reload();
-  }
-
   registration(): void {
       this.httpClient.post(environment.endpointURL + 'user/register', {
         userName: this.userName,
@@ -56,10 +51,10 @@ export class UserRegistrationComponent implements OnInit {
         lastName: this.lastName,
         gender: this.gender,
         telephoneNumber: this.telephoneNumber,
-        adressStreet: this.adressStreet,
-        adressPin: this.adressPin,
-        adressCity: this.adressCity,
-        adressCountry: this.adressCountry,
+        addressStreet: this.addressStreet,
+        addressPin: this.addressPin,
+        addressCity: this.addressCity,
+        addressCountry: this.addressCountry,
 
 
       }).subscribe((res: any) => {
@@ -70,7 +65,7 @@ export class UserRegistrationComponent implements OnInit {
            localStorage.setItem('admin', res.admin);
            this.userId = res.userId;
            }, (error: any) => {
-            this.userAuth = 'Your Registration is invalid!';
+            this.userAuth = 'Your registration is invalid!';
       });
     }
 
@@ -81,12 +76,12 @@ export class UserRegistrationComponent implements OnInit {
   }
 
   evaluate(o):boolean{
-    if (o.length > 0) return true
+    if (o.length >= 0) return true
     else return false
   }
 
   emailFormat(e):boolean{
-  if (e.includes('@')) return true
+  if (e.includes('@') || e.length == '') return true
       else return false
       }
 

@@ -8,10 +8,7 @@
 
     <mat-form-field>
       <input matInput placeholder="Password" [(ngModel)]="password" name="password" type="password">
-      <ng-template [ngIf]="empty(password)" [ngIfElse]="error">
-        <div class="invalid-feedback">Password is required</div>
-      </ng-template>
-      <ng-template #error>
+      <ng-template [ngIf]="!empty(password)">
         <div *ngIf="!passwordContainsMixedLetters(password)" class="invalid-feedback"> Use capital and small letters
         </div>
         <div *ngIf="!passwordHasNumber(password)" class="invalid-feedback"> Use at least one number
@@ -59,19 +56,19 @@
 
 <mat-card>
   <mat-form-field>
-    <input matInput placeholder="Street" [(ngModel)]="adressStreet" name="adressStreet">
+    <input matInput placeholder="Street" [(ngModel)]="addressStreet" name="addressStreet">
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput placeholder="Zip code" [(ngModel)]="adressPin" name="adressPin">
+    <input matInput placeholder="Zip code" [(ngModel)]="addressPin" name="addressPin">
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput placeholder="City" [(ngModel)]="adressCity" name="adressCity">
+    <input matInput placeholder="City" [(ngModel)]="addressCity" name="addressCity">
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput placeholder="Country" [(ngModel)]="adressCountry" name="adressCountry">
+    <input matInput placeholder="Country" [(ngModel)]="addressCountry" name="addressCountry">
   </mat-form-field>
 
 </mat-card>
@@ -84,12 +81,10 @@
   </ng-template>
   <ng-template #successMessage>
 
-    <div *ngIf="registrationComplete()" class="invalid-feedback"> Your registration is now complete!
+    <div *ngIf="registrationComplete()" class="valid-feedback"> Your registration is now complete!
     </div>
 
   </ng-template>
 
 </div>
-  <br>
-  <button mat-flat-button color="primary" (click)="refresh()">Refresh</button>
 </div>

@@ -35,11 +35,6 @@ export class UserLoginComponent implements OnInit {
     this.loggedIn = !!(this.userToken);
   }
 
-  //refresh browser window
-  refresh(): void {
-    window.location.reload();
-  }
-
   login(): void {
     this.httpClient.post(environment.endpointURL + 'user/login', {
       userLogin: this.userLogin,
@@ -51,7 +46,7 @@ export class UserLoginComponent implements OnInit {
       localStorage.setItem('admin', res.user.admin);
       localStorage.setItem('userId', res.user.userId);
       this.checkUserStatus()}, (error: any) => {
-        this.userAuth = 'Your Username/ Email or Password is wrong, try again!';
+        this.userAuth = 'Your Username/Email and/or Password is wrong, try again!';
       });
   }
 

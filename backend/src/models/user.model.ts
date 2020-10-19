@@ -13,10 +13,10 @@ export interface UserAttributes {
     lastName: string;
     gender: string;
     phoneNumber: number;
-    adressStreet: string;
-    adressPin: string;
-    adressCity: string;
-    adressCountry: string;
+    addressStreet: string;
+    addressPin: string;
+    addressCity: string;
+    addressCountry: string;
 }
 
 export interface UserCreationAttributes extends Optional<UserAttributes, 'userId'> { }
@@ -32,10 +32,11 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
     lastName!: string;
     gender!: string;
     phoneNumber!: number;
-    adressStreet!: string;
-    adressPin!: string;
-    adressCity!: string;
-    adressCountry!: string;
+    addressStreet!: string;
+    addressPin!: string;
+    addressCity!: string;
+    addressCountry!: string;
+    balance: number;
 
 
     public static initialize(sequelize: Sequelize) {
@@ -82,19 +83,19 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
                 type: DataTypes.INTEGER,
                 allowNull: true
             },
-            adressStreet: {
+            addressStreet: {
                 type: DataTypes.STRING,
                 allowNull: true
             },
-            adressPin: {
+            addressPin: {
                 type: DataTypes.STRING,
                 allowNull: true
             },
-            adressCity: {
+            addressCity: {
                 type: DataTypes.STRING,
                 allowNull: true
             },
-            adressCountry: {
+            addressCountry: {
                 type: DataTypes.STRING,
                 allowNull: true
             }
@@ -109,6 +110,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
 
     public static createAssociations() {
         User.hasMany(Product, {
+            as: 'products',
             foreignKey: 'userId'
         });
     }

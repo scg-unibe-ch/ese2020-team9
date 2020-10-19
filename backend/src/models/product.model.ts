@@ -60,6 +60,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
 
     public static createAssociations() {
         Product.belongsTo(User, {
+            as: 'user',
             targetKey: 'userId',
             onDelete: 'cascade',
             foreignKey: 'userId'

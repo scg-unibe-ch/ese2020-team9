@@ -1,13 +1,8 @@
 import { Product } from './models/product.model';
 import express, { Application , Request, Response } from 'express';
 import morgan from 'morgan';
-import { TodoItemController } from './controllers/todoitem.controller';
-import { TodoListController } from './controllers/todolist.controller';
 import { UserController } from './controllers/user.controller';
-import { SecuredController } from './controllers/secured.controller';
 import { Sequelize } from 'sequelize';
-import { TodoList } from './models/todolist.model';
-import { TodoItem } from './models/todoitem.model';
 import { User } from './models/user.model';
 
 import cors from 'cors';
@@ -22,20 +17,11 @@ export class Server {
         this.server = this.configureServer();
         this.sequelize = this.configureSequelize();
 
-        TodoItem.initialize(this.sequelize); // creates the tables if they dont exist
-        TodoList.initialize(this.sequelize);
-        TodoItem.createAssociations();
-        TodoList.createAssociations();
+        // create tables (if they do not already exist)
         User.initialize(this.sequelize);
         Product.initialize(this.sequelize);
         User.createAssociations();
         Product.createAssociations();
-
-        this.sequelize.sync().then(() => {                           // create connection to the database
-            this.server.listen(this.port, () => {                                   // start server on specified port
-                console.log(`server listening at http://localhost:${this.port}`);   // indicate that the server has started
-            });
-        });
     }
 
     private configureServer(): Application {
@@ -58,11 +44,8 @@ export class Server {
             .use(cors())
             .use(express.json())                    // parses an incoming json to an object
             .use(morgan('tiny'))                    // logs incoming requests
-            .use('/todoitem', TodoItemController)   // any request on this path is forwarded to the TodoItemController
-            .use('/todolist', TodoListController)
             .use('/user', UserController)
             .use('/products', ProductController)
-            .use('/secured', SecuredController)
             .options('*', cors(options))
             .use(express.static('./src/public'))
             // this is the message you get if you open http://localhost:3000/ when the server is running
@@ -70,12 +53,37 @@ export class Server {
     }
 
     private configureSequelize(): Sequelize {
+        if (process.env.NODE_ENV === 'test') {
+            return new Sequelize({
+                dialect: 'sqlite',
+                logging: true
+            });
+        }
         return new Sequelize({
             dialect: 'sqlite',
             storage: 'db.sqlite',
             logging: false // can be set to true for debugging
         });
     }
+
+    public start() {
+        this.sequelize.sync().then(() => {                           // create connection to the database
+            this.server.listen(this.port, () => {                                   // start server on specified port
+                console.log(`server listening at http://localhost:${this.port}`);   // indicate that the server has started
+            });
+        });
+    }
+
+    public getServer() {
+        return this.server;
+    }
+
 }
 
-const server = new Server(); // starts the server
+const server = new Server();
+
+export const app = server.getServer(); // for test purposes only
+
+if (process.env.NODE_ENV === 'local') {
+    server.start(); // starts the server
+}

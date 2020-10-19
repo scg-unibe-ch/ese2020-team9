@@ -4,6 +4,36 @@
 </div>
 
 <mat-card>
+
+
+  <!-- Button to delete list -->
+  <button mat-flat-button color="warn" (click)="onListDelete()" [disabled]="productList.productItems.length != 0">
+    Delete list
+  </button>
+
+  <br>
+
+  <!-- Input field for new product item name -->
+
+<!-- List of ProductItemComponents displaying all items of list -->
+<mat-list>
+  <mat-list-item *ngFor="let productItem of productList.productItems">
+    <app-prodduct-item
+      [productItem]="productItem"
+      (update)="onItemUpdate($event)"
+      (delete)="onItemDelete($event)"
+    ></app-prodduct-item>
+  </mat-list-item>
+</mat-list>
+  <div *ngIf="productList.productItems.length === 0">No Products available.</div>
+
+</mat-card>
+
+
+
+<hr>
+
+<mat-card>
   <mat-card-header>
     <img mat-card-avatar src="/assets/unknown_profilepicture.png" alt="Profile Picture">
     <mat-card-title>

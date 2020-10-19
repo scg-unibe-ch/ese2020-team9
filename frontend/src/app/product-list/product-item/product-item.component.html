@@ -1,1 +1,12 @@
-<p>product-item works!</p>
+<div class="shaded">
+  <!-- Input field with item name -->
+  <mat-form-field>
+    <input matInput placeholder="Item Name" [(ngModel)]="productItem.productName" (ngModelChange)="onItemUpdate()" productName="productName">
+  </mat-form-field>
+
+  <!-- Checkbox for item status -->
+  <mat-checkbox [(ngModel)]="productItem.approved" (ngModelChange)="onItemUpdate()">Done</mat-checkbox>
+
+  <!-- Button to delete item -->
+  <button mat-flat-button color="warn"  (click)="onItemDelete()">Delete Item</button>
+</div>

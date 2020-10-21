@@ -151,5 +151,45 @@ describe('UserController Test', () => {
                 done();
             });
         });
+        after('clean up db', function(done) {
+            User.destroy({
+                truncate: true
+            }).then(() => done());
+        });
+    });
+    describe('Test get all Users', () => {
+        let token: string;
+        before('init db and get valid token', function(done) {
+            User.create(user1).then(() => {
+                chai.request(app).post('/user/login').send({
+                    userLogin: 'gandalf',
+                    password: 'gandalf4ever'
+                }).end(function(err, res) {
+                    token = res.body.token;
+                    done();
+                });
+            });
+        });
+        it('should return all users when valid token', function(done) {
+            chai.request(app).get('/user/').set('Authorization', 'Bearer ' + token).end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body[0].firstName).to.be.eq('Gandalf');
+                done();
+            });
+        });
+        it('should be forbidden to access without token', function(done) {
+            chai.request(app).get('/user/').end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(403);
+                expect(res.body.message).to.contain('Unauthorized');
+                done();
+            });
+        });
+        after('clean up db', function(done) {
+            User.destroy({
+                truncate: true
+            }).then(() => done());
+        });
     });
 });

@@ -9,7 +9,7 @@ chai.use(chaiHttp); // add chai-http to chai
 let app: Application;
 
 describe('ProductController Test', () => { // bundles the tests related to the ProductController
-    before('init app', function(done) {
+    before('init app', function(done) { // applicationPromise value must be assigned to app!!!
         applicationPromise.then(value => {
             app = value;
             done();
@@ -19,8 +19,7 @@ describe('ProductController Test', () => { // bundles the tests related to the P
         it('should return status 200', function(done) { // one single test
             chai.request(app).post('/products/').send({}) // starts the server and performs a post with an empty body
             .end(function (err, res) { // handles the response
-                // tslint:disable-next-line: no-unused-expression
-                expect(err).to.be.null; // check that no error occured
+                expect(err).to.be.eq(null); // check that no error occured
                 expect(res).to.have.status(200); // check that status is 200
                 expect(res.body.message).to.contain('POST works!'); // checks that the body message contains 'POST works!'
                 done(); // signalizes the end of the asynchronous function to the framework
@@ -31,8 +30,7 @@ describe('ProductController Test', () => { // bundles the tests related to the P
         it('should return status 200', function(done) {
             chai.request(app).put('/products/7').send({})
             .end(function (err, res) {
-                // tslint:disable-next-line: no-unused-expression
-                expect(err).to.be.null;
+                expect(err).to.be.eq(null);
                 expect(res).to.have.status(200);
                 expect(res.body.message).to.contain('PUT works!');
                 done();
@@ -43,8 +41,7 @@ describe('ProductController Test', () => { // bundles the tests related to the P
         it('should return status 200', function(done) {
             chai.request(app).delete('/products/3')
             .end(function (err, res) {
-                // tslint:disable-next-line: no-unused-expression
-                expect(err).to.be.null;
+                expect(err).to.be.eq(null);
                 expect(res).to.have.status(200);
                 expect(res.body.message).to.contain('DELETE works!');
                 done();

@@ -49,11 +49,51 @@ describe('UserController Test', () => {
                 addressCity: 'Buckland',
                 addressCountry: 'The Shire'
             }).end(function (err, res) {
-                expect(err).to.be.null;
+                expect(err).to.be.eq(null);
                 expect(res).to.have.status(200);
-                expect(res.body.admin).to.be.false;
+                expect(res.body.admin).to.be.eq(false);
                 expect(res.body.wallet).to.be.eq(500);
                 expect(res.body.firstName).to.contain('Frodo');
+                done();
+            });
+        });
+        it('should return 500 when userName already exists', function(done) {
+            chai.request(app).post('/user/register').send({
+                userName: 'gandalf',
+                password: 'hansii',
+                userMail: 'hans@gmail.com',
+                firstName: 'Hans',
+                lastName: 'Ulrich',
+                gender: 'male',
+                phoneNumber: '0794443332',
+                addressStreet: 'Hansenstrasse',
+                addressPin: '13',
+                addressCity: 'Mühlhausen',
+                addressCountry: 'Hansingen'
+            }).end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(500);
+                expect(res.body.message).to.contain('This username or email address is already being used!');
+                done();
+            });
+        });
+        it('should return 500 when email already exists', function(done) {
+            chai.request(app).post('/user/register').send({
+                userName: 'radagast',
+                password: '4est',
+                userMail: 'gandalf@wizards.me',
+                firstName: 'Radagast',
+                lastName: 'The Brown',
+                gender: 'male',
+                phoneNumber: '0791234567',
+                addressStreet: 'Rhosgobel',
+                addressPin: '',
+                addressCity: 'Mirkwood',
+                addressCountry: 'Middle-earth'
+            }).end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(500);
+                expect(res.body.message).to.contain('This username or email address is already being used!');
                 done();
             });
         });

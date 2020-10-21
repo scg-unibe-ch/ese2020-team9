@@ -18,7 +18,7 @@ export class UserService {
             }
         }).then(function(userFound) {
             if (userFound) {
-            return Promise.reject({message: 'This username or email adress is already being used!'});
+            return Promise.reject('This username or email address is already being used!');
             }
             return User.create(user).then(inserted => Promise.resolve(inserted)).catch(err => Promise.reject(err));
         })

@@ -1,5 +1,4 @@
-process.env.NODE_ENV = 'test';
-import { User, UserCreationAttributes } from './../../models/user.model';
+import { User, UserCreationAttributes, UserAttributes } from './../../models/user.model';
 import { applicationPromise } from './../../server';
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
@@ -12,7 +11,7 @@ const user1: UserCreationAttributes = {
     admin: false,
     wallet: 500,
     userName: 'gandalf',
-    password: 'gandalf4ever',
+    password: '$2b$12$9yxV7TrHFID5bGdWJ8zBv.eSqHuSQYF8cxSR8yMknLz0RRkr2KwhC', // gandalf4ever
     userMail: 'gandalf@wizards.me',
     firstName: 'Gandalf',
     lastName: 'The Grey',
@@ -101,6 +100,56 @@ describe('UserController Test', () => {
             User.destroy({
                 truncate: true
             }).then(() => done());
+        });
+    });
+    describe('Test login', () => {
+        before('init db', function(done) {
+            User.create(user1).then(() => done());
+        });
+        it('should login successfully with username when user registered', function(done) {
+            chai.request(app).post('/user/login').send({
+                userLogin: 'gandalf',
+                password: 'gandalf4ever'
+            }).end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body.token).not.to.be.eq(null);
+                expect(res.body.user.firstName).to.contain('Gandalf');
+                done();
+            });
+        });
+        it('should login successfully with email when user registered', function(done) {
+            chai.request(app).post('/user/login').send({
+                userLogin: 'gandalf@wizards.me',
+                password: 'gandalf4ever'
+            }).end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body.token).not.to.be.eq(null);
+                expect(res.body.user.firstName).to.contain('Gandalf');
+                done();
+            });
+        });
+        it('should not login when password wrong', function(done) {
+            chai.request(app).post('/user/login').send({
+                userLogin: 'gandalf@wizards.me',
+                password: 'gandever'
+            }).end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(500);
+                expect(res.body.message).to.contain('not authorized');
+                done();
+            });
+        });
+        it('should not login when not registered', function(done) {
+            chai.request(app).post('/user/login').send({
+                userLogin: 'notRegisteredUser',
+                password: 'heyImNotRegistered'
+            }).end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(500);
+                done();
+            });
         });
     });
 });

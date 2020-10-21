@@ -22,7 +22,7 @@ export class UserService {
             }
             return User.create(user).then(inserted => Promise.resolve(inserted)).catch(err => Promise.reject(err));
         })
-        .catch(err => Promise.reject({ message: err }));
+        .catch(err => Promise.reject({message: err}));
 
 
     }
@@ -43,10 +43,10 @@ export class UserService {
                 const token: string = jwt.sign({ userName: user.userName, userId: user.userId, admin: user.admin }, secret, { expiresIn: '2h' });
                 return Promise.resolve({ user, token });
             } else {
-                return Promise.reject({ message: 'not authorized' });
+                return Promise.reject('not authorized');
             }
         })
-        .catch(err => Promise.reject({ message: err }));
+        .catch(err => Promise.reject({message: err}));
     }
 
     public getAll(): Promise<User[]> {

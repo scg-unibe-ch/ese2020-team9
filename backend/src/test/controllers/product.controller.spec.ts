@@ -1,13 +1,21 @@
-import { app } from './../../server';
+process.env.NODE_ENV = 'test'; // set env to 'test', db will then be inmemory
+import { applicationPromise } from './../../server';
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
+import { Application } from 'express';
 
 // to run the tests, use the command 'npm run test' in the terminal
 
 chai.use(chaiHttp); // add chai-http to chai
-process.env.NODE_ENV = 'test'; // set env to 'test', db will then be inmemory
+let app: Application;
 
 describe('ProductController Test', () => { // bundles the tests related to the ProductController
+    before('init app', function(done) {
+        applicationPromise.then(value => {
+            app = value;
+            done();
+        });
+    });
     describe('Test post', () => { // bundles the tests related to the post method
         it('should return status 200', function(done) { // one single test
             chai.request(app).post('/products/').send({}) // starts the server and performs a post with an empty body

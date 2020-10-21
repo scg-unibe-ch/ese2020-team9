@@ -53,9 +53,11 @@ export class Server {
     }
 
     private configureSequelize(): Sequelize {
+        console.log(process.env.NODE_ENV);
         if (process.env.NODE_ENV === 'test') {
             return new Sequelize({
                 dialect: 'sqlite',
+                storage: ':memory:',
                 logging: true
             });
         }
@@ -74,7 +76,11 @@ export class Server {
         });
     }
 
-    public getServer() {
+    public async getServer() {
+        if (process.env.NODE_ENV === 'test') {
+            await this.sequelize.sync();
+            return this.server;
+        }
         return this.server;
     }
 
@@ -82,7 +88,7 @@ export class Server {
 
 const server = new Server();
 
-export const app = server.getServer(); // for test purposes only
+export const applicationPromise = server.getServer(); // for test purposes only
 
 if (process.env.NODE_ENV === 'local') {
     server.start(); // starts the server

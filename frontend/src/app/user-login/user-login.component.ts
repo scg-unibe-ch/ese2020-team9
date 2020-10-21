@@ -23,6 +23,7 @@ export class UserLoginComponent implements OnInit {
   userAuth = '';
   secureEndpointResponse = '';
   isUserLoggedIn: boolean;
+  isUserAdmin: boolean;
 
   constructor(private httpClient: HttpClient, private router: Router, private userService: UserService) { }
 
@@ -33,6 +34,7 @@ export class UserLoginComponent implements OnInit {
     //this.checkoutStatus();
   }
 
+  //replaced this function by subscribing to isUserLoggedIn Observable, don't know if better approach!
 /*checkUserStatus(): void {
     // Get user data from local storage
     this.userToken = localStorage.getItem('userToken');
@@ -50,9 +52,10 @@ export class UserLoginComponent implements OnInit {
       localStorage.setItem('userId', res.user.userId);
       //updates isUserLoggedIn value
       this.userService.isUserLoggedIn.next(true);
+      //update isUserAdmin value
+      this.userService.isUserAdmin.next(res.user.admin);
       //navigates to dashboard
       this.router.navigate(['/home']);
-      //replaced this function by subscribing to isUserLoggedIn Observable, don't know if better approach!
       //this.checkUserStatus();
       }, (error: any) => {
         this.userAuth = 'Your Username/Email and/or Password is wrong, try again!';
@@ -65,7 +68,6 @@ export class UserLoginComponent implements OnInit {
     this.userService.isUserLoggedIn.next(false);
     //navigates to dashboard
     this.router.navigate(['/home']);
-    //replaced this function by subscribing to isUserLoggedIn Observable, don't know if better approach!
     //this.checkUserStatus();
   }
 

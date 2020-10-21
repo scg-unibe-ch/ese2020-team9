@@ -22,9 +22,9 @@
     </div>
     <mat-menu #menu>
       <button mat-menu-item routerLink="/user" routerLinkActive="active">Dashboard</button>
-      <!--<div *ngIf="isAdmin">-->
+      <div *ngIf="isUserAdmin">
       <button mat-menu-item routerLink="/admin" routerLinkActive="active">Admin</button>
-      <!--</div>-->
+      </div>
       <button mat-menu-item routerLink="/login" routerLinkActive="active">Logout</button>
     </mat-menu>
   </mat-toolbar-row>

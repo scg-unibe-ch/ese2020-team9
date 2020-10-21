@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {UserService} from "../services/user.service";
 
 @Component({
   selector: 'app-user-dashboard',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserDashboardComponent implements OnInit {
 
-  constructor() { }
+  userId: any;
+  isLoggedIn: boolean;
+
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.userId = this.userService.getUserId();
+    this.isLoggedIn = this.userService.getIsLoggedIn();
   }
-
 }

@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject } from "rxjs";
 import { environment} from "../../environments/environment";
 import { User } from "../models/user.model";
+import { map } from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,12 @@ export class UserService {
 
   userToken: string;
   userName: string;
+  isLoggedIn = false;
   isAdmin: any;
+  userId: any;
 
   public isUserLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public isUserAdmin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.getIsAdmin());
 
   constructor(private httpClient: HttpClient) { }
 
@@ -27,6 +31,7 @@ export class UserService {
     localStorage.clear();
   }
 
+  //registration is currently handled in registration Component
   /*registration(userName: string, password: string, userMail: string, firstName: string, lastName: string, gender,
                telephoneNumber: string, addressStreet: string, addressPin: string, addressCity: string, addressCountry: string){
     return this.httpClient.post(environment.endpointURL + 'user/register', {
@@ -45,23 +50,28 @@ export class UserService {
   }*/
 
   getIsLoggedIn(){
-    this.userToken = localStorage.getItem('token');
-    if((!!(this.userToken))=== true){
-      return true
-    } else {
-      return false
-    }
+    this.userToken = localStorage.getItem('userToken');
+    return !!(this.userToken);
   }
 
   getIsAdmin(){
-    return this.isAdmin = localStorage.getItem('admin');
+    this.isAdmin = localStorage.getItem('admin');
+    if (this.isAdmin === true){
+      return true;
+    }
+    return false;
   }
 
   getUserName(){
     return this.userName = localStorage.getItem('userName');
   }
 
-  getUserList(){
-    return this.httpClient.get<User[]>(environment.endpointURL + 'user');
+  getUserId(){
+    return this.userId = localStorage.getItem('userId');
   }
+
+  //http request is currently handled in admin-panel component
+  /*getUserList(){
+    return this.httpClient.get<User>(environment.endpointURL + 'user');
+  }*/
 }

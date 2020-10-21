@@ -9,7 +9,7 @@ import { UserService } from "../services/user.service";
 export class HeaderComponent implements OnInit {
 
   isUserLoggedIn: boolean;
-  //isAdmin: any;
+  isUserAdmin: boolean;
 
   constructor(private userService: UserService) { }
 
@@ -17,12 +17,9 @@ export class HeaderComponent implements OnInit {
     this.userService.isUserLoggedIn.subscribe(value => {
       this.isUserLoggedIn = value;
     });
-    //this.getIsAdmin();
+    this.userService.isUserAdmin.subscribe(value => {
+      this.isUserAdmin = value;
+    });
 
   }
-
-  /*getIsAdmin(){
-    this.isAdmin = this.userService.getIsAdmin();
-  }*/
-
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import {Router} from "@angular/router";
+import {UserService} from "../services/user.service";
+
 
 @Component({
   selector: 'app-user-registration',
@@ -29,7 +31,7 @@ export class UserRegistrationComponent implements OnInit {
 
   userAuth = '';
 
-  constructor(private httpClient: HttpClient, private router: Router) { }
+  constructor(private httpClient: HttpClient, private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
     this.checkRegistrationStatus()
@@ -65,6 +67,7 @@ export class UserRegistrationComponent implements OnInit {
            localStorage.setItem('userName', res.userName);
            localStorage.setItem('admin', res.admin);
            this.userId = res.userId;
+           this.userService.isUserLoggedIn.next(true);
             //navigates to dashboard
             this.router.navigate(['/home'])
            }, (error: any) => {

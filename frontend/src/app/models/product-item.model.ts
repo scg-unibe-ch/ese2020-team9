@@ -8,11 +8,12 @@ export class ProductItem {
     public productPrice: number,
     public productCategory: string,
     public productLocation: string,
+    public productDelivery: boolean,
     public uploadDate: Date,
     public sellDate: Date,
-    public approved: boolean,
+    public isApproved: boolean,
     public isService: boolean,
-    public isLend: boolean,
+    public isRentable: boolean,
     public isAvailable: boolean,
     public userId: number,
     public userName: String,
@@ -20,4 +21,6 @@ export class ProductItem {
   ) {}
 
 }
+
+
 

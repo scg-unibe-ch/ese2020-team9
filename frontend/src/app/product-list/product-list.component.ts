@@ -38,18 +38,18 @@ export class ProductListComponent {
     this.statusLoggedIn = !!(this.userToken);
   }
 
- /*todo
- different get methods by service
- get products by user
- get products by category
- get products not approved yet
- etc
+   /*todo
+   different get methods by service
+   get products by user
+   get products by category
+   get products not approved yet
+   etc
 
- buy
- edit
- delete
- approve
- */
+   buy
+   edit
+   delete
+   approve
+   */
 
   onListUpdate(): void {
     // Emits event to parent component that TodoList got updated

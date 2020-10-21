@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MatIconModule} from '@angular/material/icon';
+import { UserService } from "../services/user.service";
 
 @Component({
   selector: 'app-header',
@@ -8,9 +8,21 @@ import {MatIconModule} from '@angular/material/icon';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  isUserLoggedIn: boolean;
+  //isAdmin: any;
+
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.userService.isUserLoggedIn.subscribe(value => {
+      this.isUserLoggedIn = value;
+    });
+    //this.getIsAdmin();
+
   }
+
+  /*getIsAdmin(){
+    this.isAdmin = this.userService.getIsAdmin();
+  }*/
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-user-registration',
@@ -28,7 +29,7 @@ export class UserRegistrationComponent implements OnInit {
 
   userAuth = '';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     this.checkRegistrationStatus()
@@ -64,6 +65,8 @@ export class UserRegistrationComponent implements OnInit {
            localStorage.setItem('userName', res.userName);
            localStorage.setItem('admin', res.admin);
            this.userId = res.userId;
+            //navigates to dashboard
+            this.router.navigate(['/home'])
            }, (error: any) => {
             this.userAuth = 'Your registration is invalid!';
       });

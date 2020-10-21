@@ -15,6 +15,7 @@ import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoItemComponent } from './todo-list/todo-item/todo-item.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from "@angular/material/menu";
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
@@ -22,9 +23,12 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { ProductItemComponent } from './product-list/product-item/product-item.component';
-
+import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AppRoutingModule } from "./app-routing.module";
 
 @NgModule({
   declarations: [
@@ -37,7 +41,10 @@ import { ProductItemComponent } from './product-list/product-item/product-item.c
     ProductListComponent,
     HeaderComponent,
     FooterComponent,
-    ProductItemComponent
+    ProductItemComponent,
+    UserDashboardComponent,
+    DashboardComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -50,8 +57,10 @@ import { ProductItemComponent } from './product-list/product-item/product-item.c
     MatCheckboxModule,
     MatCardModule,
     MatTabsModule,
+    MatMenuModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    AppRoutingModule,
   ],
   providers: [
     {

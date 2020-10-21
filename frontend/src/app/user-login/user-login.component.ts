@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import {Router} from "@angular/router";
+import {UserService} from "../services/user.service";
 
 @Component({
   selector: 'app-user-login',
@@ -16,47 +18,55 @@ export class UserLoginComponent implements OnInit {
   userName: string;
   admin: boolean;
 
-  loggedIn = false;
+  //loggedIn = false;
 
   userAuth = '';
   secureEndpointResponse = '';
+  isUserLoggedIn: boolean;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.checkUserStatus();
+    this.userService.isUserLoggedIn.subscribe(value => {
+      this.isUserLoggedIn = value;
+    });
+    //this.checkoutStatus();
   }
 
-  checkUserStatus(): void {
+/*checkUserStatus(): void {
     // Get user data from local storage
     this.userToken = localStorage.getItem('userToken');
     this.userLogin = localStorage.getItem('userLogin');
     // Set boolean whether a user is logged in or not
     this.loggedIn = !!(this.userToken);
-  }
+  }*/
 
   login(): void {
-    this.httpClient.post(environment.endpointURL + 'user/login', {
-      userLogin: this.userLogin,
-      password: this.password
-    }).subscribe((res: any) => {
+    this.userService.login(this.userLogin, this.password).subscribe((res: any) => {
       // Set user data in local storage
       localStorage.setItem('userToken', res.token);
       localStorage.setItem('userName', res.user.userName);
       localStorage.setItem('admin', res.user.admin);
       localStorage.setItem('userId', res.user.userId);
-      this.checkUserStatus()}, (error: any) => {
+      //updates isUserLoggedIn value
+      this.userService.isUserLoggedIn.next(true);
+      //navigates to dashboard
+      this.router.navigate(['/home']);
+      //replaced this function by subscribing to isUserLoggedIn Observable, don't know if better approach!
+      //this.checkUserStatus();
+      }, (error: any) => {
         this.userAuth = 'Your Username/Email and/or Password is wrong, try again!';
       });
   }
 
   logout(): void {
-    // Remove user data from local storage
-    localStorage.removeItem('userToken');
-    localStorage.removeItem('userName');
-    localStorage.removeItem('admin');
-    localStorage.removeItem('userId');
-    this.checkUserStatus();
+    this.userService.logout();
+    //updates isUserLoggedIn value
+    this.userService.isUserLoggedIn.next(false);
+    //navigates to dashboard
+    this.router.navigate(['/home']);
+    //replaced this function by subscribing to isUserLoggedIn Observable, don't know if better approach!
+    //this.checkUserStatus();
   }
 
 

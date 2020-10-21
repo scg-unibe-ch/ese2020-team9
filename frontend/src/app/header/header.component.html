@@ -1,0 +1,57 @@
+
+<mat-toolbar>
+  <mat-toolbar-row>
+    <img src="assets/cd/logo_small.png" class="img" alt="Stor">
+    <img src="assets/cd/logo_font_only.png" class="img" alt="Stor">
+    <span class="example-spacer"></span>
+
+    <div *ngIf="true">
+      <button mat-button>
+        <mat-icon >account_circle</mat-icon>
+        Register
+      </button>
+    </div>
+
+    <div *ngIf="true">
+      <button mat-button [routerLink]="['./login']">
+        <mat-icon >account_circle</mat-icon>
+        Login
+      </button>
+    </div>
+
+
+    <div *ngIf="true">
+      <button mat-button>
+        <mat-icon >home</mat-icon>
+        Userdashboard
+      </button>
+    </div>
+
+  </mat-toolbar-row>
+
+
+
+
+
+
+
+</mat-toolbar>
+
+<mat-divider></mat-divider>
+<mat-tab-group animationDuration="800ms">
+
+<mat-tab label="User Login">
+  <app-user-login></app-user-login>
+</mat-tab>
+
+
+
+<mat-tab label="User Registration">
+  <app-user-registration></app-user-registration>
+</mat-tab>
+
+<mat-tab label="Admin Panel">
+  <app-admin-panel></app-admin-panel>
+</mat-tab>
+<p>lalal</p>
+</mat-tab-group>

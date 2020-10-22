@@ -2,8 +2,9 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ProductList } from '../models/product-list.model';
 import { ProductItem } from '../models/product-item.model';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
-
+import { MOCKPRODUCTLIST } from '../mock-products';
+import { UserService } from "../services/user.service";
+import { FlexLayoutModule} from "@angular/flex-layout";
 
 @Component({
   selector: 'app-product-list',
@@ -13,7 +14,11 @@ import { environment } from '../../environments/environment';
 export class ProductListComponent {
 
   userToken: string;
-  statusLoggedIn = false;
+  isUserLoggedIn: boolean;
+
+  // gets Array of Mock Products from mock-products.ts
+  mockProductList = MOCKPRODUCTLIST;
+
 
   @Input()
   productList: ProductList = new ProductList(null, '', []);
@@ -24,18 +29,12 @@ export class ProductListComponent {
   @Output()
   delete = new EventEmitter<ProductList>();
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.checkStatus()
-  }
-
-  checkStatus(): void {
-    // Get user data from local storage
-    this.userToken = localStorage.getItem('userToken');
-
-    // Set boolean whether a user is logged or not
-    this.statusLoggedIn = !!(this.userToken);
+    this.userService.isUserLoggedIn.subscribe(value => {
+      this.isUserLoggedIn = value;
+    })
   }
 
    /*todo

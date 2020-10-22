@@ -68,6 +68,8 @@ export class UserRegistrationComponent implements OnInit {
            this.userId = res.userId;
             //updates isUserLoggedIn value
             this.userService.isUserLoggedIn.next(true);
+            //get User Name
+            this.userService.isUserName.next(res.user.userName);
             //update isUserAdmin value
             this.userService.isUserAdmin.next(res.admin);
             //navigates to dashboard

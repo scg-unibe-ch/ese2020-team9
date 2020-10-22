@@ -52,6 +52,8 @@ export class UserLoginComponent implements OnInit {
       localStorage.setItem('userId', res.user.userId);
       //updates isUserLoggedIn value
       this.userService.isUserLoggedIn.next(true);
+      //get User Name
+      this.userService.isUserName.next(res.user.userName);
       //update isUserAdmin value
       this.userService.isUserAdmin.next(res.user.admin);
       //navigates to dashboard

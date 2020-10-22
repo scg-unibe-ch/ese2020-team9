@@ -1,0 +1,41 @@
+import { ProductItem} from "./models/product-item.model";
+
+export const MOCKPRODUCTLIST: ProductItem [] = [
+  {productId: 1,
+    productName: 'Fruit Basket',
+    productDescription: 'Fresh fruit. Picked yesterday from my garden!',
+    productImage: null,
+    productPrice: 10,
+    productCategory: 'Food',
+    productLocation: 'Bern',
+    productDelivery: true,
+    uploadDate: null,
+    sellDate: null,
+    isApproved: false,
+    isService: false,
+    isRentable: false,
+    isAvailable: true,
+    userId: 3,
+    userName: 'tw',
+    userReview: ''
+  },
+
+    {productId: 2,
+    productName: 'Snow Shoveling',
+    productDescription: 'Winter is coming! If you need someone to shovel your driveway, let me know.',
+    productImage: null,
+    productPrice: 20,
+    productCategory: 'Service',
+    productLocation: 'Bern',
+    productDelivery: false,
+    uploadDate: null,
+    sellDate: null,
+    isApproved: true,
+    isService: true,
+    isRentable: false,
+    isAvailable: false,
+    userId: 2,
+    userName: 'John',
+    userReview: ''
+    },
+];

@@ -18,6 +18,7 @@ export class UserService {
 
   public isUserLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public isUserAdmin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.getIsAdmin());
+  public isUserName: BehaviorSubject<string> = new BehaviorSubject<string>(this.getUserName());
 
   constructor(private httpClient: HttpClient) { }
 

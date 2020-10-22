@@ -29,6 +29,8 @@ import { UserDashboardComponent } from './user-dashboard/user-dashboard.componen
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AppRoutingModule } from "./app-routing.module";
+import { MatGridListModule} from "@angular/material/grid-list";
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -61,6 +63,8 @@ import { AppRoutingModule } from "./app-routing.module";
     MatToolbarModule,
     MatIconModule,
     AppRoutingModule,
+    MatGridListModule,
+    FlexLayoutModule,
   ],
   providers: [
     {

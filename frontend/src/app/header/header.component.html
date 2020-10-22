@@ -18,7 +18,7 @@
       <button mat-button color="storMain" routerLink="/login" routerLinkActive="active"><mat-icon >account_circle</mat-icon>Login</button>
     </div>
     <div *ngIf="isUserLoggedIn">
-      <button mat-button color="storMain" [matMenuTriggerFor]="menu"><mat-icon >home</mat-icon>User</button>
+      <button mat-button color="storMain" [matMenuTriggerFor]="menu"><mat-icon >home</mat-icon>{{isUserName}}</button>
     </div>
     <mat-menu #menu>
       <button mat-menu-item routerLink="/user" routerLinkActive="active">Dashboard</button>

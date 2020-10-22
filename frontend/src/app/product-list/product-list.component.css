@@ -1,0 +1,9 @@
+/*.productList{
+  columns: 6;
+}
+
+.productListItems{
+  column-span: 1;
+  row-span: 1;
+}*/
+

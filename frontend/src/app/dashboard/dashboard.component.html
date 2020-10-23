@@ -1,4 +1,59 @@
-<app-product-list></app-product-list>
+<div>
+  <br>
+  <h1>Product List</h1>
+  <mat-divider></mat-divider>
+  <!-- Toggle Button to control how many products are displayed -->
+  <button mat-button (click)="toggleGridColumns()">
+    <span *ngIf="gridColumns === 4">Three Columns</span>
+    <span *ngIf="gridColumns === 3">Four Columns</span>
+  </button>
+</div>
+<div class="productList_dashboard" fxLayout="row wrap" fxLayoutGap="15px grid">
+  <!--still figuring out how to use fxLayout-->
+  <div fxFlex="25%" fxFlex.lg="20%" fxFlex.xs="50%" fxFlex.sm="33%" fxFlex.m="40%" *ngFor="let mockProduct of mockProductList">
+    <!-- List of Mock Products-->
+    <mat-card>
+      <mat-card-header>
+        <!--<img mat-card-avatar src="/assets/unknown_profilepicture.png" alt="Profile Picture">-->
+        <!-- should get update date, but can^^ understand date-->
+        <mat-card-title routerLink="product-item">{{mockProduct.productName}}</mat-card-title>
+        <mat-card-subtitle>posted by {{mockProduct.userName}} on {{mockProduct.uploadDate}}</mat-card-subtitle>
+      </mat-card-header>
+      <!-- should get {{mockProduct.productImage}} as source, but can't understand html image element-->
+      <img mat-card-image src="./assets/fresh_fruits.png" alt="Fresh Fruits To Buy">
+      <mat-card-content>
+        {{mockProduct.productDescription}}
+      </mat-card-content>
+      <mat-card-actions *ngIf="isUserLoggedIn" align="end">
+          <mat-icon >contact_support</mat-icon>
+          Price: {{mockProduct.productPrice}} CHF
+        <button class="buyButton" mat-flat-button color="red" (click)="buyProduct()">Buy</button>
+      </mat-card-actions>
+      <mat-card-footer>
+        <mat-chip-list [selectable]="true" color="">
+          <mat-chip color="primary" aria-selected="true">
+            {{mockProduct.productCategory}}
+          </mat-chip>
+          <mat-chip>
+            {{mockProduct.productLocation}}
+          </mat-chip>
+          <mat-chip *ngIf="mockProduct.isService">
+            Service
+          </mat-chip>
+          <mat-chip *ngIf="mockProduct.isRentable">
+            rentable
+          </mat-chip>
+          <mat-chip *ngIf="mockProduct.isAvailable">
+            available
+          </mat-chip>
+        </mat-chip-list>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</div>
+
+<!--<app-product-list></app-product-list>
+
 <!--TodoList originally displayed in app.component.html-->
 <!--<mat-tab-group animationDuration="800ms">
   <mat-tab label="Todo List Example">

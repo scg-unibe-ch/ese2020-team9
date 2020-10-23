@@ -1,21 +1,24 @@
+mat-toolbar{
+  width: 100%;
+  background-color: #f0f0f0;
+}
+
 .logo {
   max-width: 100%;
   max-height: 100%;
   vertical-align: middle;
   display:block;
 }
+
 .spacer {
   flex: 1 ;
 }
+
 .nav {
   max-height:64px;
   height: 64px;
 }
+
 .mat-storMain {
-  color: #f0f0f0;
+  color: darkgreen;
 }
-
-.mat-toolbar-row{
-  background-color: #bd3d9e;
-}
-

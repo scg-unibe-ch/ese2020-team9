@@ -24,24 +24,18 @@ export class UserRegistrationComponent implements OnInit {
 
   test: boolean;
   userId = '';
-  registeredIn = false;
   userToken: string;
   admin: boolean;
+  isUserLoggedIn: boolean;
 
   userAuth = '';
 
   constructor(private httpClient: HttpClient, private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.checkRegistrationStatus()
-  }
-
-  checkRegistrationStatus(): void {
-    // Get user data from local storage
-    this.userToken = localStorage.getItem('userToken');
-
-    // Set boolean whether a user is registered or not
-    this.registeredIn = !!(this.userToken);
+    this.userService.isUserLoggedIn.subscribe(value => {
+      this.isUserLoggedIn = value;
+    })
   }
 
   registration(): void {

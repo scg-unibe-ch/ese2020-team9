@@ -1,15 +1,15 @@
 <mat-toolbar role="heading">
   <mat-toolbar-row>
-    <div class="nav">
-      <a routerLink="/home">
+    <!-- Logo -->
+    <!--<div>
+    <a routerLink="/home">
         <img src="assets/cd/logo_small.png" class="logo" alt="Stor">
         <span class="example-spacer"></span>
-      </a>
-    </div>
+      </--a>
+    </div>-->
     <div class="nav">
       <a routerLink="/home">
         <img src="assets/cd/logo_font_only.png"  class="logo" alt="Stor" />
-        <span class="example-spacer"></span>
       </a>
     </div>
     <span class="spacer"></span>
@@ -21,7 +21,8 @@
       <button mat-button color="storMain" [matMenuTriggerFor]="menu"><mat-icon >home</mat-icon>{{isUserName}}</button>
     </div>
     <mat-menu #menu>
-      <button mat-menu-item routerLink="/user" routerLinkActive="active">Dashboard</button>
+      <button mat-menu-item routerLink="/my-products" routerLinkActive="active">My Products</button>
+      <button mat-menu-item routerLink="/user" routerLinkActive="active">My Profile</button>
       <div *ngIf="isUserAdmin">
       <button mat-menu-item routerLink="/admin" routerLinkActive="active">Admin</button>
       </div>
@@ -30,4 +31,3 @@
   </mat-toolbar-row>
 </mat-toolbar>
 <router-outlet></router-outlet>
-

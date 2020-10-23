@@ -2,9 +2,6 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ProductList } from '../models/product-list.model';
 import { ProductItem } from '../models/product-item.model';
 import { HttpClient } from '@angular/common/http';
-import { MOCKPRODUCTLIST } from '../mock-products';
-import { UserService } from "../services/user.service";
-import { FlexLayoutModule} from "@angular/flex-layout";
 
 @Component({
   selector: 'app-product-list',
@@ -14,11 +11,6 @@ import { FlexLayoutModule} from "@angular/flex-layout";
 export class ProductListComponent {
 
   userToken: string;
-  isUserLoggedIn: boolean;
-
-  // gets Array of Mock Products from mock-products.ts
-  mockProductList = MOCKPRODUCTLIST;
-
 
   @Input()
   productList: ProductList = new ProductList(null, '', []);
@@ -29,12 +21,9 @@ export class ProductListComponent {
   @Output()
   delete = new EventEmitter<ProductList>();
 
-  constructor(private httpClient: HttpClient, private userService: UserService) { }
+  constructor(private httpClient: HttpClient) { }
 
   ngOnInit(): void {
-    this.userService.isUserLoggedIn.subscribe(value => {
-      this.isUserLoggedIn = value;
-    })
   }
 
    /*todo

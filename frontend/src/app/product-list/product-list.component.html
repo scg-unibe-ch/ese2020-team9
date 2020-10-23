@@ -1,39 +1,3 @@
-<div>
-  <br>
-  <h1>Product List</h1>
-</div>
-
-<div class="productList_dashboard" fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="20%">
-<!--still figuring out how to use fxLayout-->
-  <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="50%" fx.Flex.m="30%">
-    <!-- List of Mock Products-->
-    <mat-card *ngFor="let mockProduct of mockProductList">
-      <mat-card-header>
-        <!--<img mat-card-avatar src="/assets/unknown_profilepicture.png" alt="Profile Picture">-->
-        <mat-card-title>{{mockProduct.productName}}</mat-card-title>
-        <mat-card-subtitle>posted by {{mockProduct.userName}}</mat-card-subtitle>
-      </mat-card-header>
-      <img mat-card-image src={{mockProduct.productImage}} alt="Fresh Fruits To Buy">
-      <mat-card-content>
-        Category: {{mockProduct.productCategory}}
-        <br>
-        Description: {{mockProduct.productDescription}}
-        <br>
-        Service: {{mockProduct.isService}}
-        <br>
-        Location: {{mockProduct.productLocation}}
-        <br>
-        Price: {{mockProduct.productPrice}} CHF
-      </mat-card-content>
-      <mat-card-actions *ngIf="isUserLoggedIn">
-        <button mat-flat-button color="primary" (click)="buyProduct()">BUY</button>
-      </mat-card-actions>
-      <mat-card-footer>
-        Posted: {{mockProduct.uploadDate}}
-      </mat-card-footer>
-    </mat-card>
-  </div>
-</div>
 <!-- List of ProductItemComponents displaying all items of list -->
 <!--<mat-grid-tile class="productListItems" *ngFor="let productItem of productList.productItems">
   <app-prodduct-item

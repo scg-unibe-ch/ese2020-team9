@@ -7,7 +7,7 @@
     <mat-form-field>
       <input matInput placeholder="Password" [(ngModel)]="password" name="password" type="password">
     </mat-form-field>
-    <button mat-flat-button color="primary" (click)="login()">Login</button>
+    <button mat-flat-button color="primary" (keydown)="submit()" (click)="login()">Login</button>
     <br>
     {{userAuth}}
     <div *ngIf="userAuth">
@@ -17,15 +17,10 @@
     </div>
   </div>
 
-
   <div *ngIf="isUserLoggedIn">
     You are currently logged in!
     <button mat-flat-button color="primary" (click)="logout()">Logout</button>
+
   </div>
 
-</mat-card>
-
-<mat-card>
-  <button mat-flat-button color="primary" (click)="accessSecuredEndpoint()">Access Secure Endpoint (only for logged in users)</button>
-  {{ secureEndpointResponse }}
 </mat-card>

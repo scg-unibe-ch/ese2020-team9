@@ -19,6 +19,6 @@ mat-toolbar{
   height: 64px;
 }
 
-.mat-storMain {
-  color: darkgreen;
+.storMainColor {
+  color: #B82D70;
 }

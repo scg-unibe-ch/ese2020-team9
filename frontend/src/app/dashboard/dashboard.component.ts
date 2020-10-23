@@ -16,7 +16,6 @@ export class DashboardComponent implements OnInit {
 
   mockProductList = MOCKPRODUCTLIST;
   isUserLoggedIn: boolean;
-  gridColumns = 3;
 
   constructor(private userService: UserService) { }
 
@@ -45,12 +44,6 @@ onListCreate(): void {
       });
     });*/
   }
-
-  //Toggle Button to control how many products are displayed
-  toggleGridColumns(){
-    this.gridColumns = this.gridColumns === 3 ? 4 : 3;
-  }
-
 
   // TodoList - UPDATE
   /*onListUpdate(todoList: TodoList): void {

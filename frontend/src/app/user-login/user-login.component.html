@@ -14,12 +14,12 @@
     {{userAuth}}
     <br>
     <br>
+  </div>
 
-    <div *ngIf="userAuth">
-      <a routerLink="/registration">
-        <button mat-flat-button class="button_standard">Registration</button>
-      </a>
-    </div>
+  <div *ngIf="userAuth">
+    <a routerLink="/registration">
+      <button mat-flat-button class="button_standard">Registration</button>
+    </a>
   </div>
 
   <div *ngIf="isUserLoggedIn">

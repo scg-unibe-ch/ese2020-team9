@@ -12,6 +12,7 @@ import {UserService} from "../services/user.service";
 export class UserRegistrationComponent implements OnInit {
   userName = '';
   password = '';
+  confPassword = '';
   userMail = '';
   firstName = '';
   lastName = '';
@@ -131,6 +132,18 @@ export class UserRegistrationComponent implements OnInit {
 
   }
 
+  confirmPassword(cpw):boolean{
+  this.confPassword = cpw;
+  console.log ("confPassword ", this.confPassword );
+  console.log ("password ", this.password );
+       if(this.password == cpw){
+         return true;
+       } else {
+
+         return false;
+       }
+
+   }
 
 
   //make register button visible

@@ -15,11 +15,11 @@ export class ProductService {
         }
 
 
-    /*
+
     public getProduct(productId: number): Promise<Product> {
         return Product.findByPk(productId);
     }
-    */
+
 
     public getProductsOfCategory(category: string): Promise<Product[]> {
         const { Op } = require('sequelize');

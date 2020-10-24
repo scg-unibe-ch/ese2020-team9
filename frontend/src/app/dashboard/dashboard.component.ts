@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MOCKPRODUCTLIST } from "../mock-products";
+import { FlexLayoutModule } from "@angular/flex-layout";
+import {UserService} from "../services/user.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -9,8 +12,12 @@ export class DashboardComponent implements OnInit {
 
   //newTodoListName = '';
   //todoLists: TodoList[] = [];
+  // gets Array of Mock Products from mock-products.ts
 
-  constructor() { }
+  mockProductList = MOCKPRODUCTLIST;
+  isUserLoggedIn: boolean;
+
+  constructor(private userService: UserService) { }
 
   /* // TodoList - CREATE
 onListCreate(): void {
@@ -23,6 +30,10 @@ onListCreate(): void {
 }*/
 
   ngOnInit(): void {
+    this.userService.isUserLoggedIn.subscribe(value => {
+      this.isUserLoggedIn = value;
+    })
+
 
     // TodoList - READ
     /* this.httpClient.get(environment.endpointURL + 'todolist').subscribe((instances: any) => {

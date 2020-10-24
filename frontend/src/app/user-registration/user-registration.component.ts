@@ -12,6 +12,7 @@ import {UserService} from "../services/user.service";
 export class UserRegistrationComponent implements OnInit {
   userName = '';
   password = '';
+  confPassword = '';
   userMail = '';
   firstName = '';
   lastName = '';
@@ -24,24 +25,18 @@ export class UserRegistrationComponent implements OnInit {
 
   test: boolean;
   userId = '';
-  registeredIn = false;
   userToken: string;
   admin: boolean;
+  isUserLoggedIn: boolean;
 
   userAuth = '';
 
   constructor(private httpClient: HttpClient, private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.checkRegistrationStatus()
-  }
-
-  checkRegistrationStatus(): void {
-    // Get user data from local storage
-    this.userToken = localStorage.getItem('userToken');
-
-    // Set boolean whether a user is registered or not
-    this.registeredIn = !!(this.userToken);
+    this.userService.isUserLoggedIn.subscribe(value => {
+      this.isUserLoggedIn = value;
+    })
   }
 
   registration(): void {
@@ -65,14 +60,16 @@ export class UserRegistrationComponent implements OnInit {
            localStorage.setItem('userId', res.userId);
            localStorage.setItem('userName', res.userName);
            localStorage.setItem('admin', res.admin);
-           this.userId = res.userId;
+            this.userId = res.userId;
             //updates isUserLoggedIn value
             this.userService.isUserLoggedIn.next(true);
+            //get User Name
+            this.userService.isUserName.next(res.userName);
             //update isUserAdmin value
             this.userService.isUserAdmin.next(res.admin);
             //navigates to dashboard
             this.router.navigate(['/home'])
-           }, (error: any) => {
+           }, (res: any) => {
             this.userAuth = 'Your registration is invalid!';
       });
     }
@@ -84,12 +81,12 @@ export class UserRegistrationComponent implements OnInit {
   }
 
   evaluate(o):boolean{
-    if (o.length >= 0) return true
+    if (o.length > 0) return true;
     else return false
   }
 
   emailFormat(e):boolean{
-  if (e.includes('@') || e.length == '') return true
+  if (e.includes('@')) return true;
       else return false
       }
 
@@ -135,19 +132,26 @@ export class UserRegistrationComponent implements OnInit {
 
   }
 
-
+  confirmPassword(cpw):boolean{
+       if(this.password == cpw){
+         return true;
+       } else {
+         return false;
+       }
+   }
 
   //make register button visible
   allFieldsAreFilled():boolean{
     let un = this.evaluate(this.userName);
     let fn = this.evaluate(this.firstName);
     let ln = this.evaluate(this.lastName);
+    let em = this.emailFormat(this.userMail);
     let pw1 = this.passwordLength(this.password);
     let pw2 = this.passwordHasNumber(this.password);
     let pw3 = this.passwordHasNumber(this.password);
     let pw4 = this.passwordContainsMixedLetters(this.password);
     let pw5 = this.passwordContainsSpecialChar(this.password);
-    if (un&&fn&&ln&&pw1&&pw2&&pw3&&pw4&&pw5){ return true}
+    if (un&&fn&&ln&&em&&pw1&&pw2&&pw3&&pw4&&pw5){ return true}
     else {
       return false
     }

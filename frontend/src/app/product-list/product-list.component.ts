@@ -2,8 +2,6 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ProductList } from '../models/product-list.model';
 import { ProductItem } from '../models/product-item.model';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
-
 
 @Component({
   selector: 'app-product-list',
@@ -13,7 +11,6 @@ import { environment } from '../../environments/environment';
 export class ProductListComponent {
 
   userToken: string;
-  statusLoggedIn = false;
 
   @Input()
   productList: ProductList = new ProductList(null, '', []);
@@ -27,15 +24,6 @@ export class ProductListComponent {
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit(): void {
-    this.checkStatus()
-  }
-
-  checkStatus(): void {
-    // Get user data from local storage
-    this.userToken = localStorage.getItem('userToken');
-
-    // Set boolean whether a user is logged or not
-    this.statusLoggedIn = !!(this.userToken);
   }
 
    /*todo

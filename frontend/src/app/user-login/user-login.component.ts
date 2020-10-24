@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
 import {Router} from "@angular/router";
 import {UserService} from "../services/user.service";
 
@@ -14,16 +13,11 @@ export class UserLoginComponent implements OnInit {
   userLogin = '';
   password = '';
 
-  userToken: string;
-  userName: string;
-  admin: boolean;
-
+  //userToken: string;
   //loggedIn = false;
 
   userAuth = '';
-  secureEndpointResponse = '';
   isUserLoggedIn: boolean;
-  isUserAdmin: boolean;
 
   constructor(private httpClient: HttpClient, private router: Router, private userService: UserService) { }
 
@@ -52,6 +46,8 @@ export class UserLoginComponent implements OnInit {
       localStorage.setItem('userId', res.user.userId);
       //updates isUserLoggedIn value
       this.userService.isUserLoggedIn.next(true);
+      //get User Name
+      this.userService.isUserName.next(res.user.userName);
       //update isUserAdmin value
       this.userService.isUserAdmin.next(res.user.admin);
       //navigates to dashboard
@@ -69,18 +65,5 @@ export class UserLoginComponent implements OnInit {
     //navigates to dashboard
     this.router.navigate(['/home']);
     //this.checkUserStatus();
-  }
-
-
-
-  /**
-   * Function to access a secure endpoint that can only be accessed by logged in users by providing their token.
-   */
-  accessSecuredEndpoint(): void {
-    this.httpClient.get(environment.endpointURL + 'secured').subscribe((res: any) => {
-      this.secureEndpointResponse = 'Successfully accessed secure endpoint. Message from server: ' + res.message;
-    }, (error: any) => {
-      this.secureEndpointResponse = 'Unauthorized';
-    });
   }
 }

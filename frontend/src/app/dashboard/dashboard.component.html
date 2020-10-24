@@ -1,5 +1,41 @@
-<app-product-list></app-product-list>
+<script src="../footer/footer.component.ts"></script>
 
+  <mat-toolbar>
+    <span>Product List</span>
+  </mat-toolbar>
+
+<div class="productList_dashboard" fxLayout="row wrap" fxLayoutGap="10px grid">
+  <!--still figuring out how to use fxLayout-->
+  <div fxFlex="10%" fxFlex.xl="15%" fxFlex.lg="20%" fxFlex.md="25%" fxFlex.sm="33%" fxFlex.xs="50%" *ngFor="let mockProduct of mockProductList">
+    <!-- List of Mock Products-->
+    <mat-card>
+      <mat-card-header>
+        <!--<img mat-card-avatar src="/assets/unknown_profilepicture.png" alt="Profile Picture">-->
+        <!-- should get update date, but can^^ understand date-->
+        <mat-card-title>{{mockProduct.productName}}</mat-card-title>
+        <mat-card-subtitle>posted on {{mockProduct.uploadDate}}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src={{mockProduct.productImage}} alt="Fresh Fruits To Buy" width="100%" height="80%">
+      <mat-card-content>
+        {{mockProduct.productDescription}}
+        <br>
+        Price: {{mockProduct.productPrice}} CHF
+      </mat-card-content>
+      <mat-card-actions *ngIf="isUserLoggedIn" align="end">
+        <button mat-flat-button color="warn" (click)="buyProduct()">Buy</button>
+      </mat-card-actions>
+      <mat-card-footer>
+        <span>{{mockProduct.productCategory}} </span>
+        <span>{{mockProduct.productLocation}} </span>
+        <span *ngIf="mockProduct.isService">Service </span>
+        <span *ngIf="mockProduct.isRentable">rentable </span>
+        <span *ngIf="mockProduct.isAvailable">available</span>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</div>
+
+<!--<app-product-list></app-product-list>
 
 <!--TodoList originally displayed in app.component.html-->
 <!--<mat-tab-group animationDuration="800ms">

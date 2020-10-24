@@ -1,33 +1,33 @@
 <mat-toolbar role="heading">
   <mat-toolbar-row>
-    <div class="nav">
-      <a routerLink="/home">
+    <!-- Logo -->
+    <!--<div>
+    <a routerLink="/home">
         <img src="assets/cd/logo_small.png" class="logo" alt="Stor">
         <span class="example-spacer"></span>
-      </a>
-    </div>
+      </--a>
+    </div>-->
     <div class="nav">
       <a routerLink="/home">
         <img src="assets/cd/logo_font_only.png"  class="logo" alt="Stor" />
-        <span class="example-spacer"></span>
       </a>
     </div>
     <span class="spacer"></span>
     <div *ngIf="!isUserLoggedIn">
-      <button mat-button color="storMain" routerLink="/registration" routerLinkActive="active"><mat-icon >account_circle</mat-icon>Registration</button>
-      <button mat-button color="storMain" routerLink="/login" routerLinkActive="active"><mat-icon >account_circle</mat-icon>Login</button>
+      <button mat-button class="storMainColor" routerLink="/registration" routerLinkActive="active">Registration</button>
+      <button mat-button class="storMainColor" routerLink="/login" routerLinkActive="active"><mat-icon >account_circle</mat-icon>Login</button>
     </div>
     <div *ngIf="isUserLoggedIn">
-      <button mat-button color="storMain" [matMenuTriggerFor]="menu"><mat-icon >home</mat-icon>User</button>
+      <button class="storMainColor" mat-button color="storMainColor" [matMenuTriggerFor]="menu"><mat-icon >account_circle</mat-icon>{{isUserName}}</button>
     </div>
     <mat-menu #menu>
-      <button mat-menu-item routerLink="/user" routerLinkActive="active">Dashboard</button>
-      <div *ngIf="isUserAdmin">
-      <button mat-menu-item routerLink="/admin" routerLinkActive="active">Admin</button>
-      </div>
+      <button mat-menu-item routerLink="/user" routerLinkActive="active">My Profile</button>
       <button mat-menu-item routerLink="/login" routerLinkActive="active">Logout</button>
     </mat-menu>
+    <div *ngIf="isUserAdmin">
+      <button mat-button class="storMainColor" routerLink="/admin" routerLinkActive="active">Admin</button>
+    </div>
+
   </mat-toolbar-row>
 </mat-toolbar>
 <router-outlet></router-outlet>
-

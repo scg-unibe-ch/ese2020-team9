@@ -10,6 +10,7 @@ export class HeaderComponent implements OnInit {
 
   isUserLoggedIn: boolean;
   isUserAdmin: boolean;
+  isUserName: string;
 
   constructor(private userService: UserService) { }
 
@@ -20,6 +21,10 @@ export class HeaderComponent implements OnInit {
     this.userService.isUserAdmin.subscribe(value => {
       this.isUserAdmin = value;
     });
+
+    this.userService.isUserName.subscribe(value => {
+      this.isUserName = value;
+    })
 
   }
 }

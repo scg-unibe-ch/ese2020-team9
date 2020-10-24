@@ -24,7 +24,7 @@
 
   <mat-form-field>
     <input matInput placeholder="Confirm Password*" [(ngModel)]="cpassword" name="cpassword" type="password">
-    <ng-template [ngIf]="!empty(cpassword)">
+    <ng-template [ngIf]="!empty(password)">
       <div *ngIf="!confirmPassword(cpassword)" class="invalid-feedback"> Passwords do not Match
       </div>
     </ng-template>

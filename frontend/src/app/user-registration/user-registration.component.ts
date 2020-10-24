@@ -133,9 +133,6 @@ export class UserRegistrationComponent implements OnInit {
   }
 
   confirmPassword(cpw):boolean{
-  this.confPassword = cpw;
-  console.log ("confPassword ", this.confPassword );
-  console.log ("password ", this.password );
        if(this.password == cpw){
          return true;
        } else {

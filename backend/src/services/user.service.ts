@@ -20,7 +20,6 @@ export class UserService {
             if (userFound) {
             return Promise.reject({message: 'This username or email adress is already being used!'});
             }
-            
             return User.create(user).then(inserted => Promise.resolve(inserted)).catch(err => Promise.reject(err));
         })
         .catch(err => Promise.reject({ message: err }));
@@ -52,5 +51,23 @@ export class UserService {
 
     public getAll(): Promise<User[]> {
         return User.findAll();
+    }
+
+    public deleteUser(id: number): Promise<number> {
+        return User.destroy({
+            where: { userId: id }
+        });
+    }
+
+    public makeUserAdmin(id: number): Promise<User | void> {
+        return User.findOne({
+            where: { userId: id }
+        }).then(user => {
+            return user.update({
+                admin: true
+            });
+        }).catch(err => {
+            return Promise.reject({message: err});
+        });
     }
 }

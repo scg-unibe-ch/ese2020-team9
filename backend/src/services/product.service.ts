@@ -14,23 +14,18 @@ export class ProductService {
         return null;
     }
 
-    public approve(id: ProductAttributes): Promise<Product> {
+    public approve(id: number): Promise<number> {
         return Product.findOne({
             where: {
-                productId: id.productId
+                productId: id
             }
         }).then(product => {
             return product.update({
                 isApproved: true
             });
-        })
+        }).then(product => {
+            return product.userId;
+        } )
         .catch(err => Promise.reject({message: err}));
     }
-
-    public getAll(): Promise<Product[]> {
-        return Product.findAll();
-    }
-
-
-
 }

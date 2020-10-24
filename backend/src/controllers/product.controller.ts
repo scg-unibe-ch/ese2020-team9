@@ -18,16 +18,11 @@ productController.delete('/:id', (req: Request, res: Response) => {
     res.status(200).send({message: 'DELETE works!'});
 });
 
-productController.post('/approve', verifyAdmin,
+productController.post('/approve/:id', verifyAdmin,
     (req: Request, res: Response) => {
-            productService.approve(req.body).then(approved => res.send({message: 'Successfully approved the product!'}))
-            .catch(err => res.status(500).send(err));
-    }
-);
-
-productController.get('/', verifyToken,
-    (req: Request, res: Response) => {
-        productService.getAll().then(products => res.send(products)).catch(err => res.status(500).send(err));
+        const id = Number.parseInt(req.params.id, 10);
+        productService.approve(id).then(approved => res.send({message: 'Successfully approved product ' + approved + '!'}))
+        .catch(err => res.status(500).send(err));
     }
 );
 

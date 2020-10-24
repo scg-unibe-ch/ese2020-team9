@@ -1,4 +1,4 @@
-import { ProductAttributes } from './../models/product.model';
+import { Product, ProductAttributes } from './../models/product.model';
 
 export class ProductService {
 
@@ -13,5 +13,24 @@ export class ProductService {
     public delete(id: number): Promise<any> {
         return null;
     }
+
+    public approve(id: ProductAttributes): Promise<Product> {
+        return Product.findOne({
+            where: {
+                productId: id.productId
+            }
+        }).then(product => {
+            return product.update({
+                isApproved: true
+            });
+        })
+        .catch(err => Promise.reject({message: err}));
+    }
+
+    public getAll(): Promise<Product[]> {
+        return Product.findAll();
+    }
+
+
 
 }

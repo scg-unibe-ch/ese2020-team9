@@ -30,14 +30,14 @@ export class AdminPanelComponent implements OnInit {
 
     // user - DELETE
     onUserDelete(user: User): void{
-      this.httpClient.delete(environment.endpointURL + 'user' + user.userId).subscribe(() => {
+      this.httpClient.delete(environment.endpointURL + 'user/' + user.userId).subscribe(() => {
         this.users.splice(this.users.indexOf(user), 1);
       });
     }
 
-     // user - UPDATE (down-upgrade)
+     // user - UPDATE (upgrade to admin)
   onUserUpdate(user: User): void{
-    this.httpClient.post(environment.endpointURL + 'user' + user.userId, {
+    this.httpClient.put(environment.endpointURL + 'user/makeAdmin/' + user.userId, {
       admin: user.admin,
     }).subscribe();
   }

@@ -1,10 +1,10 @@
 <div class="shaded">
   <!-- Input field with item name -->
   <mat-list-item>
-Name: {{user.userName}}, ID:  {{user.userId}} , boolean: {{ user.admin}}
+Name: {{user.userName}}, ID:  {{user.userId}} , is Admin 
 
   <!-- Checkbox for item status -->
-  <mat-checkbox [(ngModel)]="user.admin" (ngModelChange)="onUserUpdate()">Admin</mat-checkbox>
+  <mat-checkbox [(ngModel)]="user.admin" (ngModelChange)="onUserUpdate()"></mat-checkbox>
 
   <!-- Button to delete item -->
   <button mat-flat-button color="warn"  (click)="onUserDelete()">Delete User</button>

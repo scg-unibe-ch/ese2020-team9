@@ -15,6 +15,7 @@ export class UserService {
   isLoggedIn = false;
   isAdmin: any;
   userId: any;
+  users: User[] ;
 
   public isUserLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public isUserAdmin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.getIsAdmin());
@@ -70,8 +71,10 @@ export class UserService {
     return this.userId = localStorage.getItem('userId');
   }
 
-  //http request is currently handled in admin-panel component
-  /*getUserList(){
-    return this.httpClient.get<User>(environment.endpointURL + 'user');
-  }*/
+  getUserList(){
+    this.httpClient.get(environment.endpointURL + 'user').subscribe((instances: any) => {
+      this.users = instances.map((instance: any) => new User(instance.userId, instance.userName, instance.admin ));
+    });
+    return this.users;
+  }
 }

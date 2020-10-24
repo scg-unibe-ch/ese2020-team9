@@ -1,8 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { environment } from "../../environments/environment";
-import { User } from "../models/user.model";
-import {UserService} from "../services/user.service";
+import { environment } from '../../environments/environment';
+import { User } from '../models/user.model';
 
 
 @Component({
@@ -12,20 +11,35 @@ import {UserService} from "../services/user.service";
 })
 export class AdminPanelComponent implements OnInit {
 
-  userName :any;
-  userId: any;
-  users: User[] ;
 
-  constructor(private httpClient: HttpClient, private userService: UserService) { }
+ admin: any;
+ userName :any;
+ userId: any;
+ users: User[] ;
+
+  constructor(private httpClient: HttpClient) {}
 
   ngOnInit(): void {
   }
 
-
   getUserList(){
     this.httpClient.get(environment.endpointURL + 'user').subscribe((instances: any) => {
-      this.users = instances.map((instance: any) => new User(instance.userId, instance.userName ));
+        this.users = instances.map((instance: any) => new User(instance.userId, instance.userName, instance.admin));
     });
+  }
+
+    // user - DELETE
+    onUserDelete(user: User): void{
+      this.httpClient.delete(environment.endpointURL + 'user' + user.userId).subscribe(() => {
+        this.users.splice(this.users.indexOf(user), 1);
+      });
+    }
+
+     // user - UPDATE (down-upgrade)
+  onUserUpdate(user: User): void{
+    this.httpClient.post(environment.endpointURL + 'user' + user.userId, {
+      admin: user.admin,
+    }).subscribe();
   }
 
 }

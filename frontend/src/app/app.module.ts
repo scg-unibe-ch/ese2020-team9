@@ -27,6 +27,7 @@ import { UserDashboardComponent } from './user-dashboard/user-dashboard.componen
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AppRoutingModule } from "./app-routing.module";
+import { UserComponent } from './user/user.component';
 import { MatGridListModule} from "@angular/material/grid-list";
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ProductformComponent } from './productform/productform.component';
@@ -46,7 +47,8 @@ import { ProductformComponent } from './productform/productform.component';
     UserDashboardComponent,
     DashboardComponent,
     PageNotFoundComponent,
-    ProductformComponent
+    ProductformComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,

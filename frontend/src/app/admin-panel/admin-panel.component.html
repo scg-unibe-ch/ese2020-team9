@@ -1,6 +1,11 @@
 <mat-card>
   <button mat-flat-button color="primary" (click)="getUserList()">Get List of users </button>
-  <mat-list-item *ngFor="let user of users" [user]="User">
-    <li >{{user.userName}},{{user.userId}}</li>
+  <mat-list-item *ngFor="let user of users" >
+  <app-user
+        [user]="user"
+        (update)="onUserUpdate($event)"
+        (delete)="onUserDelete($event)"
+      ></app-user>
+  
   </mat-list-item>
 </mat-card>

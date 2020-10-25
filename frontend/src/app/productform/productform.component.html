@@ -2,36 +2,93 @@
   <mat-divider></mat-divider>
   <mat-card>
     <h2>Add a new Product</h2>
+
+  </mat-card>
+
+
+  <mat-card>
+
     <mat-form-field>
       <input matInput placeholder="Product Name" [(ngModel)]="productName" name="productName">
       <div *ngIf="empty(productName)" class="invalid-feedback">Product Name</div>
     </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
+      <input matInput placeholder="Product Image" [(ngModel)]="productImage" name="productImage">
+      <div *ngIf="empty(productImage)" class="invalid-feedback">Please add a Photo</div>
+    </mat-form-field>
+  </mat-card>
+
+  <mat-card>
+    <mat-checkbox >Is your Product a Service?</mat-checkbox>
+
+    <mat-checkbox class="checkboxMargin">Is your Product rentable?</mat-checkbox>
+    <div>
+    <br>
+    </div>
+    <mat-form-field appearance="fill">
+
+      <mat-label>Select Product Category</mat-label>
+      <select matNativeControl [(ngModel)]="productCategory" value="productCategory">
+        <option value="productCategory">Antiques & Art</option>
+        <option value="productCategory">Baby & Child</option>
+        <option value="productCategory">Books</option>
+        <option value="productCategory">Office & Commercial</option>
+        <option value="productCategory">Computer & Computer accessories</option>
+        <option value="productCategory">Vehicles</option>
+        <option value="productCategory">Films</option>
+        <option value="productCategory">Photo & Video</option>
+        <option value="productCategory">Garden & Crafts</option>
+        <option value="productCategory">Housekeeping</option>
+        <option value="productCategory">Real estate</option>
+        <option value="productCategory">Clothing & Accessories</option>
+        <option value="productCategory">Music</option>
+        <option value="productCategory">Collect</option>
+        <option value="productCategory">Toys & Crafts</option>
+        <option value="productCategory">Sports & Outdoors</option>
+        <option value="productCategory">Job offers</option>
+        <option value="productCategory">TV & Audio</option>
+        <option value="productCategory">Phone & Vavigation</option>
+        <option value="productCategory">Tickets & Vouchers</option>
+        <option value="productCategory">Animals</option>
+        <option value="productCategory">Miscellaneous</option>
+      </select>
+    </mat-form-field>
+  </mat-card>
+  <mat-card>
+
+    <mat-form-field>
+      <mat-label>Describe your Product</mat-label>
+      <textarea matInput
+                ng-model="productDescription"
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="20"></textarea>
+    </mat-form-field>
+  </mat-card>
+
+  <mat-card>
+
+    <mat-form-field>
+      <input matInput placeholder="Product Price" [(ngModel)]="productPrice" name="productPrice">
+      <div *ngIf="empty(productPrice)" class="invalid-feedback">Please add a Price</div>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Location" [(ngModel)]="productLocation" name="productLocation">
+      <div *ngIf="empty(productLocation)" class="invalid-feedback">Location</div>
+    </mat-form-field>
+
+    <mat-checkbox class="checkboxMargin">Product delivery possible?</mat-checkbox>
+
+  </mat-card>
+
 
 
     <mat-form-field>
       <input matInput placeholder="Describe your Product" [(ngModel)]="productDescription" name="productDescription">
       <div *ngIf="empty(productDescription)" class="invalid-feedback">Describe your Product</div>
     </mat-form-field>
-
-    <br>
-    <mat-form-field>
-      <input matInput placeholder="Product Image" [(ngModel)]="productImage" name="productImage">
-      <div *ngIf="empty(productImage)" class="invalid-feedback">Please add a Photo</div>
-    </mat-form-field>
-
-
-
-  </mat-card>
-  <p>
-    productPrice: this.productPrice,
-    productCategory: this.productCategory,
-    productLocation: this.productLocation,
-    productDelivery: this.productDelivery,
-    uploadDate: this.uploadDate,
-    sellDate: this.sellDate,
-    isApproved: this.isApproved,
-    isService: this.isService,
-    isRentable: this.isRentable,
-    isAvailable: this.isAvailable,
-    userId: this.userId,
-  </p>

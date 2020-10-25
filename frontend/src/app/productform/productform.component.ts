@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , NgZone, ViewChild} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import {Router} from "@angular/router";
 import {UserService} from "../services/user.service";
+import {CdkTextareaAutosize} from '@angular/cdk/text-field';
 
 @Component({
   selector: 'app-productform',
@@ -25,13 +26,24 @@ export class ProductformComponent implements OnInit {
   isRentable = '';
   isAvailable = '';
   userId = '';
-  userName = '';
+  //userName = '';
   userReview = '';
   userAuth = '';
 
-  constructor(private httpClient: HttpClient, private router: Router, private userService: UserService) { }
+  constructor(private httpClient: HttpClient, private router: Router, private userService: UserService, private _ngZone: NgZone) { }
 
   ngOnInit(): void {
+      this.userId = this.userService.getUserId();
+      this.isLoggedIn = this.userService.getIsLoggedIn();
+      //this.userName = this.userService.getUserName();
+  }
+
+  @ViewChild('autosize') autosize: CdkTextareaAutosize;
+
+  triggerResize() {
+    // Wait for changes to be applied, then trigger textarea resize.
+    this._ngZone.onStable.pipe(take(1))
+        .subscribe(() => this.autosize.resizeToFitContent(true));
   }
 
   addProduct(): void {

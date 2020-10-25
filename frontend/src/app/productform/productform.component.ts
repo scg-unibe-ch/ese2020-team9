@@ -4,6 +4,8 @@ import { environment } from '../../environments/environment';
 import {Router} from "@angular/router";
 import {UserService} from "../services/user.service";
 import {CdkTextareaAutosize} from '@angular/cdk/text-field';
+import { ProductItem } from "../models/product-item.model";
+
 
 @Component({
   selector: 'app-productform',
@@ -56,12 +58,12 @@ export class ProductformComponent implements OnInit {
           productCategory: this.productCategory,
           productLocation: this.productLocation,
           productDelivery: this.productDelivery,
-          uploadDate: this.uploadDate,
-          sellDate: this.sellDate,
-          isApproved: this.isApproved,
+          uploadDate: new Date(),
+          sellDate: '',
+          isApproved: false,
           isService: this.isService,
           isRentable: this.isRentable,
-          isAvailable: this.isAvailable,
+          isAvailable: true,
           userId: this.userId,
           //userReview: this.userReview,
 

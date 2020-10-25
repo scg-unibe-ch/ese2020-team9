@@ -22,9 +22,9 @@
   </mat-card>
 
   <mat-card>
-    <mat-checkbox >Is your Product a Service?</mat-checkbox>
+    <mat-checkbox [(ngModel)]="isService">Is your Product a Service?</mat-checkbox>
 
-    <mat-checkbox class="checkboxMargin">Is your Product rentable?</mat-checkbox>
+    <mat-checkbox class="checkboxMargin" [(ngModel)]="isRentable">Is your Product rentable?</mat-checkbox>
     <div>
     <br>
     </div>
@@ -32,28 +32,28 @@
 
       <mat-label>Select Product Category</mat-label>
       <select matNativeControl [(ngModel)]="productCategory" value="productCategory">
-        <option value="productCategory">Antiques & Art</option>
-        <option value="productCategory">Baby & Child</option>
-        <option value="productCategory">Books</option>
-        <option value="productCategory">Office & Commercial</option>
-        <option value="productCategory">Computer & Computer accessories</option>
-        <option value="productCategory">Vehicles</option>
-        <option value="productCategory">Films</option>
-        <option value="productCategory">Photo & Video</option>
-        <option value="productCategory">Garden & Crafts</option>
-        <option value="productCategory">Housekeeping</option>
-        <option value="productCategory">Real estate</option>
-        <option value="productCategory">Clothing & Accessories</option>
-        <option value="productCategory">Music</option>
-        <option value="productCategory">Collect</option>
-        <option value="productCategory">Toys & Crafts</option>
-        <option value="productCategory">Sports & Outdoors</option>
-        <option value="productCategory">Job offers</option>
-        <option value="productCategory">TV & Audio</option>
-        <option value="productCategory">Phone & Vavigation</option>
-        <option value="productCategory">Tickets & Vouchers</option>
-        <option value="productCategory">Animals</option>
-        <option value="productCategory">Miscellaneous</option>
+        <option value="Antiques & Art">Antiques & Art</option>
+        <option value="Baby & Child">Baby & Child</option>
+        <option value="Books">Books</option>
+        <option value="Office & Commercial">Office & Commercial</option>
+        <option value="Computer & Computer accessories">Computer & Computer accessories</option>
+        <option value="Vehicles">Vehicles</option>
+        <option value="Films">Films</option>
+        <option value="Photo & Video">Photo & Video</option>
+        <option value="Garden & Crafts">Garden & Crafts</option>
+        <option value="Housekeeping">Housekeeping</option>
+        <option value="Real estate">Real estate</option>
+        <option value="Clothing & Accessories">Clothing & Accessories</option>
+        <option value="Music">Music</option>
+        <option value="Collect">Collect</option>
+        <option value="Toys & Crafts">Toys & Crafts</option>
+        <option value="Sports & Outdoors">Sports & Outdoors</option>
+        <option value="Job offers">Job offers</option>
+        <option value="TV & Audio">TV & Audio</option>
+        <option value="Phone & Navigation">Phone & Navigation</option>
+        <option value="Tickets & Vouchers">Tickets & Vouchers</option>
+        <option value="Animals">Animals</option>
+        <option value="Miscellaneous">Miscellaneous</option>
       </select>
     </mat-form-field>
   </mat-card>
@@ -62,7 +62,7 @@
     <mat-form-field>
       <mat-label>Describe your Product</mat-label>
       <textarea matInput
-                ng-model="productDescription"
+                [(ngModel)]="productDescription"
                 cdkTextareaAutosize
                 #autosize="cdkTextareaAutosize"
                 cdkAutosizeMinRows="1"
@@ -82,7 +82,7 @@
       <div *ngIf="empty(productLocation)" class="invalid-feedback">Location</div>
     </mat-form-field>
 
-    <mat-checkbox class="checkboxMargin">Product delivery possible?</mat-checkbox>
+    <mat-checkbox class="checkboxMargin" [(ngModel)]="productDelivery">Product delivery possible?</mat-checkbox>
 
   </mat-card>
 

@@ -1,35 +1,20 @@
-<div>
+<!-- List of ProductItemComponents displaying all items of list -->
+<!--<mat-grid-tile class="productListItems" *ngFor="let productItem of productList.productItems">
+  <app-prodduct-item
+    [productItem]="productItem"
+    (update)="onItemUpdate($event)"
+    (delete)="onItemDelete($event)"
+  ></app-prodduct-item>
+</mat-grid-tile>-->
+
+<mat-card>
+  <!-- Button to delete list -->
+  <button mat-flat-button color="warn" (click)="onListDelete()" [disabled]="productList.productItems.length != 0">
+    Delete list
+  </button>
   <br>
-  <h1>Product List</h1>
-</div>
-
-<mat-card>
-  <mat-card-header>
-    <img mat-card-avatar src="/assets/unknown_profilepicture.png" alt="Profile Picture">
-    <mat-card-title>
-      <a href="">Buy Fresh Fruits</a></mat-card-title>
-    <mat-card-subtitle>posted by Nora</mat-card-subtitle>
-  </mat-card-header>
-  <img mat-card-image src="/assets/fresh_fruits.png" alt="Fresh Fruits To Buy">
-  <mat-card-content>
-    <p>I'm selling fresh fruits from my garden. Picked yesterday!!</p>
-  </mat-card-content>
-  <mat-card-actions *ngIf="statusLoggedIn">
-    <button mat-flat-button color="primary" (click)="buyProduct()">BUY</button>
-  </mat-card-actions>
+  <!-- Input field for new product item name -->
+  <div *ngIf="productList.productItems.length === 0">No Products available.</div>
 </mat-card>
 
-<mat-card>
-  <mat-card-header>
-    <img mat-card-avatar src="/assets/unknown_profilepicture.png" alt="Profile Picture">
-    <mat-card-title>Service for Shoveling Your Driveway</mat-card-title>
-    <mat-card-subtitle>posted by Nora</mat-card-subtitle>
-  </mat-card-header>
-  <img mat-card-image src="/assets/snow_shoveling.png" alt="Service for Shoveling Snow">
-  <mat-card-content>
-    <p>Winter is coming!! If you need someone to shovel your driveway, let me know.</p>
-  </mat-card-content>
-  <mat-card-actions *ngIf="statusLoggedIn">
-    <button mat-flat-button color="primary" (click)="buyProduct()">BUY</button>
-  </mat-card-actions>
-</mat-card>
+<hr>

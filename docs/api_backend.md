@@ -130,6 +130,45 @@ Requires authorization header with a valid token in the request!
     ]
     ```
 
+### delete a user `"/user/:id"` (DELETE)
+
+Request requires authorization header with a token from an admin.
+
+- Response (STATUS 200)
+
+    ```json
+    {
+        "message": "Successfully deleted 1 entry"
+    }
+    ```
+
+### make a user to an admin `"/user/makeAdmin/:id"` (PUT)
+
+Request requires authorization header with a token from an admin.
+
+- Response (STATUS 200)
+
+    ```json
+    {
+        "userId": "number",
+        "admin":  "boolean",
+        "wallet": "number",
+        "userName": "string",
+        "password": "string (Hash)",
+        "userMail": "string",
+        "firstName": "string",
+        "lastName": "string",
+        "gender":   "string",
+        "phoneNumber": "number",
+        "addressStreet": "string",
+        "addressPin": "string",
+        "addressCity": "string",
+        "addressCountry": "string",
+        "createdAt" : "string",
+        "updatedAt" : "string",
+    }
+    ```
+
 ## Product API (draft!)
 
 ### add a product `"/products/"` (POST)

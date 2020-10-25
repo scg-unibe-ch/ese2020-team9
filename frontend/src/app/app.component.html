@@ -1,36 +1,5 @@
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <span>Better Than Ebay</span>
-  </mat-toolbar-row>
-</mat-toolbar>
+<!-- header -->
+<app-header></app-header>
 
-<mat-divider></mat-divider>
-
-<mat-tab-group animationDuration="800ms">
- <!-- <mat-tab label="Todo List Example">
-    <mat-card>
-      <mat-form-field>
-        <input matInput placeholder="List Name" [(ngModel)]="newTodoListName" name="name">
-      </mat-form-field>
-      <button mat-flat-button color="primary" (click)="onListCreate()" [disabled]="newTodoListName === ''">Create new list</button>
-    </mat-card>
-
-    <app-todo-list
-      *ngFor="let todoList of todoLists" [todoList]="todoList"
-      (update)="onListUpdate($event)"
-      (delete)="onListDelete($event)"
-    ></app-todo-list>
-  </mat-tab>
--->
-  <mat-tab label="User Login">
-    <app-user-login></app-user-login>
-  </mat-tab>
-  <mat-tab label="User Registration">
-    <app-user-registration></app-user-registration>
-  </mat-tab>
-  <mat-tab label="Admin Panel">
-    <app-admin-panel></app-admin-panel>
-  </mat-tab>
-</mat-tab-group>
-
-<app-product-list></app-product-list>
+<!-- footer -->
+<app-footer></app-footer>

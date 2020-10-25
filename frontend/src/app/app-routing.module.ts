@@ -6,6 +6,8 @@ import { UserRegistrationComponent } from "./user-registration/user-registration
 import { UserDashboardComponent } from "./user-dashboard/user-dashboard.component";
 import { AdminPanelComponent } from "./admin-panel/admin-panel.component";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
+import { ProductformComponent } from "./productform/productform.component";
+
 
 const routes: Routes = [
   { path: 'home', component: DashboardComponent},
@@ -13,6 +15,7 @@ const routes: Routes = [
   { path: 'registration', component: UserRegistrationComponent},
   { path: 'user', component: UserDashboardComponent},
   { path: 'admin', component: AdminPanelComponent},
+  { path: 'productform', component: ProductformComponent},
   //default route
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   //wildcard route for 404 page

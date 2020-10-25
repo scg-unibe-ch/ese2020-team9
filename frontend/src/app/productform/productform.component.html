@@ -86,9 +86,7 @@
 
   </mat-card>
 
+  <mat-card>
+      <button mat-flat-button class="button_standard" (click)="addProduct()" [disabled]="!allFieldsAreFilled()">Add Product</button>
 
-
-    <mat-form-field>
-      <input matInput placeholder="Describe your Product" [(ngModel)]="productDescription" name="productDescription">
-      <div *ngIf="empty(productDescription)" class="invalid-feedback">Describe your Product</div>
-    </mat-form-field>
+  </mat-card>

@@ -47,7 +47,7 @@ export class ProductformComponent implements OnInit {
   }
 
   addProduct(): void {
-        this.httpClient.post(environment.endpointURL + 'user/register', {
+        this.httpClient.post(environment.endpointURL + '/', {
           //productId: this.productId,
           productName: this.productName,
           productDescription: this.productDescription,
@@ -72,13 +72,57 @@ export class ProductformComponent implements OnInit {
               //navigates to dashboard
               this.router.navigate(['/home'])
              }, (error: any) => {
-              this.userAuth = 'Your Product Information is invalid!';
+              this.userAuth = 'Your Product could not be added!';
         });
       }
+
+  getProductById(productId): void {
+          this.httpClient.get(environment.endpointURL + '/productId', {
+            productId: this.productId,
+
+          }).subscribe((res: any) => {
+
+               }, (error: any) => {
+                this.userAuth = 'There is no corresponding Product!';
+          });
+        }
+
+   editProduct(): void {
+     this.httpClient.put(environment.endpointURL + '/productId', {
+         //productId: this.productId,
+         productName: this.productName,
+         productDescription: this.productDescription,
+         productImage: this.productImage,
+         productPrice: this.productPrice,
+         productCategory: this.productCategory,
+         productLocation: this.productLocation,
+         productDelivery: this.productDelivery,
+         uploadDate: this.uploadDate,
+         sellDate: this.sellDate,
+         isApproved: this.isApproved,
+         isService: this.isService,
+         isRentable: this.isRentable,
+         isAvailable: this.isAvailable,
+         userId: this.userId,
+         //userReview: this.userReview,
+
+       }).subscribe((res: any) => {
+
+             //navigates to productItem
+             //this.router.navigate(['/'])
+            }, (error: any) => {
+             this.userAuth = 'Your Product Information is invalid!';
+     });
+
+   }
 
    //check if field is empty
     empty(input):boolean{
         if (input === "") return true;
         else return false
       }
+
+  allFieldsAreFilled():boolean{
+  return true;
+  }
 }

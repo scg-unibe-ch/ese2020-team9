@@ -23,7 +23,7 @@ export class UserService {
 
             return User.create(user).then(inserted => Promise.resolve(inserted)).catch(err => Promise.reject(err));
         })
-        .catch(err => Promise.reject({ message: err }));
+        .catch(err => Promise.reject(err));
 
 
     }
@@ -31,6 +31,7 @@ export class UserService {
     public login(loginRequestee: LoginRequest): Promise<User | LoginResponse> {
         const secret = process.env.JWT_SECRET;
         const { Op } = require('sequelize');
+
         return User.findOne({
             where:  {
                 [Op.or]: [
@@ -40,14 +41,18 @@ export class UserService {
             }
         })
         .then(user => {
-            if (bcrypt.compareSync(loginRequestee.password, user.password)) {// compares the hash with the password from the login request
-                const token: string = jwt.sign({ userName: user.userName, userId: user.userId, admin: user.admin }, secret, { expiresIn: '2h' });
-                return Promise.resolve({ user, token });
+            if (user) {
+                if (bcrypt.compareSync(loginRequestee.password, user.password)) {
+                    const token: string = jwt.sign({ userName: user.userName, userId: user.userId, admin: user.admin }, secret, { expiresIn: '2h' });
+                    return Promise.resolve({ user, token });
+                } else {
+                return Promise.reject({message: 'Wrong password'});
+                }
             } else {
-                return Promise.reject({ message: 'not authorized' });
+                return Promise.reject({message: 'Could not find this User'});
             }
         })
-        .catch(err => Promise.reject({ message: err }));
+        .catch(err => Promise.reject(err));
     }
 
     public getAll(): Promise<User[]> {

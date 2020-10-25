@@ -1,7 +1,6 @@
-<div *ngIf="admin">
-  <mat-card>
-    <button mat-flat-button color="primary" (click)="getUserID()">Get Your User Id</button>
-    Your user Id is {{userId}}.
-  </mat-card>
-</div>
-
+<mat-card>
+  <button mat-flat-button color="primary" (click)="getUserList()">Get List of users </button>
+  <mat-list-item *ngFor="let user of users" [user]="User">
+    <li >{{user.userName}},{{user.userId}}</li>
+  </mat-list-item>
+</mat-card>

@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { environment } from "../../environments/environment";
+import { User } from "../models/user.model";
+import {UserService} from "../services/user.service";
+
 
 @Component({
   selector: 'app-admin-panel',
@@ -7,23 +12,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminPanelComponent implements OnInit {
 
- admin: any;
- userId: any;
+  userName :any;
+  userId: any;
+  users: User[] ;
 
-  constructor() { }
+  constructor(private httpClient: HttpClient, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.checkAdminStatus();
   }
 
 
-  checkAdminStatus(): void{
-    this.admin = window.localStorage.getItem('admin') === "true";
-  }
-
-
-  getUserID(){
-    this.userId = localStorage.getItem('userId');
+  getUserList(){
+    this.httpClient.get(environment.endpointURL + 'user').subscribe((instances: any) => {
+      this.users = instances.map((instance: any) => new User(instance.userId, instance.userName ));
+    });
   }
 
 }

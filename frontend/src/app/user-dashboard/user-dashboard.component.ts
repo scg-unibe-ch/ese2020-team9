@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import {Router} from "@angular/router";
 import {UserService} from "../services/user.service";
 
 @Component({
@@ -10,11 +12,16 @@ export class UserDashboardComponent implements OnInit {
 
   userId: any;
   isLoggedIn: boolean;
+  userName: string;
+  isAdmin: boolean;
 
-  constructor(private userService: UserService) { }
+  constructor(private httpClient: HttpClient, private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
     this.userId = this.userService.getUserId();
     this.isLoggedIn = this.userService.getIsLoggedIn();
+    this.isAdmin = this.userService.getIsAdmin();
+    this.userName = this.userService.getUserName();
+
   }
 }

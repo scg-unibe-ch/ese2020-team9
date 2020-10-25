@@ -29,6 +29,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { AppRoutingModule } from "./app-routing.module";
 import { MatGridListModule} from "@angular/material/grid-list";
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ProductformComponent } from './productform/productform.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ProductItemComponent,
     UserDashboardComponent,
     DashboardComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ProductformComponent
   ],
   imports: [
     BrowserModule,

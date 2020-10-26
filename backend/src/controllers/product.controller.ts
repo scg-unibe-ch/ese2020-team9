@@ -8,19 +8,19 @@ const productService = new ProductService();
 
 productController.post('/', (req: Request, res: Response) => {
     productService.create(req.body).then(() =>
-        res.status(200).send({message: 'Product Created!'}))
+        res.status(200).send({message: 'Product successfully created!'}))
         .catch(err => res.status(500).send(err));
 });
 
 productController.put('/:productId', (req: Request, res: Response) => {
     productService.update(parseInt(req.params.productId, 10), req.body)
-    .then(() => res.status(200).send({message: 'Product Updated!'}))
+    .then(() => res.status(200).send({message: `Product ${req.params.productId} successfully updated!` }))
     .catch(err => res.status(500).send(err));
 });
 
 productController.delete('/:id', (req: Request, res: Response) => {
     productService.deleteProduct(parseInt(req.params.id, 10))
-    .then(() => res.send({message: 'Product Deleted!'}))
+    .then(() => res.send({message: `Product successfully deleted!`}))
     .catch(err => res.status(500).send(err));
 });
 

@@ -217,12 +217,13 @@ As a first suggestion the application could consist of the following classes. A 
 
 | Advertisement  |  |       
 |----------|-------------:|
-|  *Class Type:* Properties |
+|  *Class Type:* Property |
 |  *Class Characteristics:* Abstract, Aggregate, Concurrent, Persistent, Corruptible |
 | |
 |  *Responsibility*|  *Collaborator* |
 | knows advertisement properties (name, price, category, etc.) |  |
 | has owner | User |
+| has review | Review |
 
 
 | Product  | *Subclass of Advertisement* |       
@@ -232,7 +233,7 @@ As a first suggestion the application could consist of the following classes. A 
 | |
 |  *Responsibility*|  *Collaborator* |
 | knows product properties (availability, rentability, delivery, etc.) |  |
-| knows if sold or lent | User |
+| knows who purchased or rented | User |
 
 
 | Service  | *Subclass of Advertisement* |       
@@ -252,8 +253,8 @@ As a first suggestion the application could consist of the following classes. A 
 |  *Responsibility*|  *Collaborator* |
 | knows user info (username, password, email, etc.) |  |
 | has a shopping cart | shopping cart |
-| uploads, buys advertisements |    Advertisement |
-| knows uploaded, sold, bought advertisements |    Advertisements |
+| uploads, buys advertisements | Advertisement |
+| knows uploaded, sold, bought advertisements | Advertisements |
 | knows amount of money available |  Wallet   |
 
 
@@ -264,7 +265,7 @@ As a first suggestion the application could consist of the following classes. A 
 | |
 |  *Responsibility*|  *Collaborator* |
 | approves advertisements |  Advertisement |
-| manages users (delete, upgrade to admin) |    User |
+| manages users (delete, upgrade to admin) | User |
 
 
 | Review  |  |       
@@ -290,7 +291,7 @@ As a first suggestion the application could consist of the following classes. A 
 
 | Shopping Cart  |  |       
 |----------|-------------:|
-|  *Class Type:* Properties |
+|  *Class Type:* Property |
 |  *Class Characteristics:* Abstract, Aggregate, Sequential, Persistent, Guarded |
 | |
 |  *Responsibility*|  *Collaborator* |
@@ -309,5 +310,7 @@ As a first suggestion the application could consist of the following classes. A 
 | belongs to user | User | 
 
 
+## Class Diagram
 
+![](UML_Class_Diagram_1.png)
 

@@ -214,33 +214,99 @@ Alex wants to be able to search for different keywords or product categories, so
 As a first suggestion the application could consist of the following classes. A *Product* class and a *User* class, which may have sold or bought *Products* and knows its registration information. The class-responsibility-collaboration cards below identify possible responisabilites and collabarating classes of each class. Additonial responsabilties or classes may be added. Possibly the users can be split into normal users, registerd users and admins. 
 
 
-| Product  |               |       
-|----------|-------------:|
-|  *Responsibility*|  *Collaborator* |
-|  |
-| knows name |  |
-| knows price |       |
-| knows seller | Seller (User) |
-| knows if sold or lent | Buyer (User)   |
-| knows product category |    Category  |
 
-<br/><br/>
+| Advertisement  |  |       
+|----------|-------------:|
+|  *Class Type:* Properties |
+|  *Class Characteristics:* Abstract, Aggregate, Concurrent, Persistent, Corruptible |
+| |
+|  *Responsibility*|  *Collaborator* |
+| knows advertisement properties (name, price, category, etc.) |  |
+| has owner | User |
+
+
+| Product  | *Subclass of Advertisement* |       
+|----------|-------------:|
+|  *Class Type:* Thing |
+|  *Class Characteristics:* Tangible, Aggregate, Concurrent, Persistent, Corruptible |
+| |
+|  *Responsibility*|  *Collaborator* |
+| knows product properties (availability, rentability, delivery, etc.) |  |
+| knows if sold or lent | User |
+
+
+| Service  | *Subclass of Advertisement* |       
+|----------|-------------:|
+|  *Class Type:* Thing |
+|  *Class Characteristics:* Abstract, Aggregate, Concurrent, Persistent, Corruptible |
+| |
+|  *Responsibility*|  *Collaborator* |
+| knows service properties (conditions, price unit, etc.) |  |
+
 
 | User  |               |       
 |----------|-------------:|
+|  *Class Type:* Role |
+|  *Class Characteristics:* Abstract, Aggregate, Concurrent, Persistent, Corruptible |
+| |
 |  *Responsibility*|  *Collaborator* |
-|  |
-| knows registration info|       |
-| uploads products |    Product |
-| knows uploaded products |    Product |
-| sells products |    Product  |
-| knows sold products |    Product |
-| buys products |    Product  |
-| knows bought products |    Product |
-| knows lent products |    Product |
-| knows if it is an admin| |
-| knows amount of money available |     |
+| knows user info (username, password, email, etc.) |  |
+| has a shopping cart | shopping cart |
+| uploads, buys advertisements |    Advertisement |
+| knows uploaded, sold, bought advertisements |    Advertisements |
+| knows amount of money available |  Wallet   |
 
+
+| Admin  |  *Subclass of User*  |       
+|----------|-------------:|
+|  *Class Type:* Role |
+|  *Class Characteristics:* Abstract, Aggregate, Concurrent, Persistent, Corruptible |
+| |
+|  *Responsibility*|  *Collaborator* |
+| approves advertisements |  Advertisement |
+| manages users (delete, upgrade to admin) |    User |
+
+
+| Review  |  |       
+|----------|-------------:|
+|  *Class Type:* Property |
+|  *Class Characteristics:* Abstract, Aggregate, Concurrent, Persistent, Guarded |
+| |
+|  *Responsibility*|  *Collaborator* |
+| has feedbacks |  Feedback  |
+| calculates overall rating |  Feedback  |
+| reviews user or advertisement| User, Advertisement | 
+
+
+| Feedback  |  |       
+|----------|-------------:|
+|  *Class Type:* Property |
+|  *Class Characteristics:* Abstract, Atomic, Concurrent, Persistent, Guarded |
+| |
+|  *Responsibility*|  *Collaborator* |
+| has review text, rating |    |
+| belongs to review | Review | 
+| knows author| User | 
+
+| Shopping Cart  |  |       
+|----------|-------------:|
+|  *Class Type:* Properties |
+|  *Class Characteristics:* Abstract, Aggregate, Sequential, Persistent, Guarded |
+| |
+|  *Responsibility*|  *Collaborator* |
+| has advertisements | Advertisements |
+| calculates total costs | Advertisements | 
+| belongs to user | User | 
+
+| Wallet  |  |       
+|----------|-------------:|
+|  *Class Type:* Thing |
+|  *Class Characteristics:* Tangible, Atomic, Sequential, Persistent, Guarded |
+| |
+|  *Responsibility*|  *Collaborator* |
+| knows balance |  |
+| executes transactions |  | 
+| belongs to user | User | 
 
 
 

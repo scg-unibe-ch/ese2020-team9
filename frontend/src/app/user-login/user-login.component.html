@@ -1,26 +1,29 @@
 <mat-card>
-  <div *ngIf="!loggedIn">
-
+  <div *ngIf="!isUserLoggedIn">
     <mat-form-field>
       <input matInput placeholder="Username/ Email" [(ngModel)]="userLogin" name="userLogin">
     </mat-form-field>
+
     <mat-form-field>
-      <input matInput placeholder="Password" [(ngModel)]="password" name="password" type="password">
+      <input matInput placeholder="Password" [type]="hide ? 'text' : 'password'" [(ngModel)]="password" name="password" type="password">
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
     </mat-form-field>
-    <button mat-flat-button color="primary" (click)="login()">Login</button>
+
+    <button mat-flat-button class="button_standard" (click)="login()">Login</button>
     <br>
     {{userAuth}}
+    <br>
+    <br>
   </div>
 
+  <div *ngIf="userAuth">
+    <a routerLink="/registration">
+      <button mat-flat-button class="button_standard">Registration</button>
+    </a>
+  </div>
 
-  <div *ngIf="loggedIn">
+  <div *ngIf="isUserLoggedIn">
     You are currently logged in!
-    <button mat-flat-button color="primary" (click)="logout()">Logout</button>
+    <button mat-flat-button class="button_standard" (click)="logout()">Logout</button>
   </div>
-
-</mat-card>
-
-<mat-card>
-  <button mat-flat-button color="primary" (click)="accessSecuredEndpoint()">Access Secure Endpoint (only for logged in users)</button>
-  {{ secureEndpointResponse }}
 </mat-card>

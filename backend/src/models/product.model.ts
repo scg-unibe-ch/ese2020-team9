@@ -66,18 +66,17 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
                 allowNull: false
             },
             productLocation: {
-                type: DataTypes.STRING,
-                allowNull: false
+                type: DataTypes.STRING
             },
             productDelivery: {
-                type: DataTypes.BOOLEAN,
+                type: DataTypes.BOOLEAN
             },
             uploadDate: {
                 type: DataTypes.DATE,
                 allowNull: false
             },
             sellDate: {
-                type: DataTypes.DATE,
+                type: DataTypes.DATE
             },
             isApproved: {
                 type: DataTypes.BOOLEAN,
@@ -88,7 +87,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
                 allowNull: false
             },
             isRentable: {
-                type: DataTypes.BOOLEAN,
+                type: DataTypes.BOOLEAN
             },
             isAvailable: {
                 type: DataTypes.BOOLEAN,
@@ -99,7 +98,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
                 allowNull: false
             },
             userReview: {
-                type: DataTypes.TEXT,
+                type: DataTypes.TEXT
             }
         },
         { sequelize, tableName: 'productTable' }
@@ -109,10 +108,11 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
 
     public static createAssociations() {
         Product.belongsTo(User, {
-            as: 'user',
+            as : 'user',
+            foreignKey: 'userId',
             targetKey: 'userId',
-            onDelete: 'cascade',
-            foreignKey: 'userId'
+            onDelete: 'cascade'
+
         });
     }
 }

@@ -36,6 +36,21 @@ export class ProductService {
         return Product.findAll();
     }
 
+    public approve(id: number): Promise<number> {
+        return Product.findOne({
+            where: {
+                productId: id
+            }
+        }).then(product => {
+            return product.update({
+                isApproved: true
+            });
+        }).then(product => {
+            return product.userId;
+        } )
+        .catch(err => Promise.reject({message: err}));
+    }
+
     public getAllApproved(): Promise<Product[]> {
         return Product.findAll({
             where: {

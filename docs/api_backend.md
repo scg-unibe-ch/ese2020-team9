@@ -266,6 +266,18 @@ Request requires authorization header with a token from an admin.
     }
     ```
 
+### approve a product `"/products/approve/:id"` (PUT) (for example "/products/approve/2")
+
+Request requires authorization header with a token from an admin.
+
+- Response (STATUS 200)
+
+    ```json
+    {
+        "message": "Successfully approved product 'productId'!'"
+    }
+    ```
+    
 ### getting products (GET)
 
 #### getting all products `"/products/"` 

@@ -462,7 +462,7 @@ for example `"/products/food"`
     ]
     ```
 
-#### getting all products of a user `"/products/user/:category"` 
+#### getting all products of a user `"/products/user/:userId"` 
 
 for example `"/products/user/2"`
 

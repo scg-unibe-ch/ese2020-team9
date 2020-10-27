@@ -42,7 +42,7 @@ export class ProductService {
 
   //get all Products from a Category
   getAllCategory(category: string) {
-    return this.httpClient.get(environment.endpointURL + 'products/'+ category);
+    return this.httpClient.get(environment.endpointURL + 'products/category/'+ category);
   }
 
   //get a specific Products
@@ -52,6 +52,6 @@ export class ProductService {
 
   //get all Products from the same user -> not implemented
   getUserProduct(userId: number) {
-    return this.httpClient.get(environment.endpointURL + 'products/' + userId);
+    return this.httpClient.get(environment.endpointURL + 'products/user' + userId);
   }
 }

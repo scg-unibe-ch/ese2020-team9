@@ -266,6 +266,18 @@ Request requires authorization header with a token from an admin.
     }
     ```
 
+### approve a product `"/products/approve/:id"` (PUT) (for example "/products/approve/2")
+
+Request requires authorization header with a token from an admin.
+
+- Response (STATUS 200)
+
+    ```json
+    {
+        "message": "Successfully approved product 'productId'!'"
+    }
+    ```
+    
 ### getting products (GET)
 
 #### getting all products `"/products/"` 
@@ -450,6 +462,52 @@ for example `"/products/category/food"`
     ]
     ```
 
+#### getting all products of a user `"/products/user/:userId"` 
+
+for example `"/products/user/2"`
+
+- Response body
+    ```json
+    [
+        {   
+            "productId": "number",
+            "productName": "string",
+            "productDescription": "string",
+            "productImage": "String",
+            "productPrice": "number",
+            "productCategory": "String",
+            "productLocation": "string",
+            "productDelivery": "boolean",
+            "uploadDate": "Date",
+            "sellDate": "Date",
+            "isApproved": "boolean",
+            "isService": "boolean",
+            "isRentable": "boolean",
+            "isAvailable": "boolean",
+            "userId": "2",
+            "userReview": "string"
+        }, 
+            {   
+            "productId": "number",
+            "productName": "string",
+            "productDescription": "string",
+            "productImage": "String",
+            "productPrice": "number",
+            "productCategory": "String",
+            "productLocation": "string",
+            "productDelivery": "boolean",
+            "uploadDate": "Date",
+            "sellDate": "Date",
+            "isApproved": "boolean",
+            "isService": "boolean",
+            "isRentable": "boolean",
+            "isAvailable": "boolean",
+            "userId": "2",
+            "userReview": "string"
+        },
+        ...
+    ]
+    ```
 
 #### getting a product by id `"/products/:id"` 
 

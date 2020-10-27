@@ -32,6 +32,17 @@ export class ProductService {
         });
     }
 
+    public getProductsOfUser(userId: number): Promise<Product[]> {
+        const { Op } = require('sequelize');
+        return Product.findAll({
+            where: {
+              [Op.and]: [
+                { UserId: userId }
+              ]
+            }
+        });
+    }
+
     public getAll(): Promise<Product[]> {
         return Product.findAll();
     }

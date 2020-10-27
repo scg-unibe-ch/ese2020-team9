@@ -450,6 +450,52 @@ for example `"/products/food"`
     ]
     ```
 
+#### getting all products of a user `"/products/user/:category"` 
+
+for example `"/products/user/2"`
+
+- Response body
+    ```json
+    [
+        {   
+            "productId": "number",
+            "productName": "string",
+            "productDescription": "string",
+            "productImage": "String",
+            "productPrice": "number",
+            "productCategory": "String",
+            "productLocation": "string",
+            "productDelivery": "boolean",
+            "uploadDate": "Date",
+            "sellDate": "Date",
+            "isApproved": "boolean",
+            "isService": "boolean",
+            "isRentable": "boolean",
+            "isAvailable": "boolean",
+            "userId": "2",
+            "userReview": "string"
+        }, 
+            {   
+            "productId": "number",
+            "productName": "string",
+            "productDescription": "string",
+            "productImage": "String",
+            "productPrice": "number",
+            "productCategory": "String",
+            "productLocation": "string",
+            "productDelivery": "boolean",
+            "uploadDate": "Date",
+            "sellDate": "Date",
+            "isApproved": "boolean",
+            "isService": "boolean",
+            "isRentable": "boolean",
+            "isAvailable": "boolean",
+            "userId": "2",
+            "userReview": "string"
+        },
+        ...
+    ]
+    ```
 
 #### getting a product by id `"/products/:id"` 
 

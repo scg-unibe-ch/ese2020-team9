@@ -10,7 +10,7 @@
 </mat-list-item>
 
 <button mat-flat-button color="primary" (click)="getProductId()">Get Product with Id {{productId}}</button>
-<mat-list-item *ngFor="let productItem of productListId" >
+<mat-list-item *ngFor="let productItem of productList" >
   {{productItem.productDescription}}
   {{productItem.productId}}
 </mat-list-item>

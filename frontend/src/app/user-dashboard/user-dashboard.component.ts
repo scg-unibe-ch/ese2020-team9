@@ -20,7 +20,7 @@ export class UserDashboardComponent implements OnInit {
   productId = 4;
 
   productList: ProductItem[];
-  productListId: ProductItem[];
+  productItem: ProductItem[];
   productLIstCategory: ProductItem[];
 
   constructor(private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService) { }
@@ -49,7 +49,7 @@ export class UserDashboardComponent implements OnInit {
 
   getProductId(){
     this.productService.getProduct(this.productId).subscribe((data: ProductItem[]) => {
-      this.productListId = data;
+      this.productItem = data;
     });
   }
   getAllCategory(){

@@ -49,7 +49,14 @@ productController.get('/unapproved', (req: Request, res: Response) => {
 productController.get('/:category', (req: Request, res: Response) => {
     productService.getProductsOfCategory(req.params.category).then(products => res.send(products)).catch(err => res.status(500).send(err));
 }
-); // get all products that are available of a category
+); // get all products that are available of a
+
+productController.get('/user/:userId', (req: Request, res: Response) => {
+    productService.getProductsOfUser(parseInt(req.params.userId, 10))
+    .then(products => res.send(products))
+    .catch(err => res.status(500).send(err));
+}
+); // get all products of a user
 
 
 productController.get('/:productId', (req: Request, res: Response) => {

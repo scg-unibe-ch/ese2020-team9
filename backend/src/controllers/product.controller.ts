@@ -46,7 +46,7 @@ productController.get('/unapproved', (req: Request, res: Response) => {
 }
 ); // get all approved products
 
-productController.get('/:category', (req: Request, res: Response) => {
+productController.get('/category/:category', (req: Request, res: Response) => {
     productService.getProductsOfCategory(req.params.category).then(products => res.send(products)).catch(err => res.status(500).send(err));
 }
 ); // get all products that are available of a
@@ -60,9 +60,9 @@ productController.get('/user/:userId', (req: Request, res: Response) => {
 
 
 productController.get('/:productId', (req: Request, res: Response) => {
-        productService.getProduct(parseInt(req.params.productId, 10))
-        .then(product => res.send(product)).catch(err => res.status(500).send(err));
-    }
+    productService.getProduct(parseInt(req.params.productId, 10))
+    .then(product => res.send(product)).catch(err => res.status(500).send(err));
+}
 ); // get product by id
 
 export const ProductController: Router = productController;

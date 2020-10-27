@@ -415,9 +415,9 @@ Request requires authorization header with a token from an admin.
     ]
     ```
 
-#### getting all products of a category `"/products/:category"` 
+#### getting all products of a category `"/products/category/:category"` 
 
-for example `"/products/food"`
+for example `"/products/category/food"`
 
 - Response body
     ```json
@@ -462,7 +462,7 @@ for example `"/products/food"`
     ]
     ```
 
-#### getting all products of a user `"/products/user/:category"` 
+#### getting all products of a user `"/products/user/:userId"` 
 
 for example `"/products/user/2"`
 

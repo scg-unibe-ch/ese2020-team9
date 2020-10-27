@@ -9,3 +9,35 @@
   
   </mat-list-item>
 </mat-card>
+
+<!-- display not approved products -->
+<mat-card>
+  <mat-grid-list cols="4" [gutterSize]="'5px'" rowHeight="250px">
+    <mat-grid-tile *ngFor="let productItem of productList" style="backgroundColor: white">
+      <mat-grid-tile-header style="color: black">
+        Posted on {{productItem.uploadDate | date: "dd.MM.yy, HH:mm"}}
+      </mat-grid-tile-header>
+      {{productItem.productDescription}}
+      <mat-grid-tile-footer style="backgroundColor: white; color: black">
+        <mat-radio-group> <!--add [(ngModel)]="productItem.isApproved"-->
+          <mat-radio-button value="true">approve</mat-radio-button>
+          <mat-radio-button value="false">decline</mat-radio-button>
+        </mat-radio-group>
+        <button mat-flat-button class="button_standard" align="left"><!-- add click event-->
+          save
+        </button>
+      </mat-grid-tile-footer>
+    </mat-grid-tile>
+  </mat-grid-list>
+</mat-card>
+
+<!--<mat-card>
+  <button mat-flat-button color="primary" (click)="getProductList()">Get List unapproved Products</button>
+  <mat-list-item *ngFor="let productItem of productList" >
+    <app-product-list
+      [productItem]="productItem"
+      (update)="onProductItemUpdate($event)"
+      (delete)="onProductItemDelete($event)"
+    ></app-product-list>
+  </mat-list-item>
+</mat-card>-->

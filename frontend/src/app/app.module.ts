@@ -9,8 +9,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { TodoListComponent } from './todo-list/todo-list.component';
-import { TodoItemComponent } from './todo-list/todo-item/todo-item.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from "@angular/material/menu";
@@ -30,12 +28,13 @@ import { AppRoutingModule } from "./app-routing.module";
 import { UserComponent } from './user/user.component';
 import { MatGridListModule} from "@angular/material/grid-list";
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ProductformComponent } from './productform/productform.component';
+import { ScrollingModule } from "@angular/cdk/scrolling";
+import { MatRadioModule } from "@angular/material/radio";
 
 @NgModule({
   declarations: [
     AppComponent,
-    TodoListComponent,
-    TodoItemComponent,
     UserLoginComponent,
     UserRegistrationComponent,
     AdminPanelComponent,
@@ -46,7 +45,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     UserDashboardComponent,
     DashboardComponent,
     PageNotFoundComponent,
-    UserComponent
+    UserComponent,
+    ProductformComponent
   ],
   imports: [
     BrowserModule,
@@ -65,6 +65,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     AppRoutingModule,
     MatGridListModule,
     FlexLayoutModule,
+    ScrollingModule,
+    MatRadioModule,
   ],
   providers: [
     {

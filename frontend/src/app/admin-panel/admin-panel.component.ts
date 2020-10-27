@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import {Injectable} from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { ProductItem } from '../models/product-item.model';
 import { User } from '../models/user.model';
-import {ProductService} from "../services/product.service";
+import { ProductService } from "../services/product.service";
 
 
 
@@ -20,11 +19,12 @@ export class AdminPanelComponent implements OnInit {
  userName :any;
  userId: any;
  users: User[] ;
- products: ProductItem[] = [];
+ productList: ProductItem[];
 
   constructor(private httpClient: HttpClient, private productService: ProductService) {}
 
   ngOnInit(): void {
+    this.getProductList();
   }
 
   getUserList(){
@@ -47,9 +47,13 @@ export class AdminPanelComponent implements OnInit {
     }).subscribe();
   }
 
-  // products - GET 
+  // products - GET
   getProductList(){
-   // this.products = this.productService.getProductList()
+    this.productService.getAllUnapproved().subscribe((data: ProductItem [] ) => {
+      this.productList = data;
+    });
   }
+
+  // products - PUT
 
 }

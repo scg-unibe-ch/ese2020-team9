@@ -52,6 +52,6 @@ export class ProductService {
 
   //get all Products from the same user -> not implemented
   getUserProduct(userId: number) {
-    return this.httpClient.get(environment.endpointURL + 'products/user' + userId);
+    return this.httpClient.get(environment.endpointURL + 'products/user/' + userId);
   }
 }

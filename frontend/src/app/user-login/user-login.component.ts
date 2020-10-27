@@ -62,6 +62,8 @@ export class UserLoginComponent implements OnInit {
     this.userService.logout();
     //updates isUserLoggedIn value
     this.userService.isUserLoggedIn.next(false);
+    //update isUserAdmin value
+    this.userService.isUserAdmin.next(false);
     //navigates to dashboard
     this.router.navigate(['/home']);
     //this.checkUserStatus();

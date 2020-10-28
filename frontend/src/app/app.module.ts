@@ -46,7 +46,7 @@ import { MatRadioModule } from "@angular/material/radio";
     DashboardComponent,
     PageNotFoundComponent,
     UserComponent,
-    ProductformComponent
+    ProductformComponent,
   ],
   imports: [
     BrowserModule,

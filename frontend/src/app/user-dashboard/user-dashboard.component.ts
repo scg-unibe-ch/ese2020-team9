@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UserService} from "../services/user.service";
 import {ProductItem} from "../models/product-item.model";
 import {HttpClient} from "@angular/common/http";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ProductService} from "../services/product.service";
 
 
@@ -18,7 +18,7 @@ export class UserDashboardComponent implements OnInit {
 
   productList: ProductItem[];
 
-  constructor(private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService) { }
+  constructor(private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.userId = this.userService.getUserId();
@@ -31,6 +31,6 @@ export class UserDashboardComponent implements OnInit {
   getProductUser(){
      this.productService.getUserProduct(this.userId).subscribe((data: ProductItem[]) => {
         this.productList = data;
-      });
-    }
+     });
+  }
 }

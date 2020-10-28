@@ -32,6 +32,7 @@ import { ProductformComponent } from './productform/productform.component';
 import { ScrollingModule } from "@angular/cdk/scrolling";
 import { MatRadioModule } from "@angular/material/radio";
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +47,7 @@ import { MatRadioModule } from "@angular/material/radio";
     DashboardComponent,
     PageNotFoundComponent,
     UserComponent,
-    ProductformComponent
+    ProductformComponent,
   ],
   imports: [
     BrowserModule,

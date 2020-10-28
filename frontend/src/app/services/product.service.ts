@@ -9,18 +9,6 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient) { }
 
-  /** Product Item Requests   **/
-  addProduct(){
-
-  }
-
-  editProduct(){
-
-  }
-
-  updateProduct(){
-
-  }
 
   /** Product List Requests   **/
   //get all Products

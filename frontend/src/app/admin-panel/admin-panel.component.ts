@@ -34,7 +34,7 @@ export class AdminPanelComponent implements OnInit {
   }
 
     // user - DELETE
-    onUserDelete(user: User): void{
+  onUserDelete(user: User): void{
       this.httpClient.delete(environment.endpointURL + 'user/' + user.userId).subscribe(() => {
         this.users.splice(this.users.indexOf(user), 1);
       });

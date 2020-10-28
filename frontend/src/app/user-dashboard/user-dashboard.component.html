@@ -1,7 +1,7 @@
 <h2>Temp Userdash</h2>
 <p>Hi {{userName}}! Welcome to Stor</p>
 
-<button mat-flat-button color="primary" routerLink="/productform" routerLinkActive="active">Add Product </button>
+<button mat-flat-button color="primary" [routerLink]="['/productform/', 0]" routerLinkActive="active">Add Product </button>
 
 <div class="container">
   <cdk-virtual-scroll-viewport itemSize="200px" class="viewport">
@@ -20,10 +20,12 @@
             Price: {{productItem.productPrice}} CHF
           </mat-card-content>
           <mat-card-actions align="end">
-            <button mat-flat-button class="button_standard" routerLink="" routerLinkActive="active">Edit Product </button>
+            <button mat-flat-button class="button_standard" [routerLink]="['/productform/', productItem.productId]" routerLinkActive="active">Edit Product </button>
+            <button mat-flat-button class="button_standard">Delete Product </button>
           </mat-card-actions>
         </mat-card>
       </div>
     </div>
   </cdk-virtual-scroll-viewport>
 </div>
+<router-outlet></router-outlet>

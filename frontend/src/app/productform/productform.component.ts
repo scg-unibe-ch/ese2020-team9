@@ -1,10 +1,11 @@
-import {Component, NgZone, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
 import {ProductItem} from "../models/product-item.model";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {UserService} from "../services/user.service";
 import {ProductService} from "../services/product.service";
 import {environment} from "../../environments/environment";
+import { ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-productform',
@@ -29,19 +30,57 @@ export class ProductformComponent implements OnInit {
   isRentable = '';
   isAvailable = '';
   userId = '';
-  //userName = '';
   userReview = '';
   userAuth = '';
 
-  product: ProductItem [];
+  product: ProductItem;
+  id: any;
+  add: boolean;
 
-  constructor(private httpClient: HttpClient, private router: Router, private userService: UserService, private _ngZone: NgZone, private productService: ProductService) { }
+  constructor(private httpClient: HttpClient, private router: Router, private userService: UserService, private _ngZone: NgZone, private productService: ProductService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.userId = this.userService.getUserId();
     //this.isLoggedIn = this.userService.getIsLoggedIn();
     //this.userName = this.userService.getUserName();
+    //const id = this.route.params.subscribe(params => console.log(params));
+    this.id = this.route.snapshot.paramMap.get('id');
+
+    if(this.id==='0'){
+      this.add = true;
+    } else{
+      this.add=false;
+      this.getProduct();
+    }
+    //const productId = this.route.snapshot.paramMap.get('id');
+    //this.product = +params['productId'];
+    //this.productService.getProduct(productId);
   }
+
+  getProduct(){
+    this.productService.getProduct(this.id).subscribe((instances: any) => {
+          this.productId = instances.productId;
+          this.productName = instances.productName;
+          this.productDescription = instances.productDescription;
+          this.productImage = instances.productImage;
+          this.productPrice = instances.productPrice;
+          this.productCategory = instances.productCategory;
+          this.productLocation = instances.productLocation;
+          this.productDelivery = instances.productDelivery;
+          this.uploadDate = instances.uploadDate;
+          this.sellDate = instances.sellDate;
+          this.isApproved = instances.isApproved;
+          this.isService = instances.isService;
+          this.isRentable = instances.isRentable;
+          this.isAvailable = instances.isAvailable;
+          this.userId = instances.userId;
+          this.userReview = instances.userReview;
+          this.changeDetection.detectChanges();
+      },(error: any) => {
+      this.userAuth = 'There is no corresponding Product!';
+    });
+  }
+
   addProduct(): void {
     this.httpClient.post(environment.endpointURL + 'products/', {
       productName: this.productName,
@@ -58,7 +97,7 @@ export class ProductformComponent implements OnInit {
       isRentable: this.isRentable,
       isAvailable: true,
       userId: this.userId,
-      //userReview: this.userReview,
+      userReview: this.userReview,
 
 
 
@@ -71,17 +110,8 @@ export class ProductformComponent implements OnInit {
     });
   }
 
-  getProduct(): void {
-    this.productService.getProduct(this.productId).subscribe((data: ProductItem[]) => {
-      this.product = data;
-    }, (error: any) => {
-      this.userAuth = 'There is no corresponding Product!';
-    });
-  }
-
-
   editProduct(): void {
-    this.httpClient.put(environment.endpointURL + '/productId', {
+    this.httpClient.put(environment.endpointURL + 'products/' + this.productId, {
       productName: this.productName,
       productDescription: this.productDescription,
       productImage: this.productImage,
@@ -101,7 +131,7 @@ export class ProductformComponent implements OnInit {
     }).subscribe((res: any) => {
 
       //navigates to productItem
-      //this.router.navigate(['/'])
+      this.router.navigate(['/user'])
     }, (error: any) => {
       this.userAuth = 'Your Product Information is invalid!';
     });

@@ -4,6 +4,7 @@ import {ProductItem} from "../models/product-item.model";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProductService} from "../services/product.service";
+import {environment} from "../../environments/environment";
 
 
 @Component({
@@ -32,5 +33,9 @@ export class UserDashboardComponent implements OnInit {
      this.productService.getUserProduct(this.userId).subscribe((data: ProductItem[]) => {
         this.productList = data;
      });
+  }
+  // product delete
+  deleteProduct(productId: number){
+    this.httpClient.delete(environment.endpointURL + 'products/' + productId,{}).subscribe();
   }
 }

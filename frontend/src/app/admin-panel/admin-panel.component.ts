@@ -62,7 +62,7 @@ export class AdminPanelComponent implements OnInit {
 
   // product approve
   approveProduct(productId: number){
-   this.httpClient.put(environment.endpointURL + 'products/approve/' + 4,{
+   this.httpClient.put(environment.endpointURL + 'products/approve/' + productId,{
 
     }).subscribe();
   }
@@ -72,6 +72,10 @@ export class AdminPanelComponent implements OnInit {
    this.httpClient.delete(environment.endpointURL + 'products/' + productId,{}).subscribe();
   }
 
+  refresh(): void {
+  setTimeout( () => { /*Your Code*/ }, 25000 );
+   window.location.reload();
+  }
 
 
   // products - PUT

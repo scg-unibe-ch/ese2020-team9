@@ -105,9 +105,22 @@ describe('UserService Tests', () => {
         });
     });
     describe('Test login', () => {
-
+        it('should login successfully', function(done) {
+            done();
+        });
+        it('should login successfully with userMail', function(done) {
+            done();
+        });
+        it('should not login when password wrong', function(done) {
+            done();
+        });
+        it('should not login not registered user', function(done) {
+            done();
+        });
     });
     describe('Test getAll', () => {
-
+        it('should find all users', function(done) {
+            done();
+        });
     });
 });

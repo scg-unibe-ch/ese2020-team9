@@ -5,7 +5,6 @@ import { ProductItem } from '../models/product-item.model';
 import { User } from '../models/user.model';
 import { ProductService } from "../services/product.service";
 import {UserService} from "../services/user.service";
-import { AuthInterceptor } from '../auth/auth.interceptor';
 
 
 

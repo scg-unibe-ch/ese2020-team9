@@ -58,7 +58,7 @@ export class Server {
             return new Sequelize({
                 dialect: 'sqlite',
                 storage: ':memory:',
-                logging: true
+                logging: false
             });
         }
         return new Sequelize({

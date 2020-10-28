@@ -22,6 +22,21 @@ const user1: UserCreationAttributes = {
     addressCity: null,
     addressCountry: 'Middleearth'
 };
+const adminUser: UserCreationAttributes = {
+    admin: true,
+    wallet: 500,
+    userName: 'admin',
+    password: '$2b$12$XVwWZfAd2fjjd.QjrvMJXOh4WPuxJ4.tpNzkg9wpSSNOShAoDOYWC', // adminPW
+    userMail: 'superAdmin@admins.com',
+    firstName: 'Jack',
+    lastName: 'Hammington',
+    gender: 'male',
+    phoneNumber: 796666666,
+    addressStreet: null,
+    addressPin: null,
+    addressCity: null,
+    addressCountry: 'England'
+};
 
 describe('UserController Test', () => {
     before('init app', function(done) {
@@ -98,7 +113,8 @@ describe('UserController Test', () => {
         });
         after('clean up', function(done) {
             User.destroy({
-                truncate: true
+                truncate: true,
+                restartIdentity: true
             }).then(() => done());
         });
     });
@@ -153,7 +169,8 @@ describe('UserController Test', () => {
         });
         after('clean up db', function(done) {
             User.destroy({
-                truncate: true
+                truncate: true,
+                restartIdentity: true
             }).then(() => done());
         });
     });
@@ -188,8 +205,126 @@ describe('UserController Test', () => {
         });
         after('clean up db', function(done) {
             User.destroy({
-                truncate: true
+                truncate: true,
+                restartIdentity: true
             }).then(() => done());
+        });
+    });
+    describe('Test delete user', () => {
+        const userToDelete: UserAttributes = {
+            userId: 3,
+            admin: false,
+            wallet: 500,
+            userName: 'spamUser',
+            password: 'spammer',
+            userMail: 'spammer@spam.com',
+            firstName: 'Mister',
+            lastName: 'Spam',
+            gender: 'male',
+            phoneNumber: 34556543,
+            addressStreet: null,
+            addressPin: null,
+            addressCity: null,
+            addressCountry: 'Spamland'
+        };
+        before('init two user into db', function(done) {
+            User.create(user1).then(() => {
+                return User.create(adminUser);
+            }).then(() => {
+                done();
+            });
+        });
+        beforeEach('insert to deleted user into db', function(done) {
+            User.create(userToDelete).then(() => {
+                done();
+            }).catch(() => {
+                done();
+            });
+        });
+        it('should delete successfully one entry', function(done) {
+            chai.request(app).post('/user/login').send({ // login as admin to get valid token
+                userLogin: 'admin',
+                password: 'adminPW'
+            }).end(function(error, response) {
+                const token: string = response.body.token;
+                chai.request(app).delete('/user/3').set('Authorization', 'Bearer ' + token).end(function(err, res) {
+                    expect(err).to.be.eq(null);
+                    expect(res).to.have.status(200);
+                    expect(res.body.message).to.be.eq('Successfully deleted entry with id=3');
+                    User.findOne({
+                        where: {
+                            userName: 'spamUser'
+                        }
+                    }).then(user => {
+                        expect(user).to.be.eq(null);
+                        done();
+                    });
+                });
+            });
+        });
+        it('should return 202 when no user entry to delete', function(done) {
+            chai.request(app).post('/user/login').send({ // login as admin to get valid token
+                userLogin: 'admin',
+                password: 'adminPW'
+            }).end(function(error, response) {
+                const token: string = response.body.token;
+                chai.request(app).delete('/user/300').set('Authorization', 'Bearer ' + token).end(function(err, res) {
+                    expect(err).to.be.eq(null);
+                    expect(res).to.have.status(202);
+                    expect(res.body.message).to.be.eq('No entry to delete');
+                    User.findOne({
+                        where: {
+                            userName: 'spamUser'
+                        }
+                    }).then(user => {
+                        expect(user).not.to.be.eq(null);
+                        done();
+                    });
+                });
+            });
+        });
+        it('should not delete when not admin', function(done) {
+            chai.request(app).post('/user/login').send({
+                userLogin: 'gandalf',
+                password: 'gandalf4ever'
+            }).end(function(error, response) {
+                const token: string = response.body.token;
+                chai.request(app).delete('/user/3').set('Authorization', 'Bearer ' + token).end(function(err, res) {
+                    expect(err).to.be.eq(null);
+                    expect(res).to.have.status(403);
+                    expect(res.body.message).to.be.eq('Unauthorized');
+                    User.findOne({
+                        where: {
+                            userName: 'spamUser'
+                        }
+                    }).then(user => {
+                        expect(user).not.to.be.eq(null);
+                        done();
+                    });
+                });
+            });
+        });
+        after('clear db', function(done) {
+            User.destroy({
+                truncate: true,
+                restartIdentity: true,
+            }).then(() => {
+                done();
+            });
+        });
+    });
+    describe('Test make user admin', () => {
+        beforeEach('init user into db', function(done) {
+            done();
+        });
+        it('should make user successfully to admin', function(done) {
+            done();
+        });
+        it('should not make user to admin when no admin', function(done) {
+            done();
+        });
+        it('should return error, when url parameter no number', function(done) {
+            done();
         });
     });
 });

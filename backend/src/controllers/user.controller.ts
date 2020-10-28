@@ -26,24 +26,24 @@ userController.get('/', verifyToken, // you can add middleware on specific reque
 
 userController.delete('/:id', verifyAdmin,
     (req: Request, res: Response) => {
-        try {
-            const id = Number.parseInt(req.params.id, 10);
-            userService.deleteUser(id).then(number => res.send({message: 'Successfully deleted ' + number + ' entry'}))
-            .catch(err => res.status(500).send(err));
-        } catch {
-            res.status(404).send({message: 'no valid id parameter'});
-        }
+        const id = Number.parseInt(req.params.id, 10);
+        userService.deleteUser(id).then(number => {
+            if (number === 0) {
+                res.status(202).send({message: 'No entry to delete'});
+            } else if (number === 1) {
+                res.send({message: 'Successfully deleted entry with id=' + id});
+            } else {
+                res.send({message: 'Successfully deleted ' + number + ' entries'});
+            }
+        })
+        .catch(err => res.status(500).send(err));
     }
 );
 
 userController.put('/makeAdmin/:id', verifyAdmin,
     (req: Request, res: Response) => {
-        try {
-            const id = Number.parseInt(req.params.id, 10);
-            userService.makeUserAdmin(id).then(user => res.send(user)).catch(err => res.status(500).send(err));
-        } catch {
-            res.status(404).send({message: 'no valid id parameter'});
-        }
+        const id = Number.parseInt(req.params.id, 10);
+        userService.makeUserAdmin(id).then(user => res.send(user)).catch(err => res.status(500).send(err));
     }
 );
 

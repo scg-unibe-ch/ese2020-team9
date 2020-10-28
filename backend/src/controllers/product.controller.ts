@@ -24,7 +24,7 @@ productController.delete('/:id', (req: Request, res: Response) => {
     .catch(err => res.status(500).send(err));
 });
 
-productController.post('/approve/:id', verifyAdmin,
+productController.put('/approve/:id', verifyAdmin,
     (req: Request, res: Response) => {
         const id = Number.parseInt(req.params.id, 10);
         productService.approve(id).then(approved => res.send({message: 'Successfully approved product ' + approved + '!'}))

@@ -6,7 +6,7 @@
         (update)="onUserUpdate($event)"
         (delete)="onUserDelete($event)"
       ></app-user>
-  
+
   </mat-list-item>
 </mat-card>
 
@@ -20,8 +20,8 @@
       {{productItem.productDescription}}
       <mat-grid-tile-footer style="backgroundColor: white; color: black">
         <mat-radio-group> <!--add [(ngModel)]="productItem.isApproved"-->
-          <mat-radio-button value="true">approve</mat-radio-button>
-          <mat-radio-button value="false">decline</mat-radio-button>
+          <mat-radio-button value="true" (click)="approveProduct([productItem.productId])">Approve</mat-radio-button>
+          <mat-radio-button value="false" (click)="deleteProduct([productItem.productId])">Delete</mat-radio-button>
         </mat-radio-group>
         <button mat-flat-button class="button_standard" align="left"><!-- add click event-->
           save

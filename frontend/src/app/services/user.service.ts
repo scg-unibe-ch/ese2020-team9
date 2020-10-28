@@ -78,4 +78,9 @@ export class UserService {
     });
     return this.users;
   }
+
+  getToken(){
+      return this.userToken = localStorage.getItem('userToken');
+    }
+
 }

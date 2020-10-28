@@ -28,8 +28,7 @@ export class AdminPanelComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProductList();
-    this.userToken = this.userService.getToken()
-    //console.log(this.userToken)
+    this.userToken = this.userService.getToken();
 
   }
 
@@ -46,7 +45,7 @@ export class AdminPanelComponent implements OnInit {
     });
   }
 
-     // user - UPDATE (upgrade to admin)
+  // user - UPDATE (upgrade to admin)
   onUserUpdate(user: User): void{
     this.httpClient.put(environment.endpointURL + 'user/makeAdmin/' + user.userId, {
       admin: user.admin,
@@ -71,13 +70,4 @@ export class AdminPanelComponent implements OnInit {
   deleteProduct(productId: number){
    this.httpClient.delete(environment.endpointURL + 'products/' + productId,{}).subscribe();
   }
-
-  refresh(): void {
-  setTimeout( () => { /*Your Code*/ }, 25000 );
-   window.location.reload();
-  }
-
-
-  // products - PUT
-
 }

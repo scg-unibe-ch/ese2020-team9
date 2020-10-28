@@ -41,9 +41,6 @@ export class ProductformComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = this.userService.getUserId();
-    //this.isLoggedIn = this.userService.getIsLoggedIn();
-    //this.userName = this.userService.getUserName();
-    //const id = this.route.params.subscribe(params => console.log(params));
     this.id = this.route.snapshot.paramMap.get('id');
 
     if(this.id==='0'){
@@ -52,9 +49,6 @@ export class ProductformComponent implements OnInit {
       this.add=false;
       this.getProduct();
     }
-    //const productId = this.route.snapshot.paramMap.get('id');
-    //this.product = +params['productId'];
-    //this.productService.getProduct(productId);
   }
 
   getProduct(){

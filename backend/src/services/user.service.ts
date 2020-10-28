@@ -59,7 +59,7 @@ export class UserService {
         });
     }
 
-    public makeUserAdmin(id: number): Promise<User | void> {
+    public makeUserAdmin(id: number): Promise<User> {
         return User.findOne({
             where: { userId: id }
         }).then(user => {

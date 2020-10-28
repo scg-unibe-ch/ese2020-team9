@@ -11,6 +11,25 @@ import { HttpClient } from '@angular/common/http';
 export class ProductListComponent {
 
   userToken: string;
+  isAdmin: boolean;
+  products: ProductItem;
+  productId: number;
+  productName: string;
+  productDescription: string;
+  productImage: string;
+  productPrice: number;
+  productCategory: string;
+  productLocation: string;
+  productDelivery: boolean;
+  uploadDate: Date;
+  sellDate: Date;
+  isApproved: boolean;
+  isService: boolean;
+  isRentable: boolean;
+  isAvailable: boolean;
+  userId: number;
+  userReview: string;
+
 
   @Input()
   productList: ProductList = new ProductList(null, '', []);
@@ -24,20 +43,20 @@ export class ProductListComponent {
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit(): void {
+
   }
 
-   /*todo
-   different get methods by service
-   get products by user
-   get products by category
-   get products not approved yet
-   etc
-
-   buy
-   edit
-   delete
-   approve
-   */
+  /*todo
+  different get methods by service
+  get products by user
+  get products by category
+  get products not approved yet
+  etc
+  buy
+  edit
+  delete
+  approve
+  */
 
   onListUpdate(): void {
     // Emits event to parent component that TodoList got updated
@@ -51,16 +70,16 @@ export class ProductListComponent {
 
   // ProductItem - CREATE
   onProductItemCreate(): void {
-  /*
-    this.httpClient.post(environment.endpointURL + 'todoitem', {
-      name: this.newTodoItemName,
-      done: false,
-      todoListId: this.todoList.listId
-    }).subscribe((item: any) => {
-      this.todoList.todoItems.push(new TodoItem(item.todoItemId, item.todoListId, item.name, item.done));
-      this.newTodoItemName = '';
-    });
-  */
+    /*
+      this.httpClient.post(environment.endpointURL + 'todoitem', {
+        name: this.newTodoItemName,
+        done: false,
+        todoListId: this.todoList.listId
+      }).subscribe((item: any) => {
+        this.todoList.todoItems.push(new TodoItem(item.todoItemId, item.todoListId, item.name, item.done));
+        this.newTodoItemName = '';
+      });
+    */
   }
 
   // ProductItem - READ
@@ -79,13 +98,15 @@ export class ProductListComponent {
 
   // ProductItem - DELETE
   onProductItemDelete(productItem: ProductItem): void{
-  /*
-    this.httpClient.delete(environment.endpointURL + 'todoitem/' + todoItem.itemId).subscribe(() => {
-      this.todoList.todoItems.splice(this.todoList.todoItems.indexOf(todoItem), 1);
-    });
-  }
-  */
+    /*
+      this.httpClient.delete(environment.endpointURL + 'todoitem/' + todoItem.itemId).subscribe(() => {
+        this.todoList.todoItems.splice(this.todoList.todoItems.indexOf(todoItem), 1);
+      });
+    }
+    */
   }
 
+  getProductList(){
 
+  }
 }

@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+}
+
+mat-card {
+}
+
+img {
+}
+
+.productItem_Card{
+  margin: 5px;
+}
+
+.viewport {
+  height: 400px;
+  width: 100%;
+
+}

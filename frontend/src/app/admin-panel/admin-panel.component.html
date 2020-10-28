@@ -1,11 +1,28 @@
 <mat-card>
-  <button mat-flat-button color="primary" (click)="getUserList()">Get List of users </button>
+  <button mat-flat-button class="button_standard" (click)="getUserList()">Get List of users </button>
   <mat-list-item *ngFor="let user of users" >
   <app-user
         [user]="user"
         (update)="onUserUpdate($event)"
         (delete)="onUserDelete($event)"
       ></app-user>
-  
+
   </mat-list-item>
+</mat-card>
+
+<mat-card >
+  <mat-grid-list cols="4" [gutterSize]="'5px'" rowHeight="250px">
+    <mat-grid-tile *ngFor="let productItem of productList" style="backgroundColor: white">
+      <mat-grid-tile-header style="color: black">
+        Posted on {{productItem.uploadDate | date: "dd.MM.yy, HH:mm"}}
+      </mat-grid-tile-header>
+      {{productItem.productDescription}}
+      <mat-grid-tile-footer style="backgroundColor: white; color: black">
+        <mat-radio-group> <!--add [(ngModel)]="productItem.isApproved"-->
+          <mat-radio-button value="true" (click)="approveProduct([productItem.productId])" >Approve</mat-radio-button>
+          <mat-radio-button value="false" (click)="deleteProduct([productItem.productId])" >Delete</mat-radio-button>
+        </mat-radio-group>
+      </mat-grid-tile-footer>
+    </mat-grid-tile>
+  </mat-grid-list>
 </mat-card>

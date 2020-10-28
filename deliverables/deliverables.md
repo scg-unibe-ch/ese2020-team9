@@ -1,48 +1,50 @@
-# Better than Ebay
+# STOR
 
-Better than Ebay (BtE) is an online market place that allows users to sell and buy products and services online, but extents the classic functionalities of web-based markets with a ground-breaking new feature.
+STOR is an online market place that allows users to sell and buy products and services online but extends the classic functionalities of web-based markets with a ground-breaking new feature.
 
 <br/><br/>
 
 ## Introduction
 
-This Document provides an overview of the project scope, objectives, use cases, functional and non-functional requirements, use case diagrams and reveals (in a later version) the seminal invention.
+This document provides an overview of the project scope, objectives, use cases, functional and non-functional requirements, use case diagrams and reveals (in a later version) the seminal invention.
 
 <br/><br/>
 
 
 ## Project Scope
 
-The scope of this project is a web-based market place that allows users to sell, buy, lend and rent products and services online. After registering and setting up an account, users can upload products and services they want to sell on the website. Once an administrator has checked the product and given permission to sell it, it will be displayed on the website and other users will be able to buy it. To buy products a registration is required, but all visitors may check out the available products.
+The scope of this project is a web-based marketplace that allows users to sell, buy, lend and rent products and services online. After registering and setting up an account, users can upload products and services they want to sell on the website. Once an administrator has checked the product and given permission to sell it, it will be displayed on the website and other users will be able to buy it. To buy products a registration is required, but all visitors may check out the available products.
 
 <br/><br/>
 
 ## Functional Requirements
 
-*Milestone 1*
+*Milestone 2*
 
 * *Registration:* Users need to be able to register, with their registration data being stored persistently.
 * *Login:* After prior registration, users need to be able to login with their username and password.
 * *Viewing Products:* Users need to be able to access the list of products up for sale. To examine the products, no login is required.
+* *Uploading Products:* Registered Users must have the possibility to add products / services for sale / rent on the website.
+* *Updating Products:* Users must be able to update their posted products / services.
+* *Deleting Products:* Users must be able to remove their added products / services from the marketplace.
+* *Admitting Products:* The application shall allow administrative users to check and admit or decline uploaded products before they are publicly displayed.
 
-*Not required for Milestone 1*
+*Not required for Milestone 2*
 
-* *Selling Products:* Logged in users need be able to upload the products they want to sell.  
 * *Buying Products:* Logged in users need be able to buy the available products they desire.
 * *Searching Products:* The web-application shall provide a search facility that narrows the products displayed as desired. The search facility may allow full-text searching or click-based selecetion of categories.
 
-* *Admitting Products:* The application shall allow administrative users to check and admit or decline uploaded products before they are publicly displayed.
 
 ## Non-Functional Requirements
 
-*Not requred for Milestone 1*
+*Not requred for Milestone 2*
 
 * *Privacy:* User data must remain confidential and must confirm to
 Swiss privacy laws. This includes registration data as well as purchased products. Users have the right to audit their data and to request that their data be removed from the system.
 * *Usability:* Users should be able to register within one minute.
 * *Usability II:* Users should be able to register, login, sell and buy products without having to read a manual.
 * *Performance:* Submitting the registration form shall not exceed 10 seconds. Logging in shall not exceed 5 seconds.
-* *Reliability:* The system shall be completely operational at least 95 percent of the time.
+* *Reliability:* The system shall be completely operational at least 99 percent of the time.
  
  <br/><br/>
 
@@ -62,32 +64,34 @@ The above diagrams were created from: https://online.visual-paradigm.com/
 
 ## Use Cases
 
-In the following part, the uses cases for the two user types are listed.
+In the following part, the use cases for the two user types are listed.
 
 #### *User*
 
-*Milestone 1*
+*Milestone 2*
 
 * View products up for sale (without prior login)
 * Registration
 * Login
+* Upload products / services
+* Update products / services
+* Delete prodcuts / services
 
-*Not required for Milestone 1*
+*Not required for Milestone 2*
 
-* Upload product
 * Buy Product
 
 
 #### *Administrator*
 
-*Milestone 1*
+*Milestone 2*
 
 * Registration
 * Login
-
-*Not required for Milestone 1*
-
 * Check uploaded products (admit or decline)
+
+*Not required for Milestone 2*
+
 * Upgrade other users to administrators
 
 <br/><br/>
@@ -95,9 +99,9 @@ In the following part, the uses cases for the two user types are listed.
 
 ## Use Case Descriptions
 
-| View Products (not required for Milestone 1)  |             |       
+| View Products |             |       
 |----------|:-------------|
-|  *Summary*|  Products up for sale can be looked at by any user without logging into the system  |
+|  *Summary*|  Products up for sale can be browsed by any user without logging into the system  |
 | *Basic Flow* |  <ol><li>The use case start when a user indicates that he wants look at the products up for sale.  </li><li>The system displays the products. </li><li> The user may read additional information about a product, e.g. the price or seller. </li><li>The user stops examing the product when desired and leaves the system, registers or logges in.	
 | *Alternative Flows* | **Step 3:** If the user wants to buy a product, she will be prompted to log into the system or register.      |
 | *Extension Points* |    none  |
@@ -131,7 +135,6 @@ In the following part, the uses cases for the two user types are listed.
 
 <br/><br/>
 
-*Not required for Milestone 1*
 
 | Upload Products |             |       
 |----------|:-------------|
@@ -155,7 +158,7 @@ In the following part, the uses cases for the two user types are listed.
 
 <br/><br/>
 
-
+*Not required Milestone 2*
 
 | Buy Product  |             |       
 |----------|:-------------|
@@ -186,6 +189,20 @@ Alex does not have a lot of spare time and wants to be able to perform all essen
 Alex wants that all her data remains confidential and can be deleted upon request, so that she is willing to share the necessary data for the transaction and the online market place to work and trusts in our services. (non-functional)
 
 ### Story 5
+Alex wants to upload products or services, so that she is able to post all of her stuff for selling she does not need anymore.
+
+### Story 6
+Alex wants to have a Dashboard of her posted, sold, lent and purchased products, so that she can have an easy overview over all products related to her.
+
+### Story 7
+Alex wants to update a product or a service, so that she is able to add further descriptions or details after having already posted a product / service.
+
+### Story 8
+Alex wants to delete a posted product or service, so that she may easily change her mind on what she still needs and does not want to sell.
+
+*Not required for Milestone 2*
+
+### Story 9
 Alex wants to be able to search for different keywords or product categories, so that she can find the desired products faster. (functional)
 
 <br/><br/>
@@ -197,34 +214,103 @@ Alex wants to be able to search for different keywords or product categories, so
 As a first suggestion the application could consist of the following classes. A *Product* class and a *User* class, which may have sold or bought *Products* and knows its registration information. The class-responsibility-collaboration cards below identify possible responisabilites and collabarating classes of each class. Additonial responsabilties or classes may be added. Possibly the users can be split into normal users, registerd users and admins. 
 
 
-| Product  |               |       
-|----------|-------------:|
-|  *Responsibility*|  *Collaborator* |
-|  |
-| knows name |  |
-| knows price |       |
-| knows seller | Seller (User) |
-| knows if sold or lent | Buyer (User)   |
-| knows product category |    Category  |
 
-<br/><br/>
+| Advertisement  |  |       
+|----------|-------------:|
+|  *Class Type:* Property |
+|  *Class Characteristics:* Abstract, Aggregate, Concurrent, Persistent, Corruptible |
+| |
+|  *Responsibility*|  *Collaborator* |
+| knows advertisement properties (name, price, category, etc.) |  |
+| has owner | User |
+| has review | Review |
+
+
+| Product  | *Subclass of Advertisement* |       
+|----------|-------------:|
+|  *Class Type:* Thing |
+|  *Class Characteristics:* Tangible, Aggregate, Concurrent, Persistent, Corruptible |
+| |
+|  *Responsibility*|  *Collaborator* |
+| knows product properties (availability, rentability, delivery, etc.) |  |
+| knows who purchased or rented | User |
+
+
+| Service  | *Subclass of Advertisement* |       
+|----------|-------------:|
+|  *Class Type:* Thing |
+|  *Class Characteristics:* Abstract, Aggregate, Concurrent, Persistent, Corruptible |
+| |
+|  *Responsibility*|  *Collaborator* |
+| knows service properties (conditions, price unit, etc.) |  |
+
 
 | User  |               |       
 |----------|-------------:|
+|  *Class Type:* Role |
+|  *Class Characteristics:* Abstract, Aggregate, Concurrent, Persistent, Corruptible |
+| |
 |  *Responsibility*|  *Collaborator* |
-|  |
-| knows registration info|       |
-| uploads products |    Product |
-| knows uploaded products |    Product |
-| sells products |    Product  |
-| knows sold products |    Product |
-| buys products |    Product  |
-| knows bought products |    Product |
-| knows lent products |    Product |
-| knows if it is an admin| |
-| knows amount of money available |     |
+| knows user info (username, password, email, etc.) |  |
+| has a shopping cart | shopping cart |
+| uploads, buys advertisements | Advertisement |
+| knows uploaded, sold, bought advertisements | Advertisements |
+| knows amount of money available |  Wallet   |
 
 
+| Admin  |  *Subclass of User*  |       
+|----------|-------------:|
+|  *Class Type:* Role |
+|  *Class Characteristics:* Abstract, Aggregate, Concurrent, Persistent, Corruptible |
+| |
+|  *Responsibility*|  *Collaborator* |
+| approves advertisements |  Advertisement |
+| manages users (delete, upgrade to admin) | User |
 
 
+| Review  |  |       
+|----------|-------------:|
+|  *Class Type:* Property |
+|  *Class Characteristics:* Abstract, Aggregate, Concurrent, Persistent, Guarded |
+| |
+|  *Responsibility*|  *Collaborator* |
+| has feedbacks |  Feedback  |
+| calculates overall rating |  Feedback  |
+| reviews user or advertisement| User, Advertisement | 
+
+
+| Feedback  |  |       
+|----------|-------------:|
+|  *Class Type:* Property |
+|  *Class Characteristics:* Abstract, Atomic, Concurrent, Persistent, Guarded |
+| |
+|  *Responsibility*|  *Collaborator* |
+| has review text, rating |    |
+| belongs to review | Review | 
+| knows author| User | 
+
+| Shopping Cart  |  |       
+|----------|-------------:|
+|  *Class Type:* Property |
+|  *Class Characteristics:* Abstract, Aggregate, Sequential, Persistent, Guarded |
+| |
+|  *Responsibility*|  *Collaborator* |
+| has advertisements | Advertisements |
+| calculates total costs | Advertisements | 
+| belongs to user | User | 
+
+| Wallet  |  |       
+|----------|-------------:|
+|  *Class Type:* Thing |
+|  *Class Characteristics:* Tangible, Atomic, Sequential, Persistent, Guarded |
+| |
+|  *Responsibility*|  *Collaborator* |
+| knows balance |  |
+| executes transactions |  | 
+| belongs to user | User | 
+
+
+## Class Diagram
+
+![](UML_Class_Diagram_I.png)
 

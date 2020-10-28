@@ -10,7 +10,7 @@ import { environment } from '../environments/environment';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'better than ebay';
+  title = 'Stor';
 
   newTodoListName = '';
   todoLists: TodoList[] = [];

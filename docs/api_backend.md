@@ -130,22 +130,409 @@ Requires authorization header with a valid token in the request!
     ]
     ```
 
-## Product API (draft!)
+### delete a user `"/user/:id"` (DELETE)
+
+Request requires authorization header with a token from an admin.
+
+- Response (STATUS 200)
+
+    ```json
+    {
+        "message": "Successfully deleted 1 entry"
+    }
+    ```
+
+### make a user to an admin `"/user/makeAdmin/:id"` (PUT)
+
+Request requires authorization header with a token from an admin.
+
+- Response (STATUS 200)
+
+    ```json
+    {
+        "userId": "number",
+        "admin":  "boolean",
+        "wallet": "number",
+        "userName": "string",
+        "password": "string (Hash)",
+        "userMail": "string",
+        "firstName": "string",
+        "lastName": "string",
+        "gender":   "string",
+        "phoneNumber": "number",
+        "addressStreet": "string",
+        "addressPin": "string",
+        "addressCity": "string",
+        "addressCountry": "string",
+        "createdAt" : "string",
+        "updatedAt" : "string",
+    }
+    ```
+
+## Product API
 
 ### add a product `"/products/"` (POST)
 
-- Request-Body n/a
+- Request Body
+    ```json
+    {   
+        "productId": "number",
+        "productName": "string",
+        "productDescription": "string",
+        "productImage": "String",
+        "productPrice": "number",
+        "productCategory": "string",
+        "productLocation": "string",
+        "productDelivery": "boolean",
+        "uploadDate": "Date",
+        "sellDate": "Date",
+        "isApproved": "boolean",
+        "isService": "boolean",
+        "isRentable": "boolean",
+        "isAvailable": "boolean",
+        "userId": "number",
+        "userReview": "string"
+    }
+    ```
 
-- Response-Body n/a
+- Response (STATUS 200)
 
+    ```json
+    {
+        "message": "Product successfully created!"
+    }
+    ```
 ### change a product `"/products/:id"` (PUT) (for example "/products/2")
 
-- Request-Body n/a
+- Request Body
+    ```json
+    {   
+        "productId": "number",
+        "productName": "string",
+        "productDescription": "string",
+        "productImage": "String",
+        "productPrice": "number",
+        "productCategory": "string",
+        "productLocation": "string",
+        "productDelivery": "boolean",
+        "uploadDate": "Date",
+        "sellDate": "Date",
+        "isApproved": "boolean",
+        "isService": "boolean",
+        "isRentable": "boolean",
+        "isAvailable": "boolean",
+        "userId": "number",
+        "userReview": "string"
+    }
+    ```
 
-- Response-Body n/a
+- Response (STATUS 200)
+
+    ```json
+    {
+        "message": "Product `productId` successfully updated!"
+    }
+    ```
 
 ### delete a product `"/products/:id"` (DELETE) (for example "/products/2")
 
-- Request-Body n/a
+- Request Body
+    ```json
+    {   
+        "productId": "number",
+        "productName": "string",
+        "productDescription": "string",
+        "productImage": "String",
+        "productPrice": "number",
+        "productCategory": "string",
+        "productLocation": "string",
+        "productDelivery": "boolean",
+        "uploadDate": "Date",
+        "sellDate": "Date",
+        "isApproved": "boolean",
+        "isService": "boolean",
+        "isRentable": "boolean",
+        "isAvailable": "boolean",
+        "userId": "number",
+        "userReview": "string"
+    }
+    ```
 
-- Response-Body n/a
+- Response (STATUS 200)
+
+    ```json
+    {
+        "message": "Product successfully deleted!"
+    }
+    ```
+
+### approve a product `"/products/approve/:id"` (PUT) (for example "/products/approve/2")
+
+Request requires authorization header with a token from an admin.
+
+- Response (STATUS 200)
+
+    ```json
+    {
+        "message": "Successfully approved product 'productId'!'"
+    }
+    ```
+    
+### getting products (GET)
+
+#### getting all products `"/products/"` 
+
+- Response body
+    ```json
+    [
+        {   
+            "productId": "number",
+            "productName": "string",
+            "productDescription": "string",
+            "productImage": "String",
+            "productPrice": "number",
+            "productCategory": "string",
+            "productLocation": "string",
+            "productDelivery": "boolean",
+            "uploadDate": "Date",
+            "sellDate": "Date",
+            "isApproved": "boolean",
+            "isService": "boolean",
+            "isRentable": "boolean",
+            "isAvailable": "boolean",
+            "userId": "number",
+            "userReview": "string"
+        }, 
+            {   
+            "productId": "number",
+            "productName": "string",
+            "productDescription": "string",
+            "productImage": "String",
+            "productPrice": "number",
+            "productCategory": "string",
+            "productLocation": "string",
+            "productDelivery": "boolean",
+            "uploadDate": "Date",
+            "sellDate": "Date",
+            "isApproved": "boolean",
+            "isService": "boolean",
+            "isRentable": "boolean",
+            "isAvailable": "boolean",
+            "userId": "number",
+            "userReview": "string"
+        },
+        ...
+    ]
+    ```
+
+#### getting all approved products `"/products/approved"` 
+
+- Response body
+    ```json
+    [
+        {   
+            "productId": "number",
+            "productName": "string",
+            "productDescription": "string",
+            "productImage": "String",
+            "productPrice": "number",
+            "productCategory": "string",
+            "productLocation": "string",
+            "productDelivery": "boolean",
+            "uploadDate": "Date",
+            "sellDate": "Date",
+            "isApproved": "true",
+            "isService": "boolean",
+            "isRentable": "boolean",
+            "isAvailable": "boolean",
+            "userId": "number",
+            "userReview": "string"
+        }, 
+            {   
+            "productId": "number",
+            "productName": "string",
+            "productDescription": "string",
+            "productImage": "String",
+            "productPrice": "number",
+            "productCategory": "string",
+            "productLocation": "string",
+            "productDelivery": "boolean",
+            "uploadDate": "Date",
+            "sellDate": "Date",
+            "isApproved": "true",
+            "isService": "boolean",
+            "isRentable": "boolean",
+            "isAvailable": "boolean",
+            "userId": "number",
+            "userReview": "string"
+        },
+        ...
+    ]
+    ```
+
+#### getting all unapproved products `"/products/unapproved"` 
+
+- Response body
+    ```json
+    [
+        {   
+            "productId": "number",
+            "productName": "string",
+            "productDescription": "string",
+            "productImage": "String",
+            "productPrice": "number",
+            "productCategory": "string",
+            "productLocation": "string",
+            "productDelivery": "boolean",
+            "uploadDate": "Date",
+            "sellDate": "Date",
+            "isApproved": "false",
+            "isService": "boolean",
+            "isRentable": "boolean",
+            "isAvailable": "boolean",
+            "userId": "number",
+            "userReview": "string"
+        }, 
+            {   
+            "productId": "number",
+            "productName": "string",
+            "productDescription": "string",
+            "productImage": "String",
+            "productPrice": "number",
+            "productCategory": "string",
+            "productLocation": "string",
+            "productDelivery": "boolean",
+            "uploadDate": "Date",
+            "sellDate": "Date",
+            "isApproved": "false",
+            "isService": "boolean",
+            "isRentable": "boolean",
+            "isAvailable": "boolean",
+            "userId": "number",
+            "userReview": "string"
+        },
+        ...
+    ]
+    ```
+
+#### getting all products of a category `"/products/category/:category"` 
+
+for example `"/products/category/food"`
+
+- Response body
+    ```json
+    [
+        {   
+            "productId": "number",
+            "productName": "string",
+            "productDescription": "string",
+            "productImage": "String",
+            "productPrice": "number",
+            "productCategory": "food",
+            "productLocation": "string",
+            "productDelivery": "boolean",
+            "uploadDate": "Date",
+            "sellDate": "Date",
+            "isApproved": "boolean",
+            "isService": "boolean",
+            "isRentable": "boolean",
+            "isAvailable": "boolean",
+            "userId": "number",
+            "userReview": "string"
+        }, 
+            {   
+            "productId": "number",
+            "productName": "string",
+            "productDescription": "string",
+            "productImage": "String",
+            "productPrice": "number",
+            "productCategory": "food",
+            "productLocation": "string",
+            "productDelivery": "boolean",
+            "uploadDate": "Date",
+            "sellDate": "Date",
+            "isApproved": "boolean",
+            "isService": "boolean",
+            "isRentable": "boolean",
+            "isAvailable": "boolean",
+            "userId": "number",
+            "userReview": "string"
+        },
+        ...
+    ]
+    ```
+
+#### getting all products of a user `"/products/user/:userId"` 
+
+for example `"/products/user/2"`
+
+- Response body
+    ```json
+    [
+        {   
+            "productId": "number",
+            "productName": "string",
+            "productDescription": "string",
+            "productImage": "String",
+            "productPrice": "number",
+            "productCategory": "String",
+            "productLocation": "string",
+            "productDelivery": "boolean",
+            "uploadDate": "Date",
+            "sellDate": "Date",
+            "isApproved": "boolean",
+            "isService": "boolean",
+            "isRentable": "boolean",
+            "isAvailable": "boolean",
+            "userId": "2",
+            "userReview": "string"
+        }, 
+            {   
+            "productId": "number",
+            "productName": "string",
+            "productDescription": "string",
+            "productImage": "String",
+            "productPrice": "number",
+            "productCategory": "String",
+            "productLocation": "string",
+            "productDelivery": "boolean",
+            "uploadDate": "Date",
+            "sellDate": "Date",
+            "isApproved": "boolean",
+            "isService": "boolean",
+            "isRentable": "boolean",
+            "isAvailable": "boolean",
+            "userId": "2",
+            "userReview": "string"
+        },
+        ...
+    ]
+    ```
+
+#### getting a product by id `"/products/:id"` 
+
+for example `"/products/5"`
+
+
+- Response body
+    ```json
+    {   
+        "productId": "5",
+        "productName": "string",
+        "productDescription": "string",
+        "productImage": "String",
+        "productPrice": "number",
+        "productCategory": "string",
+        "productLocation": "string",
+        "productDelivery": "boolean",
+        "uploadDate": "Date",
+        "sellDate": "Date",
+        "isApproved": "boolean",
+        "isService": "boolean",
+        "isRentable": "boolean",
+        "isAvailable": "boolean",
+        "userId": "number",
+        "userReview": "string"
+    }
+    ```
+

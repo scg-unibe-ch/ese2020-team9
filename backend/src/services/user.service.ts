@@ -52,4 +52,22 @@ export class UserService {
     public getAll(): Promise<User[]> {
         return User.findAll();
     }
+
+    public deleteUser(id: number): Promise<number> {
+        return User.destroy({
+            where: { userId: id }
+        });
+    }
+
+    public makeUserAdmin(id: number): Promise<User | void> {
+        return User.findOne({
+            where: { userId: id }
+        }).then(user => {
+            return user.update({
+                admin: true
+            });
+        }).catch(err => {
+            return Promise.reject({message: err});
+        });
+    }
 }

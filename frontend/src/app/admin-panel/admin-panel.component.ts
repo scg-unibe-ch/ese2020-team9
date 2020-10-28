@@ -63,7 +63,8 @@ export class AdminPanelComponent implements OnInit {
   approveProduct(productId: number){
    this.httpClient.put(environment.endpointURL + 'products/approve/' + productId,{
 
-    }).subscribe();
+    }).subscribe(
+   );
   }
 
   // product delete

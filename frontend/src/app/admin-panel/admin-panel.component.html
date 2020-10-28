@@ -10,7 +10,6 @@
   </mat-list-item>
 </mat-card>
 
-<!-- display not approved products -->
 <mat-card >
   <mat-grid-list cols="4" [gutterSize]="'5px'" rowHeight="250px">
     <mat-grid-tile *ngFor="let productItem of productList" style="backgroundColor: white">
@@ -23,21 +22,7 @@
           <mat-radio-button value="true" (click)="approveProduct([productItem.productId])" >Approve</mat-radio-button>
           <mat-radio-button value="false" (click)="deleteProduct([productItem.productId])" >Delete</mat-radio-button>
         </mat-radio-group>
-        <!-- <button mat-flat-button class="button_standard" align="left">
-          save
-        </button>-->
       </mat-grid-tile-footer>
     </mat-grid-tile>
   </mat-grid-list>
 </mat-card>
-
-<!--<mat-card>
-  <button mat-flat-button color="primary" (click)="getProductList()">Get List unapproved Products</button>
-  <mat-list-item *ngFor="let productItem of productList" >
-    <app-product-list
-      [productItem]="productItem"
-      (update)="onProductItemUpdate($event)"
-      (delete)="onProductItemDelete($event)"
-    ></app-product-list>
-  </mat-list-item>
-</mat-card>-->

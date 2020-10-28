@@ -211,8 +211,7 @@ Alex wants to be able to search for different keywords or product categories, so
 
 ## CRC Cards 
 
-As a first suggestion the application could consist of the following classes. A *Product* class and a *User* class, which may have sold or bought *Products* and knows its registration information. The class-responsibility-collaboration cards below identify possible responisabilites and collabarating classes of each class. Additonial responsabilties or classes may be added. Possibly the users can be split into normal users, registerd users and admins. 
-
+The application could consist of the following classes described as CRC-Cards. *Product* and *Service* are specializations of a more general *Advertisement*, *Admin* is a specialization of *User*. Each *User* and *Advertisement* has a *Review*, which contains and sums up all the different given *Feedback*s by other *User*s. And to each *User* belongs a *ShoppingCart*, where he can add all the desired *Advertisement*s, and a *Wallet* responsible for managing the money.
 
 
 | Advertisement  |  |       
@@ -252,9 +251,9 @@ As a first suggestion the application could consist of the following classes. A 
 | |
 |  *Responsibility*|  *Collaborator* |
 | knows user info (username, password, email, etc.) |  |
-| has a shopping cart | shopping cart |
+| has a shopping cart | ShoppingCart |
 | uploads, buys advertisements | Advertisement |
-| knows uploaded, sold, bought advertisements | Advertisements |
+| knows uploaded, sold, bought advertisements | Advertisement |
 | knows amount of money available |  Wallet   |
 
 
@@ -289,14 +288,14 @@ As a first suggestion the application could consist of the following classes. A 
 | belongs to review | Review | 
 | knows author| User | 
 
-| Shopping Cart  |  |       
+| ShoppingCart  |  |       
 |----------|-------------:|
 |  *Class Type:* Property |
 |  *Class Characteristics:* Abstract, Aggregate, Sequential, Persistent, Guarded |
 | |
 |  *Responsibility*|  *Collaborator* |
-| has advertisements | Advertisements |
-| calculates total costs | Advertisements | 
+| has advertisements | Advertisement |
+| calculates total costs | Advertisement | 
 | belongs to user | User | 
 
 | Wallet  |  |       
@@ -311,6 +310,8 @@ As a first suggestion the application could consist of the following classes. A 
 
 
 ## Class Diagram
+
+The following Diagram shows graphically the identified classes and their relationsship.
 
 ![](UML_Class_Diagram_I.png)
 

@@ -1,4 +1,4 @@
-import { User, UserCreationAttributes, UserAttributes } from './../../models/user.model';
+import { User, UserAttributes } from './../../models/user.model';
 import { applicationPromise } from './../../server';
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
@@ -7,7 +7,8 @@ import { Application } from 'express';
 chai.use(chaiHttp);
 let app: Application;
 
-const user1: UserCreationAttributes = {
+const user1: UserAttributes = {
+    userId: 1,
     admin: false,
     wallet: 500,
     userName: 'gandalf',
@@ -22,7 +23,8 @@ const user1: UserCreationAttributes = {
     addressCity: null,
     addressCountry: 'Middleearth'
 };
-const adminUser: UserCreationAttributes = {
+const adminUser: UserAttributes = {
+    userId: 2,
     admin: true,
     wallet: 500,
     userName: 'admin',
@@ -315,16 +317,84 @@ describe('UserController Test', () => {
     });
     describe('Test make user admin', () => {
         beforeEach('init user into db', function(done) {
-            done();
+            User.create(user1).then(() => {
+                User.create(adminUser).then(() => {
+                    done();
+                });
+            }).catch(err => {
+                console.log(err);
+            });
+        });
+        afterEach('clear db', function(done) {
+            User.destroy({
+                truncate: true,
+                restartIdentity: true
+            }).then(() => {
+                done();
+            });
         });
         it('should make user successfully to admin', function(done) {
-            done();
+            User.findOne({
+                where: {
+                    userName: 'gandalf'
+                }
+            }).then(user => {
+                expect(user.admin).to.be.eq(false);
+                chai.request(app).post('/user/login').send({
+                    userLogin: 'admin',
+                    password: 'adminPW'
+                }).end(function(error, response) {
+                    const token: string = response.body.token;
+                    chai.request(app).put('/user/makeAdmin/1').set('Authorization', 'Bearer ' + token).end(function(err, res) {
+                        expect(err).to.be.eq(null);
+                        expect(res).to.have.status(200);
+                        expect(res.body.admin).to.be.eq(true);
+                        expect(res.body.userName).to.be.eq('gandalf');
+                        done();
+                    });
+                });
+            });
         });
         it('should not make user to admin when no admin', function(done) {
-            done();
+            User.findOne({
+                where: {
+                    userName: 'gandalf'
+                }
+            }).then(user => {
+                expect(user.admin).to.be.eq(false);
+                chai.request(app).post('/user/login').send({
+                    userLogin: 'gandalf',
+                    password: 'gandalf4ever'
+                }).end(function(error, response) {
+                    const token: string = response.body.token;
+                    chai.request(app).put('/user/makeAdmin/1').set('Authorization', 'Bearer ' + token).end(function(err, res) {
+                        expect(err).to.be.eq(null);
+                        expect(res).to.have.status(403);
+                        expect(res.body.message).to.be.eq('Unauthorized');
+                        User.findOne({
+                            where: {
+                                userName: 'gandalf'
+                            }
+                        }).then(foundUser => {
+                            expect(foundUser.admin).to.be.eq(false);
+                            done();
+                        });
+                    });
+                });
+            });
         });
-        it('should return error, when url parameter no number', function(done) {
-            done();
+        it('should return error, when no user with indicated id', function(done) {
+            chai.request(app).post('/user/login').send({
+                userLogin: 'admin',
+                password: 'adminPW'
+            }).end(function(error, response) {
+                const token: string = response.body.token;
+                chai.request(app).put('/user/makeAdmin/199').set('Authorization', 'Bearer ' + token).end(function(err, res) {
+                    expect(err).to.be.eq(null);
+                    expect(res).to.have.status(500);
+                    done();
+                });
+            });
         });
     });
 });

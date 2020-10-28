@@ -70,7 +70,7 @@ export class UserRegistrationComponent implements OnInit {
             //navigates to dashboard
             this.router.navigate(['/home'])
            }, (res: any) => {
-            this.userAuth = 'Your registration is invalid!';
+            this.userAuth = 'This Username or Email Address is already taken';
       });
     }
 

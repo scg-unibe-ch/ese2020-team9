@@ -76,6 +76,7 @@ export class ProductformComponent implements OnInit {
           this.userId = instances.userId;
           this.userReview = instances.userReview;
           this.changeDetection.detectChanges();
+
       },(error: any) => {
       this.userAuth = 'There is no corresponding Product!';
     });
@@ -98,8 +99,6 @@ export class ProductformComponent implements OnInit {
       isAvailable: true,
       userId: this.userId,
       userReview: this.userReview,
-
-
 
     }).subscribe((res: any) => {
 
@@ -126,7 +125,7 @@ export class ProductformComponent implements OnInit {
       isRentable: this.isRentable,
       isAvailable: this.isAvailable,
       userId: this.userId,
-      //userReview: this.userReview,
+      userReview: this.userReview,
 
     }).subscribe((res: any) => {
 

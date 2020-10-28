@@ -1,8 +1,6 @@
 <script src="../footer/footer.component.ts"></script>
 
-  <mat-toolbar>
-    <span>Product List</span>
-  </mat-toolbar>
+<h2>Product List</h2>
 
 <div class="productList_dashboard" fxLayout="row wrap" fxLayoutGap="10px grid">
   <div fxFlex="10%" fxFlex.xl="10%" fxFlex.lg="15%" fxFlex.md="20%" fxFlex.sm="33%" fxFlex.xs="50%" *ngFor="let productItem of productList; trackBy: trackByFn">

@@ -1,5 +1,5 @@
 <mat-card>
-  <button mat-flat-button color="primary" (click)="getUserList()">Get List of users </button>
+  <button mat-flat-button class="button_standard" (click)="getUserList()">Get List of users </button>
   <mat-list-item *ngFor="let user of users" >
   <app-user
         [user]="user"

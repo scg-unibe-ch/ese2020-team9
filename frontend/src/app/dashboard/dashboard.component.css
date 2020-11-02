@@ -34,3 +34,11 @@ hr {
     background: black;
     margin-bottom: 30px;
 }
+
+
+.imgMid {
+    height:280px;
+    width:auto;/*maintain aspect ratio*/
+    max-width:280px;
+    margin: 0 auto 1em auto; /*Center the image*/
+}

@@ -5,7 +5,11 @@
 mat-card {
 }
 
-img {
+.imgSmall {
+    height:220px;
+    width:auto;/*maintain aspect ratio*/
+    max-width:220px;
+    margin: 0 auto 1em auto; /*Center the image*/
 }
 
 .productItem_Card{

@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import {Router} from "@angular/router";
+import { ActivatedRoute} from "@angular/router";
+
 import {UserService} from "../services/user.service";
 
 @Component({
@@ -29,14 +31,26 @@ export class UserRegistrationComponent implements OnInit {
   admin: boolean;
   isUserLoggedIn: boolean;
 
+  edit: boolean
+  id: any;
   userAuth = '';
 
-  constructor(private httpClient: HttpClient, private router: Router, private userService: UserService) { }
+  constructor(private httpClient: HttpClient, private router: Router, private userService: UserService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.userService.isUserLoggedIn.subscribe(value => {
       this.isUserLoggedIn = value;
     })
+
+    this.userId = this.userService.getUserId();
+        this.id = this.route.snapshot.paramMap.get('id');
+
+        if(this.id==='0'){
+          this.edit = false;
+        } else{
+          this.edit=true;
+          //this.getUserById();
+        }
   }
 
   registration(): void {
@@ -157,5 +171,27 @@ export class UserRegistrationComponent implements OnInit {
       return false
     }
   }
+
+  getUserById(){
+      this.userService.getUserById(this.id).subscribe((instances: any) => {
+            this.userMail = instances.userMail;
+            this.password = instances.password;
+            this.userName = instances.userName;
+            this.firstName = instances.firstName;
+            this.lastName = instances.lastName;
+            this.gender = instances.gender;
+            this.telephoneNumber = instances.telephoneNumber;
+            this.addressStreet = instances.addressStreet;
+            this.addressPin = instances.addressPin;
+            this.addressCity = instances.addressCity;
+            this.addressCountry = instances.addressCountry;
+
+            this.changeDetection.detectChanges();
+
+        },(error: any) => {
+        this.userAuth = 'There is no corresponding User!';
+      });
+    }
+
 
 }

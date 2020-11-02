@@ -38,4 +38,9 @@ export class UserDashboardComponent implements OnInit {
   deleteProduct(productId: number){
     this.httpClient.delete(environment.endpointURL + 'products/' + productId,{}).subscribe();
   }
+
+  trackByFn(index, item){
+    return item.id;
+  }
+
 }

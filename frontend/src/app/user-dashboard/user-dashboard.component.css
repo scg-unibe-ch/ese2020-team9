@@ -12,8 +12,12 @@ img {
   margin: 5px;
 }
 
-.viewport {
-  height: 400px;
-  width: 100%;
 
+
+.button_standard {
+
+ }
+
+.text{
+  margin: 16px
 }

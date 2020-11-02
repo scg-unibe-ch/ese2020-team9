@@ -1,29 +1,53 @@
-<h2>My Profile</h2>
-<p>Hi {{userName}}! Welcome to Stor</p>
+<div>
+  <br>
+  <br>
+  <p>Hi <b>{{userName}}!</b> <br>Welcome to Stor</p>
 
 <button mat-flat-button class="button_standard" [routerLink]="['/productform/', 0]" routerLinkActive="active">Add Product </button>
+<button mat-flat-button class="button_standard" [routerLink]="['/registration/', 0]" routerLinkActive="active">Edit Profile </button>
+
 <br>
+<br>
+</div>
+
+<p>Your Items:</p>
 <div class="container">
-  <cdk-virtual-scroll-viewport itemSize="300px" class="viewport">
-    <div  fxLayout="row wrap" fxLayoutGap="5px grid">
-      <!--still figuring out how to use fxLayout-->
-      <div fxFlex="10%" fxFlex.xl="15%" fxFlex.lg="20%" fxFlex.md="25%" fxFlex.sm="33%" fxFlex.xs="50%" *cdkVirtualFor="let productItem of productList">
+
+
+  <div class="productList_dashboard" fxLayout="row wrap" fxLayoutAlign="space-evenly center" fxLayoutGap="1em">
+    <div fxFlex="0 0 calc(20% - 0.8em)" *ngFor="let productItem of productList; trackBy: trackByFn">
         <mat-card class="productItem_Card">
           <mat-card-header>
             <!--<img mat-card-avatar src="/assets/unknown_profilepicture.png" alt="Profile Picture">-->
             <!-- should get update date, but can^^ understand date-->
             <mat-card-title>{{productItem.productName}}</mat-card-title>
             <mat-card-subtitle>posted on {{productItem.uploadDate | date: "dd.MM.yy, HH:mm"}}</mat-card-subtitle>
+
           </mat-card-header>
           <mat-card-content>
+            <div *ngIf="productItem.isApproved">
+              <p class="text">Approved</p>
+            </div>
+            <div *ngIf="!productItem.isApproved">
+              <b class="text">Awaiting approval</b>
+            </div>
+
+            <div *ngIf="productItem.isAvailable">
+              <p class="text">Available</p>
+            </div>
+            <div *ngIf="!productItem.isAvailable">
+              <b class="text">Sold!</b>
+            </div>
+
+
+
           </mat-card-content>
-          <mat-card-actions align="end">
+          <mat-card-actions align="left">
             <button mat-flat-button class="button_standard" [routerLink]="['/productform/', productItem.productId]" routerLinkActive="active">Edit</button>
-            <button mat-flat-button class="button_standard" (click)="deleteProduct([productItem.productId])">Delete</button>
+            <button mat-flat-button class="button_standard" (click)="deleteProduct([productItem.productId])" color="warn">Delete</button>
           </mat-card-actions>
         </mat-card>
       </div>
     </div>
-  </cdk-virtual-scroll-viewport>
 </div>
 

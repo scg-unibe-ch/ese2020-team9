@@ -1,4 +1,36 @@
 mat-card-footer {
   background-color: #D3D9EF;
-  text-align: center;
+  text-align: left;
+}
+
+
+.button_fill{
+  width: 100%;
+  text-align: left;
+  align: left;
+  box-shadow:none !important;
+}
+
+
+
+
+.text{
+  margin: 16px
+}
+
+.img{
+  margin: 16px;
+  width: 100%;
+  object-fit: contain;
+
+}
+
+hr {
+    margin: 16px;
+    position: relative;
+    top: 20px;
+    border: none;
+    height: 1px;
+    background: black;
+    margin-bottom: 30px;
 }

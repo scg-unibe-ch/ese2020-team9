@@ -61,6 +61,12 @@ export class UserService {
     return this.users;
   }
 
+   //get a specific User
+  getUserById(userId: number){
+    return this.httpClient.get(environment.endpointURL + 'user/' + userId);
+
+  }
+
   getToken(){
       return this.userToken = localStorage.getItem('userToken');
     }

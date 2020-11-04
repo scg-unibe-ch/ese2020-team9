@@ -20,6 +20,7 @@ export interface UserAttributes {
 }
 
 export interface UserEditingAttributes {
+    userId: number;
     userName: string;
     userMail: string;
     firstName: string;

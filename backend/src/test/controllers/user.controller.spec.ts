@@ -397,4 +397,108 @@ describe('UserController Test', () => {
             });
         });
     });
+    describe('Test get single user', () => {
+        before('init user into db', function(done) {
+            User.create(user1).then(() => done()).catch(err => console.log(err));
+        });
+        it('should return requested user', function(done) {
+            chai.request(app).get('/user/1').end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body.userName).to.be.eq('gandalf');
+                done();
+            });
+        });
+        it('should return 404 when requested user does not exist', function(done) {
+            chai.request(app).get('/user/2').end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(404);
+                expect(res.body.message).to.be.eq('User not found!');
+                done();
+            });
+        });
+        after('clear db', function(done) {
+            User.destroy({
+                truncate: true,
+                restartIdentity: true,
+            }).then(() => {
+                done();
+            });
+        });
+    });
+    describe('Test update user', () => {
+        before('init user into db', function(done) {
+            User.create(user1).then(() => done()).catch(err => console.log(err));
+        });
+        it('should successfully update user', function(done) {
+            chai.request(app).post('/user/edit').send({
+                userId: 1,
+                userName: 'gandalf',
+                userMail: 'gandalf@wizards.me',
+                firstName: 'Gandalf',
+                lastName: 'The White',
+                gender: 'male',
+                phoneNumber: 796554545,
+                addressStreet: null,
+                addressPin: null,
+                addressCity: null,
+                addressCountry: 'Aman'
+            }).end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body.lastName).to.be.eq('The White');
+                User.findByPk(1).then(user => {
+                    expect(user.lastName).to.be.eq('The White');
+                    done();
+                });
+            });
+        });
+        it('should return 500 when to be updated user not exists', function(done) {
+            chai.request(app).post('/user/edit').send({
+                userId: 2,
+                userName: 'admin',
+                userMail: 'superAdmin@admins.com',
+                firstName: 'Jack',
+                lastName: 'Hammington',
+                gender: 'male',
+                phoneNumber: 796666666,
+                addressStreet: null,
+                addressPin: null,
+                addressCity: 'London',
+                addressCountry: 'England'
+            }).end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(500);
+                expect(res.body).to.have.property('message');
+                done();
+            });
+        });
+        it('should return 500 when cannot update because of bad data', function(done) {
+            chai.request(app).post('/user/edit').send({
+                userId: 1,
+                userName: null,
+                userMail: 'gandalf@wizards.me',
+                firstName: 'Gandalf',
+                lastName: 'The White',
+                gender: 'male',
+                phoneNumber: 796554545,
+                addressStreet: null,
+                addressPin: null,
+                addressCity: 1,
+                addressCountry: 'Aman'
+            }).end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(500);
+                done();
+            });
+        });
+        after('clear db', function(done) {
+            User.destroy({
+                truncate: true,
+                restartIdentity: true,
+            }).then(() => {
+                done();
+            });
+        });
+    });
 });

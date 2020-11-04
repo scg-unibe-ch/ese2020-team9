@@ -128,6 +128,75 @@ This documents describes in detail the endpoints provided by the backend.
     }   
     ```
 
+### POST on `"/user/edit"`
+
+Edit an existing user. If user does not exist, will return an error.
+
+- **Details**
+
+    <details>
+
+    <summary>Request</summary>
+
+    ```json
+        {
+            "userId": "number",
+            "admin":  "boolean",
+            "wallet": "number",
+            "userName": "string",
+            "password": "string (Hash)",
+            "userMail": "string",
+            "firstName": "string",
+            "lastName": "string",
+            "gender":   "string",
+            "phoneNumber": "number",
+            "addressStreet": "string",
+            "addressPin": "string",
+            "addressCity": "string",
+            "addressCountry": "string"
+        }
+    ```
+
+    </details>
+
+    <details>
+
+    <summary>Response (STATUS 200)</summary>
+
+    ```json
+        {
+            "userId": "number",
+            "admin":  "boolean",
+            "wallet": "number",
+            "userName": "string",
+            "password": "string (Hash)",
+            "userMail": "string",
+            "firstName": "string",
+            "lastName": "string",
+            "gender":   "string",
+            "phoneNumber": "number",
+            "addressStreet": "string",
+            "addressPin": "string",
+            "addressCity": "string",
+            "addressCountry": "string",
+            "createdAt" : "string",
+            "updatedAt" : "string",
+        }
+    ```
+
+    </details>
+
+    <details>
+    <summary>Response (STATUS 500)</summary>
+
+    ```json
+        {
+            "message": "error message"
+        }
+    ```
+
+    </details>
+
 ### get all users `"/user/"` (GET)
 
 Requires authorization header with a valid token in the request! (see logged-in user)
@@ -175,6 +244,60 @@ Requires authorization header with a valid token in the request! (see logged-in 
         ...
     ]
     ```
+
+### GET on `"/user/:id"`
+
+Returns the user with the requested id. If user does not exist, will return a not found error (404).
+
+- **Details**
+
+    <details>
+    <summary>Response (STATUS 200)</summary>
+
+    ```json
+        {
+            "userId": "number",
+            "admin":  "boolean",
+            "wallet": "number",
+            "userName": "string",
+            "password": "string (Hash)",
+            "userMail": "string",
+            "firstName": "string",
+            "lastName": "string",
+            "gender":   "string",
+            "phoneNumber": "number",
+            "addressStreet": "string",
+            "addressPin": "string",
+            "addressCity": "string",
+            "addressCountry": "string",
+            "createdAt" : "string",
+            "updatedAt" : "string",
+        }
+    ```
+
+    </details>
+
+    <details>
+    <summary>Response (STATUS 404)</summary>
+
+    ```json
+    {
+        "message": "User not found!"
+    }
+    ```
+
+    </details>
+
+    <details>
+    <summary>Response (STATUS 500)</summary>
+
+    ```json
+    {
+        "message": "error message"
+    }
+    ```
+
+    </details>
 
 ### delete a user `"/user/:id"` (DELETE)
 

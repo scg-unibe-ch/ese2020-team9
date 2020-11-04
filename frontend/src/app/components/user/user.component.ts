@@ -28,9 +28,4 @@ export class UserComponent {
     // Emits event to parent component that User got deleted
     this.delete.emit(this.user);
   }
-
-
-
-
-
 }

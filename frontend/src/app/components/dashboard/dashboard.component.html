@@ -1,14 +1,13 @@
 <br>
 <h2>Product List</h2>
 
-<!-- define card size for different  screens -->
 <div class="productList_dashboard" fxLayout="row wrap" fxLayoutGap="2% grid" fxLayoutAlign="space-evenly stretch">
   <div fxFlex="10%" fxFlex.xl="10%" fxFlex.lg="15%" fxFlex.md="20%" fxFlex.sm="33%" fxFlex.xs="50%" *ngFor="let productItem of productList; trackBy: trackByFn">
 
     <mat-card>
 
       <mat-card-header>
-        <!--<img mat-card-avatar src="/assets/unknown_profilepicture.png" alt="Profile Picture">-->
+        <!--<img mat-card-avatar src="" alt="Profile Picture">-->
         <mat-card-title>{{productItem.productName}}</mat-card-title>
         <mat-card-subtitle>{{productItem.uploadDate | date: "dd.MM.yy, HH:mm"}} Uhr</mat-card-subtitle>
       </mat-card-header>

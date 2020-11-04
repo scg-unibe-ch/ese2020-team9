@@ -1,5 +1,4 @@
-<div *ngIf="!isUserLoggedIn">
-  <mat-card>
+ <mat-card>
     <mat-form-field>
       <input matInput placeholder="Email*" [(ngModel)]="userMail" name="userMail">
         <div *ngIf="!empty(userMail)">
@@ -22,7 +21,6 @@
 
     </mat-form-field>
 
-    <!-- fix confirm password visibility-->
   <mat-form-field>
     <input matInput placeholder="Confirm Password*" [(ngModel)]="confPassword" name="confPassword" type="password">
     <ng-template [ngIf]="!empty(confPassword)">
@@ -33,17 +31,14 @@
 
     <mat-form-field>
       <input matInput placeholder="User Name*" [(ngModel)]="userName" name="userName" (change)="evaluate(userName)">
-      <!--<div *ngIf="empty(userName)" class="invalid-feedback">User Name is required </div>-->
     </mat-form-field>
 
     <mat-form-field>
       <input matInput placeholder="First Name*" [(ngModel)]="firstName" name="firstName">
-      <!--<div *ngIf="empty(firstName)" class="invalid-feedback">First Name is required </div>-->
     </mat-form-field>
 
     <mat-form-field>
       <input matInput placeholder="Last Name*" [(ngModel)]="lastName" name="lastName">
-      <!--<div *ngIf="empty(lastName)" class="invalid-feedback">Last Name is required </div>-->
     </mat-form-field>
   </mat-card>
 
@@ -151,4 +146,3 @@
       </div>
     </ng-template>
   </div>
-</div>

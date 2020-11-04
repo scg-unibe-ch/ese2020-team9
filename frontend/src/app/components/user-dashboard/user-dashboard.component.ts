@@ -16,7 +16,6 @@ export class UserDashboardComponent implements OnInit {
 
   userId: any;
   userName: string;
-
   productList: ProductItem[];
 
   constructor(private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute) { }
@@ -28,13 +27,13 @@ export class UserDashboardComponent implements OnInit {
 
   }
 
-  // products - GET
+  // products - get all products of user
   getProductUser(){
      this.productService.getUserProduct(this.userId).subscribe((data: ProductItem[]) => {
         this.productList = data;
      });
   }
-  // product delete
+
   deleteProduct(productId: number){
     this.httpClient.delete(environment.endpointURL + 'products/' + productId,{}).subscribe();
   }

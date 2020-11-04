@@ -25,17 +25,7 @@ export class UserLoginComponent implements OnInit {
     this.userService.isUserLoggedIn.subscribe(value => {
       this.isUserLoggedIn = value;
     });
-    //this.checkoutStatus();
   }
-
-  //replaced this function by subscribing to isUserLoggedIn Observable, don't know if better approach!
-/*checkUserStatus(): void {
-    // Get user data from local storage
-    this.userToken = localStorage.getItem('userToken');
-    this.userLogin = localStorage.getItem('userLogin');
-    // Set boolean whether a user is logged in or not
-    this.loggedIn = !!(this.userToken);
-  }*/
 
   login(): void {
     this.userService.login(this.userLogin, this.password).subscribe((res: any) => {
@@ -52,7 +42,6 @@ export class UserLoginComponent implements OnInit {
       this.userService.isUserAdmin.next(res.user.admin);
       //navigates to dashboard
       this.router.navigate(['/home']);
-      //this.checkUserStatus();
       }, (error: any) => {
         this.userAuth = 'Your Username/Email and/or Password is wrong, try again!';
       });
@@ -66,6 +55,5 @@ export class UserLoginComponent implements OnInit {
     this.userService.isUserAdmin.next(false);
     //navigates to dashboard
     this.router.navigate(['/home']);
-    //this.checkUserStatus();
   }
 }

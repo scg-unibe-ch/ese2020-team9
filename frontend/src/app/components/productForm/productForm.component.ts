@@ -14,7 +14,6 @@ import { ActivatedRoute} from "@angular/router";
 })
 export class ProductFormComponent implements OnInit {
 
-  isLoggedIn = '';
   productId: number;
   productName = '';
   productDescription = '';
@@ -69,7 +68,7 @@ export class ProductFormComponent implements OnInit {
           this.isAvailable = instances.isAvailable;
           this.userId = instances.userId;
           this.userReview = instances.userReview;
-          this.changeDetection.detectChanges();
+          //this.changeDetection.detectChanges();
 
       },(error: any) => {
       this.userAuth = 'There is no corresponding Product!';

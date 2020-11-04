@@ -1,4 +1,4 @@
-import { UserAttributes, User } from '../models/user.model';
+import { UserAttributes, UserEditingAttributes, User } from '../models/user.model';
 import { LoginResponse, LoginRequest } from '../models/login.model';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -84,7 +84,7 @@ export class UserService {
         }).catch(err => Promise.reject({message: err}));
     }
 
-    public changeUser(user: UserAttributes): Promise<User> {
+    public changeUser(user: UserEditingAttributes): Promise<User> {
         return User.findByPk(user.userId).then(foundUser => foundUser.update(user))
             .catch(err => Promise.reject({message: err}));
     }

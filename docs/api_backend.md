@@ -141,10 +141,7 @@ Edit an existing user. If user does not exist, will return an error.
     ```json
         {
             "userId": "number",
-            "admin":  "boolean",
-            "wallet": "number",
             "userName": "string",
-            "password": "string (Hash)",
             "userMail": "string",
             "firstName": "string",
             "lastName": "string",

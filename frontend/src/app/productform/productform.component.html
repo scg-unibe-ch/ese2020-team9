@@ -1,0 +1,93 @@
+<div>
+  <mat-divider></mat-divider>
+    <h2>My Product</h2>
+
+  <mat-card>
+    <mat-form-field>
+      <input matInput placeholder="Product Name" [(ngModel)]="productName" name="productName">
+      <output  [(ngModel)]="productName" name="productName"></output>
+      <div *ngIf="empty(productName)" class="invalid-feedback">Product Name</div>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
+      <input matInput placeholder="Product Image" [(ngModel)]="productImage" name="productImage">
+      <div *ngIf="empty(productImage)" class="invalid-feedback">Please add a Photo</div>
+    </mat-form-field>
+  </mat-card>
+
+  <mat-card>
+    <mat-checkbox [(ngModel)]="isService">Is your Product a Service?</mat-checkbox>
+
+    <mat-checkbox class="checkboxMargin" [(ngModel)]="isRentable">Is your Product rentable?</mat-checkbox>
+    <div>
+      <br>
+    </div>
+    <mat-form-field appearance="fill">
+
+      <mat-label>Select Product Category</mat-label>
+      <select matNativeControl [(ngModel)]="productCategory" value="productCategory">
+        <option value="AntiquesAndArt">Antiques & Art</option>
+        <option value="BabyAndChild">Baby & Child</option>
+        <option value="Books">Books</option>
+        <option value="OfficeAndCommercial">Office & Commercial</option>
+        <option value="ComputerAndComputer accessories">Computer & Computer accessories</option>
+        <option value="Vehicles">Vehicles</option>
+        <option value="Films">Films</option>
+        <option value="PhotoAndVideo">Photo & Video</option>
+        <option value="GardenAndCrafts">Garden & Crafts</option>
+        <option value="Housekeeping">Housekeeping</option>
+        <option value="RealEstate">Real estate</option>
+        <option value="ClothingAndAccessories">Clothing & Accessories</option>
+        <option value="Music">Music</option>
+        <option value="Collect">Collect</option>
+        <option value="ToysAndCrafts">Toys & Crafts</option>
+        <option value="SportsAndOutdoors">Sports & Outdoors</option>
+        <option value="JobOffers">Job offers</option>
+        <option value="TVAndAudio">TV & Audio</option>
+        <option value="PhoneAndNavigation">Phone & Navigation</option>
+        <option value="TicketsAndVouchers">Tickets & Vouchers</option>
+        <option value="Animals">Animals</option>
+        <option value="Miscellaneous">Miscellaneous</option>
+      </select>
+    </mat-form-field>
+  </mat-card>
+  <mat-card>
+
+    <mat-form-field>
+      <mat-label>Describe your Product</mat-label>
+      <textarea matInput
+                [(ngModel)]="productDescription"
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="20"></textarea>
+    </mat-form-field>
+  </mat-card>
+
+  <mat-card>
+
+    <mat-form-field>
+      <input matInput placeholder="Product Price" [(ngModel)]="productPrice" name="productPrice">
+      <div *ngIf="empty(productPrice)" class="invalid-feedback">Please add a Price</div>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Location" [(ngModel)]="productLocation" name="productLocation">
+      <div *ngIf="empty(productLocation)" class="invalid-feedback">Location</div>
+    </mat-form-field>
+
+    <mat-checkbox class="checkboxMargin" [(ngModel)]="productDelivery">Product delivery possible?</mat-checkbox>
+
+  </mat-card>
+
+  <mat-card>
+    <div *ngIf="add">
+    <button mat-flat-button class="button_standard" (click)="addProduct()" [disabled]="!allFieldsAreFilled()">Add Product</button>
+    </div>
+    <div *ngIf="!add">
+    <button mat-flat-button class="button_standard" (click)="editProduct()" [disabled]="!allFieldsAreFilled()">Save Product</button>
+    </div>
+  </mat-card>
+</div>

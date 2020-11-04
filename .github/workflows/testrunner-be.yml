@@ -7,7 +7,7 @@ on:
   pull_request:
     branches: [ master ]
     paths-ignore: [ 'docs/**', 'frontend/**', 'deliverables/**', '.github/**' ]
-    
+
 jobs:
   build:
 

@@ -70,7 +70,7 @@ export class UserRegistrationComponent implements OnInit {
             //navigates to dashboard
             this.router.navigate(['/home'])
            }, (res: any) => {
-            this.userAuth = 'Your registration is invalid!';
+            this.userAuth = 'This Username or Email Address is already taken';
       });
     }
 
@@ -146,12 +146,13 @@ export class UserRegistrationComponent implements OnInit {
     let fn = this.evaluate(this.firstName);
     let ln = this.evaluate(this.lastName);
     let em = this.emailFormat(this.userMail);
+    let cpw = this.evaluate(this.confPassword);
     let pw1 = this.passwordLength(this.password);
     let pw2 = this.passwordHasNumber(this.password);
     let pw3 = this.passwordHasNumber(this.password);
     let pw4 = this.passwordContainsMixedLetters(this.password);
     let pw5 = this.passwordContainsSpecialChar(this.password);
-    if (un&&fn&&ln&&em&&pw1&&pw2&&pw3&&pw4&&pw5){ return true}
+    if (un&&fn&&ln&&em&&cpw&&pw1&&pw2&&pw3&&pw4&&pw5){ return true}
     else {
       return false
     }

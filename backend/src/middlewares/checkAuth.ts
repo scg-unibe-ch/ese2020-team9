@@ -23,10 +23,10 @@ export function verifyAdmin(req: Request, res: Response, next: any) {
         if (admin === true) {
             next();
         } else {
-        res.status(403).send({ message: 'Unauthorized' });
+        res.status(403).send({ message: 'This User is not an Admin' });
         }
     } catch (err) {
-    res.status(403).send({ message: 'Unauthorized' });
+    res.status(403).send({ message: 'This User is not an Admin' });
     }
 }
 // helper-function which decodes the Token

@@ -33,24 +33,6 @@ export class UserService {
     localStorage.clear();
   }
 
-  //registration is currently handled in registration Component
-  /*registration(userName: string, password: string, userMail: string, firstName: string, lastName: string, gender,
-               telephoneNumber: string, addressStreet: string, addressPin: string, addressCity: string, addressCountry: string){
-    return this.httpClient.post(environment.endpointURL + 'user/register', {
-      userName,
-      password,
-      userMail,
-      firstName,
-      lastName,
-      gender,
-      telephoneNumber,
-      addressStreet,
-      addressPin,
-      addressCity,
-      addressCountry,
-    }).pipe()
-  }*/
-
   getIsLoggedIn(){
     this.userToken = localStorage.getItem('userToken');
     return !!(this.userToken);
@@ -78,4 +60,9 @@ export class UserService {
     });
     return this.users;
   }
+
+  getToken(){
+      return this.userToken = localStorage.getItem('userToken');
+    }
+
 }

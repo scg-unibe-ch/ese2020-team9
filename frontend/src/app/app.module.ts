@@ -13,25 +13,24 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from "@angular/material/menu";
 import { AuthInterceptor } from './auth/auth.interceptor';
-import { UserLoginComponent } from './user-login/user-login.component';
-import { UserRegistrationComponent } from './user-registration/user-registration.component';
-import { AdminPanelComponent } from './admin-panel/admin-panel.component';
-import { ProductListComponent } from './product-list/product-list.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
+import { UserLoginComponent } from './components/user-login/user-login.component';
+import { UserRegistrationComponent } from './components/user-registration/user-registration.component';
+import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
+import { ProductListComponent } from './components/product-list/product-list.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { MatIconModule } from '@angular/material/icon';
-import { ProductItemComponent } from './product-list/product-item/product-item.component';
-import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ProductItemComponent } from './components/product-list/product-item/product-item.component';
+import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AppRoutingModule } from "./app-routing.module";
-import { UserComponent } from './user/user.component';
+import { UserComponent } from './components/user/user.component';
 import { MatGridListModule} from "@angular/material/grid-list";
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ProductformComponent } from './productform/productform.component';
+import { ProductFormComponent } from './components/productForm/productForm.component';
 import { ScrollingModule } from "@angular/cdk/scrolling";
 import { MatRadioModule } from "@angular/material/radio";
-
 
 @NgModule({
   declarations: [
@@ -47,7 +46,7 @@ import { MatRadioModule } from "@angular/material/radio";
     DashboardComponent,
     PageNotFoundComponent,
     UserComponent,
-    ProductformComponent,
+    ProductFormComponent,
   ],
   imports: [
     BrowserModule,

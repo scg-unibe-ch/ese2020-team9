@@ -1,7 +1,7 @@
 <h2>My Profile</h2>
 <p>Hi {{userName}}! Welcome to Stor</p>
 
-<button mat-flat-button class="button_standard" [routerLink]="['/productform/', 0]" routerLinkActive="active">Add Product </button>
+<button mat-flat-button class="button_standard" [routerLink]="['/productForm/', 0]" routerLinkActive="active">Add Product </button>
 <br>
 <div class="container">
   <cdk-virtual-scroll-viewport itemSize="300px" class="viewport">
@@ -18,7 +18,7 @@
           <mat-card-content>
           </mat-card-content>
           <mat-card-actions align="end">
-            <button mat-flat-button class="button_standard" [routerLink]="['/productform/', productItem.productId]" routerLinkActive="active">Edit</button>
+            <button mat-flat-button class="button_standard" [routerLink]="['/productForm/', productItem.productId]" routerLinkActive="active">Edit</button>
             <button mat-flat-button class="button_standard" (click)="deleteProduct([productItem.productId])">Delete</button>
           </mat-card-actions>
         </mat-card>

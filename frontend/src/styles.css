@@ -5,12 +5,14 @@ body { margin: 30px; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .mat-card {
   margin: 20px 0;
+  padding: 0px;
   background-color: #EEE;
 }
 
 button, input {
   margin-left: 15px !important;
   margin-right: 15px !important;
+
 }
 
 .mat-form-field-wrapper {

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { User } from '../models/user.model';
+import { User } from '../../models/user.model';
 
 
 @Component({
@@ -29,7 +29,7 @@ export class UserComponent {
     this.delete.emit(this.user);
   }
 
-  
+
 
 
 

@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { ProductList } from '../models/product-list.model';
-import { ProductItem } from '../models/product-item.model';
+import { ProductList } from '../../models/product-list.model';
+import { ProductItem } from '../../models/product-item.model';
 import { HttpClient } from '@angular/common/http';
 
 @Component({

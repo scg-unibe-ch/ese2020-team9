@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from "../services/user.service";
-import {ProductItem} from "../models/product-item.model";
+import {UserService} from "../../services/user.service";
+import {ProductItem} from "../../models/product-item.model";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
-import {ProductService} from "../services/product.service";
-import {environment} from "../../environments/environment";
+import {ProductService} from "../../services/product.service";
+import {environment} from "../../../environments/environment";
 
 
 @Component({

@@ -1,7 +1,8 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {UserService} from "../services/user.service";
-import {ProductItem} from "../models/product-item.model";
-import {ProductService} from "../services/product.service";
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { UserService } from "../../services/user.service";
+import { ProductItem } from "../../models/product-item.model";
+import { ProductService } from "../../services/product.service";
+
 
 @Component({
   selector: 'app-dashboard',

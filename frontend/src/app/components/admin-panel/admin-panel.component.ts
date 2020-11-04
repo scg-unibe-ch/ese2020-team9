@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { environment } from '../../environments/environment';
-import { ProductItem } from '../models/product-item.model';
-import { User } from '../models/user.model';
-import { ProductService } from "../services/product.service";
-import {UserService} from "../services/user.service";
+import { environment } from '../../../environments/environment';
+import { ProductItem } from '../../models/product-item.model';
+import { User } from '../../models/user.model';
+import { ProductService } from "../../services/product.service";
+import { UserService } from "../../services/user.service";
 
 
 
@@ -31,17 +31,16 @@ export class AdminPanelComponent implements OnInit {
     this.userToken = this.userService.getToken();
 
   }
-
+  // get all Users
   getUserList(){
     this.httpClient.get(environment.endpointURL + 'user').subscribe((instances: any) => {
         this.users = instances.map((instance: any) => new User(instance.userId, instance.userName, instance.admin));
     });
   }
 
-  // user - DELETE
   onUserDelete(user: User): void{
     this.httpClient.delete(environment.endpointURL + 'user/' + user.userId).subscribe(() => {
-      this.users.splice(this.users.indexOf(user), 1);
+      this.users.splice(this.users.indexOf(user), 1); //delete one user
     });
   }
 
@@ -52,14 +51,13 @@ export class AdminPanelComponent implements OnInit {
     }).subscribe();
   }
 
-  // products - GET
+  // products - get all Unapproved ProductItems
   getProductList(){
     this.productService.getAllUnapproved().subscribe((data: ProductItem [] ) => {
       this.productList = data;
     });
   }
 
-  // product approve
   approveProduct(productId: number){
    this.httpClient.put(environment.endpointURL + 'products/approve/' + productId,{
 
@@ -67,7 +65,6 @@ export class AdminPanelComponent implements OnInit {
    );
   }
 
-  // product delete
   deleteProduct(productId: number){
    this.httpClient.delete(environment.endpointURL + 'products/' + productId,{}).subscribe();
   }

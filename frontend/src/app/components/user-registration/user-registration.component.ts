@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 import {Router} from "@angular/router";
-import {UserService} from "../services/user.service";
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-user-registration',

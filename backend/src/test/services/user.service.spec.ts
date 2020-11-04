@@ -134,7 +134,7 @@ describe('UserService Tests', () => {
                 password: 'j123'
             }).catch(err => {
                 expect(err).to.have.property('message');
-                expect(err.message).to.contain('not authorized');
+                expect(err.message).to.contain('Wrong password');
                 done();
             });
         });

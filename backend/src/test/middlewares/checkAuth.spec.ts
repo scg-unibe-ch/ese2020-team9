@@ -71,7 +71,7 @@ describe('Test checkAuth middlewares', () => {
             const req = mockRequest();
             verifyAdmin(req, res, nextSpy);
             expect(statusStub.calledWith(sinon.match(403))).to.be.eq(true);
-            expect(sendSpy.calledWith(sinon.match({message: 'Unauthorized'}))).to.be.eq(true);
+            expect(sendSpy.calledWith(sinon.match({message: 'This User is not an Admin'}))).to.be.eq(true);
             expect(nextSpy.called).to.be.eq(false);
             done();
         });
@@ -83,7 +83,7 @@ describe('Test checkAuth middlewares', () => {
             });
             verifyAdmin(req, res, nextSpy);
             expect(statusStub.calledWith(sinon.match(403))).to.be.eq(true);
-            expect(sendSpy.calledWith(sinon.match({message: 'Unauthorized'}))).to.be.eq(true);
+            expect(sendSpy.calledWith(sinon.match({message: 'This User is not an Admin'}))).to.be.eq(true);
             expect(nextSpy.called).to.be.eq(false);
             done();
         });
@@ -96,7 +96,7 @@ describe('Test checkAuth middlewares', () => {
             });
             verifyAdmin(req, res, nextSpy);
             expect(statusStub.calledWith(sinon.match(403))).to.be.eq(true);
-            expect(sendSpy.calledWith(sinon.match({message: 'Unauthorized'}))).to.be.eq(true);
+            expect(sendSpy.calledWith(sinon.match({message: 'This User is not an Admin'}))).to.be.eq(true);
             expect(nextSpy.called).to.be.eq(false);
             done();
         });

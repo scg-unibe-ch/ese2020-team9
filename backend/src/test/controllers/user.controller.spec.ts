@@ -73,7 +73,7 @@ describe('UserController Test', () => {
                 done();
             });
         });
-        it('should return 500 when userName already exists', function(done) {
+        it('should return 400 when userName already exists', function(done) {
             chai.request(app).post('/user/register').send({
                 userName: 'gandalf',
                 password: 'hansii',
@@ -88,12 +88,12 @@ describe('UserController Test', () => {
                 addressCountry: 'Hansingen'
             }).end(function(err, res) {
                 expect(err).to.be.eq(null);
-                expect(res).to.have.status(500);
+                expect(res).to.have.status(400);
                 expect(res.body.message).to.contain('This username or email address is already being used!');
                 done();
             });
         });
-        it('should return 500 when email already exists', function(done) {
+        it('should return 400 when email already exists', function(done) {
             chai.request(app).post('/user/register').send({
                 userName: 'radagast',
                 password: '4est',
@@ -108,7 +108,7 @@ describe('UserController Test', () => {
                 addressCountry: 'Middle-earth'
             }).end(function(err, res) {
                 expect(err).to.be.eq(null);
-                expect(res).to.have.status(500);
+                expect(res).to.have.status(400);
                 expect(res.body.message).to.contain('This username or email address is already being used!');
                 done();
             });
@@ -154,8 +154,8 @@ describe('UserController Test', () => {
                 password: 'gandever'
             }).end(function(err, res) {
                 expect(err).to.be.eq(null);
-                expect(res).to.have.status(500);
-                expect(res.body.message).to.contain('not authorized');
+                expect(res).to.have.status(400);
+                expect(res.body.message).to.contain('Wrong password');
                 done();
             });
         });
@@ -165,7 +165,7 @@ describe('UserController Test', () => {
                 password: 'heyImNotRegistered'
             }).end(function(err, res) {
                 expect(err).to.be.eq(null);
-                expect(res).to.have.status(500);
+                expect(res).to.have.status(400);
                 done();
             });
         });
@@ -294,7 +294,7 @@ describe('UserController Test', () => {
                 chai.request(app).delete('/user/3').set('Authorization', 'Bearer ' + token).end(function(err, res) {
                     expect(err).to.be.eq(null);
                     expect(res).to.have.status(403);
-                    expect(res.body.message).to.be.eq('Unauthorized');
+                    expect(res.body.message).to.be.eq('This User is not an Admin');
                     User.findOne({
                         where: {
                             userName: 'spamUser'
@@ -370,7 +370,7 @@ describe('UserController Test', () => {
                     chai.request(app).put('/user/makeAdmin/1').set('Authorization', 'Bearer ' + token).end(function(err, res) {
                         expect(err).to.be.eq(null);
                         expect(res).to.have.status(403);
-                        expect(res.body.message).to.be.eq('Unauthorized');
+                        expect(res.body.message).to.be.eq('This User is not an Admin');
                         User.findOne({
                             where: {
                                 userName: 'gandalf'

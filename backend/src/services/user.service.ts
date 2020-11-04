@@ -22,7 +22,7 @@ export class UserService {
             }
             return User.create(user).then(inserted => Promise.resolve(inserted)).catch(err => Promise.reject(err));
         })
-        .catch(err => Promise.reject(err));
+        .catch(err => Promise.reject({message: err}));
     }
 
     public login(loginRequestee: LoginRequest): Promise<User | LoginResponse> {
@@ -43,13 +43,13 @@ export class UserService {
                     const token: string = jwt.sign({ userName: user.userName, userId: user.userId, admin: user.admin }, secret, { expiresIn: '2h' });
                     return Promise.resolve({ user, token });
                 } else {
-                return Promise.reject({message: 'Wrong password'});
+                return Promise.reject('Wrong password');
                 }
             } else {
-                return Promise.reject({message: 'Could not find this User'});
+                return Promise.reject('Could not find this User');
             }
         })
-        .catch(err => Promise.reject(err));
+        .catch(err => Promise.reject({message: err}));
     }
 
     public getAll(): Promise<User[]> {

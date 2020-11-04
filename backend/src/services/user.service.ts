@@ -18,13 +18,11 @@ export class UserService {
             }
         }).then(function(userFound) {
             if (userFound) {
-            return Promise.reject({message: 'This username or email adress is already being used!'});
+            return Promise.reject('This username or email address is already being used!');
             }
             return User.create(user).then(inserted => Promise.resolve(inserted)).catch(err => Promise.reject(err));
         })
-        .catch(err => Promise.reject(err));
-
-
+        .catch(err => Promise.reject({message: err}));
     }
 
     public login(loginRequestee: LoginRequest): Promise<User | LoginResponse> {
@@ -45,13 +43,13 @@ export class UserService {
                     const token: string = jwt.sign({ userName: user.userName, userId: user.userId, admin: user.admin }, secret, { expiresIn: '2h' });
                     return Promise.resolve({ user, token });
                 } else {
-                return Promise.reject({message: 'Wrong password'});
+                return Promise.reject('Wrong password');
                 }
             } else {
-                return Promise.reject({message: 'Could not find this User'});
+                return Promise.reject('Could not find this User');
             }
         })
-        .catch(err => Promise.reject(err));
+        .catch(err => Promise.reject({message: err}));
     }
 
     public getAll(): Promise<User[]> {
@@ -64,7 +62,7 @@ export class UserService {
         });
     }
 
-    public makeUserAdmin(id: number): Promise<User | void> {
+    public makeUserAdmin(id: number): Promise<User> {
         return User.findOne({
             where: { userId: id }
         }).then(user => {

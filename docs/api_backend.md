@@ -184,7 +184,15 @@ Request requires authorization header with a token from an admin.
 
     ```json
     {
-        "message": "Successfully deleted 1 entry"
+        "message": "Successfuly deleted entry with id='id'"
+    }
+    ```
+
+- Response (STATUS 202)
+
+    ```json
+    {
+        "message": "No entry to delete"
     }
     ```
 

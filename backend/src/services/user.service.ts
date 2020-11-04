@@ -73,4 +73,19 @@ export class UserService {
             return Promise.reject({message: err});
         });
     }
+
+    public getSingleUser(id: number): Promise<User> {
+        return User.findByPk(id).then(user => {
+            if (user) {
+                return Promise.resolve(user);
+            } else {
+                return Promise.reject('User not found!');
+            }
+        }).catch(err => Promise.reject({message: err}));
+    }
+
+    public changeUser(user: UserAttributes): Promise<User> {
+        return User.findByPk(user.userId).then(foundUser => foundUser.update(user))
+            .catch(err => Promise.reject({message: err}));
+    }
 }

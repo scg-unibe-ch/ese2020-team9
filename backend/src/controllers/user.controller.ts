@@ -18,9 +18,22 @@ userController.post('/login',
     }
 );
 
+userController.post('/edit',
+    (req: Request, res: Response) => {
+        userService.changeUser(req.body).then(user => res.send(user)).catch(err => res.status(500).send(err));
+    }
+);
+
 userController.get('/', verifyToken, // you can add middleware on specific requests like that
     (req: Request, res: Response) => {
         userService.getAll().then(users => res.send(users)).catch(err => res.status(404).send(err));
+    }
+);
+
+userController.get('/:id',
+    (req: Request, res: Response) => {
+        const id = Number.parseInt(req.params.id, 10);
+        userService.getSingleUser(id).then(user => res.send(user)).catch(err => res.status(404).send(err));
     }
 );
 

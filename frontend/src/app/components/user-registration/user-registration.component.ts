@@ -2,6 +2,7 @@ import {ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import {Router} from "@angular/router";
+import {MatSnackBar} from '@angular/material/snack-bar';
 import { ActivatedRoute} from "@angular/router";
 import {UserService} from "../../services/user.service";
 
@@ -34,7 +35,7 @@ export class UserRegistrationComponent implements OnInit {
   id: any;
   userAuth = '';
 
-  constructor(private httpClient: HttpClient, private router: Router, private userService: UserService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
+  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.userService.isUserLoggedIn.subscribe(value => {
@@ -192,5 +193,10 @@ export class UserRegistrationComponent implements OnInit {
       });
     }
 
+  openSnackBar(message: string, action: string) {
+      this._snackBar.open(message, action, {
+        duration: 2000,
+      });
+    }
 
 }

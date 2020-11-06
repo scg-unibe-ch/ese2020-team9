@@ -6,6 +6,8 @@ import {UserService} from "../../services/user.service";
 import {ProductService} from "../../services/product.service";
 import {environment} from "../../../environments/environment";
 import { ActivatedRoute} from "@angular/router";
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-productForm',
@@ -36,7 +38,7 @@ export class ProductFormComponent implements OnInit {
   id: any;
   add: boolean;
 
-  constructor(private httpClient: HttpClient, private router: Router, private userService: UserService, private _ngZone: NgZone, private productService: ProductService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
+  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private _ngZone: NgZone, private productService: ProductService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.userId = this.userService.getUserId();
@@ -97,8 +99,12 @@ export class ProductFormComponent implements OnInit {
 
       //navigates to dashboard
       this.router.navigate(['/user'])
+       let message = "Your Product has been added"
+       let action = "OK"
+       this.openSnackBar(message, action);
     }, (error: any) => {
-      this.userAuth = 'Your Product could not be added!';
+        //this.userAuth = 'Your Product could not be added!';
+
     });
   }
 
@@ -125,7 +131,10 @@ export class ProductFormComponent implements OnInit {
       //navigates to productItem
       this.router.navigate(['/user'])
     }, (error: any) => {
-      this.userAuth = 'Your Product Information is invalid!';
+      let message = "Your Product Information is invalid!"
+      let action = ""
+      this.openSnackBar(message, action);
+      //this.userAuth = 'Your Product Information is invalid!';
     });
 
   }
@@ -139,4 +148,11 @@ export class ProductFormComponent implements OnInit {
   allFieldsAreFilled():boolean{
     return true;
   }
+
+
+  openSnackBar(message: string, action: string) {
+      this._snackBar.open(message, action, {
+        duration: 3000
+      });
+    }
 }

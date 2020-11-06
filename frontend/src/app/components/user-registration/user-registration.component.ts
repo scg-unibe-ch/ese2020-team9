@@ -76,7 +76,10 @@ export class UserRegistrationComponent implements OnInit {
            localStorage.setItem('userId', res.userId);
            localStorage.setItem('userName', res.userName);
            localStorage.setItem('admin', res.admin);
-            this.userId = res.userId;
+           this.userId = res.userId;
+           let message = "Registration complete!"
+           let action = "Welcome"
+           this.openSnackBar(message, action);
             //updates isUserLoggedIn value
             this.userService.isUserLoggedIn.next(true);
             //get User Name
@@ -86,7 +89,7 @@ export class UserRegistrationComponent implements OnInit {
             //navigates to dashboard
             this.router.navigate(['/home'])
            }, (res: any) => {
-           this.userAuth = 'This Username or Email already exists';
+           //this.userAuth = 'This Username or Email already exists';
            let message = "This Username or Email already exists"
            let action = "OK"
            this.openSnackBar(message, action);
@@ -195,7 +198,7 @@ export class UserRegistrationComponent implements OnInit {
             this.changeDetection.detectChanges();
 
         },(error: any) => {
-        this.userAuth = 'There is no corresponding User!';
+        //this.userAuth = 'There is no corresponding User!';
         let message = "There is no corresponding User!"
         let action = "OK"
         this.openSnackBar(message, action);

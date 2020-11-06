@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-user-login',
@@ -19,7 +21,7 @@ export class UserLoginComponent implements OnInit {
   userAuth = '';
   isUserLoggedIn: boolean;
 
-  constructor(private httpClient: HttpClient, private router: Router, private userService: UserService) { }
+  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
     this.userService.isUserLoggedIn.subscribe(value => {
@@ -43,7 +45,10 @@ export class UserLoginComponent implements OnInit {
       //navigates to dashboard
       this.router.navigate(['/home']);
       }, (error: any) => {
-        this.userAuth = 'Your Username/Email and/or Password is wrong, try again!';
+        let message = "Your Username/Email and/or Password is wrong, try again!"
+        let action = "Retry"
+        this.openSnackBar(message, action);
+        //this.userAuth = 'Your Username/Email and/or Password is wrong, try again!';
       });
   }
 
@@ -56,4 +61,11 @@ export class UserLoginComponent implements OnInit {
     //navigates to dashboard
     this.router.navigate(['/home']);
   }
+
+  openSnackBar(message: string, action: string) {
+      this._snackBar.open(message, action, {
+        duration: 3000
+      });
+    }
+
 }

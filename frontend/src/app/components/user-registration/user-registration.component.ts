@@ -34,6 +34,8 @@ export class UserRegistrationComponent implements OnInit {
   edit: boolean
   id: any;
   userAuth = '';
+  message ='';
+  action = ''
 
   constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
 
@@ -84,7 +86,11 @@ export class UserRegistrationComponent implements OnInit {
             //navigates to dashboard
             this.router.navigate(['/home'])
            }, (res: any) => {
-            this.userAuth = 'This Username or Email Address is already taken';
+           this.userAuth = 'This Username or Email already exists';
+           let message = "This Username or Email already exists"
+           let action = "OK"
+           this.openSnackBar(message, action);
+
       });
     }
 
@@ -190,12 +196,15 @@ export class UserRegistrationComponent implements OnInit {
 
         },(error: any) => {
         this.userAuth = 'There is no corresponding User!';
+        let message = "There is no corresponding User!"
+        let action = "OK"
+        this.openSnackBar(message, action);
       });
     }
 
   openSnackBar(message: string, action: string) {
       this._snackBar.open(message, action, {
-        duration: 2000,
+        duration: 3000
       });
     }
 

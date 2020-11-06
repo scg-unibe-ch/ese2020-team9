@@ -1,14 +1,5 @@
-<mat-form-field>
-  <mat-label>Message</mat-label>
-  <input matInput value="Disco party!" #message>
-</mat-form-field>
 
-<mat-form-field>
-  <mat-label>Action</mat-label>
-  <input matInput value="Dance" #action>
-</mat-form-field>
 
-<button mat-stroked-button (click)="openSnackBar(message.value, action.value)">Show snack-bar</button>
 
 
 <mat-card>
@@ -148,8 +139,8 @@
   <p>*Required Fields</p>
 
   <div>
-    <ng-template [ngIf]="!registrationComplete()" [ngIfElse]="successMessage">
-      <button mat-flat-button class="button_standard" (click)="registration()" [disabled]="!allFieldsAreFilled()">Registration</button>
+    <ng-template [ngIf]="registrationComplete()" [ngIfElse]="successMessage">
+      <button mat-flat-button class="button_standard" (click)="registration(); openSnackBar(message.value, action.value)" [disabled]="!allFieldsAreFilled()">Registration</button>
       <br>
       {{userAuth}}
     </ng-template>

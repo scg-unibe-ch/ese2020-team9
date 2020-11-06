@@ -51,7 +51,7 @@ These are links to some of the files that we have implemented/modified when deve
   Represents a todo-list
 - **TodoItemComponent** | [TS](./src/app/todo-list/todo-item.component.ts), [HTML](./src/app/todo-list/todo-item.component.html)  
   Represents a todo-item
-- **UserLoginComponent** | [TS](./src/app/user-login/user-login.component.ts), [HTML](./src/app/user-login/user-login.component.html)  
+- **UserLoginComponent** | [TS](src/app/components/user-login/user-login.component.ts), [HTML](src/app/components/user-login/user-login.component.html)  
   Represents the user login section
 - **[AuthInterceptor](./src/app/auth/auth.interceptor.ts)**  
   Intercepts all HTTP requests to add the user token if a user is logged in.

@@ -11,7 +11,6 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient) { }
 
-  /** Product List Requests   **/
   //get all Products
   getAll(){
     return this.httpClient.get(environment.endpointURL + 'products');
@@ -23,7 +22,7 @@ export class ProductService {
   }
 
 
-  //get all not Products that are not approved
+  //get all Products that are not approved
   getAllUnapproved() {
     return this.httpClient.get(environment.endpointURL + 'products/unapproved');
   }

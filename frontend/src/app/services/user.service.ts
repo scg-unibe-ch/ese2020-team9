@@ -12,13 +12,12 @@ export class UserService {
 
   userToken: string;
   userName: string;
-  isLoggedIn = false;
   isAdmin: any;
   userId: any;
   users: User[] ;
 
   public isUserLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public isUserAdmin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.getIsAdmin());
+  public isUserAdmin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public isUserName: BehaviorSubject<string> = new BehaviorSubject<string>(this.getUserName());
 
   constructor(private httpClient: HttpClient) { }
@@ -26,7 +25,7 @@ export class UserService {
   login(userLogin: string, password: string){
     return this.httpClient.post(environment.endpointURL + 'user/login', {
       userLogin, password
-    }).pipe();
+    });
   }
 
   logout(){
@@ -54,12 +53,7 @@ export class UserService {
     return this.userId = localStorage.getItem('userId');
   }
 
-  getUserList(){
-    this.httpClient.get(environment.endpointURL + 'user').subscribe((instances: any) => {
-      this.users = instances.map((instance: any) => new User(instance.userId, instance.userName, instance.admin ));
-    });
-    return this.users;
-  }
+
 
    //get a specific User
   getUserById(userId: number){
@@ -68,7 +62,10 @@ export class UserService {
   }
 
   getToken(){
-      return this.userToken = localStorage.getItem('userToken');
-    }
+    return this.userToken = localStorage.getItem('userToken');
+  }
 
+  getUserList(){
+    this.httpClient.get(environment.endpointURL + 'user');
+  }
 }

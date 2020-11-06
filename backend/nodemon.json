@@ -1,10 +1,10 @@
 {
-    "watch":["src", "./"],
-    "ext":"ts, json",
+    "watch": ["src", "./"],
+    "ext": "ts, json",
     "exec": "npm start",
-    "env":{
-        "PORT":3000,
-        "JWT_SECRET":"not_secure",
+    "env": {
+        "PORT": 3000,
+        "JWT_SECRET": "not_secure",
         "NODE_ENV": "local"
     }
 }

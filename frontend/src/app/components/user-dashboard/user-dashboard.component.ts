@@ -49,7 +49,7 @@ export class UserDashboardComponent implements OnInit {
           let action = ""
           this.openSnackBar(message, action);
           //this.userAuth = 'Your Product Information is invalid!';
-        });;
+        });
   }
 
   trackByFn(index, item){

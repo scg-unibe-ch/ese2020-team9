@@ -84,4 +84,13 @@ export class ProductService {
             .then(() => Promise.resolve(isFound))
             .catch(err => Promise.reject(err)));
     }
+
+
+    public buyProduct(productId: number, buyerId: number): Promise<Product> {
+        return Product.findByPk(productId)
+        .then(isFound => isFound.update({
+            userId: buyerId
+        })
+        .catch(err => Promise.reject(err)));
+    }
 }

@@ -65,5 +65,13 @@ productController.get('/:productId', (req: Request, res: Response) => {
 }
 ); // get product by id
 
+
+// Endpoint to buy a product
+productController.put('/buy/:productId/buyer/:buyerId', (req: Request, res: Response) => {
+    productService.buyProduct(parseInt(req.params.productId, 10), parseInt(req.params.buyerId, 10))
+    .then(product => res.send(product)).catch(err => res.status(500).send(err));
+});
+
+
 export const ProductController: Router = productController;
 

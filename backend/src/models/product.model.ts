@@ -17,6 +17,7 @@ export interface ProductAttributes {
     isRentable: boolean;
     isAvailable: boolean;
     userId: number;
+    buyerId: number;
     userReview: string;
 }
 
@@ -38,6 +39,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
     isRentable!: boolean;
     isAvailable!: boolean;
     userId!: number;
+    buyerId!: number;
     userReview!: string;
 
     public static initialize(sequelize: Sequelize) {
@@ -96,6 +98,9 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
             userId: {
                 type: DataTypes.INTEGER,
                 allowNull: false
+            },
+            buyerId: {
+                type: DataTypes.INTEGER
             },
             userReview: {
                 type: DataTypes.TEXT

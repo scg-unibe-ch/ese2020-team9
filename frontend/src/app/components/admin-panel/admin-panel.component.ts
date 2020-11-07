@@ -74,8 +74,7 @@ export class AdminPanelComponent implements OnInit {
   }
 
   deleteProduct(productId: number){
-   this.httpClient.delete(environment.endpointURL + 'products/' + productId,{}).subscribe((res: any)
-    => {
+   this.httpClient.delete(environment.endpointURL + 'products/' + productId,{}).subscribe((res: any)  => {
 
           let message = "Product deleted"
           let action = "Ok"

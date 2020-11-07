@@ -36,8 +36,7 @@ export class UserDashboardComponent implements OnInit {
   }
 
   deleteProduct(productId: number){
-    this.httpClient.delete(environment.endpointURL + 'products/' + productId,{}).subscribe((res: any)
-    => {
+    this.httpClient.delete(environment.endpointURL + 'products/' + productId,{}).subscribe((res: any) => {
 
           //navigates to productItem
           this.router.navigate(['/user'])

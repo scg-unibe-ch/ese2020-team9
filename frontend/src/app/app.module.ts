@@ -31,6 +31,7 @@ import { ProductFormComponent } from './components/productForm/productForm.compo
 import { ScrollingModule } from "@angular/cdk/scrolling";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     PageNotFoundComponent,
     UserComponent,
     ProductFormComponent,
+    ProductDetailComponent,
   ],
   imports: [
     BrowserModule,

@@ -46,7 +46,7 @@
       Delivery is possible
     </p>
   </mat-card-content>
-  <mat-card-content *ngIf="!productDelivery">
+  <mat-card-content *ngIf="!productDelivery && !isService">
     <p>
       Product has to be picked up at {{productLocation}}
     </p>

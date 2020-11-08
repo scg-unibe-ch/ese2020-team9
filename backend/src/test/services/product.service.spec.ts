@@ -286,19 +286,13 @@ describe('ProductService Tests', () => {
                     expect(foundProduct).to.be.eq(null);
                     done();
                 });
-            })
-        })
-    })
+            });
+        });
+    });
     after('clean up user', function(done) {
         User.destroy({
             truncate: true,
             restartIdentity: true
         }).then(() => done());
     });
-    after('clean up products', function(done) {
-        Product.destroy({
-            truncate: true,
-            restartIdentity: true
-        }).then(() => done());
-    });
-})
+});

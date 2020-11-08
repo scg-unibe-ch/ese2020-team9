@@ -20,7 +20,7 @@ productController.put('/:productId', (req: Request, res: Response) => {
 
 productController.delete('/:id', (req: Request, res: Response) => {
     productService.deleteProduct(parseInt(req.params.id, 10))
-    .then(() => res.send({message: `Product successfully deleted!`}))
+    .then(() => res.status(200).send({message: `Product successfully deleted!`}))
     .catch(err => res.status(500).send(err));
 });
 
@@ -32,36 +32,37 @@ productController.put('/approve/:id', verifyAdmin,
     }
 );
 productController.get('/', (req: Request, res: Response) => {
-        productService.getAll().then(products => res.send(products)).catch(err => res.status(500).send(err));
+        productService.getAll().then(products => res.status(200).send(products))
+            .catch(err => res.status(500).send(err));
     }
 ); // get all products
 
 productController.get('/approved', (req: Request, res: Response) => {
-    productService.getAllApproved().then(products => res.send(products)).catch(err => res.status(500).send(err));
+    productService.getAllApproved().then(products => res.status(200).send(products)).catch(err => res.status(500).send(err));
 }
 ); // get all approved products
 
 productController.get('/unapproved', (req: Request, res: Response) => {
-    productService.getAllUnapproved().then(products => res.send(products)).catch(err => res.status(500).send(err));
+    productService.getAllUnapproved().then(products => res.status(200).send(products)).catch(err => res.status(500).send(err));
 }
 ); // get all approved products
 
 productController.get('/category/:category', (req: Request, res: Response) => {
-    productService.getProductsOfCategory(req.params.category).then(products => res.send(products)).catch(err => res.status(500).send(err));
+    productService.getProductsOfCategory(req.params.category).then(products =>
+        res.status(200).send(products)).catch(err => res.status(500).send(err));
 }
-); // get all products that are available of a
+); // get all products that are available of a category
 
 productController.get('/user/:userId', (req: Request, res: Response) => {
     productService.getProductsOfUser(parseInt(req.params.userId, 10))
-    .then(products => res.send(products))
+    .then(products => res.status(200).send(products))
     .catch(err => res.status(500).send(err));
 }
 ); // get all products of a user
 
-
 productController.get('/:productId', (req: Request, res: Response) => {
     productService.getProduct(parseInt(req.params.productId, 10))
-    .then(product => res.send(product)).catch(err => res.status(500).send(err));
+    .then(product => res.status(200).send(product)).catch(err => res.status(500).send(err));
 }
 ); // get product by id
 

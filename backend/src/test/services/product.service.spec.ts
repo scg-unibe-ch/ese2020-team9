@@ -154,6 +154,12 @@ describe('ProductService Tests', () => {
                 });
             });
         });
+        it('should return a error if product does not exist', function(done){
+            testedProductService.getProduct(300).catch(err => {
+                expect(err.message).to.be.eq('Product with id 300 not found!');
+                done();
+            });
+        });
     });
     describe('Test getProductsOfCategory()', () => {
         it('should successfully get all products of a category', function(done){

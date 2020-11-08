@@ -8,17 +8,23 @@ export class ProductService {
     }
 
     public update(productId: number, product: ProductAttributes): Promise<ProductAttributes> {
-        return Product.findByPk(productId).then((isFound) => isFound.update(product)
+        return Product.findByPk(productId).then(isFound => isFound.update(product)
         .then(() => {
             return Promise.resolve(isFound);
         }).catch(err => Promise.reject(err)));
-        }
+    }
 
 
 
     public getProduct(productId: number): Promise<Product> {
-        return Product.findByPk(productId)
-        .catch(err => Promise.reject(err));
+        return Product.findByPk(productId).then(product => {
+            if (product) {
+                return Promise.resolve(product);
+            } else {
+                return Promise.reject(`Product with id ${productId} not found!`)
+            }
+        })
+        .catch(err => Promise.reject({message: err}));
     }
 
 

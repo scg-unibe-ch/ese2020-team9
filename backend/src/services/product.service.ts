@@ -17,7 +17,8 @@ export class ProductService {
 
 
     public getProduct(productId: number): Promise<Product> {
-        return Product.findByPk(productId);
+        return Product.findByPk(productId)
+        .catch(err => Promise.reject(err));
     }
 
 
@@ -29,7 +30,8 @@ export class ProductService {
                 { productCategory: category }
               ]
             }
-        });
+        })
+        .catch(err => Promise.reject(err));
     }
 
     public getProductsOfUser(userId: number): Promise<Product[]> {
@@ -40,11 +42,13 @@ export class ProductService {
                 { UserId: userId }
               ]
             }
-        });
+        })
+        .catch(err => Promise.reject(err));
     }
 
     public getAll(): Promise<Product[]> {
-        return Product.findAll();
+        return Product.findAll()
+        .catch(err => Promise.reject(err));
     }
 
     public approve(id: number): Promise<number> {
@@ -67,7 +71,7 @@ export class ProductService {
             where: {
                 isApproved: true
             },
-        });
+        }).catch(err => Promise.reject(err));
     }
 
     public getAllUnapproved(): Promise<Product[]> {
@@ -75,7 +79,7 @@ export class ProductService {
             where: {
                 isApproved: false
             },
-        });
+        }).catch(err => Promise.reject(err));
     }
 
     public deleteProduct(id: number): Promise<Product> {

@@ -315,6 +315,34 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "product search",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Scho\",\r\n    \"priceMin\":\"0\",\r\n    \"priceMax\":\"100\", \r\n    \"delivery\": false, \r\n    \"location\": \"\", \r\n    \"available\": true \r\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/products/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products",
+						"search"
+					]
+				}
+			}
 		}
 	],
 	"protocolProfileBehavior": {}

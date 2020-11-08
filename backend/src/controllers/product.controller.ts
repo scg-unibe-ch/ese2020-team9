@@ -65,5 +65,10 @@ productController.get('/:productId', (req: Request, res: Response) => {
 }
 ); // get product by id
 
+productController.post('/search', (req: Request, res: Response) => {
+    productService.searchProduct(req.body).then(productList => res.send(productList))
+    .catch(err => res.status(400).send(err));
+}); // search product by keyword and filters
+
 export const ProductController: Router = productController;
 

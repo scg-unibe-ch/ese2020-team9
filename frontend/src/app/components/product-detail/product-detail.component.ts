@@ -33,20 +33,28 @@ export class ProductDetailComponent implements OnInit {
   userReview = '';
   userAuth = '';
 
+
+  userName = '';
+  addressPin = '';
+  addressCity = '';
+  addressCountry = '';
+
   product: ProductItem;
   id: any;
+  view: boolean;
+
   constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService,private productService: ProductService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.userId = this.userService.getUserId();
     this.id = this.route.snapshot.paramMap.get('id');
+     if(this.id==='0'){
+          this.view = true;
+        } else{
+          this.view=false;
+          this.getProduct();
+        }
 
-    if(this.id==='0'){
-      this.add = true;
-    } else{
-      this.add=false;
-      this.getProduct();
-    }
   }
 
   getProduct(){
@@ -75,6 +83,32 @@ export class ProductDetailComponent implements OnInit {
       this.openSnackBar(message, action);
       //this.userAuth = 'There is no corresponding Product!';
     });
+  }
+
+
+
+  getSeller(){
+    this.productService.getProduct(this.id).subscribe((instances: any) => {
+          this.userId = instances.userId;
+          this.userName = instances.userName;
+          this.addressPin = instances.addressPin;
+          this.addressCity = instances.addressCity;
+          this.addressCountry = instances.addressCountry;
+
+
+
+      },(error: any) => {
+      let message = "There is no corresponding User!"
+      let action = "OK"
+      this.openSnackBar(message, action);
+    });
+  }
+
+  buyProduct(){
+    let message = "Buying not implemented yet"
+    let action = "OK"
+    this.openSnackBar(message, action);
+
   }
 
   openSnackBar(message: string, action: string) {

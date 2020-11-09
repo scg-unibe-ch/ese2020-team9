@@ -99,7 +99,7 @@ Register a user to the system. UserName and userMail must be unique, otherwise r
 
 Log in a user. UserLogin is either userName or userMail. 
 
--**Details**
+- **Details**
 
      <details>
      

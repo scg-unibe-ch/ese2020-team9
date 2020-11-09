@@ -1,6 +1,6 @@
 
 
-<div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start">
+<div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start" >
 
 <mat-card>
   <mat-card-header>
@@ -24,6 +24,26 @@
   </mat-card-content>
 </mat-card>
 
+
+
+  <mat-card>
+    <h2>Sellerinfo:</h2>
+    <br><br>
+    <button mat-button class="button_fill" [routerLink]="['/User', userId]" routerLinkActive="active" ><mat-icon >account_circle</mat-icon>{{userName}}</button>
+
+    <br>
+    {{userId}}<br>
+    {{userName}}<br>
+    {{addressPin}}<br>
+    {{addressCity}}<br>
+    {{addressCountry}}<br>
+    <button mat-flat-button color="warn" (click)="buyProduct()">Buy</button>
+
+
+  </mat-card>
+</div>
+
+<div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start"  >
 <mat-card>
   <mat-card-content>
     {{productDescription}}
@@ -53,20 +73,12 @@
   </mat-card-content>
 
 </mat-card>
-<p>
+
+<mat-card>
+
+    <h2>Reviews:</h2>
+
   {{userReview}}
+</mat-card>
 
-  Sellerinfo:
-
-  <button mat-button class="button_fill" [routerLink]="['/User', userId]" routerLinkActive="active" ><mat-icon >account_circle</mat-icon>{{userName}}</button>
-
-  <br>
-  {{userId}}
-  {{userName}}
-  {{addressPin}}
-  {{addressCity}}
-  {{addressCountry}}
-</p>
-
-<button mat-flat-button color="warn" (click)="buyProduct()">Buy</button>
 </div>

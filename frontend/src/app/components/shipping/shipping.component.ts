@@ -5,7 +5,7 @@ import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import {ProductService} from "../../services/product.service";
 import {environment} from "../../../environments/environment";
-import { ActivatedRoute} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
@@ -75,6 +75,20 @@ export class ShippingComponent implements OnInit {
       },(error: any) => {
       this.userAuth = 'There is no corresponding Product!';
     });
+  }
+
+  buyProduct(){
+  this.productService.buyProduct(this.id).subscribe((instances: any) => {
+
+   let message = "There is no corresponding Product!"
+    let action = "OK"
+    this.openSnackBar(message, action);
+  },(error: any) => {
+        let message = "There is no corresponding Product!"
+        let action = "OK"
+        this.openSnackBar(message, action);
+        //this.userAuth = 'There is no corresponding Product!';
+      });
   }
 
   openSnackBar(message: string, action: string) {

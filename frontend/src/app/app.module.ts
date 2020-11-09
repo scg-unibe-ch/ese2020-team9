@@ -32,6 +32,7 @@ import { ScrollingModule } from "@angular/cdk/scrolling";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { ShippingComponent } from './components/shipping/shipping.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
     UserComponent,
     ProductFormComponent,
     ProductDetailComponent,
+    ShippingComponent,
   ],
   imports: [
     BrowserModule,

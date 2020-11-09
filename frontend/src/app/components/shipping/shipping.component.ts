@@ -9,11 +9,11 @@ import { ActivatedRoute} from "@angular/router";
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-product-detail',
-  templateUrl: './product-detail.component.html',
-  styleUrls: ['./product-detail.component.css']
+  selector: 'app-shipping',
+  templateUrl: './shipping.component.html',
+  styleUrls: ['./shipping.component.css']
 })
-export class ProductDetailComponent implements OnInit {
+export class ShippingComponent implements OnInit {
 
   productId: number;
   productName = '';
@@ -42,14 +42,13 @@ export class ProductDetailComponent implements OnInit {
   product: ProductItem;
   id: any;
 
-  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService,private productService: ProductService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
+  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.userId = this.userService.getUserId();
     this.id = this.route.snapshot.paramMap.get('id');
 
     this.getProduct();
-
 
   }
 
@@ -74,40 +73,13 @@ export class ProductDetailComponent implements OnInit {
           //this.changeDetection.detectChanges();
 
       },(error: any) => {
-      let message = "There is no corresponding Product!"
-      let action = "OK"
-      this.openSnackBar(message, action);
-      //this.userAuth = 'There is no corresponding Product!';
+      this.userAuth = 'There is no corresponding Product!';
     });
   }
-
-
-
-  getSeller(){
-    this.productService.getProduct(this.id).subscribe((instances: any) => {
-          this.userId = instances.userId;
-          this.userName = instances.userName;
-          this.addressPin = instances.addressPin;
-          this.addressCity = instances.addressCity;
-          this.addressCountry = instances.addressCountry;
-
-
-
-      },(error: any) => {
-      let message = "There is no corresponding User!"
-      let action = "OK"
-      this.openSnackBar(message, action);
-    });
-  }
-
-
 
   openSnackBar(message: string, action: string) {
-        this._snackBar.open(message, action, {
-          duration: 3000
-        });
-      }
-
-
-
+          this._snackBar.open(message, action, {
+            duration: 3000
+          });
+        }
 }

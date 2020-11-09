@@ -104,6 +104,7 @@ export class ProductFormComponent implements OnInit {
        this.openSnackBar(res.message, action);
     }, (error: any) => {
         //this.userAuth = 'Your Product could not be added!';
+        let action = "OK"
         this.openSnackBar(error.message, action);
 
     });
@@ -120,7 +121,7 @@ export class ProductFormComponent implements OnInit {
       productDelivery: this.productDelivery,
       uploadDate: this.uploadDate,
       sellDate: this.sellDate,
-      isApproved: this.isApproved,
+      isApproved: false,
       isService: this.isService,
       isRentable: this.isRentable,
       isAvailable: this.isAvailable,
@@ -131,6 +132,10 @@ export class ProductFormComponent implements OnInit {
 
       //navigates to productItem
       this.router.navigate(['/user'])
+      let message = "Your Product is now awaiting approval"
+      let action = "OK"
+      this.openSnackBar(message, action);
+
     }, (error: any) => {
       let message = "Your Product Information is invalid!"
       let action = ""

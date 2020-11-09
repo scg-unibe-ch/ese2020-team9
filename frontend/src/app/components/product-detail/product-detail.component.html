@@ -37,7 +37,7 @@
     {{addressPin}}<br>
     {{addressCity}}<br>
     {{addressCountry}}<br>
-    <button mat-flat-button color="warn" (click)="buyProduct()">Buy</button>
+    <button mat-flat-button color="warn" w [routerLink]="['/shipping', productId]" routerLinkActive="active" >Buy</button>
 
 
   </mat-card>

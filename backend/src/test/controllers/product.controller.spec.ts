@@ -2,11 +2,67 @@ import { applicationPromise } from './../../server';
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import { Application } from 'express';
+import { User, UserAttributes } from '../../models/user.model';
+import { Product, ProductAttributes } from '../../models/product.model';
 
 // to run the tests, use the command 'npm run test' in the terminal
 
 chai.use(chaiHttp); // add chai-http to chai
 let app: Application;
+
+const product1: ProductAttributes = {
+    productId : 1,
+    productName: 'Schoggi',
+    productDescription: 'E feini Schoggi us Guetemala.',
+    productImage: null,
+    productPrice: 10,
+    productCategory: 'food',
+    productLocation: null,
+    productDelivery: null,
+    uploadDate: new Date(Date.now()),
+    sellDate: null,
+    isApproved: false,
+    isService: false,
+    isRentable: null,
+    isAvailable: true,
+    userId: 1,
+    userReview: null
+};
+const product2: ProductAttributes = {
+    productId : 2,
+    productName: 'Massage',
+    productDescription: 'One hour of thai massage.',
+    productImage: null,
+    productPrice: 120,
+    productCategory: 'service',
+    productLocation: null,
+    productDelivery: null,
+    uploadDate: new Date(Date.now()),
+    sellDate: null,
+    isApproved: true,
+    isService: true,
+    isRentable: null,
+    isAvailable: true,
+    userId: 1,
+    userReview: null
+};
+
+const user1: UserAttributes = {
+    userId: 1,
+    admin: true,
+    wallet: 500,
+    userName: 'admin',
+    password: '$2b$12$XVwWZfAd2fjjd.QjrvMJXOh4WPuxJ4.tpNzkg9wpSSNOShAoDOYWC', // adminPW
+    userMail: 'superAdmin@admins.com',
+    firstName: 'Jack',
+    lastName: 'Hammington',
+    gender: 'male',
+    phoneNumber: 796666666,
+    addressStreet: null,
+    addressPin: null,
+    addressCity: null,
+    addressCountry: 'England'
+};
 
 describe('ProductController Test', () => { // bundles the tests related to the ProductController
     before('init app', function(done) { // applicationPromise value must be assigned to app!!!
@@ -15,43 +71,151 @@ describe('ProductController Test', () => { // bundles the tests related to the P
             done();
         });
     });
-    describe('Test post', () => { // bundles the tests related to the post method
-        it('should return status 200', function(done) { // one single test
-            chai.request(app).post('/products/').send({}) // starts the server and performs a post with an empty body
-            .end(function (err, res) { // handles the response
-                /*
-                expect(err).to.be.eq(null); // check that no error occured
-                expect(res).to.have.status(200); // check that status is 200
-                expect(res.body.message).to.contain('POST works!'); // checks that the body message contains 'POST works!'
-                */
-                done(); // signalizes the end of the asynchronous function to the framework
+    describe('Test Post', () => { // bundles the tests related to the post method
+        before('add user to db', function(done) {
+            User.create(user1).then(() => {
+                done();
             });
         });
-    });
-    describe('Test put', () => { // bundles the tests related to the Put method
-        it('should return status 200', function(done) {
-            chai.request(app).put('/products/7').send({})
-            .end(function (err, res) {
-                /*
+        it('should create a product successfully', function(done) {
+            chai.request(app).post('/products').send({
+                productId : 1,
+                productName: 'Schoggi',
+                productDescription: 'E feini Schoggi us Guetemala.',
+                productImage: null,
+                productPrice: 10,
+                productCategory: 'food',
+                productLocation: null,
+                productDelivery: null,
+                uploadDate: new Date(Date.now()),
+                sellDate: null,
+                isApproved: true,
+                isService: false,
+                isRentable: null,
+                isAvailable: true,
+                userId: 1,
+                userReview: null
+            }).end(function(err, res) {
                 expect(err).to.be.eq(null);
                 expect(res).to.have.status(200);
-                expect(res.body.message).to.contain('PUT works!');
-                */
+                expect(res.body.message).to.be.eq('Product successfully created!');
                 done();
             });
         });
     });
-    describe('Test delete', () => { // bundles the tests related to the delete method
-        it('should return status 200', function(done) {
-            chai.request(app).delete('/products/3')
-            .end(function (err, res) {
-                /*
+    describe('Test PUT', () => {
+        it('should successfully update a product', function(done) {
+            chai.request(app).put('/products/1').send({
+                productId : 1,
+                productName: 'Schoggi',
+                productDescription: 'E sehr feini Schoggi us Guetemala.',
+                productImage: null,
+                productPrice: 10,
+                productCategory: 'food',
+                productLocation: null,
+                productDelivery: null,
+                uploadDate: new Date(Date.now()),
+                sellDate: null,
+                isApproved: false,
+                isService: false,
+                isRentable: null,
+                isAvailable: true,
+                userId: 1,
+                userReview: null
+            }).end(function(err, res) {
                 expect(err).to.be.eq(null);
                 expect(res).to.have.status(200);
-                expect(res.body.message).to.contain('DELETE works!');
-                */
+                expect(res.body.message).to.be.eq('Product 1 successfully updated!');
+                done();
+            });
+        });
+        /*
+        it('should successfully approve product', function(done) {
+            chai.request(app).put('/products/approve/1').send({ // login as admin to get valid token
+                userLogin: 'admin',
+                password: 'adminPW'
+            }).end(function(err, res) {
+                expect(err).to.be.eq(null);
+                //expect(res).to.have.status(200);
+                expect(res.body.message).to.be.eq('Successfully approved product 1!');
+                done();
+            });
+        })
+        */
+    });
+    describe('Test Delete', () => {
+        it('should successfully delete a product', function(done) {
+            chai.request(app).delete('/products/1')
+            .end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body.message).to.be.eq('Product successfully deleted!');
                 done();
             });
         });
     });
+    describe('Test Get', () => {
+        before('init db with user', function(done) {
+            Product.create(product1).then(() => {
+                return Product.create(product2);
+            }).then(() => {
+                done();
+            });
+        });
+        it('should successfully get all products', function(done){
+            chai.request(app).get('/products').end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body[0].productId).to.be.eq(1);
+                done();
+            }); 
+        });
+        it('should successfully get all approved products', function(done){
+            chai.request(app).get('/products/approved').end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body[0].productId).to.be.eq(2);
+                done();
+            }); 
+        });
+        it('should successfully get all unapproved products', function(done){
+            chai.request(app).get('/products/unapproved').end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body[0].productId).to.be.eq(1);
+                done();
+            });
+        });
+        it('should successfully get all products of a category', function(done){
+            chai.request(app).get('/products/category/service').end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body[0].productId).to.be.eq(2);
+                done();
+            }); 
+        });
+        it('should successfully get all products of a user', function(done){
+            chai.request(app).get('/products/user/1').end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body[1].productId).to.be.eq(2);
+                done();
+            }); 
+        });
+        it('should successfully get a products by id', function(done){
+            chai.request(app).get('/products/2').end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body.productId).to.be.eq(2);
+                done();
+            });
+        });
+    });
+    after('clean up', function(done) {
+        User.destroy({
+            truncate: true,
+            restartIdentity: true
+        }).then(() => done());
+    });
+
 });

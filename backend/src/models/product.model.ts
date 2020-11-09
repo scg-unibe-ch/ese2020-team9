@@ -1,5 +1,6 @@
 import { User } from './user.model';
 import { Optional, Model, Sequelize, DataTypes } from 'sequelize';
+import { Transaction} from './transaction.model';
 
 export interface ProductAttributes {
     productId: number;
@@ -117,7 +118,10 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
             foreignKey: 'userId',
             targetKey: 'userId',
             onDelete: 'cascade'
-
+        });
+        Product.hasMany(Transaction, {
+            as: 'transactions',
+            foreignKey: 'productId'
         });
     }
 }

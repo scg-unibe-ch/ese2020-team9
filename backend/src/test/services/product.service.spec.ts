@@ -298,7 +298,7 @@ describe('ProductService Tests', () => {
             });
         });
     });
-    after('clean up user', function(done) {
+    after('clean up', function(done) {
         User.destroy({
             truncate: true,
             restartIdentity: true

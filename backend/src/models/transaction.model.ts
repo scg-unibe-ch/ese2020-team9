@@ -1,12 +1,12 @@
-import { User } from './user.model';
-import { Optional, Model, Sequelize, DataTypes } from 'sequelize';
 import { Product } from './product.model';
+import { Optional, Model, Sequelize, DataTypes } from 'sequelize';
+
 
 export interface TransactionAttributes {
     transactionId: number;
     productId: number;
     userId: number;
-    buyerId: number;   
+    buyerId: number;
     transactionStatus: number;
     deliveryFirstName: string;
     deliveryLastName: string;
@@ -22,7 +22,7 @@ export class Transaction extends Model<TransactionAttributes, TransactionCreatio
     transactionId!: number;
     productId!: number;
     userId!: number;
-    buyerId!: number;   
+    buyerId!: number;
     transactionStatus!: number;
     deliveryFirstName!: string;
     deliveryLastName!: string;
@@ -76,19 +76,17 @@ export class Transaction extends Model<TransactionAttributes, TransactionCreatio
         },
             {
                 sequelize,
-                tableName: 'transactions'
+                tableName: 'transactionTable'
             }
         );
     }
 
     public static createAssociations() {
-        User.hasMany(Transaction, {
-            as: 'transactions',
-            foreignKey: 'userId'
-        });
-        Product.hasOne(Transaction, {
-            as: 'transaction',
-            foreignKey: 'productId'
+        Transaction.belongsTo(Product, {
+            as : 'product',
+            foreignKey: 'productId',
+            targetKey: 'productId',
+            onDelete: 'cascade'
         });
     }
 

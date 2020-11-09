@@ -4,10 +4,14 @@ import morgan from 'morgan';
 import { UserController } from './controllers/user.controller';
 import { Sequelize } from 'sequelize';
 import { User } from './models/user.model';
+import { Transaction } from './models/transaction.model';
+import { TransactionController } from './controllers/transaction.controller';
+
+
 
 import cors from 'cors';
 import { ProductController } from './controllers/product.controller';
-
+    
 export class Server {
     private server: Application;
     private sequelize: Sequelize;
@@ -20,8 +24,10 @@ export class Server {
         // create tables (if they do not already exist)
         User.initialize(this.sequelize);
         Product.initialize(this.sequelize);
+        Transaction.initialize(this.sequelize);
         User.createAssociations();
         Product.createAssociations();
+        Transaction.createAssociations();
     }
 
     private configureServer(): Application {
@@ -46,6 +52,7 @@ export class Server {
             .use(morgan('tiny'))                    // logs incoming requests
             .use('/user', UserController)
             .use('/products', ProductController)
+            .use('/transaction', TransactionController)
             .options('*', cors(options))
             .use(express.static('./src/public'))
             // this is the message you get if you open http://localhost:3000/ when the server is running

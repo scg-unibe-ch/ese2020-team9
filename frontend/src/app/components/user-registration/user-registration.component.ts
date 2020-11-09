@@ -232,10 +232,29 @@ export class UserRegistrationComponent implements OnInit {
 
   }
 
+  requestCity(){
+
+    let params = {
+          codes: this.addressPin,
+          country: this.addressCountry,
+          apikey: '4bc7d070-229b-11eb-8bf2-6be81465cc4d'
+    }
+    if (this.addressPin.length >= 4){this.httpClient.get('https://app.zipcodebase.com/api/v1/search', {params}).subscribe((res: any) => {
+       console.log(this.addressPin)
+        const apiResponse = res.data;
+        console.log(apiResponse);
+        this.addressCity = res.results.city;
+        console.log(this.addressCity)
+      }, (error: any) => {
+        console.log(error);
+      });}
+
+  }
+
   openSnackBar(message: string, action: string) {
       this._snackBar.open(message, action, {
         duration: 3000
       });
     }
 
-}
+ }

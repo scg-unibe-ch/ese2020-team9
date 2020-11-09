@@ -123,20 +123,23 @@
 
   <mat-card>
     <mat-form-field>
-      <input matInput placeholder="Street" [(ngModel)]="addressStreet" name="addressStreet">
+      <input matInput placeholder="Country Code" [(ngModel)]="addressCountry" name="addressCountry">
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Zip code" [(ngModel)]="addressPin" name="addressPin">
+      <input matInput placeholder="Zip code" [(ngModel)]="addressPin" name="addressPin" (ngModelChange)="requestCity()">
+    </mat-form-field>
+
+
+    <mat-form-field>
+      <input matInput placeholder="Street" [(ngModel)]="addressStreet" name="addressStreet">
     </mat-form-field>
 
     <mat-form-field>
       <input matInput placeholder="City" [(ngModel)]="addressCity" name="addressCity">
     </mat-form-field>
 
-    <mat-form-field>
-      <input matInput placeholder="Country" [(ngModel)]="addressCountry" name="addressCountry">
-    </mat-form-field>
+
   </mat-card>
 
   <p>*Required Fields</p>

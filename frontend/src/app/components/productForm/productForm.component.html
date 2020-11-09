@@ -4,14 +4,16 @@
 
   <mat-card>
     <mat-form-field>
+
       <input matInput placeholder="Product Name" [(ngModel)]="productName" name="productName">
-      <output  [(ngModel)]="productName" name="productName"></output>
       <div *ngIf="empty(productName)" class="invalid-feedback">Product Name</div>
+
     </mat-form-field>
 
     <br>
 
     <mat-form-field>
+
       <input matInput placeholder="Product Image" [(ngModel)]="productImage" name="productImage">
       <div *ngIf="empty(productImage)" class="invalid-feedback">Please add a Photo</div>
     </mat-form-field>

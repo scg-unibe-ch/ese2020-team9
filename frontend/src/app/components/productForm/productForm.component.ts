@@ -99,11 +99,12 @@ export class ProductFormComponent implements OnInit {
 
       //navigates to dashboard
       this.router.navigate(['/user'])
-       let message = "Your Product has been added"
+       //let message = "Your Product has been added"
        let action = "OK"
-       this.openSnackBar(message, action);
+       this.openSnackBar(res.message, action);
     }, (error: any) => {
         //this.userAuth = 'Your Product could not be added!';
+        this.openSnackBar(error.message, action);
 
     });
   }

@@ -141,15 +141,13 @@
 
   <p>*Required Fields</p>
 
-  <div>
-    <ng-template [ngIf]="registrationComplete()" [ngIfElse]="successMessage">
-      <button mat-flat-button class="button_standard" (click)="registration(); openSnackBar(message.value, action.value)" [disabled]="!allFieldsAreFilled()">Registration</button>
-      <br>
-      {{userAuth}}
-    </ng-template>
+  <div *ngIf="!edit">
 
-    <ng-template #successMessage>
-      <div *ngIf="registrationComplete()" class="valid-feedback">
-      </div>
-    </ng-template>
+      <button mat-flat-button class="button_standard" (click)="registration()" [disabled]="!allFieldsAreFilled()">Registration</button>
+
+
   </div>
+  <div *ngIf="edit">
+    <button mat-flat-button class="button_standard" [routerLink]="['/user']" routerLinkActive="active" (click)="saveUser()">Save Changes</button>
+  </div>
+

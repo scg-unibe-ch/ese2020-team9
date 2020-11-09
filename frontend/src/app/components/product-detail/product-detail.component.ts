@@ -41,19 +41,15 @@ export class ProductDetailComponent implements OnInit {
 
   product: ProductItem;
   id: any;
-  view: boolean;
 
   constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService,private productService: ProductService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.userId = this.userService.getUserId();
     this.id = this.route.snapshot.paramMap.get('id');
-     if(this.id==='0'){
-          this.view = true;
-        } else{
-          this.view=false;
-          this.getProduct();
-        }
+
+    this.getProduct();
+
 
   }
 

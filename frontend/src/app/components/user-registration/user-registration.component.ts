@@ -45,14 +45,14 @@ export class UserRegistrationComponent implements OnInit {
     })
 
     this.userId = this.userService.getUserId();
-        this.id = this.route.snapshot.paramMap.get('id');
+    this.id = this.route.snapshot.paramMap.get('id');
 
-        if(this.id==='0'){
-          this.edit = false;
-        } else{
-          this.edit=true;
-          //this.getUserById();
-        }
+    if(this.id===null){
+      this.edit = false;
+    } else{
+      this.edit=true;
+      this.getUserById();
+    }
   }
 
   registration(): void {
@@ -88,11 +88,11 @@ export class UserRegistrationComponent implements OnInit {
             this.userService.isUserAdmin.next(res.admin);
             //navigates to dashboard
             this.router.navigate(['/home'])
-           }, (res: any) => {
+           }, (error: any) => {
            //this.userAuth = 'This Username or Email already exists';
-           let message = "This Username or Email already exists"
+           //let message = "This Username or Email already exists"
            let action = "OK"
-           this.openSnackBar(message, action);
+           this.openSnackBar(error.error.message, action);
 
       });
     }
@@ -199,11 +199,38 @@ export class UserRegistrationComponent implements OnInit {
 
         },(error: any) => {
         //this.userAuth = 'There is no corresponding User!';
-        let message = "There is no corresponding User!"
+        //let message = "There is no corresponding User!"
         let action = "OK"
-        this.openSnackBar(message, action);
+        this.openSnackBar(error.error.message, action);
       });
     }
+
+  saveUser(){
+     this.httpClient.put(environment.endpointURL + 'user/' + this.userId, {
+          userName: this.userName,
+          password: this.password,
+          userMail: this.userMail,
+          firstName: this.firstName,
+          lastName: this.lastName,
+          gender: this.gender,
+          telephoneNumber: this.telephoneNumber,
+          addressStreet: this.addressStreet,
+          addressPin: this.addressPin,
+          addressCity: this.addressCity,
+          addressCountry: this.addressCountry,
+
+        }).subscribe((res: any) => {
+
+          //navigates to productItem
+          this.router.navigate(['/user'])
+        }, (error: any) => {
+          let message = "Your Product Information is invalid!"
+          let action = ""
+          this.openSnackBar(message, action);
+          //this.userAuth = 'Your Product Information is invalid!';
+        });
+
+  }
 
   openSnackBar(message: string, action: string) {
       this._snackBar.open(message, action, {

@@ -176,11 +176,11 @@ describe('TransactionService Test', () => {
             });
         })
         it('should get all transactions of seller with status', function(done) {
-            testedTransactionService.getTransactionsOfSeller(2, 1).then(transaction => {
-                expect(transaction[0].transactionId).to.be.eq(2);
-                expect(transaction[0].productId).to.be.eq(2);
-                expect(transaction[0].buyerId).to.be.eq(1);
-                expect(transaction[0].userId).to.be.eq(2);
+            testedTransactionService.getTransactionsOfSeller(1, 1).then(transaction => {
+                expect(transaction[0].transactionId).to.be.eq(1);
+                expect(transaction[0].productId).to.be.eq(1);
+                expect(transaction[0].buyerId).to.be.eq(2);
+                expect(transaction[0].userId).to.be.eq(1);
             }).then(() =>{
                 done();
             });

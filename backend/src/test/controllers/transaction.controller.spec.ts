@@ -72,13 +72,32 @@ describe('TransactionController Test', () => { // bundles the tests related to t
         userReview: null,
         buyerId: null
     };
+    const product2: ProductAttributes = {
+        productId : 2,
+        productName: 'Formaggio',
+        productDescription: 'Un buono formaggio di Ticino.',
+        productImage: null,
+        productPrice: 30,
+        productCategory: 'food',
+        productLocation: null,
+        productDelivery: null,
+        uploadDate: new Date(Date.now()),
+        sellDate: null,
+        isApproved: false,
+        isService: false,
+        isRentable: null,
+        isAvailable: true,
+        userId: 1,
+        userReview: null,
+        buyerId: null
+    };
 
     const transaction1: TransactionAttributes = {
         transactionId: 1,
         productId: 1,
         userId: 1,
         buyerId: 2,   
-        transactionStatus: 0,
+        transactionStatus: undefined,
         deliveryFirstName: null, 
         deliveryLastName: null,
         deliveryStreet: null, 
@@ -86,25 +105,73 @@ describe('TransactionController Test', () => { // bundles the tests related to t
         deliveryCity: null,
         deliveryCountry: null
     }
-    before('add users and product to db', function(done) { // applicationPromise value must be assigned to app!!!
+
+    before('init app', function(done) { // applicationPromise value must be assigned to app!!!
+        applicationPromise.then(value => {
+            app = value;
+            done();
+        });
+    });
+    before('add users and product to db', function(done) { 
         User.create(seller);
         User.create(buyer);
-        Product.create(product1).then(() => {
+        Product.create(product1);
+        Product.create(product2);
+        Transaction.create(transaction1).then(() => {
             done();
         });
     });
     describe('Test post', () => { // bundles the tests related to the post method
-        it('should successfully inittialize a transaction', function(done) { 
-            testedTransactionService.startTransaction(transaction1).then(transaction => {
-                expect(transaction.transactionId).to.be.eq(1);
-                Transaction.findOne({
-                    where: {
-                        transactionId: 1
-                    }
-                }).then(foundTransaction => {
-                    expect(foundTransaction).not.to.be.eq(null);
-                    done();
-                });
+        it('should successfully initialize a transaction', function(done) { 
+            chai.request(app).post('/transaction').send({
+                productId: 2,
+                userId: 2,
+                buyerId: 1,   
+                deliveryFirstName: null, 
+                deliveryLastName: null,
+                deliveryStreet: null, 
+                deliveryPin: null,
+                deliveryCity: null,
+                deliveryCountry: null
+            }).end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body.message).to.be.eq('Transaction successfully initialized!');
+                done();
+            });
+        });
+    });
+    describe('Test get', () => { // bundles the tests related to the post method
+        it('should successfully get products of a seller', function(done) {
+            chai.request(app).get('/transaction/sell/1').end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body[0].transactionId).to.be.eq(1);
+                done();
+            });
+        });
+        it('should successfully get products with status of a seller', function(done) {
+            chai.request(app).get('/transaction/sell/1/status/1').end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body[0].transactionId).to.be.eq(1);
+                done();
+            });
+        });
+        it('should successfully get products of buyer', function(done) {
+            chai.request(app).get('/transaction/buy/2').end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body[0].transactionId).to.be.eq(1);
+                done();
+            });
+        });
+        it('should successfully get products with status of buyer', function(done) {
+            chai.request(app).get('/transaction/buy/2/status/1').end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body[0].transactionId).to.be.eq(1);
+                done();
             });
         });
     });
@@ -115,3 +182,4 @@ describe('TransactionController Test', () => { // bundles the tests related to t
         }).then(() => done());
     });
 })
+

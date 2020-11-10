@@ -1,6 +1,6 @@
 # API Backend
 
-This documents describes in detail the endpoints provided by the backend.
+This document describes in detail the endpoints provided by the backend.
 
 ## User Validation
 
@@ -29,11 +29,17 @@ This documents describes in detail the endpoints provided by the backend.
     ```
 ## User API
 
-### register a user `"/user/register"` (POST)
+### POST on `"/user/register"`
 
-- Request-Body
+Register a user to the system. UserName and userMail must be unique, otherwise registration will fail.
 
-    ```json
+- **Details**
+
+     <details>
+     
+     <summary>Request</summary>
+     
+     ```json
     {
         "userName": "string",
         "password": "string",
@@ -48,8 +54,11 @@ This documents describes in detail the endpoints provided by the backend.
         "addressCountry": "string"
     }
     ```
-
-- Response-Body (if successful) (HTTP_STATUS_CODE 200)
+    </details>
+    
+    <details>
+     
+     <summary>Response (STATUS 200)</summary>
 
     ```json
     {
@@ -71,17 +80,30 @@ This documents describes in detail the endpoints provided by the backend.
         "createdAt": "string"
     }
     ```
-    - If userName or userMail is already being used, it will return a HTTP_STATUS_CODE 400 with error message:
+    
+    </details>
+    
+    <details>
+     
+     <summary>Response (STATUS 400)</summary>
 
     ```json
     {
-    "message": "This username or email adress is already being used!"
+        "message": "This username or email adress is already being used!"
     }
     ```
+    
+    </details>
+    
+### POST on `"/user/login"`
 
-### login a user `"/user/login"` (POST)
+Log in a user. UserLogin is either userName or userMail. 
 
-- Request-Body
+- **Details**
+
+     <details>
+     
+     <summary>Request</summary>
 
     ```json
     {
@@ -89,9 +111,13 @@ This documents describes in detail the endpoints provided by the backend.
         "password": "string"
     }
     ```
-
-- Response-Body (if successful) (HTTP_STATUS_CODE 200)
-
+    
+    </details>
+    
+    <details>
+    
+    <summary>Response (STATUS 200)</summary>
+    
     ```json
     {
         "user" : {
@@ -115,18 +141,92 @@ This documents describes in detail the endpoints provided by the backend.
         "token": "string"
     }
     ```
-- If there is no entry in the database with the given username or email, it will return a HTTP_STATUS_CODE 400 with error message:
+    
+    </details>
+    
+    <details>
+    
+    <summary>Response (STATUS 400)</summary>
+    
     ```json
     {
     "message": "Could not find this User"
     }   
     ```
-- If the password is wrong, it will return a HTTP_STATUS_CODE 400 with error message:
+    respectively
     ```json
     {
     "message": "Wrong password"
     }   
     ```
+    
+    </details>
+
+### POST on `"/user/edit"`
+
+Edit an existing user. If user does not exist, will return an error.
+
+- **Details**
+
+    <details>
+
+    <summary>Request</summary>
+
+    ```json
+        {
+            "userId": "number",
+            "userName": "string",
+            "userMail": "string",
+            "firstName": "string",
+            "lastName": "string",
+            "gender":   "string",
+            "phoneNumber": "number",
+            "addressStreet": "string",
+            "addressPin": "string",
+            "addressCity": "string",
+            "addressCountry": "string"
+        }
+    ```
+
+    </details>
+
+    <details>
+
+    <summary>Response (STATUS 200)</summary>
+
+    ```json
+        {
+            "userId": "number",
+            "admin":  "boolean",
+            "wallet": "number",
+            "userName": "string",
+            "password": "string (Hash)",
+            "userMail": "string",
+            "firstName": "string",
+            "lastName": "string",
+            "gender":   "string",
+            "phoneNumber": "number",
+            "addressStreet": "string",
+            "addressPin": "string",
+            "addressCity": "string",
+            "addressCountry": "string",
+            "createdAt" : "string",
+            "updatedAt" : "string",
+        }
+    ```
+
+    </details>
+
+    <details>
+    <summary>Response (STATUS 500)</summary>
+
+    ```json
+        {
+            "message": "error message"
+        }
+    ```
+
+    </details>
 
 ### get all users `"/user/"` (GET)
 
@@ -175,6 +275,60 @@ Requires authorization header with a valid token in the request! (see logged-in 
         ...
     ]
     ```
+
+### GET on `"/user/:id"`
+
+Returns the user with the requested id. If user does not exist, will return a not found error (404).
+
+- **Details**
+
+    <details>
+    <summary>Response (STATUS 200)</summary>
+
+    ```json
+        {
+            "userId": "number",
+            "admin":  "boolean",
+            "wallet": "number",
+            "userName": "string",
+            "password": "string (Hash)",
+            "userMail": "string",
+            "firstName": "string",
+            "lastName": "string",
+            "gender":   "string",
+            "phoneNumber": "number",
+            "addressStreet": "string",
+            "addressPin": "string",
+            "addressCity": "string",
+            "addressCountry": "string",
+            "createdAt" : "string",
+            "updatedAt" : "string",
+        }
+    ```
+
+    </details>
+
+    <details>
+    <summary>Response (STATUS 404)</summary>
+
+    ```json
+    {
+        "message": "User not found!"
+    }
+    ```
+
+    </details>
+
+    <details>
+    <summary>Response (STATUS 500)</summary>
+
+    ```json
+    {
+        "message": "error message"
+    }
+    ```
+
+    </details>
 
 ### delete a user `"/user/:id"` (DELETE)
 

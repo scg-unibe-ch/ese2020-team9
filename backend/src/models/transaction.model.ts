@@ -52,7 +52,7 @@ export class Transaction extends Model<TransactionAttributes, TransactionCreatio
             },
             transactionStatus: {
                 type: DataTypes.INTEGER,
-                defaultValue: 0,
+                defaultValue: 1,
                 allowNull: false
             },
             deliveryFirstName: {

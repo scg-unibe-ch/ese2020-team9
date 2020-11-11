@@ -14,7 +14,7 @@ export class UserService {
   userName: string;
   isAdmin: any;
   userId: any;
-  userWallet: number;
+  userWallet: any;
   users: User[] ;
 
 

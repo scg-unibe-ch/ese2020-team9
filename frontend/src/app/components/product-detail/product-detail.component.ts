@@ -29,10 +29,10 @@ export class ProductDetailComponent implements OnInit {
   isService = '';
   isRentable = '';
   isAvailable = '';
-  userId: number;
+  userId: any;
   userReview = '';
   userAuth = '';
-  userWallet = '';
+  userWallet: any;
 
   userName = '';
   addressPin = '';

@@ -72,6 +72,7 @@
 
     <mat-form-field>
       <input matInput placeholder="Product Price" [(ngModel)]="productPrice" name="productPrice">
+
       <div *ngIf="empty(productPrice)" class="invalid-feedback">Please add a Price</div>
     </mat-form-field>
 

@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {UserService} from "../../services/user.service";
 import {ProductItem} from "../../models/product-item.model";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProductService} from "../../services/product.service";
 import {environment} from "../../../environments/environment";
+import {ChangeDetection} from "@angular/cli/lib/config/schema";
+import {error} from "selenium-webdriver";
 
 
 @Component({
@@ -18,7 +20,8 @@ export class UserDashboardComponent implements OnInit {
   userName: string;
   productList: ProductItem[];
 
-  constructor(private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute) { }
+  constructor(private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
     this.userId = this.userService.getUserId();
@@ -35,6 +38,10 @@ export class UserDashboardComponent implements OnInit {
   }
 
   deleteProduct(productId: number){
-    this.httpClient.delete(environment.endpointURL + 'products/' + productId,{}).subscribe();
+    this.httpClient.delete(environment.endpointURL + 'products/' + productId,{}).subscribe(() => {
+      this.getProductUser();
+      },() => {
+      return 'Your action has been unsuccessful!'
+    });
   }
 }

@@ -42,6 +42,4 @@ export class ProductService {
   getUserProduct(userId: number) {
     return this.httpClient.get(environment.endpointURL + 'products/user/' + userId);
   }
-
-
 }

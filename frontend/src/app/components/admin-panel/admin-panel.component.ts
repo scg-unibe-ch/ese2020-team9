@@ -15,40 +15,45 @@ import { UserService } from "../../services/user.service";
 })
 export class AdminPanelComponent implements OnInit {
 
-
  admin: any;
  userName :any;
  userId: any;
  userToken: string;
  productId: any;
- users: User[] ;
+ userList: User[] ;
  productList: ProductItem[];
 
   constructor(private httpClient: HttpClient, private productService: ProductService, private userService: UserService) {}
 
   ngOnInit(): void {
+    this.userId = this.userService.getUserId();
     this.getProductList();
+    this.getUserList();
     this.userToken = this.userService.getToken();
 
   }
   // get all Users
   getUserList(){
-    this.httpClient.get(environment.endpointURL + 'user').subscribe((instances: any) => {
-        this.users = instances.map((instance: any) => new User(instance.userId, instance.userName, instance.admin));
-    });
+    this.userService.getUserList().subscribe((data: User[]) => {
+      this.userList = data;
+    })
   }
 
   onUserDelete(user: User): void{
-    this.httpClient.delete(environment.endpointURL + 'user/' + user.userId).subscribe(() => {
-      this.users.splice(this.users.indexOf(user), 1); //delete one user
+    this.httpClient.delete(environment.endpointURL + 'user/' + this.userId).subscribe(() => {
+      this.userList.splice(this.userList.indexOf(user), 1); //delete one user
     });
   }
 
   // user - UPDATE (upgrade to admin)
-  onUserUpdate(user: User): void{
-    this.httpClient.put(environment.endpointURL + 'user/makeAdmin/' + user.userId, {
-      admin: user.admin,
-    }).subscribe();
+  onUserUpdate(userId: number): void{
+    this.httpClient.put(environment.endpointURL + 'user/makeAdmin/' + this.userId, {
+      admin: this.admin,
+    }).subscribe(() => {
+      this.getUserList();
+    }, ()=>{
+      return 'Your action has been unsuccessful!';
+    });
   }
 
   // products - get all Unapproved ProductItems
@@ -60,12 +65,18 @@ export class AdminPanelComponent implements OnInit {
 
   approveProduct(productId: number){
    this.httpClient.put(environment.endpointURL + 'products/approve/' + productId,{
-
-    }).subscribe(
-   );
+    }).subscribe(() => {
+      this.getProductList();
+     }, ()=>{
+      return 'Your action has been unsuccessful!';
+     });
   }
 
-  deleteProduct(productId: number){
-   this.httpClient.delete(environment.endpointURL + 'products/' + productId,{}).subscribe();
+  Product(productId: number){
+   this.httpClient.delete(environment.endpointURL + 'products/' + productId,{}).subscribe(() => {
+     this.getProductList();
+   }, ()=>{
+     return 'Your action has been unsuccessful!';
+   });
   }
 }

@@ -1,14 +1,10 @@
-<mat-card>
-  <button mat-flat-button class="button_standard" (click)="getUserList()">Get List of users </button>
-  <mat-list-item *ngFor="let user of users" >
-  <app-user
-        [user]="user"
-        (update)="onUserUpdate($event)"
-        (delete)="onUserDelete($event)"
-      ></app-user>
-
+<div class="shaded">
+  <mat-list-item *ngFor="let user of userList">
+    Name: {{user.userName}}, ID:  {{user.userId}} , is Admin
+    <mat-checkbox [(ngModel)]="user.admin" (change)="onUserUpdate(user.userId)" >Admin User</mat-checkbox>
+    <button mat-flat-button color="warn" (click)="onUserDelete(user)">Delete User</button>
   </mat-list-item>
-</mat-card>
+</div>
 
 <mat-card >
   <mat-grid-list cols="4" [gutterSize]="'5px'" rowHeight="250px">
@@ -18,7 +14,7 @@
       </mat-grid-tile-header>
       {{productItem.productDescription}}
       <mat-grid-tile-footer style="backgroundColor: white; color: black">
-        <mat-radio-group> <!--add [(ngModel)]="productItem.isApproved"-->
+        <mat-radio-group [(ngModel)]="productItem.isApproved">
           <mat-radio-button value="true" (click)="approveProduct([productItem.productId])" >Approve</mat-radio-button>
           <mat-radio-button value="false" (click)="deleteProduct([productItem.productId])" >Delete</mat-radio-button>
         </mat-radio-group>

@@ -198,7 +198,7 @@ export class UserRegistrationComponent implements OnInit {
    }
 
   saveUser(){
-     this.httpClient.post(environment.endpointURL + 'user/edit/' + this.userId, {
+     this.httpClient.post(environment.endpointURL + 'user/edit/', {
           userId: this.userId,
           userName: this.userName,
           userMail: this.userMail,
@@ -230,7 +230,6 @@ export class UserRegistrationComponent implements OnInit {
   }
 
   requestCity(){
-
     let params = {
           codes: this.addressPin,
           country: this.addressCountry,
@@ -238,7 +237,7 @@ export class UserRegistrationComponent implements OnInit {
     };
     if (this.addressPin.length >= 4){this.httpClient.get('https://app.zipcodebase.com/api/v1/search', {params}).subscribe((res: any) => {
        console.log(this.addressPin);
-        const apiResponse = res.data;
+        const apiResponse = res;
         console.log(apiResponse);
         this.addressCity = res.results.city;
         console.log(this.addressCity)

@@ -7,6 +7,7 @@ export interface SearchRequest {
     priceMax: number;
     delivery: boolean;
     available: boolean;
+    category: string;
 }
 
 

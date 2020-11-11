@@ -22,7 +22,7 @@ export class ProductService {
             if (product) {
                 return Promise.resolve(product);
             } else {
-                return Promise.reject(`Product with id ${productId} not found!`)
+                return Promise.reject(`Product with id ${productId} not found!`);
             }
         })
         .catch(err => Promise.reject({message: err}));
@@ -142,6 +142,12 @@ export class ProductService {
         if (searchParameters.available === true || searchParameters.available === false) {
             where.isAvailable = {
                 [Op.is]: searchParameters.available
+            };
+        }
+
+        if (searchParameters.category) {
+            where.productCategory = {
+                [Op.like]: searchParameters.category
             };
         }
 

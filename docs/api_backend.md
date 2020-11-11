@@ -455,17 +455,15 @@ Adds a new Product to the system.
 
 ### POST on `"/products/search"`  
 
-Search a product by filters and keyword
+Search a product by filters and keyword. The request body does not require every parameter in order to work. Only the parameters that are required have to be sent but sending an empty parameter will work aswell. 
+The Response body delivers a list of products that match the keyword and the filters given. Returns an empty array if there are no products with given parameters instead.
 
 - **Details**
 
     <details>
 
     <summary>Request</summary>
-
-The request body does not require every parameter in order to work. Only the parameters that are required have to be sent but sending an empty parameter will work aswell.
-
-- Request Body
+    
     ```json
     {   
         "name": "string",
@@ -484,9 +482,6 @@ The request body does not require every parameter in order to work. Only the par
 
     <summary>Response (STATUS 200)</summary>
 
-The Response body delivers a list of products that match the keyword and the filters given.
-
-- Response body (STATUS 200)
     ```json
     [
         {   
@@ -533,8 +528,6 @@ The Response body delivers a list of products that match the keyword and the fil
     ]
 
     ```
-
-    Returns an empty array if there are no products with given parameters.
     
     </details>
     

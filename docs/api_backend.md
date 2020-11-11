@@ -2,31 +2,6 @@
 
 This document describes in detail the endpoints provided by the backend.
 
-## User Validation
-
-### logged-in user
-
-- If a request requires the requester to be a logged in user → requires authorization header with a valid token in the request!
-
-- Response-Body (if token invalid) (HTTP_STATUS_CODE 403)
-
-     ```json
-    {
-    "message": "Unauthorized"
-    }
-    ```
-
-### logged-in admin
-
-- If a request requires the requester to be a logged in admin → requires authorization header with a valid token in the request!
-
-- Response-Body (if token invalid) (HTTP_STATUS_CODE 403)
-
-     ```json
-    {
-    "message": "This User is not an Admin"
-    }
-    ```
 ## User API
 
 ### POST on `"/user/register"`
@@ -734,6 +709,31 @@ Gets all products belonging to a certain category, indicated with the parameter 
      <details>
      
      <summary>Available Categories</summary>
+     
+     ```
+     AntiquesAndArt
+     BabyAndChild
+     Books
+     OfficeAndCommercial
+     ComputerAndComputer accessories
+     Vehicles
+     Films
+     PhotoAndVideo
+     GardenAndCrafts
+     Housekeeping
+     RealEstate
+     ClothingAndAccessories
+     Music
+     Collect
+     ToysAndCrafts
+     SportsAndOutdoors
+     JobOffers
+     TVAndAudio
+     PhoneAndNavigation
+     TicketsAndVouchers
+     Animals
+     Miscellaneous
+     ```
      
      </details>
      

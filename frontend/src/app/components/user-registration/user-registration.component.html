@@ -119,7 +119,7 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Telephone Number" [(ngModel)]="telephoneNumber" name="telephoneNumber">
+      <input matInput placeholder="Telephone Number" [(ngModel)]="phoneNumber" name="phoneNumber">
     </mat-form-field>
   </mat-card>
 
@@ -149,7 +149,6 @@
   <div *ngIf="!edit">
 
       <button mat-flat-button class="button_standard" (click)="registration()" [disabled]="!allFieldsAreFilled()">Registration</button>
-
 
   </div>
   <div *ngIf="edit">

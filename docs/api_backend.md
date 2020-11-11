@@ -228,12 +228,16 @@ Edit an existing user. If user does not exist, will return an error.
 
     </details>
 
-### get all users `"/user/"` (GET)
+### GET on `"/user/"`
 
-Requires authorization header with a valid token in the request! (see logged-in user)
+Gets the list of all user in the system. Requires the Authorization Header on the Request with a valid token from a logged-in user.
 
-- Response-Body (if successful) (HTTP_STATUS_CODE 200)
-  
+- **Details**
+
+     <details>
+     
+     <summary>Response (STATUS 200)</summary>
+     
     ```json
     [
         {
@@ -275,6 +279,22 @@ Requires authorization header with a valid token in the request! (see logged-in 
         ...
     ]
     ```
+    
+    </details>
+    
+    <details>
+    
+    <summary>Response (STATUS 403)</summary>
+    If authorizatoin token is invalid or missing.
+    
+    ```json
+    {
+    "message": "Unauthorized"
+    }
+    ```
+    
+    </details>
+    
 
 ### GET on `"/user/:id"`
 
@@ -330,32 +350,55 @@ Returns the user with the requested id. If user does not exist, will return a no
 
     </details>
 
-### delete a user `"/user/:id"` (DELETE)
+### DELETE on `"/user/:id"`
 
-Request requires authorization header with a token from an admin.
+Deletes the user with the id set as parameter in url. Requires the Authorization Header set with a valid token from a logged-in admin user. 
 
-- Response (STATUS 200)
+- **Details**
 
+     <details>
+     
+     <summary>Response (STATUS 200)</summary>
+    
     ```json
     {
         "message": "Successfuly deleted entry with id='id'"
     }
     ```
-
-- Response (STATUS 202)
-
+    </details>
+    
+    <details>
+     
+     <summary>Response (STATUS 202)</summary>
+     
     ```json
     {
         "message": "No entry to delete"
     }
     ```
+    </details>
+    
+    <details>
+     
+     <summary>Response (STATUS 403)</summary>
+     
+     ```json
+    {
+        "message": "This User is not an Admin"
+    }
+    ```
+    </details>
 
-### make a user to an admin `"/user/makeAdmin/:id"` (PUT)
+### PUT on `"/user/makeAdmin/:id"`
 
-Request requires authorization header with a token from an admin.
+Makes the user with the id set in the url as parameter to an admin user. Request requires Authorization Header with a token from a logged-in admin user.
 
-- Response (STATUS 200)
+- **Details**
 
+     <details>
+     
+     <summary>Response (STATUS 200)</summary>
+    
     ```json
     {
         "userId": "number",
@@ -376,12 +419,32 @@ Request requires authorization header with a token from an admin.
         "updatedAt" : "string",
     }
     ```
+    
+    </details>
+    
+    <details>
+     
+     <summary>Response (STATUS 403)</summary>
+     
+    ```json
+    {
+        "message": "This User is not an Admin"
+    }
+    ```
+    </details>
 
 ## Product API
 
-### add a product `"/products/"` (POST)
+### POST on `"/products/"`
 
-- Request Body
+Adds a new Product to the system.
+
+- **Details**
+
+     <details>
+     
+     <summary>Request</summary>
+
     ```json
     {   
         "productId": "number",
@@ -402,17 +465,29 @@ Request requires authorization header with a token from an admin.
         "userReview": "string"
     }
     ```
-
-- Response (STATUS 200)
+    </details>
+    
+    <details>
+     
+     <summary>Response (STATUS 200)</summary>
 
     ```json
     {
         "message": "Product successfully created!"
     }
     ```
-### change a product `"/products/:id"` (PUT) (for example "/products/2")
+    </details>
+    
+### PUT on `"/products/:id"`
 
-- Request Body
+Changes the product with the id set as parameter in the url. Product will be updated with values of request body.
+
+- **Details**
+
+     <details>
+     
+     <summary>Request</summary>
+     
     ```json
     {   
         "productId": "number",
@@ -433,64 +508,74 @@ Request requires authorization header with a token from an admin.
         "userReview": "string"
     }
     ```
-
-- Response (STATUS 200)
+    </details>
+    
+    <details>
+     
+     <summary>Response (STATUS 200)</summary>
 
     ```json
     {
         "message": "Product `productId` successfully updated!"
     }
     ```
+    </details>
 
-### delete a product `"/products/:id"` (DELETE) (for example "/products/2")
+### DELETE on `"/products/:id"`
 
-- Request Body
-    ```json
-    {   
-        "productId": "number",
-        "productName": "string",
-        "productDescription": "string",
-        "productImage": "String",
-        "productPrice": "number",
-        "productCategory": "string",
-        "productLocation": "string",
-        "productDelivery": "boolean",
-        "uploadDate": "Date",
-        "sellDate": "Date",
-        "isApproved": "boolean",
-        "isService": "boolean",
-        "isRentable": "boolean",
-        "isAvailable": "boolean",
-        "userId": "number",
-        "userReview": "string"
-    }
-    ```
+Deletes the product with the id indicated in the url.
 
-- Response (STATUS 200)
+- **Details**
+
+     <details>
+     
+     <summary>Response (STATUS 200)</summary>
 
     ```json
     {
         "message": "Product successfully deleted!"
     }
     ```
+    </details>
 
-### approve a product `"/products/approve/:id"` (PUT) (for example "/products/approve/2")
+### PUT on `"/products/approve/:id"`
 
-Request requires authorization header with a token from an admin.
+Approves the product with the id indicated in the url. Request requires Authorization Header with a token from a logged-in admin user.
 
-- Response (STATUS 200)
+- **Details**
+
+     <details>
+     
+     <summary>Response (STATUS 200)</summary>
 
     ```json
     {
         "message": "Successfully approved product 'productId'!'"
     }
     ```
-    
-### getting products (GET)
+    </details>
 
-#### getting all products `"/products/"` 
+     <details>
+     
+     <summary>Response (STATUS 403)</summary>
 
-- Response body
+    ```json
+    {
+        "message": "This User is not an Admin"
+    }
+    ```
+    </details>
+
+### GET on `"/products/"` 
+
+Gets all products in the system.
+
+- **Details**
+
+     <details>
+     
+     <summary>Response (STATUS 200)</summary>
+     
     ```json
     [
         {   
@@ -532,10 +617,18 @@ Request requires authorization header with a token from an admin.
         ...
     ]
     ```
+    </details>
 
-#### getting all approved products `"/products/approved"` 
+### GET on `"/products/approved"` 
 
-- Response body
+Gets all products, which have status approved.
+
+- **Details**
+
+     <details>
+     
+     <summary>Response (STATUS 200)</summary>
+     
     ```json
     [
         {   
@@ -577,10 +670,18 @@ Request requires authorization header with a token from an admin.
         ...
     ]
     ```
+    </details>
 
-#### getting all unapproved products `"/products/unapproved"` 
+### GET on `"/products/unapproved"` 
 
-- Response body
+Gets all products, which have status not approved.
+
+- **Details**
+
+     <details>
+     
+     <summary>Response (STATUS 200)</summary>
+     
     ```json
     [
         {   
@@ -622,12 +723,24 @@ Request requires authorization header with a token from an admin.
         ...
     ]
     ```
+    </details>
 
-#### getting all products of a category `"/products/category/:category"` 
+### GET on `"/products/category/:category"` 
 
-for example `"/products/category/food"`
+Gets all products belonging to a certain category, indicated with the parameter in the url.
 
-- Response body
+- **Details**
+
+     <details>
+     
+     <summary>Available Categories</summary>
+     
+     </details>
+     
+     <details>
+     
+     <summary>Response (STATUS 200)</summary>
+     
     ```json
     [
         {   
@@ -669,12 +782,18 @@ for example `"/products/category/food"`
         ...
     ]
     ```
+    </details>
 
-#### getting all products of a user `"/products/user/:userId"` 
+### GET on `"/products/user/:userId"` 
 
-for example `"/products/user/2"`
+Gets all products belonging to the user with the id indicated in the url.
 
-- Response body
+- **Details**
+
+     <details>
+     
+     <summary>Response (STATUS 200)</summary>
+     
     ```json
     [
         {   
@@ -716,13 +835,18 @@ for example `"/products/user/2"`
         ...
     ]
     ```
+    </details>
 
-#### getting a product by id `"/products/:id"` 
+### GET on `"/products/:id"` 
 
-for example `"/products/5"`
+Gets a single product with the id indicated in the url.
 
+- **Details**
 
-- Response body
+     <details>
+     
+     <summary>Response (STATUS 200)</summary>
+     
     ```json
     {   
         "productId": "5",
@@ -743,4 +867,5 @@ for example `"/products/5"`
         "userReview": "string"
     }
     ```
+    </details>
 

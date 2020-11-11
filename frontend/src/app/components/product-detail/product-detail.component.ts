@@ -29,10 +29,10 @@ export class ProductDetailComponent implements OnInit {
   isService = '';
   isRentable = '';
   isAvailable = '';
-  userId = '';
+  userId: number;
   userReview = '';
   userAuth = '';
-
+  userWallet = '';
 
   userName = '';
   addressPin = '';
@@ -46,9 +46,11 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = this.userService.getUserId();
+    this.userWallet = this.userService.getUserWallet();
     this.id = this.route.snapshot.paramMap.get('id');
 
     this.getProduct();
+    this.getSeller();
 
 
   }
@@ -84,7 +86,7 @@ export class ProductDetailComponent implements OnInit {
 
 
   getSeller(){
-    this.productService.getProduct(this.id).subscribe((instances: any) => {
+    this.userService.getUserById(this.userId).subscribe((instances: any) => {
           this.userId = instances.userId;
           this.userName = instances.userName;
           this.addressPin = instances.addressPin;
@@ -100,6 +102,15 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
+  // Check to make sure User has enough Cash to buy product
+  checkCash(){
+    if (this.userWallet >= this.productPrice) {
+        return false;
+      } else {
+        return true;
+      }
+
+  }
 
 
   openSnackBar(message: string, action: string) {

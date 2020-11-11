@@ -40,14 +40,12 @@ export class UserRegistrationComponent implements OnInit {
   constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    this.userService.isUserLoggedIn.subscribe(value => {
-      this.isUserLoggedIn = value;
-    })
+
 
     this.userId = this.userService.getUserId();
     this.id = this.route.snapshot.paramMap.get('id');
 
-    if(this.id===null){
+    if(this.id==0){
       this.edit = false;
     } else{
       this.edit=true;

@@ -14,7 +14,7 @@ import { ShippingComponent } from "./components/shipping/shipping.component";
 const routes: Routes = [
   { path: 'home', component: DashboardComponent},
   { path: 'login', component: UserLoginComponent},
-  { path: 'registration', component: UserRegistrationComponent},
+  { path: 'registration/:id', component: UserRegistrationComponent},
   { path: 'user', component: UserDashboardComponent},
   { path: 'admin', component: AdminPanelComponent},
   { path: 'productForm/:id', component: ProductFormComponent},

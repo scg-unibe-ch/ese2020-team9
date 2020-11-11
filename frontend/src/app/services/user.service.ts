@@ -14,7 +14,9 @@ export class UserService {
   userName: string;
   isAdmin: any;
   userId: any;
+  userWallet: number;
   users: User[] ;
+
 
   public isUserLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public isUserAdmin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -54,6 +56,9 @@ export class UserService {
   }
 
 
+  getUserWallet(){
+    return this.userWallet = localStorage.getItem('userWallet')
+  }
 
    //get a specific User
   getUserById(userId: number){

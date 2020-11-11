@@ -37,7 +37,8 @@
     {{addressPin}}<br>
     {{addressCity}}<br>
     {{addressCountry}}<br>
-    <button mat-flat-button color="warn" w [routerLink]="['/shipping', productId]" routerLinkActive="active" >Buy</button>
+    alalalaala{{userWallet}}lalala
+    <button mat-flat-button color="warn"  [routerLink]="['/shipping', productId]" routerLinkActive="active" [disabled]="checkCash()">Buy</button>
 
 
   </mat-card>

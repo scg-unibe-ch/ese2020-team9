@@ -14,7 +14,7 @@ export class UserLoginComponent implements OnInit {
 
   userLogin = '';
   password = '';
-
+  userWallet = '';
   //userToken: string;
   //loggedIn = false;
 
@@ -36,6 +36,8 @@ export class UserLoginComponent implements OnInit {
       localStorage.setItem('userName', res.user.userName);
       localStorage.setItem('admin', res.user.admin);
       localStorage.setItem('userId', res.user.userId);
+      localStorage.setItem('userWallet', res.user.userWallet);
+
       //updates isUserLoggedIn value
       this.userService.isUserLoggedIn.next(true);
       //get User Name

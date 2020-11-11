@@ -22,7 +22,9 @@
     <input matInput placeholder="Last Name*" [(ngModel)]="lastName" name="lastName">
   </mat-form-field>
     <br>
-    <mat-form-field>
+
+
+    <mat-form-field *ngIf="!edit">
       <input matInput placeholder="Password*" [(ngModel)]="password" name="password" type="password">
       <ng-template [ngIf]="!empty(password)">
         <div *ngIf="!passwordContainsMixedLetters(password)" class="invalid-feedback"> Use capital and small letters
@@ -37,7 +39,7 @@
 
     </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field *ngIf="!edit">
     <input matInput placeholder="Confirm Password*" [(ngModel)]="confPassword" name="confPassword" type="password">
     <ng-template [ngIf]="!empty(confPassword)">
       <div *ngIf="!confirmPassword(confPassword)" class="invalid-feedback"> Passwords do not Match

@@ -12,7 +12,9 @@
     </div>
     <span class="spacer"></span>
     <div *ngIf="!isUserLoggedIn">
-      <button mat-button class="storMainColor" routerLink="/registration" routerLinkActive="active">Registration</button>
+
+
+      <button mat-button class="storMainColor" routerLink="/registration/0" routerLinkActive="active">Registration</button>
       <button mat-button class="storMainColor" routerLink="/login" routerLinkActive="active"><mat-icon >account_circle</mat-icon>Login</button>
     </div>
     <div *ngIf="isUserLoggedIn">

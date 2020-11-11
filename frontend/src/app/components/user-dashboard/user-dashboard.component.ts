@@ -39,13 +39,12 @@ export class UserDashboardComponent implements OnInit {
     this.httpClient.delete(environment.endpointURL + 'products/' + productId,{}).subscribe((res: any) => {
 
           //navigates to productItem
-          this.router.navigate(['/user'])
-          let message = "Product deleted"
-          let action = "Ok"
-          this.openSnackBar(message, action);
+          this.router.navigate(['/user']);
+          let action = "Ok";
+          this.openSnackBar(res.message, action);
         }, (error: any) => {
-          let message = "Can not delete this Product"
-          let action = ""
+          let message = "Can not delete this Product";
+          let action = "";
           this.openSnackBar(message, action);
           //this.userAuth = 'Your Product Information is invalid!';
         });

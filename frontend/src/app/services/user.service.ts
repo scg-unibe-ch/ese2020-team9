@@ -34,6 +34,8 @@ export class UserService {
     localStorage.clear();
   }
 
+  /** Functions to get specific user attributes from local storag e**/
+
   getIsLoggedIn(){
     this.userToken = localStorage.getItem('userToken');
     return !!(this.userToken);
@@ -47,6 +49,10 @@ export class UserService {
     return false;
   }
 
+  getToken(){
+    return this.userToken = localStorage.getItem('userToken');
+  }
+
   getUserName(){
     return this.userName = localStorage.getItem('userName');
   }
@@ -55,22 +61,15 @@ export class UserService {
     return this.userId = localStorage.getItem('userId');
   }
 
-
   getUserWallet(){
     return this.userWallet = localStorage.getItem('userWallet')
   }
 
-   //get a specific User
-  getUserById(userId: number){
+  getUser(userId: number){
     return this.httpClient.get(environment.endpointURL + 'user/' + userId);
-
-  }
-
-  getToken(){
-    return this.userToken = localStorage.getItem('userToken');
   }
 
   getUserList(){
-    this.httpClient.get(environment.endpointURL + 'user');
+    this.httpClient.get(environment.endpointURL + 'user/');
   }
 }

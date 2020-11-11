@@ -31,7 +31,6 @@ export class ProductDetailComponent implements OnInit {
   isAvailable = '';
   userId: any;
   userReview = '';
-  userAuth = '';
   userWallet: any;
 
   userName = '';
@@ -51,7 +50,6 @@ export class ProductDetailComponent implements OnInit {
 
     this.getProduct();
     this.getSeller();
-
 
   }
 
@@ -76,29 +74,25 @@ export class ProductDetailComponent implements OnInit {
           //this.changeDetection.detectChanges();
 
       },(error: any) => {
-      let message = "There is no corresponding Product!"
-      let action = "OK"
+      let message = "There is no corresponding Product!";
+      let action = "OK";
       this.openSnackBar(message, action);
-      //this.userAuth = 'There is no corresponding Product!';
     });
   }
 
 
 
   getSeller(){
-    this.userService.getUserById(this.userId).subscribe((instances: any) => {
+    this.userService.getUser(this.userId).subscribe((instances: any) => {
           this.userId = instances.userId;
           this.userName = instances.userName;
           this.addressPin = instances.addressPin;
           this.addressCity = instances.addressCity;
           this.addressCountry = instances.addressCountry;
 
-
-
       },(error: any) => {
-      let message = "There is no corresponding User!"
-      let action = "OK"
-      this.openSnackBar(message, action);
+      let action = "";
+      this.openSnackBar(error.message, action);
     });
   }
 

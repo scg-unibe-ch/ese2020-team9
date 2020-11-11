@@ -98,13 +98,11 @@ export class ProductFormComponent implements OnInit {
     }).subscribe((res: any) => {
 
       //navigates to dashboard
-      this.router.navigate(['/user'])
-       //let message = "Your Product has been added"
-       let action = "OK"
+      this.router.navigate(['/user']);
+       let action = "";
        this.openSnackBar(res.message, action);
     }, (error: any) => {
-        //this.userAuth = 'Your Product could not be added!';
-        let action = "OK"
+        let action = "";
         this.openSnackBar(error.message, action);
 
     });
@@ -131,16 +129,14 @@ export class ProductFormComponent implements OnInit {
     }).subscribe((res: any) => {
 
       //navigates to productItem
-      this.router.navigate(['/user'])
-      let message = "Your Product is now awaiting approval"
-      let action = "OK"
-      this.openSnackBar(message, action);
+      this.router.navigate(['/user']);
+      let action = "";
+      this.openSnackBar(res.message, action);
 
     }, (error: any) => {
-      let message = "Your Product Information is invalid!"
-      let action = ""
+      let message = "Your Product Information is invalid!";
+      let action = "";
       this.openSnackBar(message, action);
-      //this.userAuth = 'Your Product Information is invalid!';
     });
 
   }

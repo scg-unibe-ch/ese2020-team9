@@ -1,4 +1,5 @@
-import { Product, ProductAttributes } from './../models/product.model';
+import {  Product, ProductAttributes } from './../models/product.model';
+import {SearchRequest} from './../models/search.model';
 
 export class ProductService {
 
@@ -94,4 +95,60 @@ export class ProductService {
             .then(() => Promise.resolve(isFound))
             .catch(err => Promise.reject(err)));
     }
+
+    public searchProduct(searchParameters: SearchRequest): Promise<Product[]> {
+        const { Op } = require('sequelize');
+        const where: any = {};
+
+        where.isApproved = {
+            [Op.is]: true
+        };
+
+        if (searchParameters.name) {
+            where.productName = {
+                [Op.like]:  '%' + searchParameters.name + '%'
+            };
+        }
+
+        if (searchParameters.priceMax && searchParameters.priceMin) {
+            where.productPrice = {
+                [Op.gte]: searchParameters.priceMin,
+                [Op.lte]: searchParameters.priceMax
+            };
+
+        } else if (searchParameters.priceMax && !searchParameters.priceMin) {
+            where.productPrice = {
+                [Op.lte]: searchParameters.priceMax
+            };
+
+        } else if (searchParameters.priceMin && !searchParameters.priceMax) {
+            where.productPrice = {
+                [Op.gte]: searchParameters.priceMin
+            };
+        }
+
+        if (searchParameters.delivery === true || searchParameters.delivery === false) {
+            where.productDelivery = {
+                [Op.is]: searchParameters.delivery
+            };
+        }
+
+        if (searchParameters.location ) {
+            where.productLocation = {
+                [Op.like]:  '%' + searchParameters.location + '%'
+            };
+        }
+
+        if (searchParameters.available === true || searchParameters.available === false) {
+            where.isAvailable = {
+                [Op.is]: searchParameters.available
+            };
+        }
+
+        return Product.findAll({
+            where: where
+        }).catch(err => Promise.reject({message: err}));
+    }
 }
+
+

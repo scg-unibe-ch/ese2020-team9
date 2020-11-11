@@ -869,3 +869,67 @@ Gets a single product with the id indicated in the url.
     ```
     </details>
 
+#### search a product by filters and keyword `"/products/search"`    
+
+The request body does not require every parameter in order to work. Only the parameters that are required have to be sent but sending an empty parameter will work aswell.
+
+- Request Body
+    ```json
+    {   
+        "name": "string",
+        "priceMin": "number",
+        "priceMax": "number",
+        "delivery": "boolean",
+        "location": "string",
+        "available": "string
+    }
+    ```
+
+The Response body delivers a list of products that match the keyword and the filters given.
+
+- Response body (STATUS 200)
+    ```json
+    [
+        {   
+            "productId": "number",
+            "productName": "string",
+            "productDescription": "string",
+            "productImage": "String",
+            "productPrice": "number",
+            "productCategory": "String",
+            "productLocation": "string",
+            "productDelivery": "boolean",
+            "uploadDate": "Date",
+            "sellDate": "Date",
+            "isApproved": "boolean",
+            "isService": "boolean",
+            "isRentable": "boolean",
+            "isAvailable": "boolean",
+            "userId": "number",
+            "userReview": "string",
+            "createdAt" : "string",
+            "updatedAt" : "string"
+        }, 
+            {   
+            "productId": "number",
+            "productName": "string",
+            "productDescription": "string",
+            "productImage": "String",
+            "productPrice": "number",
+            "productCategory": "String",
+            "productLocation": "string",
+            "productDelivery": "boolean",
+            "uploadDate": "Date",
+            "sellDate": "Date",
+            "isApproved": "boolean",
+            "isService": "boolean",
+            "isRentable": "boolean",
+            "isAvailable": "boolean",
+            "userId": "number",
+            "userReview": "string",
+            "createdAt" : "string",
+            "updatedAt" : "string"
+        },
+        ...
+    ]
+    ```

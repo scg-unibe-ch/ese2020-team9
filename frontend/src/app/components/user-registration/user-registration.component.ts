@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import {Router} from "@angular/router";
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { ActivatedRoute} from "@angular/router";
 import {UserService} from "../../services/user.service";
 
 @Component({
@@ -17,7 +19,7 @@ export class UserRegistrationComponent implements OnInit {
   firstName = '';
   lastName = '';
   gender = '';
-  telephoneNumber = '';
+  phoneNumber = '';
   addressStreet = '';
   addressPin = '';
   addressCity = '';
@@ -29,14 +31,24 @@ export class UserRegistrationComponent implements OnInit {
   admin: boolean;
   isUserLoggedIn: boolean;
 
+  edit: boolean;
+  id: any;
   userAuth = '';
+  message ='';
+  action = '';
 
-  constructor(private httpClient: HttpClient, private router: Router, private userService: UserService) { }
+  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    this.userService.isUserLoggedIn.subscribe(value => {
-      this.isUserLoggedIn = value;
-    })
+    this.userId = this.userService.getUserId();
+    this.id = this.route.snapshot.paramMap.get('id');
+
+    if(this.id === '0'){
+      this.edit = false;
+    } else{
+      this.edit = true;
+      this.getUser();
+    }
   }
 
   registration(): void {
@@ -47,7 +59,7 @@ export class UserRegistrationComponent implements OnInit {
         firstName: this.firstName,
         lastName: this.lastName,
         gender: this.gender,
-        telephoneNumber: this.telephoneNumber,
+        phoneNumber: this.phoneNumber,
         addressStreet: this.addressStreet,
         addressPin: this.addressPin,
         addressCity: this.addressCity,
@@ -60,7 +72,11 @@ export class UserRegistrationComponent implements OnInit {
            localStorage.setItem('userId', res.userId);
            localStorage.setItem('userName', res.userName);
            localStorage.setItem('admin', res.admin);
-            this.userId = res.userId;
+           localStorage.setItem('userWallet', res.user.wallet);
+           this.userId = res.userId;
+           let message = "Registration complete!";
+           let action = "Welcome";
+           this.openSnackBar(message, action);
             //updates isUserLoggedIn value
             this.userService.isUserLoggedIn.next(true);
             //get User Name
@@ -69,8 +85,10 @@ export class UserRegistrationComponent implements OnInit {
             this.userService.isUserAdmin.next(res.admin);
             //navigates to dashboard
             this.router.navigate(['/home'])
-           }, (res: any) => {
-            this.userAuth = 'This Username or Email Address is already taken';
+           }, (error: any) => {
+           let action = "";
+           this.openSnackBar(error.message, action);
+
       });
     }
 
@@ -158,4 +176,81 @@ export class UserRegistrationComponent implements OnInit {
     }
   }
 
-}
+  getUser(){
+
+    this.userService.getUser(this.id).subscribe((instances: any) => {
+            this.userMail = instances.userMail;
+            this.password = instances.password;
+            this.userName = instances.userName;
+            this.firstName = instances.firstName;
+            this.lastName = instances.lastName;
+            this.gender = instances.gender;
+            this.phoneNumber = instances.phoneNumber;
+            this.addressStreet = instances.addressStreet;
+            this.addressPin = instances.addressPin;
+            this.addressCity = instances.addressCity;
+            this.addressCountry = instances.addressCountry;
+
+        },(error: any) => {
+        let action = "";
+        this.openSnackBar(error.message, action);
+     });
+   }
+
+  saveUser(){
+     this.httpClient.post(environment.endpointURL + 'user/edit/', {
+          userId: this.userId,
+          userName: this.userName,
+          userMail: this.userMail,
+          firstName: this.firstName,
+          lastName: this.lastName,
+          gender: this.gender,
+          phoneNumber: this.phoneNumber,
+          addressStreet: this.addressStreet,
+          addressPin: this.addressPin,
+          addressCity: this.addressCity,
+          addressCountry: this.addressCountry,
+
+        }).subscribe((res: any) => {
+          //update user information
+           localStorage.setItem('userToken', res.token);
+           localStorage.setItem('userId', res.userId);
+           localStorage.setItem('userName', res.userName);
+           localStorage.setItem('admin', res.admin);
+          //navigates to productItem
+          this.router.navigate(['/user']);
+          let message = "You successfully updated your profile!";
+          let action = "";
+          this.openSnackBar(message, action);
+        }, (error: any) => {
+          let message = "Your profile update is invalid!";
+          let action = "";
+          this.openSnackBar(message, action);
+        });
+  }
+
+  requestCity(){
+    let params = {
+          codes: this.addressPin,
+          country: this.addressCountry,
+          apikey: '4bc7d070-229b-11eb-8bf2-6be81465cc4d'
+    };
+    if (this.addressPin.length >= 4){this.httpClient.get('https://app.zipcodebase.com/api/v1/search', {params}).subscribe((res: any) => {
+       console.log(this.addressPin);
+        const apiResponse = res;
+        console.log(apiResponse);
+        this.addressCity = res.results.city;
+        console.log(this.addressCity)
+      }, (error: any) => {
+        console.log(error);
+      });
+    }
+  }
+
+  openSnackBar(message: string, action: string) {
+      this._snackBar.open(message, action, {
+        duration: 3000
+      });
+    }
+
+ }

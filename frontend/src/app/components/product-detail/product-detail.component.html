@@ -1,0 +1,85 @@
+
+
+<div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start" >
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      {{productName}}
+    </mat-card-title>
+    <mat-card-title>
+      {{productPrice}} CHF
+    </mat-card-title>
+    <mat-card-subtitle>
+      {{uploadDate | date: "dd.MM.yy, HH:mm"}}
+    </mat-card-subtitle>
+
+  </mat-card-header>
+
+  <mat-card-content>
+    <img mat-card-image width="100%" height="100px" src="{{productImage}}" alt="{{productName}}" >
+    <button mat-button class="button_fill" [routerLink]="['/', productCategory]" routerLinkActive="active" ><mat-icon >chevron_right</mat-icon>{{productCategory}}</button>
+    <button mat-button class="button_fill" [routerLink]="['/', productLocation]" routerLinkActive="active"><mat-icon >place</mat-icon>{{productLocation}}</button>
+    <br>
+  </mat-card-content>
+</mat-card>
+
+
+
+  <mat-card>
+    <h2>Sellerinfo:</h2>
+    <br><br>
+    <button mat-button class="button_fill" [routerLink]="['/User', userId]" routerLinkActive="active" ><mat-icon >account_circle</mat-icon>{{userName}}</button>
+
+    <br>
+    {{userId}}<br>
+    {{userName}}<br>
+    {{addressPin}}<br>
+    {{addressCity}}<br>
+    {{addressCountry}}<br>
+    alalalaala {{userWallet}} lalala
+    <button mat-flat-button color="warn"  [routerLink]="['/shipping', productId]" routerLinkActive="active" [disabled]="checkCash()">Buy</button>
+
+
+  </mat-card>
+</div>
+
+<div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start"  >
+<mat-card>
+  <mat-card-content>
+    {{productDescription}}
+  </mat-card-content>
+
+  <mat-card-content *ngIf="isService">
+    <p>
+      Service
+    </p>
+  </mat-card-content>
+
+  <mat-card-content *ngIf="isRentable">
+    <p>
+      Can be rented
+    </p>
+  </mat-card-content>
+
+  <mat-card-content *ngIf="productDelivery">
+    <p>
+      Delivery is possible
+    </p>
+  </mat-card-content>
+  <mat-card-content *ngIf="!productDelivery && !isService">
+    <p>
+      Product has to be picked up at {{productLocation}}
+    </p>
+  </mat-card-content>
+
+</mat-card>
+
+<mat-card>
+
+    <h2>Reviews:</h2>
+
+  {{userReview}}
+</mat-card>
+
+</div>

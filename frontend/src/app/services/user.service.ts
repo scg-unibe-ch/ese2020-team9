@@ -14,7 +14,9 @@ export class UserService {
   userName: string;
   isAdmin: any;
   userId: any;
+  userWallet: any;
   users: User[] ;
+
 
   public isUserLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public isUserAdmin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -32,6 +34,8 @@ export class UserService {
     localStorage.clear();
   }
 
+  /** Functions to get specific user attributes from local storag e**/
+
   getIsLoggedIn(){
     this.userToken = localStorage.getItem('userToken');
     return !!(this.userToken);
@@ -45,6 +49,10 @@ export class UserService {
     return false;
   }
 
+  getToken(){
+    return this.userToken = localStorage.getItem('userToken');
+  }
+
   getUserName(){
     return this.userName = localStorage.getItem('userName');
   }
@@ -53,11 +61,15 @@ export class UserService {
     return this.userId = localStorage.getItem('userId');
   }
 
-  getToken(){
-    return this.userToken = localStorage.getItem('userToken');
+  getUserWallet(){
+    return this.userWallet = localStorage.getItem('userWallet')
+  }
+
+  getUser(userId: number){
+    return this.httpClient.get(environment.endpointURL + 'user/' + userId);
   }
 
   getUserList(){
-    this.httpClient.get(environment.endpointURL + 'user');
+    this.httpClient.get(environment.endpointURL + 'user/');
   }
 }

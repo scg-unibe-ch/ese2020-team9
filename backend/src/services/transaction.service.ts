@@ -66,52 +66,24 @@ export class TransactionService {
     }
 
     public confirmTransaction(transactionId: number): Promise<TransactionAttributes> {
-        return Transaction.findByPk(transactionId)
-            .then((foundTransaction) => {
-                if (foundTransaction != null) {
-                    console.log(foundTransaction.productId);
-                    Product.findByPk(foundTransaction.productId).then(foundProduct => {
-                        console.log(foundProduct);
-                        foundProduct.update({
-                            buyerId: foundTransaction.buyerId
-                        }).then(() => {
-                            console.log('lolol');
-                            console.log(foundProduct);
-                            console.log(foundTransaction);
-                            return Promise.resolve(foundTransaction);
-                        }).catch(err => Promise.reject(err));
-                    });
-                } else {
-                    return Promise.reject('Transaction not found!');
-                }
-            })
-            .catch(err => Promise.reject(err));
-        }
-
-
-            /*
-            return Product.findByPk(transaction.productId)
-        .then(product => {
-            product.update({
-                buyerId: buyerId
-            })
-
-            addBuyerIdtoProduct(transaction.productId)
-        }
+        return Transaction.findByPk(transactionId) 
+        .then((foundTransaction) => {
+            if (foundTransaction != null) {
+                return Product.findByPk(foundTransaction.productId).then(foundProduct => {
+                    return foundProduct.update({
+                        buyerId: foundTransaction.buyerId
+                    })
+                })
+        .then(() => {
+            return Promise.resolve(foundTransaction);
         })
-    }
-
-    private addBuyerIdToProduct(productId: number, buyerId: number): Promise<Product | void> {
-        return Product.findByPk(productId)
-        .then(product => {
-            product.update({
-                buyerId: buyerId
-            })
-            .then(() => Promise.resolve(product))
-            .catch(err => Promise.reject(err));
+            }
+            else {
+                return Promise.reject('Transaction not found!');
+            }
         })
+        .catch(err => Promise.reject(err));            
     }
-*/
 }
 
 

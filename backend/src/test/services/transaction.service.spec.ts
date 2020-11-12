@@ -185,69 +185,35 @@ describe('TransactionService Test', () => {
                 done();
             });
         })
-        after('clean up', function(done) {
-            User.destroy({
-                truncate: true,
-                restartIdentity: true
-            });
-            Product.destroy({
-                truncate: true,
-                restartIdentity: true
-            }).then(() => done());
-    
-        });
     });
-    describe('Test executeTransaction', () => {
-        before('add users and product to db', function(done) { // applicationPromise value must be assigned to app!!!
-            User.create(seller).then(() => {
-                User.create(buyer);
-            }).then(() => {
-                Product.create(product1);
-            }).then(() => {
-                Product.create(product2);
-            }).then(() => {
-                Transaction.create(transaction1);
-            }).then(() => {
-                Transaction.create(transaction2);
-            }).then(() => {
-                console.log("reached first done");
-                console.log(transaction1);
-                done();
-            });
-        });
-        
+    describe('Test executeTransaction', () => {      
         it('should successfully confirm and execute the transaction', function(done) {
             testedTransactionService.confirmTransaction(1).then(transaction => {
-                console.log('here');
-                console.log(transaction);
-                //expect(transaction.transactionId).to.be.eq(1);
+                expect(transaction.transactionId).to.be.eq(1);
                 //expect(transaction.transactionStatus).to.be.eq(2);
-                //expect(transaction.userId).to.be.eq(1);
-                //expect(transaction.buyerId).to.be.eq(2);
-                //expect(transaction.productId).to.be.eq(1);
+                expect(transaction.userId).to.be.eq(1);
+                expect(transaction.buyerId).to.be.eq(2);
+                expect(transaction.productId).to.be.eq(1);
                 
             }).then(() => {
-                console.log("reached second done");
                 done();
             });
         });
     });
-    /*
     after('clean up', function() {
-        setTimeout(function(){ alert("Hello"); }, 30000);
         User.destroy({
             truncate: true,
             restartIdentity: true
-        }).then(() => {
+        })
+        .then(() => {
             Product.destroy({
                 truncate: true,
                 restartIdentity: true
             })
-        }).then(() => {
-            console.log("reached third done");
-           
+        })
+        .then(() => {        
             Promise.resolve();
         });
 
-    });   */  
+    });   
 });

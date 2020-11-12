@@ -175,11 +175,28 @@ describe('TransactionController Test', () => { // bundles the tests related to t
             });
         });
     });
+    /*
+    describe('Test put', () => {
+        it('should confirm the transaction', function(done) {
+            chai.request(app).put('transaction/confirm/1').end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body.message).to.be.eq('Transaction successfully confirmed!');
+                done();
+            });
+        });
+    });
+    */
     after('clean up', function(done) {
         User.destroy({
             truncate: true,
             restartIdentity: true
+        });
+        Product.destroy({
+            truncate: true,
+            restartIdentity: true
         }).then(() => done());
+
     });
 })
 

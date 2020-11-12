@@ -1,4 +1,5 @@
 import { LoginResponse } from './../../models/login.model';
+import { Product, ProductAttributes } from './../../models/product.model';
 import { UserService } from './../../services/user.service';
 import { User, UserAttributes } from './../../models/user.model';
 import { expect } from 'chai';
@@ -25,6 +26,22 @@ describe('UserService Tests', () => {
     };
 
     describe('Test register', () => {
+        before('clean up', function() {
+            User.destroy({
+                truncate: true,
+                restartIdentity: true
+            }).then(() => {
+                Product.destroy({
+                    truncate: true,
+                    restartIdentity: true
+                })
+            }).then(() => {
+                console.log("reached user done");
+               
+                Promise.resolve();
+            });
+    
+        }); 
         it('should register user successfully', function(done) {
             testedUserService.register(user1).then(user => {
                 expect(user.userName).to.be.eq('jacky');
@@ -206,6 +223,14 @@ describe('UserService Tests', () => {
                 expect(err).to.have.property('message');
                 done();
             });
+        });
+    });
+    after('clean up', function(done) {
+        User.destroy({
+            truncate: true,
+            restartIdentity: true
+        }).then(() => {
+            done();
         });
     });
 });

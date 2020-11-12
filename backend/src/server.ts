@@ -11,7 +11,7 @@ import { TransactionController } from './controllers/transaction.controller';
 
 import cors from 'cors';
 import { ProductController } from './controllers/product.controller';
-    
+
 export class Server {
     private server: Application;
     private sequelize: Sequelize;

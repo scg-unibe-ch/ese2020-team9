@@ -302,6 +302,13 @@ describe('ProductService Tests', () => {
         User.destroy({
             truncate: true,
             restartIdentity: true
-        }).then(() => done());
+        }).then(() => {
+            Product.destroy({
+                truncate: true,
+                restartIdentity: true
+            })
+        }).then(() => {
+            done();
+        });
     });
 });

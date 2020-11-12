@@ -336,7 +336,7 @@ Request requires authorization header with a token from an admin.
 
 #### getting all products `"/products/"` 
 
-- Response body
+- Response-Body (if successful) (HTTP_STATUS_CODE 200)
     ```json
     [
         {   
@@ -381,7 +381,7 @@ Request requires authorization header with a token from an admin.
 
 #### getting all approved products `"/products/approved"` 
 
-- Response body
+- Response-Body (if successful) (HTTP_STATUS_CODE 200)
     ```json
     [
         {   
@@ -426,7 +426,7 @@ Request requires authorization header with a token from an admin.
 
 #### getting all unapproved products `"/products/unapproved"` 
 
-- Response body
+- Response-Body (if successful) (HTTP_STATUS_CODE 200)
     ```json
     [
         {   
@@ -473,7 +473,7 @@ Request requires authorization header with a token from an admin.
 
 for example `"/products/category/food"`
 
-- Response body
+- Response-Body (if successful) (HTTP_STATUS_CODE 200)
     ```json
     [
         {   
@@ -520,7 +520,7 @@ for example `"/products/category/food"`
 
 for example `"/products/user/2"`
 
-- Response body
+- Response-Body (if successful) (HTTP_STATUS_CODE 200)
     ```json
     [
         {   
@@ -568,7 +568,7 @@ for example `"/products/user/2"`
 for example `"/products/5"`
 
 
-- Response body
+- Response-Body (if successful) (HTTP_STATUS_CODE 200)
     ```json
     {   
         "productId": "5",
@@ -590,3 +590,182 @@ for example `"/products/5"`
     }
     ```
 
+## Transaction API
+
+#### Transaction Status:
+- 1: Transaction intialized (buyer clicked on buy)
+  - product is updated to isAvailable == false
+- 2: Transaction confirmed (seller confirmed transaction)
+  - money is transferred
+  - product is updated wit sellDate and buyerId
+- 3: Transaction declined (seller declined)
+  - product is updated back to isAvailable == true
+
+### intialize a transaction `"/transaction/"` (POST)
+
+- Request Body
+    ```json
+    {   
+        "transactionId": "number",
+        "productId": "number",
+        "userId": "number",
+        "buyerId": "number",   
+        "transactionStatus": "number",
+        "deliveryFirstName": "string",
+        "deliveryLastName": "string",
+        "deliveryStreet": "string",
+        "deliveryPin": "string",
+        "deliveryCity": "string",
+        "deliveryCountry": "string"
+    }
+    ```
+
+- Response (STATUS 200)
+
+    ```json
+    {
+        "message": "Transaction successfully initialized!"
+    }
+    ```
+
+### getting transcactions (GET)
+
+#### getting all transactions of seller `"/transaction/sell/:userId"` 
+
+- Response-Body (if successful) (HTTP_STATUS_CODE 200)
+    ```json
+    [
+        {   
+            "transactionId": "number",
+            "productId": "number",
+            "userId": "number",
+            "buyerId": "number",   
+            "transactionStatus": "number",
+            "deliveryFirstName": "string",
+            "deliveryLastName": "string",
+            "deliveryStreet": "string",
+            "deliveryPin": "string",
+            "deliveryCity": "string",
+            "deliveryCountry": "string"
+        }, 
+        {   
+            "transactionId": "number",
+            "productId": "number",
+            "userId": "number",
+            "buyerId": "number",   
+            "transactionStatus": "number",
+            "deliveryFirstName": "string",
+            "deliveryLastName": "string",
+            "deliveryStreet": "string",
+            "deliveryPin": "string",
+            "deliveryCity": "string",
+            "deliveryCountry": "string"
+        },
+        ...
+    ]
+    ```
+
+#### getting all transactions of buyer `"/transaction/buy/:userId"` 
+
+- Response-Body (if successful) (HTTP_STATUS_CODE 200)
+    ```json
+    [
+        {   
+            "transactionId": "number",
+            "productId": "number",
+            "userId": "number",
+            "buyerId": "number",   
+            "transactionStatus": "number",
+            "deliveryFirstName": "string",
+            "deliveryLastName": "string",
+            "deliveryStreet": "string",
+            "deliveryPin": "string",
+            "deliveryCity": "string",
+            "deliveryCountry": "string"
+        }, 
+        {   
+            "transactionId": "number",
+            "productId": "number",
+            "userId": "number",
+            "buyerId": "number",   
+            "transactionStatus": "number",
+            "deliveryFirstName": "string",
+            "deliveryLastName": "string",
+            "deliveryStreet": "string",
+            "deliveryPin": "string",
+            "deliveryCity": "string",
+            "deliveryCountry": "string"
+        },
+        ...
+    ]
+    ```
+
+#### getting all transactions of seller with certain status `"/transaction/sell/:userId/status/:transactionStatus"` 
+
+- Response-Body (if successful) (HTTP_STATUS_CODE 200)
+    ```json
+    [
+        {   
+            "transactionId": "number",
+            "productId": "number",
+            "userId": "number",
+            "buyerId": "number",   
+            "transactionStatus": "number",
+            "deliveryFirstName": "string",
+            "deliveryLastName": "string",
+            "deliveryStreet": "string",
+            "deliveryPin": "string",
+            "deliveryCity": "string",
+            "deliveryCountry": "string"
+        }, 
+        {   
+            "transactionId": "number",
+            "productId": "number",
+            "userId": "number",
+            "buyerId": "number",   
+            "transactionStatus": "number",
+            "deliveryFirstName": "string",
+            "deliveryLastName": "string",
+            "deliveryStreet": "string",
+            "deliveryPin": "string",
+            "deliveryCity": "string",
+            "deliveryCountry": "string"
+        },
+        ...
+    ]
+    ```
+
+#### getting all transactions of buyer with certain status `"/transaction/buy/:userId/status/:transactionStatus"` 
+
+- Response-Body (if successful) (HTTP_STATUS_CODE 200)
+    ```json
+    [
+        {   
+            "transactionId": "number",
+            "productId": "number",
+            "userId": "number",
+            "buyerId": "number",   
+            "transactionStatus": "number",
+            "deliveryFirstName": "string",
+            "deliveryLastName": "string",
+            "deliveryStreet": "string",
+            "deliveryPin": "string",
+            "deliveryCity": "string",
+            "deliveryCountry": "string"
+        }, 
+        {   
+            "transactionId": "number",
+            "productId": "number",
+            "userId": "number",
+            "buyerId": "number",   
+            "transactionStatus": "number",
+            "deliveryFirstName": "string",
+            "deliveryLastName": "string",
+            "deliveryStreet": "string",
+            "deliveryPin": "string",
+            "deliveryCity": "string",
+            "deliveryCountry": "string"
+        },
+        ...
+    ]
+    ```

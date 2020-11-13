@@ -1,9 +1,16 @@
+import { EmailService } from './email.service';
 import { UserAttributes, UserEditingAttributes, User } from '../models/user.model';
 import { LoginResponse, LoginRequest } from '../models/login.model';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 export class UserService {
+
+    private emailService: EmailService;
+
+    public UserService() {
+        this.emailService = new EmailService();
+    }
 
     public register(user: UserAttributes): Promise<UserAttributes> {
         const saltRounds = 12;
@@ -87,5 +94,19 @@ export class UserService {
     public changeUser(user: UserEditingAttributes): Promise<User> {
         return User.findByPk(user.userId).then(foundUser => foundUser.update(user))
             .catch(err => Promise.reject({message: err}));
+    }
+
+    // sends an email with a link to restore a forgotten password
+    public sendEmailWithResetLink(email: string): Promise<void> {
+        // TODO: look up user belonging to email
+        // TODO: generate Token which is valid only for 15 minutes
+        // TODO: send an email using the email server
+        return Promise.resolve();
+    }
+
+    // restores a forgotten password
+    public restorePassword(userLogin: string, newPassword: string): Promise<void> {
+        // TODO change password
+        return Promise.resolve();
     }
 }

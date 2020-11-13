@@ -29,6 +29,13 @@ export function verifyAdmin(req: Request, res: Response, next: any) {
     res.status(403).send({ message: 'This User is not an Admin' });
     }
 }
+
+// checks if the token for the password change request is valid
+export function verifyPasswordToken(req: Request, res: Response, next: any) {
+    // TODO check token in header if valid and deny access if necessary
+    next();
+}
+
 // helper-function which decodes the Token
 function decodeToken (req: Request, res: Response): any {
 

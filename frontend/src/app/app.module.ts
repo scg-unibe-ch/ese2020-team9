@@ -31,6 +31,8 @@ import { ScrollingModule } from "@angular/cdk/scrolling";
 import { MatRadioModule } from "@angular/material/radio";
 import { SearchComponent } from './components/dashboard/search/search.component';
 import { MatSelectModule } from "@angular/material/select";
+import { SearchCategoryComponent } from './components/dashboard/search-category/search-category.component';
+import { MatChipsModule} from "@angular/material/chips";
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import { MatSelectModule } from "@angular/material/select";
     PageNotFoundComponent,
     ProductFormComponent,
     SearchComponent,
+    SearchCategoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +70,7 @@ import { MatSelectModule } from "@angular/material/select";
     ScrollingModule,
     MatRadioModule,
     MatSelectModule,
+    MatChipsModule,
   ],
   providers: [
     {

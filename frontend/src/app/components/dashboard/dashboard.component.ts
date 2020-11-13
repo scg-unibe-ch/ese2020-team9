@@ -48,4 +48,11 @@ export class DashboardComponent implements OnInit {
       this.productList = data;
     });
   }
+
+  /*
+  getAllCategory(){
+    this.productService.getAllCategory().subscribe((data: ProductItem []) => {
+      this.productList = data;
+    });
+  }*/
 }

@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { Search } from "../../../models/search.model";
-import { Category } from "../../../models/category";
 import {environment} from "../../../../environments/environment";
 import {ProductItem} from "../../../models/product-item.model";
 import {HttpClient} from "@angular/common/http";
@@ -31,7 +30,7 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+/*
   getSearchInput(){
     this.httpClient.post(environment.endpointURL + 'products/search/', {
       name: this.name,
@@ -47,8 +46,8 @@ export class SearchComponent implements OnInit {
       return 'Could not Search';
     });
   }
-
-  /*getSearchInput(){
+*/
+  getSearchInput(){
     this.search = new Search(
       this.name,
       this.location,
@@ -59,11 +58,16 @@ export class SearchComponent implements OnInit {
       this.category,
     );
     this.searchInput.emit(this.search);
-  }*/
+  }
 
-  categories: Category[] = [
+  categories =  [
+    {value: '', viewValue: 'None'},
+    {value: 'AntiquesAndArt', viewValue: 'Antiques & Art'},
+    {value: 'BabyAndChild', viewValue: 'Baby & Child'},
+  ];
+  /*categories: Category[] = [
     {value: '', viewValue: 'None'},
     {value: 'AntiquesAndArt', viewValue: 'Antiques & Art'},
     {value: 'BabyAndChild', viewValue: 'Baby & Child'}
-  ];
+  ];*/
 }

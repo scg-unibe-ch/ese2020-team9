@@ -77,7 +77,7 @@ describe('TransactionService Test', () => {
         isApproved: false,
         isService: false,
         isRentable: null,
-        isAvailable: true,
+        isAvailable: false,
         userId: 1,
         userReview: null,
         buyerId: null
@@ -111,14 +111,28 @@ describe('TransactionService Test', () => {
         deliveryCountry: null
     }
 
+    const transaction3: TransactionAttributes = {
+        transactionId: 3,
+        productId: 2,
+        userId: 2,
+        buyerId: 1,   
+        transactionStatus: 1,
+        deliveryFirstName: null, 
+        deliveryLastName: null,
+        deliveryStreet: null, 
+        deliveryPin: null,
+        deliveryCity: null,
+        deliveryCountry: null
+    }
+
     before('add users and product to db', function(done) { // applicationPromise value must be assigned to app!!!
         User.create(seller).then(() => {
             User.create(buyer);
         }).then(() => {
             Product.create(product1);
         }).then(() => {
-                done();
-            });
+            done();
+        });
     });
     describe('Test startTransaction()', () => { 
         it('should successfully initialize a transaction', function(done) { 
@@ -134,7 +148,18 @@ describe('TransactionService Test', () => {
                 }).then(foundTransaction => {
                     expect(foundTransaction).not.to.be.eq(null);
                     done();
-                });
+                });   
+            });
+        });
+        it('should update the product to buy successfully', function(done) {                 
+            Product.findOne({
+                where: {
+                    productId: 1,
+                    isAvailable: false,
+                }
+            }).then(foundProduct => {
+                expect(foundProduct).not.to.be.eq(null);
+                done();
             });
         });
     });
@@ -154,7 +179,7 @@ describe('TransactionService Test', () => {
             }).then(() =>{
                 done();
             });
-        })
+        });
         it('should get all transactions of seller', function(done) {
             testedTransactionService.getAllTransactionsOfSeller(2).then(transaction => {
                 expect(transaction[0].transactionId).to.be.eq(2);
@@ -164,7 +189,7 @@ describe('TransactionService Test', () => {
             }).then(() =>{
                 done();
             });
-        })
+        });
         it('should get all transactions of buyer with status', function(done) {
             testedTransactionService.getTransactionsOfBuyer(1, 2).then(transaction => {
                 expect(transaction[0].transactionId).to.be.eq(2);
@@ -174,7 +199,7 @@ describe('TransactionService Test', () => {
             }).then(() =>{
                 done();
             });
-        })
+        });
         it('should get all transactions of seller with status', function(done) {
             testedTransactionService.getTransactionsOfSeller(1, 1).then(transaction => {
                 expect(transaction[0].transactionId).to.be.eq(1);
@@ -184,18 +209,84 @@ describe('TransactionService Test', () => {
             }).then(() =>{
                 done();
             });
-        })
+        });
     });
-    describe('Test executeTransaction', () => {      
+    describe('Test confirm Transaction', () => {      
         it('should successfully confirm and execute the transaction', function(done) {
             testedTransactionService.confirmTransaction(1).then(transaction => {
                 expect(transaction.transactionId).to.be.eq(1);
-                //expect(transaction.transactionStatus).to.be.eq(2);
+                expect(transaction.transactionStatus).to.be.eq(2);
                 expect(transaction.userId).to.be.eq(1);
                 expect(transaction.buyerId).to.be.eq(2);
                 expect(transaction.productId).to.be.eq(1);
-                
-            }).then(() => {
+                done();
+            });
+        });
+        it('should update the bought product successfully', function(done) {
+            Product.findOne({
+                where: {
+                    productId: 1,
+                    isAvailable: false,
+                    buyerId: 2
+                }
+            }).then(foundProduct => {
+                expect(foundProduct).not.to.be.eq(null);
+                done();
+            });
+        });
+        it('should update the buyer successfully', function(done) {
+            User.findOne({
+                where: {
+                    userId: 2,
+                    wallet: 490
+                }
+            }).then(foundUser => {
+                expect(foundUser).not.to.be.eq(null);
+                done();
+            });
+        });
+        it('should update the seller successfully', function(done) {
+            User.findOne({
+                where: {
+                    userId: 1,
+                    wallet: 510
+                }
+            }).then(foundUser => {
+                expect(foundUser).not.to.be.eq(null);
+                done();
+            });
+        });
+    });
+    describe('Test declineTransaction()', () => { 
+        before('add additional transaction to db', function(done) {
+            Transaction.create(transaction3).then(() => {
+                done();
+            });
+        });
+        it('should successfully decline a transaction', function(done) { 
+            testedTransactionService.declineTransaction(3).then(transaction => {
+                expect(transaction.transactionId).to.be.eq(3);
+                expect(transaction.transactionStatus).to.be.eq(3);
+                expect(transaction.userId).to.be.eq(2);
+                expect(transaction.buyerId).to.be.eq(1);
+                Transaction.findOne({
+                    where: {
+                        transactionId: 3
+                    }
+                }).then(foundTransaction => {
+                    expect(foundTransaction).not.to.be.eq(null);
+                    done();
+                });   
+            });
+        });
+        it('should update the product to buy successfully', function(done) {                 
+            Product.findOne({
+                where: {
+                    productId: 2,
+                    isAvailable: true,
+                }
+            }).then(foundProduct => {
+                expect(foundProduct).not.to.be.eq(null);
                 done();
             });
         });

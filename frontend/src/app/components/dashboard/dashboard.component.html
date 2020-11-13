@@ -28,9 +28,11 @@
       </mat-card-content>
 
       <mat-card-actions *ngIf="isUserLoggedIn" align="end">
-        <button mat-flat-button color="warn" (click)="buyProduct()">Buy</button>
+        <button mat-flat-button class="button_fill" color="warn"  [routerLink]="['/productDetail', productItem.productId]" routerLinkActive="active" ><b>Check Details</b></button>
+
       </mat-card-actions>
-      <hr>
+
+        <hr>
 
       <br>
       <button mat-button class="button_fill" [routerLink]="['/', productItem.productCategory]" routerLinkActive="active" ><mat-icon >chevron_right</mat-icon>{{productItem.productCategory}}</button>

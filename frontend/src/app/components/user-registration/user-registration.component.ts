@@ -72,7 +72,7 @@ export class UserRegistrationComponent implements OnInit {
            localStorage.setItem('userId', res.userId);
            localStorage.setItem('userName', res.userName);
            localStorage.setItem('admin', res.admin);
-           localStorage.setItem('userWallet', res.user.wallet);
+           localStorage.setItem('userWallet', res.wallet);
            this.userId = res.userId;
            let message = "Registration complete!";
            let action = "Welcome";

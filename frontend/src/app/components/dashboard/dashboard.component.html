@@ -1,22 +1,26 @@
-<br>
-<h2>Product List</h2>
+<app-search (searchInput)="searchProduct($event)">
+</app-search>
+
+<div *ngFor="let product of searchList">
+  {{product.productDescription}}
+</div>
 
 <div class="productList_dashboard" fxLayout="row wrap" fxLayoutGap="2% grid" fxLayoutAlign="space-evenly stretch">
-  <div fxFlex="10%" fxFlex.xl="10%" fxFlex.lg="15%" fxFlex.md="20%" fxFlex.sm="33%" fxFlex.xs="50%" *ngFor="let productItem of productList; trackBy: trackByFn">
+  <div fxFlex="10%" fxFlex.xl="10%" fxFlex.lg="15%" fxFlex.md="20%" fxFlex.sm="33%" fxFlex.xs="50%" *ngFor="let productItem of productList">
 
     <mat-card>
 
       <mat-card-header>
         <!--<img mat-card-avatar src="" alt="Profile Picture">-->
         <mat-card-title>{{productItem.productName}}</mat-card-title>
-        <mat-card-subtitle>{{productItem.uploadDate | date: "dd.MM.yy, HH:mm"}} Uhr</mat-card-subtitle>
+        <!--<mat-card-subtitle>{{productItem.uploadDate | date: "dd.MM.yy, HH:mm"}} Uhr</mat-card-subtitle>-->
       </mat-card-header>
 
 
       <mat-card-content>
         <img mat-card-image width="100%" height="100px" src="{{productItem.productImage}}" alt="{{productItem.productName}}" >
       </mat-card-content>
-
+<!--
       <mat-card-content>
         <p class="text">
           Price: <b>{{productItem.productPrice}} CHF</b>
@@ -38,7 +42,7 @@
         <span *ngIf="productItem.isService">Service </span>
         <span *ngIf="productItem.isRentable">rentable </span>
         <span *ngIf="productItem.isAvailable">available</span>
-      </mat-card-footer>
+      </mat-card-footer>-->
     </mat-card>
   </div>
 </div>

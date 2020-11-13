@@ -29,6 +29,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ProductFormComponent } from './components/productForm/productForm.component';
 import { ScrollingModule } from "@angular/cdk/scrolling";
 import { MatRadioModule } from "@angular/material/radio";
+import { SearchComponent } from './components/dashboard/search/search.component';
+import { MatSelectModule } from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import { MatRadioModule } from "@angular/material/radio";
     DashboardComponent,
     PageNotFoundComponent,
     ProductFormComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,6 +66,7 @@ import { MatRadioModule } from "@angular/material/radio";
     FlexLayoutModule,
     ScrollingModule,
     MatRadioModule,
+    MatSelectModule,
   ],
   providers: [
     {

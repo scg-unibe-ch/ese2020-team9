@@ -66,6 +66,26 @@ const user1: UserAttributes = {
     addressCountry: 'England'
 };
 
+const product3: ProductAttributes = {
+    productId : 3,
+    productName: 'Formaggio',
+    productDescription: 'Un molto buono formaggio di Ticino.',
+    productImage: null,
+    productPrice: 30,
+    productCategory: 'food',
+    productLocation: null,
+    productDelivery: null,
+    uploadDate: new Date(Date.now()),
+    sellDate: null,
+    isApproved: false,
+    isService: false,
+    isRentable: null,
+    isAvailable: false,
+    userId: 1,
+    userReview: null,
+    buyerId: 2
+};
+
 describe('ProductController Test', () => { // bundles the tests related to the ProductController
     before('init app', function(done) { // applicationPromise value must be assigned to app!!!
         applicationPromise.then(value => {
@@ -133,19 +153,6 @@ describe('ProductController Test', () => { // bundles the tests related to the P
                 done();
             });
         });
-        /*
-        it('should successfully approve product', function(done) {
-            chai.request(app).put('/products/approve/1').send({ // login as admin to get valid token
-                userLogin: 'admin',
-                password: 'adminPW'
-            }).end(function(err, res) {
-                expect(err).to.be.eq(null);
-                //expect(res).to.have.status(200);
-                expect(res.body.message).to.be.eq('Successfully approved product 1!');
-                done();
-            });
-        })
-        */
     });
     describe('Test Delete', () => {
         it('should successfully delete a product', function(done) {
@@ -161,7 +168,9 @@ describe('ProductController Test', () => { // bundles the tests related to the P
     describe('Test Get', () => {
         before('init db with user', function(done) {
             Product.create(product1).then(() => {
-                return Product.create(product2);
+                Product.create(product2).then(() => {
+                    return Product.create(product3);
+                })
             }).then(() => {
                 done();
             });
@@ -211,6 +220,22 @@ describe('ProductController Test', () => { // bundles the tests related to the P
                 expect(err).to.be.eq(null);
                 expect(res).to.have.status(200);
                 expect(res.body.productId).to.be.eq(2);
+                done();
+            });
+        });
+        it('should successfully get all sold products of user', function(done){
+            chai.request(app).get('/products/sold/1').end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body[0].productId).to.be.eq(3);
+                done();
+            });
+        });
+        it('should successfully get all bought products of user', function(done){
+            chai.request(app).get('/products/bought/2').end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body[0].productId).to.be.eq(3);
                 done();
             });
         });

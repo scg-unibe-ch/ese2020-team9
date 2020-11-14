@@ -84,8 +84,35 @@ export class ProductService {
         return Product.findAll({
             where: {
                 isApproved: false
-            },
+            }
         }).catch(err => Promise.reject(err));
+    }
+
+    public getBoughtProducts(buyerId: number): Promise<Product[]> {
+        const { Op } = require('sequelize');
+        return Product.findAll({
+            where: {
+              [Op.and]: [
+                { buyerId: buyerId }
+              ]
+            }
+        })
+        .catch(err => Promise.reject(err));
+    }
+
+    public getSoldProducts(userId: number): Promise<Product[]> {
+        const { Op } = require('sequelize');
+        return Product.findAll({
+            where: {
+              [Op.and]: [
+                { 
+                    userId: userId, 
+                    buyerId: {[Op.ne]: null} 
+                }
+              ]
+            }
+        })
+        .catch(err => Promise.reject(err));
     }
 
     public deleteProduct(id: number): Promise<Product> {

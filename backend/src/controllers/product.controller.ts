@@ -69,6 +69,18 @@ productController.get('/:productId', (req: Request, res: Response) => {
 }
 ); // get product by id
 
+productController.get('/bought/:userId', (req: Request, res: Response) => {
+    productService.getBoughtProducts(parseInt(req.params.userId, 10)).then(product =>
+         res.status(200).send(product)).catch(err => res.status(404).send(err));
+}
+); // get all bought products of a user
+
+productController.get('/sold/:userId', (req: Request, res: Response) => {
+    productService.getSoldProducts(parseInt(req.params.userId, 10)).then(product =>
+         res.status(200).send(product)).catch(err => res.status(404).send(err));
+}
+); // get all bought products of a user
+
 
 // Endpoint to buy a product
 productController.put('/buy/:productId/buyer/:buyerId', (req: Request, res: Response) => {

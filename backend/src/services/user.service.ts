@@ -8,7 +8,7 @@ export class UserService {
 
     private emailService: EmailService;
 
-    public UserService() {
+    public constructor() {
         this.emailService = new EmailService();
     }
 
@@ -106,12 +106,12 @@ export class UserService {
         return User.findOne({
             where: { userMail: email}
         }).then(user => {
-
-                const token: string = jwt.sign({ userName: user.userName, userId: user.userId }, secret, { expiresIn: '15m' });
-                this.emailService.sendPasswordRestorationMail(email, token).catch(err => Promise.reject(err));
-                return user;
-
-        }).catch(err => Promise.reject({message: err}));
+            const token: string = jwt.sign({ userName: user.userName, userId: user.userId }, secret, { expiresIn: '15m' });
+            return this.emailService.sendPasswordRestorationMail(user.userName, email, token);
+        }).then(info => {
+            return Promise.resolve(info);
+        })
+        .catch(err => Promise.reject({message: err}));
 
     }
 

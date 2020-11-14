@@ -5,13 +5,14 @@ export class EmailService {
 
     private mailTransport: Mail;
 
-    public EmailService() {
+    public constructor() {
         this.instantiateMailer();
     }
 
-    public sendPasswordRestorationMail(receiver: string, token: string): Promise<any> {
-        const mailOptions = this.createPWMailPayload(token);
-        mailOptions.to = receiver;
+    public sendPasswordRestorationMail(username: string, email: string, token: string): Promise<any> {
+        const mailOptions = this.createPWMailPayload(token, username);
+        mailOptions.to = email;
+        console.log('Checkpoint!');
         return new Promise((resolve, reject) => {
             this.mailTransport.sendMail(mailOptions, function(err, info) {
                 if (err) {
@@ -24,6 +25,7 @@ export class EmailService {
     }
 
     private instantiateMailer() {
+        console.log('instantiate me!');
         this.mailTransport = nodemailer.createTransport({
             host: 'smtp.mail.ch',
             port: 465,
@@ -36,7 +38,7 @@ export class EmailService {
     }
 
     // creates the mail payload for a password forgotten request
-    private createPWMailPayload(token: string) {
+    private createPWMailPayload(token: string, username: string) {
         return {
             from: 'stor@mail.ch',
             to: '',

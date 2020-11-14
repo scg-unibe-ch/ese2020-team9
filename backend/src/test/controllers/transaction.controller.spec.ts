@@ -178,7 +178,17 @@ describe('TransactionController Test', () => { // bundles the tests related to t
     /*
     describe('Test put', () => {
         it('should confirm the transaction', function(done) {
-            chai.request(app).put('transaction/confirm/1').end(function(err, res) {
+            chai.request(app).patch('transaction/confirm/1').send({
+                productId: 1,
+                userId: 2,
+                buyerId: 1,   
+                deliveryFirstName: null, 
+                deliveryLastName: null,
+                deliveryStreet: null, 
+                deliveryPin: null,
+                deliveryCity: null,
+                deliveryCountry: null
+            }).end(function(err, res) {
                 expect(err).to.be.eq(null);
                 expect(res).to.have.status(200);
                 expect(res.body.message).to.be.eq('Transaction successfully confirmed!');

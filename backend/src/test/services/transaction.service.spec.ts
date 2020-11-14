@@ -256,6 +256,18 @@ describe('TransactionService Test', () => {
                 done();
             });
         });
+        it('should not confirm a transaction if buyer does not have enough money', function(done) {        
+            User.findByPk(2).then((foundUser) => {
+                foundUser.update({
+                    wallet: 9
+                })
+            }).then(() => {
+                testedTransactionService.confirmTransaction(1).catch(error => {
+                    expect(error.message).to.be.eq('Not enough money available to buy the product!');
+                    done();
+                });
+            });
+        });
     });
     describe('Test declineTransaction()', () => { 
         before('add additional transaction to db', function(done) {

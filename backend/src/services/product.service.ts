@@ -105,9 +105,9 @@ export class ProductService {
         return Product.findAll({
             where: {
               [Op.and]: [
-                { 
-                    userId: userId, 
-                    buyerId: {[Op.ne]: null} 
+                {
+                    userId: userId,
+                    buyerId: {[Op.ne]: null}
                 }
               ]
             }

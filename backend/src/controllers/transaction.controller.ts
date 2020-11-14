@@ -1,7 +1,5 @@
-import express, { response } from 'express';
+import express from 'express';
 import { Router, Request, Response } from 'express';
-import { request } from 'http';
-import { Transaction } from 'sequelize/types';
 import { TransactionService } from '../services/transaction.service';
 
 const transactionController: Router = express.Router();
@@ -27,7 +25,8 @@ transactionController.get('/buy/:userId', (req: Request, res: Response) => {
 });
 
 transactionController.get('/sell/:userId/status/:transactionStatus', (req: Request, res: Response) => {
-    transactionService.getTransactionsOfSeller(parseInt( req.params.userId, 10), parseInt(req.params.transactionStatus, 10))
+    transactionService.getTransactionsOfSeller(parseInt( req.params.userId, 10),
+                                               parseInt(req.params.transactionStatus, 10))
     .then((transactions) => res.status(200).send(transactions))
     .catch(err => res.status(404).send(err));
 });

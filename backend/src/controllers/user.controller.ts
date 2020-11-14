@@ -3,8 +3,10 @@ import express, { Router, Request, Response } from 'express';
 import { UserService } from '../services/user.service';
 import { verifyAdmin, verifyToken, verifyPasswordToken } from '../middlewares/checkAuth';
 
+
 const userController: Router = express.Router();
 const userService = new UserService();
+
 
 userController.post('/register',
     (req: Request, res: Response) => {
@@ -63,16 +65,18 @@ userController.put('/makeAdmin/:id', verifyAdmin,
 // Request must contain usermail!
 userController.post('/passwordForgotten',
     (req: Request, res: Response) => {
-        userService.sendEmailWithResetLink(req.body.userEmail).then(() => res.send({message: 'We sent you an email, check out your mail box!'}))
-        .catch(() => res.status(404).send({message: 'This email is not registeret, please sign up!'}));
+        userService.sendEmailWithResetLink(req.body.userEmail)
+        .then(() => res.send({message: 'We sent you an email, check out your mail box!'}))
+        .catch((err) => res.status(404).send(err));
     }
 );
 
 // Request must also contain the username or the email to being able to identify the user
 userController.post('/restorePassword', verifyPasswordToken,
     (req: Request, res: Response) => {
-        userService.restorePassword(req.body.userLogin, req.body.password).then(() => res.send({message: 'Successfully changed the password, you now may sign in!'}))
-            .catch(() => res.status(500).send({message: 'Failed to change the password, please try again!'}));
+        userService.restorePassword(req.body.userLogin, req.body.password)
+        .then(() => res.send({message: 'Successfully changed the password, you now may sign in!'}))
+        .catch(() => res.status(500).send({message: 'Failed to change the password, please try again!'}));
     }
 );
 

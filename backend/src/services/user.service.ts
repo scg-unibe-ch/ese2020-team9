@@ -97,16 +97,44 @@ export class UserService {
     }
 
     // sends an email with a link to restore a forgotten password
-    public sendEmailWithResetLink(email: string): Promise<void> {
+    public sendEmailWithResetLink(email: string): Promise<any> {
         // TODO: look up user belonging to email
         // TODO: generate Token which is valid only for 15 minutes
         // TODO: send an email using the email server
-        return Promise.resolve();
+        const secret = process.env.JWT_PW_SECRET;
+        // Sending the mail NOT WORKING YET
+        return User.findOne({
+            where: { userMail: email}
+        }).then(user => {
+
+                const token: string = jwt.sign({ userName: user.userName, userId: user.userId }, secret, { expiresIn: '15m' });
+                this.emailService.sendPasswordRestorationMail(email, token).catch(err => Promise.reject(err));
+                return user;
+
+        }).catch(err => Promise.reject({message: err}));
+
     }
 
     // restores a forgotten password
     public restorePassword(userLogin: string, newPassword: string): Promise<void> {
+        // NOT WORKING YET
         // TODO change password
-        return Promise.resolve();
+        const { Op } = require('sequelize');
+        const saltRounds = 12;
+        const hashedPassword: string = bcrypt.hashSync(newPassword, saltRounds);
+        return User.findOne({
+            where:  {
+                [Op.or]: [
+                {userName: userLogin},
+                {userMail: userLogin}
+                ]
+            }
+        }).then(user => {
+            user.update({
+                password: hashedPassword
+            });
+            return Promise.resolve();
+        }) .catch(err => Promise.reject({message: err}));
+
     }
 }

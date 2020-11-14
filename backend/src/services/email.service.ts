@@ -12,7 +12,6 @@ export class EmailService {
     public sendPasswordRestorationMail(username: string, email: string, token: string): Promise<any> {
         const mailOptions = this.createPWMailPayload(token, username);
         mailOptions.to = email;
-        console.log('Checkpoint!');
         return new Promise((resolve, reject) => {
             this.mailTransport.sendMail(mailOptions, function(err, info) {
                 if (err) {
@@ -25,7 +24,6 @@ export class EmailService {
     }
 
     private instantiateMailer() {
-        console.log('instantiate me!');
         this.mailTransport = nodemailer.createTransport({
             host: 'smtp.mail.ch',
             port: 465,
@@ -43,15 +41,12 @@ export class EmailService {
             from: 'stor@mail.ch',
             to: '',
             subject: 'STOR - Reset password',
-            // TODO: improve html
-            html: '<h2>Requested Password Resetting</h2>' +
-                '<br>' +
-                '<p>You have requested a resetting of your password for the login in STOR, please ' +
-                'use the following link, to reset your password. The link is only valid for 15 minutes!</p>' +
-                '<br>' +
-                '<a href="http://localhost:3000/resetPassword/' + token + '">Reset Password</a>' +
-                '<br>' +
-                '<p>Greetings <br> Your STOR Team</p>'
+            html: '<p>Hi ' + username + ',<br>' +
+                'We got a request to reset your STOR password. Click on the link below, to do so.<br></p>' +
+                '<a href="http://localhost:3000/resetPassword/' + token + '">Reset Password</a><br>' +
+                '<p>The link is only valid for 15 minutes. If you did not request the password change, you may ' +
+                'ignore this email.<br><br>' +
+                'Greetings <br> Your STOR Team</p>'
         };
     }
 }

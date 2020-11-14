@@ -5,6 +5,7 @@
     "env": {
         "PORT": 3000,
         "JWT_SECRET": "not_secure",
+        "JWT_PW_SECRET": "password_securator",
         "NODE_ENV": "local"
     }
 }

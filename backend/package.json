@@ -9,7 +9,7 @@
     "prestart": "npm run build",
     "dev": "nodemon",
     "start": "node .",
-    "test": "cross-env NODE_ENV=test cross-env JWT_SECRET=not_secure mocha -r ts-node/register src/test/**/*.spec.ts"
+    "test": "cross-env NODE_ENV=test cross-env JWT_SECRET=not_secure JWT_PW_SECRET=password_securator mocha -r ts-node/register src/test/**/*.spec.ts"
   },
   "dependencies": {
     "@types/cors": "^2.8.7",

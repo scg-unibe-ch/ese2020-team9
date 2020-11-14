@@ -2,6 +2,7 @@ import { ProductService } from './../../services/product.service';
 import { Product, ProductAttributes   } from './../../models/product.model';
 import { expect } from 'chai';
 import { User, UserAttributes } from '../../models/user.model';
+import {SearchRequest} from '../../models/search.model';
 
 describe('ProductService Tests', () => {
     const testedProductService: ProductService = new ProductService();
@@ -35,7 +36,7 @@ describe('ProductService Tests', () => {
         productDelivery: null,
         uploadDate: new Date(Date.now()),
         sellDate: null,
-        isApproved: true,
+        isApproved: false,
         isService: false,
         isRentable: null,
         isAvailable: true,
@@ -54,7 +55,7 @@ describe('ProductService Tests', () => {
         productDelivery: null,
         uploadDate: new Date(Date.now()),
         sellDate: null,
-        isApproved: true,
+        isApproved: false,
         isService: false,
         isRentable: null,
         isAvailable: true,
@@ -80,6 +81,60 @@ describe('ProductService Tests', () => {
         userId: 1,
         userReview: null
     };
+    const product4: ProductAttributes = {
+        productId : 3,
+        productName: 'Drone',
+        productDescription: 'Endlessly flying drone with autonomous electricity due to solar power.',
+        productImage: null,
+        productPrice: 850,
+        productCategory: 'ComputerAndComputerAccessories',
+        productLocation: 'Bern',
+        productDelivery: true,
+        uploadDate: new Date(Date.now()),
+        sellDate: null,
+        isApproved: true,
+        isService: false,
+        isRentable: null,
+        isAvailable: true,
+        userId: 1,
+        userReview: null
+    };
+    const product5: ProductAttributes = {
+        productId : 4,
+        productName: 'Shovel',
+        productDescription: 'A strong shovel made from steel, useful for various tasks around the house in winter and summer.',
+        productImage: null,
+        productPrice: 15,
+        productCategory: 'Miscellaneous',
+        productLocation: 'Bern',
+        productDelivery: false,
+        uploadDate: new Date(Date.now()),
+        sellDate: null,
+        isApproved: true,
+        isService: false,
+        isRentable: null,
+        isAvailable: false,
+        userId: 1,
+        userReview: null
+    };
+    const product6: ProductAttributes = {
+        productId : 5,
+        productName: 'Massage',
+        productDescription: 'One hour of thai massage.',
+        productImage: null,
+        productPrice: 120,
+        productCategory: 'Miscellaneous',
+        productLocation: 'Zürich',
+        productDelivery: false,
+        uploadDate: new Date(Date.now()),
+        sellDate: null,
+        isApproved: true,
+        isService: true,
+        isRentable: null,
+        isAvailable: true,
+        userId: 1,
+        userReview: null
+    };
 
     before('add user to db', function(done) {
         User.create(user1).then(() => {
@@ -94,7 +149,7 @@ describe('ProductService Tests', () => {
                 expect(product.productDescription).to.be.eq('E feini Schoggi us Guetemala.');
                 expect(product.productPrice).to.be.eq(10);
                 expect(product.productCategory).to.be.eq('food');
-                expect(product.isApproved).to.be.eq(true);
+                expect(product.isApproved).to.be.eq(false);
                 expect(product.isService).to.be.eq(false);
                 expect(product.isAvailable).to.be.eq(true);
                 expect(product.userId).to.be.eq(1);
@@ -117,7 +172,7 @@ describe('ProductService Tests', () => {
                 expect(product.productDescription).to.be.eq('E sehr feini Schoggi us Guetemala.');
                 expect(product.productPrice).to.be.eq(20);
                 expect(product.productCategory).to.be.eq('food');
-                expect(product.isApproved).to.be.eq(true);
+                expect(product.isApproved).to.be.eq(false);
                 expect(product.isService).to.be.eq(false);
                 expect(product.isAvailable).to.be.eq(true);
                 expect(product.userId).to.be.eq(1);
@@ -140,7 +195,7 @@ describe('ProductService Tests', () => {
                 expect(product.productDescription).to.be.eq('E sehr feini Schoggi us Guetemala.');
                 expect(product.productPrice).to.be.eq(20);
                 expect(product.productCategory).to.be.eq('food');
-                expect(product.isApproved).to.be.eq(true);
+                expect(product.isApproved).to.be.eq(false);
                 expect(product.isService).to.be.eq(false);
                 expect(product.isAvailable).to.be.eq(true);
                 expect(product.userId).to.be.eq(1);
@@ -169,7 +224,7 @@ describe('ProductService Tests', () => {
                 expect(product[0].productDescription).to.be.eq('E sehr feini Schoggi us Guetemala.');
                 expect(product[0].productPrice).to.be.eq(20);
                 expect(product[0].productCategory).to.be.eq('food');
-                expect(product[0].isApproved).to.be.eq(true);
+                expect(product[0].isApproved).to.be.eq(false);
                 expect(product[0].isService).to.be.eq(false);
                 expect(product[0].isAvailable).to.be.eq(true);
                 expect(product[0].userId).to.be.eq(1);
@@ -192,7 +247,7 @@ describe('ProductService Tests', () => {
                 expect(product[0].productDescription).to.be.eq('E sehr feini Schoggi us Guetemala.');
                 expect(product[0].productPrice).to.be.eq(20);
                 expect(product[0].productCategory).to.be.eq('food');
-                expect(product[0].isApproved).to.be.eq(true);
+                expect(product[0].isApproved).to.be.eq(false);
                 expect(product[0].isService).to.be.eq(false);
                 expect(product[0].isAvailable).to.be.eq(true);
                 expect(product[0].userId).to.be.eq(1);
@@ -215,7 +270,7 @@ describe('ProductService Tests', () => {
                 expect(product[0].productDescription).to.be.eq('E sehr feini Schoggi us Guetemala.');
                 expect(product[0].productPrice).to.be.eq(20);
                 expect(product[0].productCategory).to.be.eq('food');
-                expect(product[0].isApproved).to.be.eq(true);
+                expect(product[0].isApproved).to.be.eq(false);
                 expect(product[0].isService).to.be.eq(false);
                 expect(product[0].isAvailable).to.be.eq(true);
                 expect(product[0].userId).to.be.eq(1);
@@ -230,6 +285,32 @@ describe('ProductService Tests', () => {
             });
         });
     });
+    describe('Test approve()', () => {
+        it('should successfully approve product by id', function(done){
+            testedProductService.approve(1).then(product => {
+                expect(product).to.be.eq(1);
+                Product.findOne({
+                    where: {
+                        productId: product
+                    }
+                }).then(foundproduct => {
+                    expect(foundproduct.productId).to.be.eq(1);
+                    expect(foundproduct.productName).to.be.eq('Schoggi');
+                    expect(foundproduct.productDescription).to.be.eq('E sehr feini Schoggi us Guetemala.');
+                    expect(foundproduct.productPrice).to.be.eq(20);
+                    expect(foundproduct.productCategory).to.be.eq('food');
+                    expect(foundproduct.isApproved).to.be.eq(true);
+                    expect(foundproduct.isService).to.be.eq(false);
+                    expect(foundproduct.isAvailable).to.be.eq(true);
+                    expect(foundproduct.userId).to.be.eq(1);
+                    done();
+                })
+                
+                    
+            });
+        });
+    });
+    
     describe('Test getAllApproved()', () => {
         it('should successfully get all approved products', function(done){
             testedProductService.getAllApproved().then(product => {
@@ -281,6 +362,140 @@ describe('ProductService Tests', () => {
             });
         });
     });
+    describe('Test searchProduct()', () => {
+        before('add products to db', function(done) {
+            Product.create(product4);
+            Product.create(product5);
+            Product.create(product6).then(() => {
+                done();
+            });
+        });
+        it('should successfully search products containing the letter \"s\"', function(done){
+            const request: SearchRequest = {
+                name: "s"
+            };
+            testedProductService.searchProduct(request).then(product => {
+                expect(product[0].productId).to.be.eq(1);
+                expect(product[1].productId).to.be.eq(4);
+                expect(product[2].productId).to.be.eq(5);
+                expect(product.length).to.be.eq(3);
+                done();
+                });
+            });
+        it('should successfully search products that have a price range of 20 to 500', function(done){
+            const request: SearchRequest = {
+                priceMin: 20,
+                priceMax: 500
+            };
+            testedProductService.searchProduct(request).then(product => {
+                expect(product[0].productId).to.be.eq(1);
+                expect(product[1].productId).to.be.eq(5);
+                expect(product.length).to.be.eq(2);
+                done();
+                });
+            });    
+        it('should successfully search products that are located in Bern', function(done){
+            const request: SearchRequest = {
+                location: 'Bern'
+            };
+            testedProductService.searchProduct(request).then(product => {
+                expect(product[0].productId).to.be.eq(3);
+                expect(product[1].productId).to.be.eq(4);
+                expect(product.length).to.be.eq(2);
+                done();
+                });
+            });
+        it('should successfully search products that are deliverable', function(done){
+            const request: SearchRequest = {
+                delivery: true
+            };
+            testedProductService.searchProduct(request).then(product => {
+                expect(product[0].productId).to.be.eq(3);
+                expect(product.length).to.be.eq(1);
+                done();
+                });
+            });
+        it('should successfully search products that are not deliverable', function(done){
+            const request: SearchRequest = {
+                delivery: false
+            };
+            testedProductService.searchProduct(request).then(product => {
+                expect(product[0].productId).to.be.eq(4);
+                expect(product[1].productId).to.be.eq(5);
+                expect(product.length).to.be.eq(2);
+                done();
+                });
+            });            
+        it('should successfully search products that are available', function(done){
+            const request: SearchRequest = {
+                available: true
+            };
+            testedProductService.searchProduct(request).then(product => {
+                expect(product[0].productId).to.be.eq(1);
+                expect(product[1].productId).to.be.eq(3);
+                expect(product[2].productId).to.be.eq(5);
+                expect(product.length).to.be.eq(3);
+                done();
+                });
+            });   
+        it('should successfully search products that are not available', function(done){
+            const request: SearchRequest = {
+                available: false
+            };
+            testedProductService.searchProduct(request).then(product => {
+                expect(product[0].productId).to.be.eq(4);
+                expect(product.length).to.be.eq(1);
+                done();
+                });
+            });
+        it('should successfully search products that are in the category \"Miscellaneous\"', function(done){
+            const request: SearchRequest = {
+                category: 'Miscellaneous'
+            };
+            testedProductService.searchProduct(request).then(product => {
+                expect(product[0].productId).to.be.eq(4);
+                expect(product[1].productId).to.be.eq(5);
+                expect(product.length).to.be.eq(2);
+                done();
+                });
+            });                                                  
+        it('should successfully search products that contain the letter \"e\" and are available', function(done){
+            const request: SearchRequest = {
+                name: 'e',
+                available: true
+            };
+            testedProductService.searchProduct(request).then(product => {
+                expect(product[0].productId).to.be.eq(3);
+                expect(product[1].productId).to.be.eq(5);
+                expect(product.length).to.be.eq(2);
+                done();
+                });
+            });    
+        
+        it('should successfully search products that are deliverable and available', function(done){
+            const request: SearchRequest = {
+                delivery: true,
+                available: true
+            };
+            testedProductService.searchProduct(request).then(product => {
+                expect(product[0].productId).to.be.eq(3);
+                expect(product.length).to.be.eq(1);
+                done();
+                });
+            });    
+        
+        
+        it('should successfully search products that contain \"abcdefg\" and return an empty array', function(done){
+            const request: SearchRequest = {
+                name: 'abcdefg'
+            };
+            testedProductService.searchProduct(request).then(product => {
+                expect(product.length).to.be.eq(0);
+                done();
+                });
+            });    
+        });
+    
     describe('Test deleteProduct()', () => {
         it('should delete a product by id', function(done) {
             testedProductService.deleteProduct(1).then(() => {

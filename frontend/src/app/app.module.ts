@@ -33,6 +33,7 @@ import { MatRadioModule } from "@angular/material/radio";
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ShippingComponent } from './components/shipping/shipping.component';
+import { OtherUserDashboardComponent } from './components/other-user-dashboard/other-user-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { ShippingComponent } from './components/shipping/shipping.component';
     ProductFormComponent,
     ProductDetailComponent,
     ShippingComponent,
+    OtherUserDashboardComponent,
   ],
   imports: [
     BrowserModule,

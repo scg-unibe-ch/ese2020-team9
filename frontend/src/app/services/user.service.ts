@@ -65,8 +65,8 @@ export class UserService {
     return this.userWallet = localStorage.getItem('userWallet')
   }
 
-  getUser(userId: number){
-    return this.httpClient.get(environment.endpointURL + 'user/' + userId);
+  getUser(id: number){
+    return this.httpClient.get(environment.endpointURL + 'user/' + id);
   }
 
   getUserList(){

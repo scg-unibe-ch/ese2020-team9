@@ -29,15 +29,14 @@
   <mat-card>
     <h2>Sellerinfo:</h2>
     <br><br>
-    <button mat-button class="button_fill" [routerLink]="['/User', userId]" routerLinkActive="active" ><mat-icon >account_circle</mat-icon>{{userName}}</button>
+    <button mat-button class="button_fill" [routerLink]="['/user', sellerId]" routerLinkActive="active" ><mat-icon >account_circle</mat-icon>{{sellerName}}</button>
 
     <br>
-    {{userId}}<br>
-    {{userName}}<br>
+    {{sellerName}}<br>
     {{addressPin}}<br>
     {{addressCity}}<br>
     {{addressCountry}}<br>
-    {{userWallet}}
+
     <button mat-flat-button color="warn"  [routerLink]="['/shipping', productId]" routerLinkActive="active" [disabled]="checkCash()">Buy</button>
 
 

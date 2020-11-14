@@ -9,8 +9,18 @@ export class EmailService {
         this.instantiateMailer();
     }
 
-    public sendPasswordRestorationMail(receiver: string, token: string) {
-
+    public sendPasswordRestorationMail(receiver: string, token: string): Promise<any> {
+        const mailOptions = this.createPWMailPayload(token);
+        mailOptions.to = receiver;
+        return new Promise((resolve, reject) => {
+            this.mailTransport.sendMail(mailOptions, function(err, info) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(info);
+                }
+            });
+        });
     }
 
     private instantiateMailer() {
@@ -26,12 +36,20 @@ export class EmailService {
     }
 
     // creates the mail payload for a password forgotten request
-    private createPWMailPayload() {
+    private createPWMailPayload(token: string) {
         return {
             from: 'stor@mail.ch',
             to: '',
             subject: 'STOR - Reset password',
-            html: ''
+            // TODO: improve html
+            html: '<h2>Requested Password Resetting</h2>' +
+                '<br>' +
+                '<p>You have requested a resetting of your password for the login in STOR, please ' +
+                'use the following link, to reset your password. The link is only valid for 15 minutes!</p>' +
+                '<br>' +
+                '<a href="http://localhost:3000/resetPassword/' + token + '">Reset Password</a>' +
+                '<br>' +
+                '<p>Greetings <br> Your STOR Team</p>'
         };
     }
 }

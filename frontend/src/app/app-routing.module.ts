@@ -8,7 +8,7 @@ import { AdminPanelComponent } from "./components/admin-panel/admin-panel.compon
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
 import { ProductFormComponent } from "./components/productForm/productForm.component";
 import { ProductDetailComponent } from "./components/product-detail/product-detail.component";
-import { ShippingComponent } from "./components/shipping/shipping.component";
+import { ShippingComponent } from './components/product-detail/shipping/shipping.component';
 import { OtherUserDashboardComponent } from './components/other-user-dashboard/other-user-dashboard.component';
 
 

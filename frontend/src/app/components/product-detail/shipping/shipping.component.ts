@@ -1,10 +1,10 @@
 import {ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
-import {ProductItem} from "../../models/product-item.model";
+import {ProductItem} from "../../../models/product-item.model";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {UserService} from "../../services/user.service";
-import {ProductService} from "../../services/product.service";
-import {environment} from "../../../environments/environment";
+import {UserService} from "../../../services/user.service";
+import {ProductService} from "../../../services/product.service";
+import {environment} from "../../../../environments/environment";
 import {ActivatedRoute} from "@angular/router";
 import {MatSnackBar} from '@angular/material/snack-bar';
 

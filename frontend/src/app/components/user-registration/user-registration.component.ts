@@ -93,31 +93,26 @@ export class UserRegistrationComponent implements OnInit {
     }
 
   registrationComplete():boolean{
-    if (this.userId ===''){
-       return false
-       } else {return true}
+    return (this.userId ==='' ? false : true);
+
   }
 
   evaluate(o):boolean{
-    if (o.length > 0) return true;
-    else return false
+    return (o.length > 0 ? true : false);
   }
 
-  emailFormat(e):boolean{
-  if (e.includes('@')) return true;
-      else return false
-      }
 
-  //check if field is empty
+  validateEmail(email) {
+   const regularExpression = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+   return regularExpression.test(String(email).toLowerCase());
+  }
+
   empty(o):boolean{
-      if (o === "") return true;
-      else return false
+      return (o === "" ? true : false);
     }
 
-  //password is at least 7 characters
   passwordLength(pw):boolean{
-      if (pw.length >= 7) return true;
-      else return false
+      return (pw.length >= 7 ? true : false);
     }
 
   // password contains Number
@@ -137,25 +132,16 @@ export class UserRegistrationComponent implements OnInit {
         if (numberOfElementsLow > 0 && numberOfElementsUp > 0) return true;
            else return false
    }
+
   //password contains Special Chars
   passwordContainsSpecialChar(pw):boolean{
-
       var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
-
-      if(format.test(pw)){
-        return true;
-      } else {
-        return false;
-      }
+      return (format.test(pw) ? true : false);
 
   }
 
   confirmPassword(cpw):boolean{
-       if(this.password == cpw){
-         return true;
-       } else {
-         return false;
-       }
+       return (this.password == cpw ? true : false);
    }
 
   //make register button visible
@@ -163,7 +149,7 @@ export class UserRegistrationComponent implements OnInit {
     let un = this.evaluate(this.userName);
     let fn = this.evaluate(this.firstName);
     let ln = this.evaluate(this.lastName);
-    let em = this.emailFormat(this.userMail);
+    let em = this.validateEmail(this.userMail);
     let cpw = this.evaluate(this.confPassword);
     let pw1 = this.passwordLength(this.password);
     let pw2 = this.passwordHasNumber(this.password);
@@ -176,8 +162,12 @@ export class UserRegistrationComponent implements OnInit {
     }
   }
 
-  getUser(){
+  checkCountryCode(c:string):boolean{
+    let check = "CH"
+    return (c==check ? true : false);
+  }
 
+  getUser(){
     this.userService.getUser(this.id).subscribe((instances: any) => {
             this.userMail = instances.userMail;
             this.password = instances.password;
@@ -232,7 +222,7 @@ export class UserRegistrationComponent implements OnInit {
   requestCity(){
     let params = {
           codes: this.addressPin,
-          country: this.addressCountry,
+          country: "CH",
           apikey: '4bc7d070-229b-11eb-8bf2-6be81465cc4d'
     };
     if (this.addressPin.length >= 4){this.httpClient.get('https://app.zipcodebase.com/api/v1/search', {params}).subscribe((res: any) => {
@@ -246,6 +236,7 @@ export class UserRegistrationComponent implements OnInit {
       });
     }
   }
+
 
   openSnackBar(message: string, action: string) {
       this._snackBar.open(message, action, {

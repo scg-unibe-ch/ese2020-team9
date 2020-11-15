@@ -11,7 +11,7 @@
     <mat-form-field>
       <input matInput placeholder="Email*" [(ngModel)]="userMail" name="userMail">
         <div *ngIf="!empty(userMail)">
-          <div *ngIf="!emailFormat(userMail)" class="invalid-feedback">Valid Email is required </div>
+          <div *ngIf="!validateEmail(userMail)" class="invalid-feedback">Valid Email is required </div>
         </div>
     </mat-form-field>
   <mat-form-field>
@@ -126,6 +126,11 @@
   <mat-card>
     <mat-form-field>
       <input matInput placeholder="Country Code" [(ngModel)]="addressCountry" name="addressCountry">
+      <div *ngIf="!empty(addressCountry)" class="invalid-feedback">
+        <div *ngIf="!checkCountryCode(addressCountry)" class="invalid-feedback">e.g. CH</div>
+      </div>
+
+
     </mat-form-field>
 
     <mat-form-field>

@@ -7,6 +7,7 @@ import {ProductService} from "../../../services/product.service";
 import {environment} from "../../../../environments/environment";
 import {ActivatedRoute} from "@angular/router";
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @Component({
   selector: 'app-shipping',
@@ -47,6 +48,12 @@ export class ShippingComponent implements OnInit {
   buyerAddressStreet = '';
   buyerWallet: any;
 
+
+  otherAddressPin = '';
+  otherAddressCity = '';
+  otherAddressCountry = '';
+  otherAddressStreet = '';
+
   product: ProductItem;
   id: any;
 
@@ -72,6 +79,9 @@ export class ShippingComponent implements OnInit {
     return (c==check ? true : false);
   }
 
+  checkCash(){
+    return (this.buyerWallet >= this.productPrice ? false : true);
+  }
 
 
   getBuyer(){this.userService.getUser(this.buyerId).subscribe((instances: any) => {
@@ -120,11 +130,11 @@ export class ShippingComponent implements OnInit {
   buyProduct(){
   this.productService.buyProduct(this.id).subscribe((instances: any) => {
 
-   let message = "There is no corresponding Product!"
+    let message = "Buying not implemented yet!"
     let action = "OK"
     this.openSnackBar(message, action);
   },(error: any) => {
-        let message = "There is no corresponding Product!"
+        let message = "Buying not implemented yet!"
         let action = "OK"
         this.openSnackBar(message, action);
         //this.userAuth = 'There is no corresponding Product!';

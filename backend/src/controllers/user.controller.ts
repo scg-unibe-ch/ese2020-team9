@@ -71,10 +71,10 @@ userController.post('/passwordForgotten',
     }
 );
 
-// Request must also contain the username or the email to being able to identify the user
+// Request gets the Username from the token
 userController.post('/restorePassword', verifyPasswordToken,
     (req: Request, res: Response) => {
-        userService.restorePassword(req.body.userLogin, req.body.password)
+        userService.restorePassword(req.body.tokenPayload.userName, req.body.password)
         .then(() => res.send({message: 'Successfully changed the password, you now may sign in!'}))
         .catch(() => res.status(500).send({message: 'Failed to change the password, please try again!'}));
     }

@@ -5,19 +5,17 @@
     <p>You are buying:</p>
     <b> {{productName}}</b>
 
-    <br>
-    <p>for </p>
-    {{productPrice}} CHF
+    <br><br>
+    <p>for <b>{{productPrice}}</b> CHF</p>
+
     <hr>
     <b>Sellerinfo:</b>
     <br><br>
-    <button mat-button class="button_fill" [routerLink]="['/User', userId]" routerLinkActive="active" ><mat-icon >account_circle</mat-icon>{{userName}}</button>
-
-    {{userId}}<br>
-    {{userName}}<br>
-    {{addressPin}}<br>
-    {{addressCity}}<br>
-    {{addressCountry}}<br>
+    <button mat-button class="button_fill" [routerLink]="['/user', sellerId]" routerLinkActive="active" ><mat-icon >account_circle</mat-icon>{{sellerName}}</button>
+    <br>
+    {{sellerAddressPin}}<br>
+    {{sellerAddressCity}}<br>
+    {{sellerAddressCountry}}<br>
 
 
   </mat-card>
@@ -27,21 +25,30 @@
     <h2>Please enter your Shipping Adress:</h2>
 
 
-      <mat-form-field>
-        <input matInput placeholder="Street"  name="addressStreet">
-      </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Country Code" [(ngModel)]="buyerAddressCountry" name="buyerAddressCountry">
+      <div *ngIf="!empty(buyerAddressCountry)" class="invalid-feedback">
+        <div *ngIf="!checkCountryCode(buyerAddressCountry)" class="invalid-feedback">e.g. CH</div>
+      </div>
 
-      <mat-form-field>
-        <input matInput placeholder="Zip code"  name="addressPin">
-      </mat-form-field>
 
-      <mat-form-field>
-        <input matInput placeholder="City"  name="addressCity">
-      </mat-form-field>
+    </mat-form-field>
 
-      <mat-form-field>
-        <input matInput placeholder="Country"  name="addressCountry">
-      </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Zip code" [(ngModel)]="buyerAddressPin" name="buyerAddressPin" >
+    </mat-form-field>
+
+
+    <mat-form-field>
+      <input matInput placeholder="Street" [(ngModel)]="buyerAddressStreet" name="buyerAddressStreet">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="City" [(ngModel)]="buyerAddressCity" name="buyerAddressCity">
+    </mat-form-field>
+
+
+
 
     <button mat-flat-button class="button_standard" (click)="buyProduct()">Buy</button>
 

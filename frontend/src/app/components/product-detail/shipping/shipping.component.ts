@@ -33,11 +33,19 @@ export class ShippingComponent implements OnInit {
   userReview = '';
   userAuth = '';
 
+  sellerId: any;
+  sellerName = '';
+  sellerAddressPin = '';
+  sellerAddressCity = '';
+  sellerAddressCountry = '';
 
-  userName = '';
-  addressPin = '';
-  addressCity = '';
-  addressCountry = '';
+  buyerId: any;
+  buyerName = '';
+  buyerAddressPin = '';
+  buyerAddressCity = '';
+  buyerAddressCountry = '';
+  buyerAddressStreet = '';
+  buyerWallet: any;
 
   product: ProductItem;
   id: any;
@@ -45,12 +53,43 @@ export class ShippingComponent implements OnInit {
   constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    this.userId = this.userService.getUserId();
+    this.buyerId = this.userService.getUserId();
+    this.getBuyer();
     this.id = this.route.snapshot.paramMap.get('id');
 
     this.getProduct();
 
   }
+
+
+  empty(o):boolean{
+        return (o === "" ? true : false);
+      }
+
+
+  checkCountryCode(c:string):boolean{
+    let check = "CH"
+    return (c==check ? true : false);
+  }
+
+
+
+  getBuyer(){this.userService.getUser(this.buyerId).subscribe((instances: any) => {
+         //this.sellerId = instances.userId;
+         this.buyerName = instances.userName;
+         this.buyerAddressPin = instances.addressPin;
+         this.buyerAddressStreet = instances.addressStreet;
+         this.buyerAddressCity = instances.addressCity;
+         this.buyerAddressCountry = instances.addressCountry;
+         this.buyerWallet = instances.wallet;
+
+
+       },(error: any) => {
+         let action = "";
+         let message = "There is no corresponding Seller!";
+         this.openSnackBar(message, action);
+     });
+   }
 
   getProduct(){
     this.productService.getProduct(this.id).subscribe((instances: any) => {
@@ -68,9 +107,10 @@ export class ShippingComponent implements OnInit {
           this.isService = instances.isService;
           this.isRentable = instances.isRentable;
           this.isAvailable = instances.isAvailable;
-          this.userId = instances.userId;
+          this.sellerId = instances.userId;
           this.userReview = instances.userReview;
           //this.changeDetection.detectChanges();
+          this.getSeller(this.sellerId);
 
       },(error: any) => {
       this.userAuth = 'There is no corresponding Product!';
@@ -89,6 +129,23 @@ export class ShippingComponent implements OnInit {
         this.openSnackBar(message, action);
         //this.userAuth = 'There is no corresponding Product!';
       });
+  }
+
+
+  getSeller(sellerId: number){
+
+    this.userService.getUser(this.sellerId).subscribe((instances: any) => {
+          //this.sellerId = instances.userId;
+          this.sellerName = instances.userName;
+          this.sellerAddressPin = instances.addressPin;
+          this.sellerAddressCity = instances.addressCity;
+          this.sellerAddressCountry = instances.addressCountry;
+
+      },(error: any) => {
+      let action = "";
+      let message = "There is no corresponding Seller!";
+      this.openSnackBar(message, action);
+    });
   }
 
   openSnackBar(message: string, action: string) {

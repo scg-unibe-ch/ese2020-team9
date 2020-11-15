@@ -46,14 +46,10 @@ export class ProductDetailComponent implements OnInit {
   constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService,private productService: ProductService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
 
   ngOnInit(): void {
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.userWallet = this.userService.getUserWallet();
     this.getProduct();
     //this.userId = this.userService.getUserId();
-    this.userWallet = this.userService.getUserWallet();
-    this.id = this.route.snapshot.paramMap.get('id');
-
-
-    this.getSeller();
-
   }
 
   getProduct(){
@@ -76,16 +72,19 @@ export class ProductDetailComponent implements OnInit {
           this.userReview = instances.userReview;
           //this.changeDetection.detectChanges();
 
+          this.getSeller(this.sellerId);
+
       },(error: any) => {
-      let message = "There is no corresponding Product!";
-      let action = "OK";
-      this.openSnackBar(message, action);
+        let message = "There is no corresponding Product!";
+        let action = "OK";
+        this.openSnackBar(message, action);
     });
   }
 
 
 
-  getSeller(){
+  getSeller(sellerId: number){
+
     this.userService.getUser(this.sellerId).subscribe((instances: any) => {
           //this.sellerId = instances.userId;
           this.sellerName = instances.userName;
@@ -95,7 +94,8 @@ export class ProductDetailComponent implements OnInit {
 
       },(error: any) => {
       let action = "";
-      this.openSnackBar(error.message, action);
+      let message = "There is no corresponding Seller!";
+      this.openSnackBar(message, action);
     });
   }
 

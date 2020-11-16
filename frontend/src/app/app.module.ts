@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
@@ -34,6 +33,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ShippingComponent } from './components/product-detail/shipping/shipping.component';
 import { OtherUserDashboardComponent } from './components/other-user-dashboard/other-user-dashboard.component';
+import { SoldproductsComponent } from './components/user-dashboard/soldproducts/soldproducts.component';
+import { BoughtproductsComponent } from './components/user-dashboard/boughtproducts/boughtproducts.component';
+import { MatStepperModule } from '@angular/material/stepper';
+ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -52,6 +55,8 @@ import { OtherUserDashboardComponent } from './components/other-user-dashboard/o
     ProductDetailComponent,
     ShippingComponent,
     OtherUserDashboardComponent,
+    SoldproductsComponent,
+    BoughtproductsComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,6 +78,8 @@ import { OtherUserDashboardComponent } from './components/other-user-dashboard/o
     FlexLayoutModule,
     ScrollingModule,
     MatRadioModule,
+    MatStepperModule,
+    ReactiveFormsModule,
 
   ],
   providers: [

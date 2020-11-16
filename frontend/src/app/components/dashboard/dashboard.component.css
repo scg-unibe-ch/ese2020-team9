@@ -43,4 +43,10 @@ hr {
     margin: 0 auto 1em auto; /*Center the image*/
 }
 
-
+.center-cropped {
+  object-fit: cover; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+  height: 150px;
+  width: 150px;
+  opacity: 0.7;
+}

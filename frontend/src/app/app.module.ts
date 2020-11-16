@@ -36,6 +36,9 @@ import { ShippingComponent } from './components/product-detail/shipping/shipping
 import { OtherUserDashboardComponent } from './components/other-user-dashboard/other-user-dashboard.component';
 import { SoldproductsComponent } from './components/user-dashboard/soldproducts/soldproducts.component';
 import { BoughtproductsComponent } from './components/user-dashboard/boughtproducts/boughtproducts.component';
+import {MatStepperModule} from '@angular/material/stepper';
+
+
 
 @NgModule({
   declarations: [
@@ -77,6 +80,7 @@ import { BoughtproductsComponent } from './components/user-dashboard/boughtprodu
     FlexLayoutModule,
     ScrollingModule,
     MatRadioModule,
+    MatStepperModule,
 
   ],
   providers: [

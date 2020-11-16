@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { ActivatedRoute} from "@angular/router";
 import {UserService} from "../../services/user.service";
+import {MatStepperModule} from '@angular/material/stepper';
 
 @Component({
   selector: 'app-user-registration',
@@ -37,19 +38,24 @@ export class UserRegistrationComponent implements OnInit {
   message ='';
   action = '';
 
+  isEditable = false;
+
+
   constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
 
-  ngOnInit(): void {
-    this.userId = this.userService.getUserId();
-    this.id = this.route.snapshot.paramMap.get('id');
+  ngOnInit() {
+      this.userId = this.userService.getUserId();
+      this.id = this.route.snapshot.paramMap.get('id');
 
-    if(this.id === '0'){
-      this.edit = false;
-    } else{
-      this.edit = true;
-      this.getUser();
+      if(this.id === '0'){
+        this.edit = false;
+
+      } else{
+        this.edit = true;
+        this.getUser();
+      }
+
     }
-  }
 
   registration(): void {
       this.httpClient.post(environment.endpointURL + 'user/register', {

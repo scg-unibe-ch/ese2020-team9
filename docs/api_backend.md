@@ -915,6 +915,112 @@ Gets all products belonging to the user with the id indicated in the url.
     ```
     </details>
 
+### GET on `"/products/bought/:userId"` 
+
+Gets all bought products of the user with the id indicated in the url.
+
+- **Details**
+
+     <details>
+     
+     <summary>Response (STATUS 200)</summary>
+     
+    ```json
+    [
+        {   
+            "productId": "number",
+            "productName": "string",
+            "productDescription": "string",
+            "productImage": "String",
+            "productPrice": "number",
+            "productCategory": "String",
+            "productLocation": "string",
+            "productDelivery": "boolean",
+            "uploadDate": "Date",
+            "sellDate": "Date",
+            "isApproved": "boolean",
+            "isService": "boolean",
+            "isRentable": "boolean",
+            "isAvailable": "boolean",
+            "userId": "number",
+            "userReview": "string"
+        }, 
+            {   
+            "productId": "number",
+            "productName": "string",
+            "productDescription": "string",
+            "productImage": "String",
+            "productPrice": "number",
+            "productCategory": "String",
+            "productLocation": "string",
+            "productDelivery": "boolean",
+            "uploadDate": "Date",
+            "sellDate": "Date",
+            "isApproved": "boolean",
+            "isService": "boolean",
+            "isRentable": "boolean",
+            "isAvailable": "boolean",
+            "userId": "number",
+            "userReview": "string"
+        },
+        ...
+    ]
+    ```
+    </details>
+
+### GET on `"/products/sold/:userId"` 
+
+Gets all sold products of the user with the id indicated in the url.
+
+- **Details**
+
+     <details>
+     
+     <summary>Response (STATUS 200)</summary>
+     
+    ```json
+    [
+        {   
+            "productId": "number",
+            "productName": "string",
+            "productDescription": "string",
+            "productImage": "String",
+            "productPrice": "number",
+            "productCategory": "String",
+            "productLocation": "string",
+            "productDelivery": "boolean",
+            "uploadDate": "Date",
+            "sellDate": "Date",
+            "isApproved": "boolean",
+            "isService": "boolean",
+            "isRentable": "boolean",
+            "isAvailable": "boolean",
+            "userId": "number",
+            "userReview": "string"
+        }, 
+            {   
+            "productId": "number",
+            "productName": "string",
+            "productDescription": "string",
+            "productImage": "String",
+            "productPrice": "number",
+            "productCategory": "String",
+            "productLocation": "string",
+            "productDelivery": "boolean",
+            "uploadDate": "Date",
+            "sellDate": "Date",
+            "isApproved": "boolean",
+            "isService": "boolean",
+            "isRentable": "boolean",
+            "isAvailable": "boolean",
+            "userId": "number",
+            "userReview": "string"
+        },
+        ...
+    ]
+    ```
+    </details>
+
 ### GET on `"/products/:id"` 
 
 Gets a single product with the id indicated in the url.
@@ -955,13 +1061,20 @@ Gets a single product with the id indicated in the url.
   - product is updated to isAvailable == false
 - 2: Transaction confirmed (seller confirmed transaction)
   - money is transferred
-  - product is updated wit sellDate and buyerId
+  - product is updated with sellDate and buyerId
 - 3: Transaction declined (seller declined)
   - product is updated back to isAvailable == true
 
-### intialize a transaction `"/transaction/"` (POST)
+### Post on `"/transaction/"` 
 
-- Request Body
+Initializes a new transaction, after the buyer clicked on buy and entered the delivery address. It sets the product boolean isAvailable to false.
+
+- **Details**
+
+     <details>
+     
+     <summary>Request</summary>
+
     ```json
     {   
         "transactionId": "number",
@@ -977,8 +1090,11 @@ Gets a single product with the id indicated in the url.
         "deliveryCountry": "string"
     }
     ```
+    </details>
 
-- Response (STATUS 200)
+    <details>
+
+    <summary>Response (STATUS 200)</summary>
 
     ```json
     {
@@ -986,11 +1102,18 @@ Gets a single product with the id indicated in the url.
     }
     ```
 
-### getting transcactions (GET)
+    </details>
 
-#### getting all transactions of seller `"/transaction/sell/:userId"` 
 
-- Response-Body (if successful) (HTTP_STATUS_CODE 200)
+###  GET on `"/transaction/sell/:userId"` 
+Gets all transactions of the seller with the id indicated in the url. 
+
+- **Details**
+  
+    <details>
+
+    <summary>Response (STATUS 200)</summary>    
+
     ```json
     [
         {   
@@ -1023,9 +1146,17 @@ Gets a single product with the id indicated in the url.
     ]
     ```
 
-#### getting all transactions of buyer `"/transaction/buy/:userId"` 
+     </details>
 
-- Response-Body (if successful) (HTTP_STATUS_CODE 200)
+###  GET on `"/transaction/buy/:userId"` 
+Gets all transactions of a buyer with the id indicated in the url. 
+
+- **Details**
+  
+    <details>
+
+    <summary>Response (STATUS 200)</summary>    
+
     ```json
     [
         {   
@@ -1058,9 +1189,18 @@ Gets a single product with the id indicated in the url.
     ]
     ```
 
-#### getting all transactions of seller with certain status `"/transaction/sell/:userId/status/:transactionStatus"` 
+     </details>
 
-- Response-Body (if successful) (HTTP_STATUS_CODE 200)
+###  GET on `"/transaction/sell/:userId/status/:transactionStatus"`
+
+Gets all transactions with a certain transaction status of a seller, with the id and the transaction status indicated in the url. 
+
+- **Details**
+  
+    <details>
+
+    <summary>Response (STATUS 200)</summary>    
+
     ```json
     [
         {   
@@ -1093,37 +1233,40 @@ Gets a single product with the id indicated in the url.
     ]
     ```
 
-#### getting all transactions of buyer with certain status `"/transaction/buy/:userId/status/:transactionStatus"` 
+     </details>
 
-- Response-Body (if successful) (HTTP_STATUS_CODE 200)
-    ```json
-    [
-        {   
-            "transactionId": "number",
-            "productId": "number",
-            "userId": "number",
-            "buyerId": "number",   
-            "transactionStatus": "number",
-            "deliveryFirstName": "string",
-            "deliveryLastName": "string",
-            "deliveryStreet": "string",
-            "deliveryPin": "string",
-            "deliveryCity": "string",
-            "deliveryCountry": "string"
-        }, 
-        {   
-            "transactionId": "number",
-            "productId": "number",
-            "userId": "number",
-            "buyerId": "number",   
-            "transactionStatus": "number",
-            "deliveryFirstName": "string",
-            "deliveryLastName": "string",
-            "deliveryStreet": "string",
-            "deliveryPin": "string",
-            "deliveryCity": "string",
-            "deliveryCountry": "string"
-        },
-        ...
-    ]
+###  PUT on `"/transaction/confirm/:transactionId"`
+
+Confirms a transactions with the id indicated in the url. This method executes the actual transaction by transferring the money from buyer to seller and updating the product information. It should be called when the seller confirms a transaction.
+
+- **Details**
+  
+    <details>
+
+    <summary>Response (STATUS 200)</summary>    
+
+        ```json
+    {
+        "message": "Transaction successfully confirmed!"
+    }
     ```
+
+     </details>
+
+     ###  PUT on `"/transaction/decline/:transactionId"`
+
+Declines a transactions with the id indicated in the url. The method should be called when the seller declines a transaction. It sets the product boolean isAvailable back to true.
+
+- **Details**
+  
+    <details>
+
+    <summary>Response (STATUS 200)</summary>    
+
+    ```json
+    {
+        "message": "Transaction successfully declined!"
+    }
+    ```
+
+     </details>

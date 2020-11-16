@@ -149,9 +149,3 @@ export class TransactionService {
         .catch(err => Promise.reject(err));
     }
 }
-
-
-// write controller confirm/decline function
-// merge from master
-// update API with new design (for getters in productservice too!)
-

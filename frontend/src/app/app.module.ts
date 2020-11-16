@@ -34,6 +34,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ShippingComponent } from './components/product-detail/shipping/shipping.component';
 import { OtherUserDashboardComponent } from './components/other-user-dashboard/other-user-dashboard.component';
+import { SoldproductsComponent } from './components/user-dashboard/soldproducts/soldproducts.component';
+import { BoughtproductsComponent } from './components/user-dashboard/boughtproducts/boughtproducts.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,8 @@ import { OtherUserDashboardComponent } from './components/other-user-dashboard/o
     ProductDetailComponent,
     ShippingComponent,
     OtherUserDashboardComponent,
+    SoldproductsComponent,
+    BoughtproductsComponent,
   ],
   imports: [
     BrowserModule,

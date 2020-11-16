@@ -5,7 +5,7 @@ import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import {ProductService} from "../../services/product.service";
 import {environment} from "../../../environments/environment";
-import { ActivatedRoute} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
@@ -29,11 +29,13 @@ export class ProductDetailComponent implements OnInit {
   isService = '';
   isRentable = '';
   isAvailable = '';
-  userId: any;
+
   userReview = '';
   userWallet: any;
 
-  userName = '';
+
+  sellerId: any;
+  sellerName = '';
   addressPin = '';
   addressCity = '';
   addressCountry = '';
@@ -44,13 +46,10 @@ export class ProductDetailComponent implements OnInit {
   constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService,private productService: ProductService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    this.userId = this.userService.getUserId();
-    this.userWallet = this.userService.getUserWallet();
     this.id = this.route.snapshot.paramMap.get('id');
-
+    this.userWallet = this.userService.getUserWallet();
     this.getProduct();
-    this.getSeller();
-
+    //this.userId = this.userService.getUserId();
   }
 
   getProduct(){
@@ -69,30 +68,34 @@ export class ProductDetailComponent implements OnInit {
           this.isService = instances.isService;
           this.isRentable = instances.isRentable;
           this.isAvailable = instances.isAvailable;
-          this.userId = instances.userId;
+          this.sellerId = instances.userId;
           this.userReview = instances.userReview;
           //this.changeDetection.detectChanges();
 
+          this.getSeller(this.sellerId);
+
       },(error: any) => {
-      let message = "There is no corresponding Product!";
-      let action = "OK";
-      this.openSnackBar(message, action);
+        let message = "There is no corresponding Product!";
+        let action = "OK";
+        this.openSnackBar(message, action);
     });
   }
 
 
 
-  getSeller(){
-    this.userService.getUser(this.userId).subscribe((instances: any) => {
-          this.userId = instances.userId;
-          this.userName = instances.userName;
+  getSeller(sellerId: number){
+
+    this.userService.getUser(this.sellerId).subscribe((instances: any) => {
+          //this.sellerId = instances.userId;
+          this.sellerName = instances.userName;
           this.addressPin = instances.addressPin;
           this.addressCity = instances.addressCity;
           this.addressCountry = instances.addressCountry;
 
       },(error: any) => {
       let action = "";
-      this.openSnackBar(error.message, action);
+      let message = "There is no corresponding Seller!";
+      this.openSnackBar(message, action);
     });
   }
 

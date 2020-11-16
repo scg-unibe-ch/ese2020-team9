@@ -18,7 +18,8 @@
 
   <mat-card-content>
 
-    <img mat-card-image width="100%" height="100px" src="{{productImage}}" alt="{{productName}}" >
+    <img mat-card-image class="center-cropped" src="{{productImage}}" alt="{{productName}}" >
+    <br>
 
     <button mat-button class="button_fill" [routerLink]="['/', productCategory]" routerLinkActive="active" ><mat-icon >chevron_right</mat-icon>{{productCategory}}</button>
     <button mat-button class="button_fill" [routerLink]="['/', productLocation]" routerLinkActive="active"><mat-icon >place</mat-icon>{{productLocation}}</button>

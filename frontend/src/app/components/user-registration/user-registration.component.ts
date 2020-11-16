@@ -6,6 +6,10 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import { ActivatedRoute} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import {MatStepperModule} from '@angular/material/stepper';
+import { FormBuilder } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
+import { Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-user-registration',
@@ -38,7 +42,8 @@ export class UserRegistrationComponent implements OnInit {
   message ='';
   action = '';
 
-  isEditable = false;
+
+
 
 
   constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
@@ -49,7 +54,6 @@ export class UserRegistrationComponent implements OnInit {
 
       if(this.id === '0'){
         this.edit = false;
-
       } else{
         this.edit = true;
         this.getUser();

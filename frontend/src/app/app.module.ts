@@ -32,7 +32,7 @@ import { ScrollingModule } from "@angular/cdk/scrolling";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
-import { ShippingComponent } from './components/shipping/shipping.component';
+import { ShippingComponent } from './components/product-detail/shipping/shipping.component';
 import { OtherUserDashboardComponent } from './components/other-user-dashboard/other-user-dashboard.component';
 
 @NgModule({

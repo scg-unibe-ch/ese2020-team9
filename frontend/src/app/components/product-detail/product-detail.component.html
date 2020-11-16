@@ -17,7 +17,9 @@
   </mat-card-header>
 
   <mat-card-content>
+
     <img mat-card-image width="100%" height="100px" src="{{productImage}}" alt="{{productName}}" >
+
     <button mat-button class="button_fill" [routerLink]="['/', productCategory]" routerLinkActive="active" ><mat-icon >chevron_right</mat-icon>{{productCategory}}</button>
     <button mat-button class="button_fill" [routerLink]="['/', productLocation]" routerLinkActive="active"><mat-icon >place</mat-icon>{{productLocation}}</button>
     <br>
@@ -32,7 +34,6 @@
     <button mat-button class="button_fill" [routerLink]="['/user', sellerId]" routerLinkActive="active" ><mat-icon >account_circle</mat-icon>{{sellerName}}</button>
 
     <br>
-    {{sellerName}}<br>
     {{addressPin}}<br>
     {{addressCity}}<br>
     {{addressCountry}}<br>

@@ -30,6 +30,7 @@ export class AdminPanelComponent implements OnInit {
   ngOnInit(): void {
     this.getProductList();
     this.userToken = this.userService.getToken();
+    this.getUserList();
 
   }
   // get all Users

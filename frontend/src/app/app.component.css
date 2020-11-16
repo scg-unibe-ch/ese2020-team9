@@ -12,3 +12,16 @@
   /*change color of underline when focused*/
   background-color: #D3D9EF !important;;
 }
+
+.app {
+    /* the .app div needs to be AT LEAST 100% of the height of the window */
+    min-height: 100%;
+    /* now that it is 100% the height, we 'pull' the footer up */
+    /* margin-bottom must be the same height as the footer height below */
+    margin-bottom: -271px;
+}
+
+.footer{
+    /* .set the height of the footer */
+    height: 271px;
+}

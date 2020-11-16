@@ -207,12 +207,81 @@ describe('UserService Tests', () => {
             });
         });
     });
-    after('clean up', function(done) {
-        User.destroy({
-            truncate: true,
-            restartIdentity: true
-        }).then(() => {
-            done();
+    describe('Test getSingleUser', () => {
+        it('should return user when exists', function(done) {
+            testedUserService.getSingleUser(1).then(user => {
+                expect(user).not.to.be.eq(null);
+                expect(user.userName).to.be.eq('jacky');
+                done();
+            });
+        });
+        it('should return error, when user not exists', function(done) {
+            testedUserService.getSingleUser(32907).catch(err => {
+                expect(err.message).to.be.eq('User not found!');
+                done();
+            });
+        });
+    });
+    describe('Test changeUser', () => {
+        it('should correctly update existing user', function(done) {
+            testedUserService.changeUser({
+                userId: 1,
+                userName: 'jacky',
+                userMail: 'jack.doe@outlook.com',
+                firstName: 'Jack',
+                lastName: 'Doe',
+                gender: 'male',
+                phoneNumber: 77788889,
+                addressStreet: 'Pinnacle Street',
+                addressPin: '77889',
+                addressCity: 'Hannington Town',
+                addressCountry: 'Saint Isles'
+            }).then(user => {
+                expect(user.userMail).to.be.eq('jack.doe@outlook.com');
+                User.findByPk(1).then(foundUser => {
+                    expect(foundUser.userMail).to.be.eq('jack.doe@outlook.com');
+                    expect(foundUser.phoneNumber).to.be.eq(77788889);
+                    done();
+                });
+            });
+        });
+        it('should return error, when user not exists', function(done) {
+            testedUserService.changeUser({
+                userId: 524456,
+                userName: 'fake',
+                userMail: 'fake.user@fake.com',
+                firstName: 'Faking',
+                lastName: 'Dude',
+                gender: 'male',
+                phoneNumber: 1,
+                addressStreet: null,
+                addressPin: null,
+                addressCity: null,
+                addressCountry: null
+            }).catch(err => {
+                expect(err).not.to.be.eq(null);
+                expect(err).to.have.property('message');
+                done();
+            });
+        });
+        it('should return error, when to be updated data is poor', function(done) {
+            testedUserService.changeUser({
+                userId: 1,
+                userName: null,
+                userMail: 'jack.doe@outlook.com',
+                firstName: 'Jack',
+                lastName: 'Doe',
+                gender: 'male',
+                phoneNumber: 77788889,
+                addressStreet: 'Pinnacle Street',
+                addressPin: '77889',
+                addressCity: 'Hannington Town',
+                addressCountry: 'Saint Isles'
+            }).catch(err => {
+                expect(err).not.to.be.eq(null);
+                expect(err).to.have.property('message');
+                done();
+            });
         });
     });
 });

@@ -5,6 +5,7 @@ import { ProductItem } from '../../models/product-item.model';
 import { User } from '../../models/user.model';
 import { ProductService } from "../../services/product.service";
 import { UserService } from "../../services/user.service";
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 
@@ -24,11 +25,12 @@ export class AdminPanelComponent implements OnInit {
  users: User[] ;
  productList: ProductItem[];
 
-  constructor(private httpClient: HttpClient, private productService: ProductService, private userService: UserService) {}
+  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private productService: ProductService, private userService: UserService) {}
 
   ngOnInit(): void {
     this.getProductList();
     this.userToken = this.userService.getToken();
+    this.getUserList();
 
   }
   // get all Users
@@ -61,11 +63,33 @@ export class AdminPanelComponent implements OnInit {
   approveProduct(productId: number){
    this.httpClient.put(environment.endpointURL + 'products/approve/' + productId,{
 
-    }).subscribe(
-   );
+    }).subscribe((res: any)  => {
+             let message = "Product approved"
+             let action = "Ok"
+             this.openSnackBar(message, action);
+           }, (error: any) => {
+             let message = "Can not delete this Product"
+             let action = ""
+             this.openSnackBar(message, action);
+           });
   }
 
   deleteProduct(productId: number){
-   this.httpClient.delete(environment.endpointURL + 'products/' + productId,{}).subscribe();
+   this.httpClient.delete(environment.endpointURL + 'products/' + productId,{}).subscribe((res: any)  => {
+
+          let message = "Product deleted"
+          let action = "Ok"
+          this.openSnackBar(message, action);
+        }, (error: any) => {
+          let message = "Can not delete this Product"
+          let action = ""
+          this.openSnackBar(message, action);
+        });
   }
+
+  openSnackBar(message: string, action: string) {
+        this._snackBar.open(message, action, {
+          duration: 3000
+        });
+      }
 }

@@ -4,14 +4,16 @@
 
   <mat-card>
     <mat-form-field>
+
       <input matInput placeholder="Product Name" [(ngModel)]="productName" name="productName">
-      <output  [(ngModel)]="productName" name="productName"></output>
       <div *ngIf="empty(productName)" class="invalid-feedback">Product Name</div>
+
     </mat-form-field>
 
     <br>
 
     <mat-form-field>
+
       <input matInput placeholder="Product Image" [(ngModel)]="productImage" name="productImage">
       <div *ngIf="empty(productImage)" class="invalid-feedback">Please add a Photo</div>
     </mat-form-field>
@@ -69,13 +71,16 @@
   <mat-card>
 
     <mat-form-field>
-      <input matInput placeholder="Product Price" [(ngModel)]="productPrice" name="productPrice">
+      <mat-label>Price</mat-label>
+      <input matInput placeholder="" [(ngModel)]="productPrice" name="productPrice">
+      <span matPrefix>CHF&nbsp;</span>
+      <span matSuffix>.00</span>
       <div *ngIf="empty(productPrice)" class="invalid-feedback">Please add a Price</div>
     </mat-form-field>
 
     <mat-form-field>
       <input matInput placeholder="Location" [(ngModel)]="productLocation" name="productLocation">
-      <div *ngIf="empty(productLocation)" class="invalid-feedback">Location</div>
+      <div *ngIf="empty(productLocation)" class="invalid-feedback">e.g. 3012</div>
     </mat-form-field>
 
     <mat-checkbox class="checkboxMargin" [(ngModel)]="productDelivery">Product delivery possible?</mat-checkbox>

@@ -33,7 +33,7 @@ export class ProductService {
     return this.httpClient.get(environment.endpointURL + 'products/category/'+ category);
   }
 
-  //get a specific Products
+  //get a specific Product
   getProduct(productId: number) {
     return this.httpClient.get(environment.endpointURL + 'products/' + productId);
   }
@@ -43,5 +43,9 @@ export class ProductService {
     return this.httpClient.get(environment.endpointURL + 'products/user/' + userId);
   }
 
+  //get all Products from the same user -> not implemented
+  buyProduct(productId: number) {
+    return this.httpClient.get(environment.endpointURL + 'products/buy/' + productId);
+  }
 
 }

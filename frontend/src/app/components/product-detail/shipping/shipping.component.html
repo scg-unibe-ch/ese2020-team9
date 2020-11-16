@@ -1,0 +1,98 @@
+
+<div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start" >
+
+  <mat-card>
+    <p>You are buying:</p>
+    <b> {{productName}}</b>
+
+    <br><br>
+    <p>for <b>{{productPrice}}</b> CHF</p>
+
+    <hr>
+    <b>Sellerinfo:</b>
+    <br><br>
+    <button mat-button class="button_fill" [routerLink]="['/user', sellerId]" routerLinkActive="active" ><mat-icon >account_circle</mat-icon>{{sellerName}}</button>
+    <br>
+    {{sellerAddressPin}}<br>
+    {{sellerAddressCity}}<br>
+    {{sellerAddressCountry}}<br>
+
+
+  </mat-card>
+
+
+  <mat-card>
+    <h2>Please enter your Shipping Address:</h2>
+    <mat-tab-group>
+      <mat-tab label="Use my Address"> <p> </p>
+
+        <mat-form-field>
+          <input matInput placeholder="Country Code" [(ngModel)]="buyerAddressCountry" name="buyerAddressCountry">
+          <div *ngIf="!empty(buyerAddressCountry)" class="invalid-feedback">
+            <div *ngIf="!checkCountryCode(buyerAddressCountry)" class="invalid-feedback">e.g. CH</div>
+          </div>
+
+
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Zip code" [(ngModel)]="buyerAddressPin" name="buyerAddressPin" >
+        </mat-form-field>
+
+
+        <mat-form-field>
+          <input matInput placeholder="Street" [(ngModel)]="buyerAddressStreet" name="buyerAddressStreet">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="City" [(ngModel)]="buyerAddressCity" name="buyerAddressCity">
+        </mat-form-field>
+
+
+
+
+        <button mat-flat-button color="warn"  [routerLink]="['/user']" routerLinkActive="active" [disabled]="checkCash()" (click)="buyProduct()">Buy</button>
+
+
+
+      </mat-tab>
+      <mat-tab label="Use other Address">
+
+        <mat-form-field>
+
+          <input matInput placeholder="Country Code" [(ngModel)]="otherAddressCountry" name="otherAddressCountry">
+          <div *ngIf="!empty(otherAddressCountry)" class="invalid-feedback">
+            <div *ngIf="!checkCountryCode(otherAddressCountry)" class="invalid-feedback">e.g. CH</div>
+          </div>
+
+
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Zip code" [(ngModel)]="otherAddressPin" name="otherAddressPin" >
+        </mat-form-field>
+
+
+        <mat-form-field>
+          <input matInput placeholder="Street" [(ngModel)]="otherAddressStreet" name="otherAddressStreet">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="City" [(ngModel)]="otherAddressCity" name="otherAddressCity">
+        </mat-form-field>
+
+
+
+        <button mat-flat-button color="warn"  [routerLink]="['/user']" routerLinkActive="active" [disabled]="checkCash()" (click)="buyProduct()">Buy</button>
+
+
+      </mat-tab>
+    </mat-tab-group>
+
+
+
+  </mat-card>
+
+
+
+</div>

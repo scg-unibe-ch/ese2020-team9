@@ -5,6 +5,7 @@ import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProductService} from "../../services/product.service";
 import {environment} from "../../../environments/environment";
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class UserDashboardComponent implements OnInit {
   userName: string;
   productList: ProductItem[];
 
-  constructor(private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute) { }
+  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.userId = this.userService.getUserId();
@@ -35,6 +36,28 @@ export class UserDashboardComponent implements OnInit {
   }
 
   deleteProduct(productId: number){
-    this.httpClient.delete(environment.endpointURL + 'products/' + productId,{}).subscribe();
+    this.httpClient.delete(environment.endpointURL + 'products/' + productId,{}).subscribe((res: any) => {
+
+          //navigates to productItem
+          this.router.navigate(['/user']);
+          let action = "Ok";
+          this.openSnackBar(res.message, action);
+        }, (error: any) => {
+          let message = "Can not delete this Product";
+          let action = "";
+          this.openSnackBar(message, action);
+          //this.userAuth = 'Your Product Information is invalid!';
+        });
   }
+
+  trackByFn(index, item){
+    return item.id;
+  }
+
+  openSnackBar(message: string, action: string) {
+        this._snackBar.open(message, action, {
+          duration: 3000
+        });
+      }
+
 }

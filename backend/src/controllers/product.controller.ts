@@ -82,6 +82,10 @@ productController.get('/sold/:userId', (req: Request, res: Response) => {
 ); // get all bought products of a user
 
 
+productController.post('/search', (req: Request, res: Response) => {
+    productService.searchProduct(req.body).then(productList => res.send(productList))
+    .catch(err => res.status(400).send(err));
+}); // search product by keyword and filters
 
 export const ProductController: Router = productController;
 

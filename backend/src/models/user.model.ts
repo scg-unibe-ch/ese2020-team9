@@ -19,6 +19,20 @@ export interface UserAttributes {
     addressCountry: string;
 }
 
+export interface UserEditingAttributes {
+    userId: number;
+    userName: string;
+    userMail: string;
+    firstName: string;
+    lastName: string;
+    gender: string;
+    phoneNumber: number;
+    addressStreet: string;
+    addressPin: string;
+    addressCity: string;
+    addressCountry: string;
+}
+
 export interface UserCreationAttributes extends Optional<UserAttributes, 'userId'> { }
 
 export class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {

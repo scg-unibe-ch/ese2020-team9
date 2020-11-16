@@ -30,6 +30,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ProductFormComponent } from './components/productForm/productForm.component';
 import { ScrollingModule } from "@angular/cdk/scrolling";
 import { MatRadioModule } from "@angular/material/radio";
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { ShippingComponent } from './components/product-detail/shipping/shipping.component';
+import { OtherUserDashboardComponent } from './components/other-user-dashboard/other-user-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -45,9 +49,13 @@ import { MatRadioModule } from "@angular/material/radio";
     PageNotFoundComponent,
     UserComponent,
     ProductFormComponent,
+    ProductDetailComponent,
+    ShippingComponent,
+    OtherUserDashboardComponent,
   ],
   imports: [
     BrowserModule,
+    MatSnackBarModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
@@ -65,6 +73,7 @@ import { MatRadioModule } from "@angular/material/radio";
     FlexLayoutModule,
     ScrollingModule,
     MatRadioModule,
+
   ],
   providers: [
     {

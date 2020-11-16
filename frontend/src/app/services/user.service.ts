@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { BehaviorSubject } from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import { environment} from "../../environments/environment";
 import { User } from "../models/user.model";
 import { map } from "rxjs/operators";
@@ -70,6 +70,6 @@ export class UserService {
   }
 
   getUserList(){
-    this.httpClient.get(environment.endpointURL + 'user/');
+    return this.httpClient.get(environment.endpointURL + 'user');
   }
 }

@@ -1,0 +1,9 @@
+.categoryLinks{
+  display: block;
+  background-color: transparent;
+}
+
+.categories{
+  display:flex;
+  flex-direction:row;
+}

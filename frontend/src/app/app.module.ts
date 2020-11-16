@@ -23,7 +23,6 @@ import { UserDashboardComponent } from './components/user-dashboard/user-dashboa
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AppRoutingModule } from "./app-routing.module";
-import { UserComponent } from './components/user/user.component';
 import { MatGridListModule} from "@angular/material/grid-list";
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ProductFormComponent } from './components/productForm/productForm.component';
@@ -36,7 +35,17 @@ import { OtherUserDashboardComponent } from './components/other-user-dashboard/o
 import { SoldproductsComponent } from './components/user-dashboard/soldproducts/soldproducts.component';
 import { BoughtproductsComponent } from './components/user-dashboard/boughtproducts/boughtproducts.component';
 import { MatStepperModule } from '@angular/material/stepper';
- import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from "@angular/material/select";
+import { SearchCategoryComponent } from './components/dashboard/search-category/search-category.component';
+import { MatChipsModule} from "@angular/material/chips";
+import { ProductViewComponent } from './components/product-view/product-view.component';
+import { ProductDisplayComponent } from './components/product-display/product-display.component';
+import { FilterComponent } from './components/product-display/filter/filter.component';
+import { SearchBarComponent } from "./components/search-bar/search-bar.component";
+import { MatExpansionModule } from "@angular/material/expansion";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { MatSliderModule } from "@angular/material/slider";
 
 @NgModule({
   declarations: [
@@ -50,13 +59,17 @@ import { MatStepperModule } from '@angular/material/stepper';
     UserDashboardComponent,
     DashboardComponent,
     PageNotFoundComponent,
-    UserComponent,
     ProductFormComponent,
     ProductDetailComponent,
     ShippingComponent,
     OtherUserDashboardComponent,
     SoldproductsComponent,
     BoughtproductsComponent,
+    SearchCategoryComponent,
+    ProductViewComponent,
+    ProductDisplayComponent,
+    FilterComponent,
+    SearchBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,7 +93,11 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatRadioModule,
     MatStepperModule,
     ReactiveFormsModule,
-
+    MatSelectModule,
+    MatChipsModule,
+    MatExpansionModule,
+    MatAutocompleteModule,
+    MatSliderModule,
   ],
   providers: [
     {

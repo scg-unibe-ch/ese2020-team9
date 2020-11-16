@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from "../../services/user.service";
 import { ProductItem } from "../../models/product-item.model";
 import { ProductService } from "../../services/product.service";
@@ -14,12 +14,13 @@ export class DashboardComponent implements OnInit {
   productList: ProductItem [];
   isUserLoggedIn: boolean;
 
-  constructor(private userService: UserService, private productService: ProductService, private changeDetection: ChangeDetectorRef) { }
+  constructor(private userService: UserService, private productService: ProductService) { }
 
   ngOnInit(): void {
     this.userService.isUserLoggedIn.subscribe(value => {
       this.isUserLoggedIn = value;
     });
+
     this.getProductList();
   }
 
@@ -28,9 +29,4 @@ export class DashboardComponent implements OnInit {
       this.productList = data;
     });
   }
-
-  trackByFn(index, item){
-    return item.id;
-  }
-
 }

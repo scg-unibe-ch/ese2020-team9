@@ -156,17 +156,7 @@ export class UserRegistrationComponent implements OnInit {
 
   //make register button visible
   allFieldsAreFilled():boolean{
-    let un = this.evaluate(this.userName);
-    let fn = this.evaluate(this.firstName);
-    let ln = this.evaluate(this.lastName);
-    let em = this.validateEmail(this.userMail);
-    let cpw = this.evaluate(this.confPassword);
-    let pw1 = this.passwordLength(this.password);
-    let pw2 = this.passwordHasNumber(this.password);
-    let pw3 = this.passwordHasNumber(this.password);
-    let pw4 = this.passwordContainsMixedLetters(this.password);
-    let pw5 = this.passwordContainsSpecialChar(this.password);
-    if (un&&fn&&ln&&em&&cpw&&pw1&&pw2&&pw3&&pw4&&pw5){ return true}
+    if (this.stepOneComplete() && this.stepTwoComplete()){ return true}
     else {
       return false
     }
@@ -245,6 +235,31 @@ export class UserRegistrationComponent implements OnInit {
         console.log(error);
       });
     }
+  }
+
+  stepOneComplete(){
+    let em = this.validateEmail(this.userMail);
+    let un = this.evaluate(this.userName);
+    let pw1 = this.passwordLength(this.password);
+    let pw2 = this.passwordHasNumber(this.password);
+    let pw3 = this.passwordHasNumber(this.password);
+    let pw4 = this.passwordContainsMixedLetters(this.password);
+    let pw5 = this.passwordContainsSpecialChar(this.password);
+    let cpw = this.evaluate(this.confPassword);
+    if (em && un && cpw && pw1 && pw2 && pw3 && pw4 && pw5){ return true}
+        else {
+          return false
+        }
+  }
+
+
+  stepTwoComplete(){
+    let fn = this.evaluate(this.firstName);
+    let ln = this.evaluate(this.lastName);
+    if (fn && ln){ return true}
+        else {
+          return false
+        }
   }
 
 

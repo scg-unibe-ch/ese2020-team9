@@ -1,9 +1,8 @@
 
-
+<!--registration only-->
 <div *ngIf="!edit">
 
 <br>
-<hr>
 <mat-horizontal-stepper [linear]="true" #stepper>
   <mat-step label="Account">
 
@@ -49,7 +48,7 @@
       </mat-form-field>
 
 
-      <button mat-button matStepperNext>Next</button>
+      <button mat-button matStepperNext [disabled]="!stepOneComplete()">Next</button>
     </mat-card>
 
 
@@ -99,7 +98,7 @@
       <mat-form-field>
         <input matInput placeholder="City" [(ngModel)]="addressCity" name="addressCity">
       </mat-form-field>
-      <button mat-button matStepperNext>Next</button>
+      <button mat-button matStepperNext [disabled]="!stepTwoComplete()">Next</button>
     </mat-card>
 
 
@@ -186,6 +185,8 @@
       </mat-form-field>
 
       <button mat-button matStepperNext>Skip</button>
+      <button mat-button matStepperNext>Next</button>
+
     </mat-card>
   </mat-step>
 
@@ -221,6 +222,12 @@
 </div>
 
 
+
+
+
+
+
+<!--edit user profile only-->
 
 <div *ngIf="edit">
 

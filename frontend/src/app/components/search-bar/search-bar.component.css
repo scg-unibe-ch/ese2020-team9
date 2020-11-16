@@ -3,15 +3,6 @@
   display:flex;
   flex-direction:row;
 }
-.filterOptions{
-  display:flex;
-  flex-direction:row;
-}
-
-.productCategory{
-  background-color: #EEEEEE;
-  color: black;
-}
 
 input:focus {
   /* removing the input focus blue box. Put this on the form if you like. */
@@ -25,26 +16,10 @@ input[type=text]{
   padding-left: 1%;
   padding-right: 1%;
 }
-input[type=number]{
-  border:1px solid #46FFFD;
-  border-radius: 4px;
-  padding-left: 3%;
-  padding-right: 1%;
-}
-
-::ng-deep .mat-checkbox .mat-checkbox-frame {
-  border-color: #46FFFD;
-}
 
 .searchButton {
   /* Just a little styling to make it pretty */
   border:1px solid #46FFFD;
   background:#46FFFD;
   color:black;
-}
-
-.filterButton{
-  border:1px solid #46FFFD;
-  background:#082A5D;
-  color: #EEEEEE;
 }

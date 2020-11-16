@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoryList } from "../../../mock-category-list";
 
 @Component({
   selector: 'app-search-category',
@@ -6,13 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search-category.component.css']
 })
 export class SearchCategoryComponent implements OnInit {
-  constructor() { }
 
-  categories =  [
-    {value: '', viewValue: 'None'},
-    {value: 'AntiquesAndArt', viewValue: 'Antiques & Art'},
-    {value: 'BabyAndChild', viewValue: 'Baby & Child'},
-  ];
+  categories = CategoryList;
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

@@ -29,10 +29,17 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ProductFormComponent } from './components/productForm/productForm.component';
 import { ScrollingModule } from "@angular/cdk/scrolling";
 import { MatRadioModule } from "@angular/material/radio";
-import { SearchComponent } from './components/dashboard/search/search.component';
 import { MatSelectModule } from "@angular/material/select";
 import { SearchCategoryComponent } from './components/dashboard/search-category/search-category.component';
 import { MatChipsModule} from "@angular/material/chips";
+import { ProductViewComponent } from './components/product-view/product-view.component';
+import { ProductDisplayComponent } from './components/product-display/product-display.component';
+import { FilterComponent } from './components/product-display/filter/filter.component';
+import { SearchBarComponent } from "./components/search-bar/search-bar.component";
+import { MatExpansionModule } from "@angular/material/expansion";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { MatSliderModule } from "@angular/material/slider";
+
 
 @NgModule({
   declarations: [
@@ -47,8 +54,11 @@ import { MatChipsModule} from "@angular/material/chips";
     DashboardComponent,
     PageNotFoundComponent,
     ProductFormComponent,
-    SearchComponent,
     SearchCategoryComponent,
+    ProductViewComponent,
+    ProductDisplayComponent,
+    FilterComponent,
+    SearchBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,6 +81,9 @@ import { MatChipsModule} from "@angular/material/chips";
     MatRadioModule,
     MatSelectModule,
     MatChipsModule,
+    MatExpansionModule,
+    MatAutocompleteModule,
+    MatSliderModule,
   ],
   providers: [
     {

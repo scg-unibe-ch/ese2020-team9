@@ -1,9 +1,11 @@
 <div class="shaded">
-  <mat-list-item *ngFor="let user of userList">
+  <mat-list *ngFor="let user of userList">
+    <mat-list-item>
     Name: {{user.userName}}, ID:  {{user.userId}} , is Admin
-    <mat-checkbox [(ngModel)]="user.admin" (change)="onUserUpdate(user.userId)" >Admin User</mat-checkbox>
-    <button mat-flat-button color="warn" (click)="onUserDelete(user)">Delete User</button>
-  </mat-list-item>
+    <mat-checkbox [(ngModel)]="user.admin" (change)="onUserUpdate()" [checked]="user.admin">Admin User</mat-checkbox>
+    <button mat-flat-button color="warn" (click)="onUserDelete()">Delete User</button>
+    </mat-list-item>
+  </mat-list>
 </div>
 
 <mat-card >

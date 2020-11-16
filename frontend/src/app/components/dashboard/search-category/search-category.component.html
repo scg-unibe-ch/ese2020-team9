@@ -1,7 +1,7 @@
 <div class="categories" >
   <div *ngFor="let category of categories">
-    <div class="categoryLinks" >
+    <button class="categoryLinks" [routerLink]="['/search']" [queryParams]="{c: category.value}">
     {{category.viewValue}}
-    </div>
+    </button>
   </div>
 </div>

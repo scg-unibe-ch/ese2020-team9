@@ -6,6 +6,7 @@ import {UserService} from "../../services/user.service";
 import {ProductService} from "../../services/product.service";
 import {environment} from "../../../environments/environment";
 import { ActivatedRoute} from "@angular/router";
+import { Location} from "@angular/common";
 
 @Component({
   selector: 'app-productForm',
@@ -36,7 +37,7 @@ export class ProductFormComponent implements OnInit {
   id: any;
   add: boolean;
 
-  constructor(private httpClient: HttpClient, private router: Router, private userService: UserService, private _ngZone: NgZone, private productService: ProductService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
+  constructor(private httpClient: HttpClient, private router: Router, private userService: UserService, private _ngZone: NgZone, private productService: ProductService, private route: ActivatedRoute, private location: Location) { }
 
   ngOnInit(): void {
     this.userId = this.userService.getUserId();
@@ -138,5 +139,9 @@ export class ProductFormComponent implements OnInit {
 
   allFieldsAreFilled():boolean{
     return true;
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

@@ -40,7 +40,13 @@ transactionController.get('/buy/:userId/status/:transactionStatus', (req: Reques
 transactionController.put('/confirm/:transactionId', (req: Request, res: Response) => {
     transactionService.confirmTransaction(parseInt(req.params.transactionId, 10))
     .then(() => res.status(200).send({message: 'Transaction successfully confirmed!'}))
-    .catch(err => res.status(500).send(err));
+    .catch(err => res.status(404).send(err));
+});
+
+transactionController.put('/decline/:transactionId', (req: Request, res: Response) => {
+    transactionService.declineTransaction(parseInt(req.params.transactionId, 10))
+    .then(() => res.status(200).send({message: 'Transaction successfully declined!'}))
+    .catch(err => res.status(404).send(err));
 });
 
 export const TransactionController: Router = transactionController;

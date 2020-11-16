@@ -1,8 +1,33 @@
-<h2>My Profile</h2>
-<p>Hi {{userName}}! Welcome to Stor</p>
 
-<button mat-flat-button class="button_standard" [routerLink]="['/productForm/', 0]" routerLinkActive="active">Add Product </button>
-<button mat-flat-button class="button_standard" [routerLink]="['/registration/', userId]" routerLinkActive="active">Edit Profile</button>
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>My Profile</mat-card-title>
+    <br>
+    <mat-card-subtitle>{{userName}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+
+    {{userName}}<br>
+    {{userFirstName}}<br>
+    {{userLastName}}<br>
+    {{userAddressStreet}}<br>
+    {{userAddressPin}}, {{userAddressCity}} <br>
+    {{userAddressCountry}} <br>
+    <br> <b>
+    Your current balance:
+    {{userWallet}} CHF
+  </b>
+
+
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-flat-button class="button_standard" [routerLink]="['/productForm/', 0]" routerLinkActive="active">Add Product </button>
+    <button mat-flat-button class="button_standard" [routerLink]="['/registration/', userId]" routerLinkActive="active">Edit Profile</button>
+  </mat-card-actions>
+</mat-card>
+
+
 
 <br>
 
@@ -44,3 +69,5 @@
   </div>
 
 
+<app-soldproducts></app-soldproducts>
+<app-boughtproducts></app-boughtproducts>

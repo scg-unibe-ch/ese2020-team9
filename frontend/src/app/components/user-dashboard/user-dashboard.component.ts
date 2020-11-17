@@ -18,15 +18,44 @@ export class UserDashboardComponent implements OnInit {
   userId: any;
   userName: string;
   productList: ProductItem[];
+  userFirstName: string;
+  userLastName: string;
+  userAddressPin: any;
+  userAddressStreet: string;
+  userAddressCity: string;
+  userAddressCountry: string;
+  userWallet: number;
+
 
   constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.userId = this.userService.getUserId();
-    this.userName = this.userService.getUserName();
+    this.getUser();
     this.getProductUser();
 
   }
+
+
+  getUser(){
+      this.userService.getUser(this.userId).subscribe((instances: any) => {
+         //this.sellerId = instances.userId;
+         this.userName = instances.userName;
+         this.userFirstName = instances.firstName;
+         this.userLastName = instances.lastName;
+         this.userAddressPin = instances.addressPin;
+         this.userAddressStreet = instances.addressStreet;
+         this.userAddressCity = instances.addressCity;
+         this.userAddressCountry = instances.addressCountry;
+         this.userWallet = instances.wallet;
+
+
+       },(error: any) => {
+         let action = "";
+         let message = "There is no corresponding User!";
+         this.openSnackBar(message, action);
+     });
+   }
 
   // products - get all products of user
   getProductUser(){
@@ -34,6 +63,7 @@ export class UserDashboardComponent implements OnInit {
         this.productList = data;
      });
   }
+
 
   deleteProduct(productId: number){
     this.httpClient.delete(environment.endpointURL + 'products/' + productId,{}).subscribe((res: any) => {

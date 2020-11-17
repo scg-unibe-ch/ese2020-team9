@@ -1,7 +1,7 @@
 <div class="shaded">
   <mat-list-item>
     Name: {{user.userName}}, ID:  {{user.userId}} , is Admin
-    <mat-checkbox [(ngModel)]="user.admin" (ngModelChange)="onUserUpdate()">Admin User</mat-checkbox>
+    <mat-checkbox [(ngModel)]="user.admin" (ngModelChange)="onUserUpdate()" [disabled]="user.admin">Admin User</mat-checkbox>
     <button mat-flat-button color="warn"  (click)="onUserDelete()">Delete User</button>
   </mat-list-item>
 </div>

@@ -1,5 +1,6 @@
 import { User } from './user.model';
 import { Optional, Model, Sequelize, DataTypes } from 'sequelize';
+import { Transaction} from './transaction.model';
 
 export interface ProductAttributes {
     productId: number;
@@ -17,6 +18,7 @@ export interface ProductAttributes {
     isRentable: boolean;
     isAvailable: boolean;
     userId: number;
+    buyerId: number;
     userReview: string;
 }
 
@@ -38,6 +40,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
     isRentable!: boolean;
     isAvailable!: boolean;
     userId!: number;
+    buyerId!: number;
     userReview!: string;
 
     public static initialize(sequelize: Sequelize) {
@@ -97,6 +100,9 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
                 type: DataTypes.INTEGER,
                 allowNull: false
             },
+            buyerId: {
+                type: DataTypes.INTEGER
+            },
             userReview: {
                 type: DataTypes.TEXT
             }
@@ -112,7 +118,10 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
             foreignKey: 'userId',
             targetKey: 'userId',
             onDelete: 'cascade'
-
+        });
+        Product.hasMany(Transaction, {
+            as: 'transactions',
+            foreignKey: 'productId'
         });
     }
 }

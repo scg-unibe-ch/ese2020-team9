@@ -1,4 +1,3 @@
-import { LoginResponse } from './../../models/login.model';
 import { UserService } from './../../services/user.service';
 import { User, UserAttributes } from './../../models/user.model';
 import { expect } from 'chai';

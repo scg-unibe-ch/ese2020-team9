@@ -1,7 +1,6 @@
 import {MockCategory} from "./models/mock-category.models";
 
 export const CategoryList:  MockCategory [] = [
-    {value: "", viewValue: "None"},
     {value: "AntiquesAndArt", viewValue: "Antiques & Art"},
     {value: "BabyAndChild", viewValue: "Baby & Child"},
     {value: "Books", viewValue: "Books"},

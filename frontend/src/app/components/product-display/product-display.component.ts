@@ -2,7 +2,7 @@ import {Component, Input, OnInit, OnDestroy} from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {ProductItem} from "../../models/product-item.model";
 import {HttpClient} from "@angular/common/http";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ProductService} from "../../services/product.service";
 import {Search} from "../../models/search.model";
 import { switchMap } from "rxjs/operators";
@@ -16,17 +16,16 @@ import { CategoryList } from "../../mock-category-list";
 })
 export class ProductDisplayComponent implements OnInit {
 
-  name: string;
-  category: string;
-  location: string;
-  priceMin: string;
-  priceMax: string;
-  delivery: string;
-  available: string;
+  name= '';
+  category= '';
+  location= '';
+  priceMin= '';
+  priceMax= '';
+  delivery= '';
 
   productList: ProductItem[];
 
-  constructor(private httpClient: HttpClient, private route: ActivatedRoute, private productService: ProductService) { }
+  constructor(private httpClient: HttpClient, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -36,7 +35,6 @@ export class ProductDisplayComponent implements OnInit {
       this.priceMin = params['min'];
       this.priceMax = params['max'];
       this.delivery = params['d'];
-      this.available = params['a'];
       this.searchProduct();
     });
   }
@@ -55,6 +53,7 @@ export class ProductDisplayComponent implements OnInit {
       return 'Could not Search';
     });
   }
+
 /*
   searchProduct(event){
     this.httpClient.post(environment.endpointURL + 'products/search/', {

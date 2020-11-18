@@ -1,9 +1,34 @@
-.categoryLinks{
-  display: block;
+@media (max-width: 573px){
+  .bigDisplay {
+    display: none; /* hides categories if display < 573px */
+  }
+}
+
+.catContainer{
+  margin-top: 15px;
+  display:flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.categoryButton{
+  color: #F0F0F0;
+  border: 1px solid #46FFFD;
+  border-radius: 4px;
   background-color: transparent;
 }
 
-.categories{
-  display:flex;
-  flex-direction:row;
+@media (min-width: 573px){
+  .smallDisplay {
+    display: none; /* hides categories if display > 573px */
+  }
+}
+.smallDisplay{
+  width: 100%;
+  margin-left: 15px;
+  margin-top: 15px;
+}
+
+mat-form-field{
+  width: 100%;
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-search-bar',
@@ -9,12 +10,9 @@ export class SearchBarComponent implements OnInit {
 
   name = '';
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-  }
-
-  clear(){
-    return this.name == '';
+    this.name = this.route.snapshot.queryParamMap.get('n');
   }
 }

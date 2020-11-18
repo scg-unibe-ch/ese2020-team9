@@ -69,7 +69,7 @@ export class AdminPanelComponent implements OnInit {
    this.httpClient.put(environment.endpointURL + 'products/approve/' + productId,{
 
     }).subscribe((res: any)  => {
-            this.getUserList();
+            this.getProductList();
              let message = "Product approved"
              let action = "Ok"
              this.openSnackBar(message, action);

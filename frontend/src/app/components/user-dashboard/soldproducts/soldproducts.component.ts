@@ -46,13 +46,13 @@ export class SoldproductsComponent implements OnInit {
         let message = "You sold the product"
         let action = "OK";
         this.openSnackBar(message, action);
+        this.getSoldProducts();
 
       }, (error: any) => {
         let message = "The Buyer does not have enough money";
         let action = "OK";
         this.openSnackBar(message, action);
       });
-    this.getSoldProducts();
     }
 
    decline(transactionId: number){

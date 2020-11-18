@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {CategoryList} from "../../../mock-category-list";
+import {MatSelect} from "@angular/material/select";
 
 @Component({
   selector: 'app-filter',
@@ -8,6 +9,9 @@ import {CategoryList} from "../../../mock-category-list";
   styleUrls: ['./filter.component.css']
 })
 export class FilterComponent implements OnInit {
+
+  @ViewChild(MatSelect)
+  matSelect: MatSelect;
 
   name = '';
   location = '';
@@ -33,15 +37,40 @@ export class FilterComponent implements OnInit {
       this.category = params['c'];
       this.name = params['n'];*/
       this.navigateTo();
-    }
+  }
 
-  clear(){
+  ngAfterViewInit() {
+    this.matSelect.openedChange.subscribe(opened => {
+      if (opened) {
+        this.matSelect.panel.nativeElement.addEventListener('mouseleave', () => {
+          this.matSelect.close();
+        })
+      }
+    })
+  }
+
+  clearLocation(){
+    this.location = '';
+    this.navigateTo();
+  }
+
+  clearMinPrice(){
+    this.priceMin = '';
+    this.navigateTo();
+  }
+
+  clearMaxPrice(){
+    this.priceMax = '';
+    this.navigateTo();
+  }
+
+  clearAll(){
     this.category = '';
     this.location = '';
     this.priceMin = '';
     this.priceMax = '';
     this.delivery = '';
-    this.router.navigate(['/search'])
+    this.navigateTo();
   }
 
   navigateTo(){

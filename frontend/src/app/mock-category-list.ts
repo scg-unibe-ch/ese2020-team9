@@ -4,7 +4,7 @@ export const CategoryList:  MockCategory [] = [
     {value: "AntiquesAndArt", viewValue: "Antiques & Art"},
     {value: "BabyAndChild", viewValue: "Baby & Child"},
     {value: "Books", viewValue: "Books"},
-    {value: "OfficeAndCommercial", viewValue: "viewValueOffice & Commercial"},
+    {value: "OfficeAndCommercial", viewValue: "view ValueOffice & Commercial"},
     {value: "ComputerAndComputer accessories", viewValue: "Computer & Computer accessories"},
     {value: "Vehicles", viewValue: "Vehicles"},
     {value: "Films", viewValue: "Films"},

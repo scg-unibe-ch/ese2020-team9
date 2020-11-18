@@ -1,7 +1,3 @@
-.categoryTitle{
-  margin: 15px;
-}
-
 .container{
   margin: 15px
 }
@@ -15,7 +11,7 @@
 
 @media (max-width: 705px) {
   .filterBig {
-    display: none; /* hides filter if display < 500px */
+    display: none; /* hides filter if display < 705px */
   }
 }
 
@@ -26,7 +22,12 @@ input:focus {
 
 @media (min-width: 705px){
   .filterSmall {
-    display: none; /* hides filter if display > 500px */
+    display: none; /* hides filter if display > 705px */
+  }
+}
+@media (min-width: 705px) {
+  .selectPanel {
+    display: none; /* hides select panel if display < 705px */
   }
 }
 
@@ -51,7 +52,8 @@ mat-checkbox{
 }
 mat-radio-button{
   color: #F0F0F0;
-  font-size: 15px;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 ::ng-deep .mat-radio-outer-circle .mat-radio-checked{
@@ -107,6 +109,7 @@ mat-radio-button{
   justify-content: center;
   flex-direction: row;
 }
+
 
 .filterCheck{
   padding-right: 5%;

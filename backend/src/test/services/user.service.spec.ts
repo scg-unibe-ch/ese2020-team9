@@ -285,4 +285,53 @@ describe('UserService Tests', () => {
             });
         });
     });
+    describe('Test sendEmailWithResetLink', function() {
+        this.timeout(12000);
+        it('should send email successfully when email exists', function(done) {
+            testedUserService.sendEmailWithResetLink('jack.doe@outlook.com').then(info => {
+                expect(info.envelope.to[0]).to.be.eq('jack.doe@outlook.com');
+                done();
+            }).catch(err => {
+                console.log(err);
+                expect(true).to.be.eq(false); // should never reach here!
+                done();
+            });
+        });
+        it('should not send email, when email does not exists', function(done) {
+            testedUserService.sendEmailWithResetLink('notexistend@email.com').then(info => {
+                console.log(info);
+                expect(true).to.be.eq(false); // should never reach here!
+                done();
+            }).catch(err => {
+                expect(err).not.to.be.eq(null);
+                expect(err).to.have.property('message');
+                done();
+            });
+        });
+    });
+    describe('Test restorePassword', () => {
+        it('should successfully change password', function(done) {
+            testedUserService.restorePassword('jacky', '1234').then(() => {
+                User.findOne({
+                    where: {
+                        userName: 'jacky'
+                    }
+                }).then(user => {
+                    expect(user.password).not.to.be.eq('$2b$12$DS7bJoPX3gH3yk0yu7V9l.jpWFIaOX3W1YzNCwtk/Y6UgYlvxVWS.'); // old password
+                    expect(user.password).not.to.be.eq('1234'); // new password must be hashed
+                    done();
+                });
+            });
+        });
+        it('should not update anything, when requested user does not exist', function(done) {
+            testedUserService.restorePassword('nonExistentUser', 'fakey').then(() => {
+                expect(true).to.be.eq(false); // should never reach here!
+                done();
+            }).catch(err => {
+                expect(err).not.to.be.eq(null);
+                expect(err).to.have.property('message');
+                done();
+            });
+        });
+    });
 });

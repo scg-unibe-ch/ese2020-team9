@@ -24,6 +24,19 @@ export class EmailService {
     }
 
     private instantiateMailer() {
+        if (process.env.NODE_ENV === 'test') {
+            nodemailer.createTestAccount().then(testAccount => {
+                this.mailTransport = nodemailer.createTransport({
+                    host: 'smtp.ethereal.email',
+                    port: 587,
+                    secure: false,
+                    auth: {
+                        user: testAccount.user,
+                        pass: testAccount.pass
+                    }
+                });
+            });
+        } else {
         this.mailTransport = nodemailer.createTransport({
             host: 'smtp.mail.ch',
             port: 465,
@@ -33,6 +46,7 @@ export class EmailService {
                 pass: 'r6CFPsieyCdhFnn'
             }
         });
+        }
     }
 
     // creates the mail payload for a password forgotten request

@@ -102,6 +102,9 @@ export class UserService {
         return User.findOne({
             where: { userMail: email}
         }).then(user => {
+            if (user === null) {
+                return Promise.reject('No such user!');
+            }
             const token: string = jwt.sign({ userName: user.userName, userId: user.userId }, secret, { expiresIn: '15m' });
             return this.emailService.sendPasswordRestorationMail(user.userName, email, token);
         }).then(info => {

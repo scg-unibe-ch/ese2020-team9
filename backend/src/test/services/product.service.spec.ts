@@ -41,7 +41,8 @@ describe('ProductService Tests', () => {
         isRentable: null,
         isAvailable: true,
         userId: 1,
-        userReview: null
+        userReview: null,
+        buyerId: null
     };
 
     const product2: ProductAttributes = {
@@ -60,7 +61,8 @@ describe('ProductService Tests', () => {
         isRentable: null,
         isAvailable: true,
         userId: 1,
-        userReview: null
+        userReview: null,
+        buyerId: null
     };
 
     const product3: ProductAttributes = {
@@ -79,8 +81,10 @@ describe('ProductService Tests', () => {
         isRentable: null,
         isAvailable: true,
         userId: 1,
-        userReview: null
+        userReview: null,
+        buyerId: null
     };
+
     const product4: ProductAttributes = {
         productId : 3,
         productName: 'Drone',
@@ -97,7 +101,9 @@ describe('ProductService Tests', () => {
         isRentable: null,
         isAvailable: true,
         userId: 1,
-        userReview: null
+        userReview: null,
+        buyerId: null
+
     };
     const product5: ProductAttributes = {
         productId : 4,
@@ -115,7 +121,9 @@ describe('ProductService Tests', () => {
         isRentable: null,
         isAvailable: false,
         userId: 1,
-        userReview: null
+        userReview: null,
+        buyerId: null
+
     };
     const product6: ProductAttributes = {
         productId : 5,
@@ -133,7 +141,29 @@ describe('ProductService Tests', () => {
         isRentable: null,
         isAvailable: true,
         userId: 1,
-        userReview: null
+        userReview: null,
+        buyerId: null
+
+    };
+
+    const product7: ProductAttributes = {
+        productId : 7,
+        productName: 'Formaggio',
+        productDescription: 'Un molto buono formaggio di Ticino.',
+        productImage: null,
+        productPrice: 30,
+        productCategory: 'food',
+        productLocation: null,
+        productDelivery: null,
+        uploadDate: new Date(Date.now()),
+        sellDate: null,
+        isApproved: false,
+        isService: false,
+        isRentable: null,
+        isAvailable: true,
+        userId: 1,
+        userReview: null,
+        buyerId: 2
     };
 
     before('add user to db', function(done) {
@@ -236,6 +266,42 @@ describe('ProductService Tests', () => {
                     expect(foundProduct).not.to.be.eq(null);
                     done();
                 });
+            });
+        });
+    });
+    describe('Test get sold or bough products', () => {
+        before('add sold product to db', function(done) {
+            Product.create(product7).then(() => {
+                done();
+            });
+        });
+        it('should successfully get all sold products of user', function(done){
+            testedProductService.getSoldProducts(1).then(product => {
+                expect(product[0].productId).to.be.eq(7);
+                expect(product[0].productName).to.be.eq('Formaggio');
+                expect(product[0].productDescription).to.be.eq('Un molto buono formaggio di Ticino.');
+                expect(product[0].productPrice).to.be.eq(30);
+                expect(product[0].productCategory).to.be.eq('food');
+                expect(product[0].isApproved).to.be.eq(false);
+                expect(product[0].isService).to.be.eq(false);
+                expect(product[0].isAvailable).to.be.eq(true);
+                expect(product[0].userId).to.be.eq(1);
+                done();
+            });
+        });
+        it('should successfully get all bought products of user', function(done){
+            testedProductService.getBoughtProducts(2).then(product => {
+                expect(product[0].productId).to.be.eq(7);
+                expect(product[0].productName).to.be.eq('Formaggio');
+                expect(product[0].productDescription).to.be.eq('Un molto buono formaggio di Ticino.');
+                expect(product[0].productPrice).to.be.eq(30);
+                expect(product[0].productCategory).to.be.eq('food');
+                expect(product[0].isApproved).to.be.eq(false);
+                expect(product[0].isService).to.be.eq(false);
+                expect(product[0].isAvailable).to.be.eq(true);
+                expect(product[0].userId).to.be.eq(1);
+                expect(product[0].buyerId).to.be.eq(2);
+                done();
             });
         });
     });
@@ -510,10 +576,17 @@ describe('ProductService Tests', () => {
             });
         });
     });
-    after('clean up user', function(done) {
+    after('clean up', function(done) {
         User.destroy({
             truncate: true,
             restartIdentity: true
-        }).then(() => done());
+        }).then(() => {
+            Product.destroy({
+                truncate: true,
+                restartIdentity: true
+            })
+        }).then(() => {
+            done();
+        });
     });
 });

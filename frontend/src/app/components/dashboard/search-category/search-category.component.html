@@ -1,0 +1,16 @@
+<div class="catContainer" >
+  <div class="bigDisplay" *ngFor="let category of categories">
+    <button class="categoryButton" [routerLink]="['/input']" [queryParams]="{c: category.value}">
+    {{category.viewValue}}
+    </button>
+  </div>
+
+  <div class="smallDisplay">
+    <mat-form-field>
+      <mat-label>Search Product Category</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let category of categories" [value]="category.value" [routerLink]="['/input']" [queryParams]="{c: category.value}">{{category.viewValue}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>

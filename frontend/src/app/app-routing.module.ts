@@ -10,7 +10,8 @@ import { ProductFormComponent } from "./components/productForm/productForm.compo
 import { ProductDetailComponent } from "./components/product-detail/product-detail.component";
 import { ShippingComponent } from './components/product-detail/shipping/shipping.component';
 import { OtherUserDashboardComponent } from './components/other-user-dashboard/other-user-dashboard.component';
-
+import { ProductDisplayComponent } from "./components/product-display/product-display.component";
+import { FilterComponent } from "./components/product-display/filter/filter.component";
 
 const routes: Routes = [
   { path: 'home', component: DashboardComponent},
@@ -22,7 +23,8 @@ const routes: Routes = [
   { path: 'productDetail/:id', component: ProductDetailComponent},
   { path: 'shipping/:id', component: ShippingComponent},
   { path: 'user/:id', component: OtherUserDashboardComponent},
-
+  { path: 'search', component: ProductDisplayComponent},
+  { path: 'input', component: FilterComponent},
   //default route
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   //wildcard route for 404 page

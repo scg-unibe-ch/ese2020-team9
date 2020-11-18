@@ -7,7 +7,7 @@ import {ProductService} from "../../services/product.service";
 import {environment} from "../../../environments/environment";
 import { ActivatedRoute} from "@angular/router";
 import {MatSnackBar} from '@angular/material/snack-bar';
-
+import { Location} from "@angular/common";
 
 @Component({
   selector: 'app-productForm',
@@ -38,7 +38,7 @@ export class ProductFormComponent implements OnInit {
   id: any;
   add: boolean;
 
-  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private _ngZone: NgZone, private productService: ProductService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
+  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private _ngZone: NgZone, private productService: ProductService, private route: ActivatedRoute, private location: Location) { }
 
   ngOnInit(): void {
     this.userId = this.userService.getUserId();
@@ -151,10 +151,13 @@ export class ProductFormComponent implements OnInit {
     return true;
   }
 
-
   openSnackBar(message: string, action: string) {
       this._snackBar.open(message, action, {
         duration: 3000
       });
     }
+
+  goBack(): void {
+    this.location.back();
+  }
 }

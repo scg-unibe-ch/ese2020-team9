@@ -1,17 +1,22 @@
-<app-search-bar></app-search-bar>
-<app-search-category></app-search-category>
+<app-search-bar>
+  {{name}}
+</app-search-bar>
+<div class="categoryTitle" *ngIf="category !== ''">
+  {{category}}
+</div>
 
+<app-filter></app-filter>
 <div class="productList_dashboard" fxLayout="row wrap" fxLayoutGap="2% grid" fxLayoutAlign="space-evenly stretch">
   <div fxFlex="10%" fxFlex.xl="10%" fxFlex.lg="15%" fxFlex.md="20%" fxFlex.sm="33%" fxFlex.xs="50%" *ngFor="let productItem of productList">
+
     <mat-card>
 
       <mat-card-header>
         <!--<img mat-card-avatar src="" alt="Profile Picture">-->
         <mat-card-title>
-          <button mat-flat-button [routerLink]="['/productDetail', productItem.productId]" routerLinkActive="active" ><b>{{productItem.productName}}</b>
+          <button mat-button class="button_fill" [routerLink]="['/productDetail', productItem.productId]" routerLinkActive="active" ><b>{{productItem.productName}}</b>
           </button>
         </mat-card-title>
-
         <mat-card-subtitle>{{productItem.uploadDate | date: "dd.MM.yy, HH:mm"}} Uhr</mat-card-subtitle>
       </mat-card-header>
 
@@ -28,6 +33,20 @@
         </p>
       </mat-card-content>
 
+
+      <mat-card-actions align="end">
+        <button mat-flat-button class="button_standard"  [routerLink]="['/productDetail', productItem.productId]" routerLinkActive="active" ><b>Check Details</b></button>
+      </mat-card-actions>
+
+      <mat-card-footer>
+        <mat-chip-list>
+          <mat-chip>{{productItem.productCategory}}</mat-chip>
+          <div *ngIf="productItem.productLocation === !''">
+            <mat-chip>{{productItem.productLocation}}</mat-chip></div>
+          <mat-chip *ngIf="productItem.isService">Service </mat-chip>
+          <mat-chip *ngIf="productItem.isRentable">rentable</mat-chip>
+        </mat-chip-list>
+      </mat-card-footer>
     </mat-card>
   </div>
 </div>

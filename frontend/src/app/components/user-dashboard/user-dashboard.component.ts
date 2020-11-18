@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../services/user.service";
 import {ProductItem} from "../../models/product-item.model";
 import {HttpClient} from "@angular/common/http";
@@ -6,7 +6,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ProductService} from "../../services/product.service";
 import {environment} from "../../../environments/environment";
 import {MatSnackBar} from '@angular/material/snack-bar';
-
 
 @Component({
   selector: 'app-user-dashboard',
@@ -25,8 +24,6 @@ export class UserDashboardComponent implements OnInit {
   userAddressCity: string;
   userAddressCountry: string;
   userWallet: number;
-
-
 
   constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute) { }
 
@@ -68,7 +65,7 @@ export class UserDashboardComponent implements OnInit {
 
   deleteProduct(productId: number){
     this.httpClient.delete(environment.endpointURL + 'products/' + productId,{}).subscribe((res: any) => {
-
+          this.getProductUser();
           //navigates to productItem
           this.router.navigate(['/user']);
           let action = "Ok";
@@ -81,16 +78,14 @@ export class UserDashboardComponent implements OnInit {
         });
   }
 
+
   trackByFn(index, item){
     return item.id;
   }
-
-
 
   openSnackBar(message: string, action: string) {
         this._snackBar.open(message, action, {
           duration: 3000
         });
-      }
-
+  }
 }

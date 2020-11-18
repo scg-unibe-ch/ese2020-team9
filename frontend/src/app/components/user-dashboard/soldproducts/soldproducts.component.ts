@@ -52,7 +52,7 @@ export class SoldproductsComponent implements OnInit {
         let action = "OK";
         this.openSnackBar(message, action);
       });
-
+    this.getSoldProducts();
     }
 
    decline(transactionId: number){

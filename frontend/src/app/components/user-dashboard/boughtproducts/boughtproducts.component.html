@@ -1,5 +1,6 @@
 <hr>
-<h2>History</h2>
+<h2>Bought products:</h2>
+
 
 
 <div  fxLayout="row wrap" fxLayoutGap="2% grid" fxLayoutAlign="space-evenly stretch">
@@ -10,22 +11,38 @@
       <p>
         transactionId: {{transaction.transactionId}}<br>
 
-        productId: {{transaction.productId}}<br>
+        <br>
+        <button mat-flat-button class="button_fill"  [routerLink]="['/productDetail', transaction.productId]" routerLinkActive="active" ><b>productId: {{transaction.productId}}</b></button>
+        <br>
 
-        userId: {{transaction.userId}}<br>
-
-
-
-        buyerId: {{transaction.buyerId}}<br>
-        transactionStatus: {{transaction.transactionStatus}}<br>
-        deliveryFirstName: {{transaction.deliveryFirstName}}<br>
-        deliveryLastName: {{transaction.deliveryLastName}}<br>
-        deliveryStreet: {{transaction.deliveryStreet}}<br>
-        deliveryPin: {{transaction.deliveryPin}}<br>
-        deliveryCity: {{transaction.deliveryCity}}<br>
-        deliveryCountry: {{transaction.deliveryCountry}}<br>
 
       </p>
+      <div *ngIf="transaction.transactionStatus==1">
+        <b>Awaiting confirmation of seller</b>
+        <br>
+
+      </div>
+
+      <div *ngIf="transaction.transactionStatus==2">
+        <b>Status: Sold</b>
+
+      </div>
+
+      <div *ngIf="transaction.transactionStatus==3">
+        <b>Status: Declined</b>
+
+      </div>
+      <div>
+        Buyer: <br>
+        <button mat-button class="button_fill" [routerLink]="['/user', transaction.buyerId]" routerLinkActive="active" ><mat-icon >account_circle</mat-icon>{{transaction.buyerIdggggg}}</button>
+
+        <br>
+        {{transaction.deliveryFirstName}} {{transaction.deliveryLastName}}<br>
+        {{transaction.deliveryStreet}}<br>
+        {{transaction.deliveryPin}} {{transaction.deliveryCity}}<br>
+        {{transaction.deliveryCountry}}<br>
+      </div>
+
 
     </mat-card>
   </div>

@@ -12,9 +12,8 @@
 
           <br>
           <button mat-flat-button class="button_fill"  [routerLink]="['/productDetail', transaction.productId]" routerLinkActive="active" ><b>productId: {{transaction.productId}}</b></button>
+          <br>
 
-          userId: {{transaction.userId}}<br>
-          transactionStatus: {{transaction.transactionStatus}}<br>
 
         </p>
         <div *ngIf="transaction.transactionStatus==1">
@@ -33,14 +32,16 @@
           <b>Status: Declined</b>
 
         </div>
+        <div>
+          Buyer: <br>
+          <button mat-button class="button_fill" [routerLink]="['/user', transaction.buyerId]" routerLinkActive="active" ><mat-icon >account_circle</mat-icon>{{transaction.buyerIdggggg}}</button>
 
-        <button mat-button class="button_fill" [routerLink]="['/user', transaction.buyerId]" routerLinkActive="active" ><mat-icon >account_circle</mat-icon>{{transaction.buyerIdggggg}}</button>
-
-          Buyer: {{transaction.deliveryFirstName}} {{transaction.deliveryLastName}}<br>
+          <br>
+          {{transaction.deliveryFirstName}} {{transaction.deliveryLastName}}<br>
           {{transaction.deliveryStreet}}<br>
           {{transaction.deliveryPin}} {{transaction.deliveryCity}}<br>
           {{transaction.deliveryCountry}}<br>
-
+        </div>
 
 
     </mat-card>

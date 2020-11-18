@@ -8,18 +8,23 @@
 
     <mat-card class="productItem_Card">
 
-      <div *ngIf="transaction" (onCreate)="getSeller(transaction.userId)">
+      <div *ngIf="transaction" [ngClass]="{check:getProduct(transaction.productId)}" >
+        <br>
+        <h1> {{productName}}</h1>
 
-        <button mat-button class="button_fill" (click)="getSeller(transaction.buyerId)" ><mat-icon >account_circle</mat-icon>{{transaction.buyerId}}</button>
 
-        <p>lalaalal2</p>
+      </div>
+      <h2>Sold by: </h2>
+
+      <div *ngIf="transaction" [ngClass]="{check:getSeller(transaction.userId)}" >
+        <button mat-button class="button_fill" [routerLink]="['/user', transaction.buyerId]" routerLinkActive="active" ><mat-icon >account_circle</mat-icon>{{sellerName}}</button>
+        <br>
       </div>
 
       <p>
-        transactionId: {{transaction.transactionId}}<br>
 
         <br>
-        <button mat-flat-button class="button_fill"  [routerLink]="['/productDetail', transaction.productId]" routerLinkActive="active" ><b>productId: {{transaction.productId}}</b></button>
+        <button mat-flat-button class="button_fill"  [routerLink]="['/productDetail', transaction.productId]" routerLinkActive="active" ><b>{{productName}}</b></button>
         <br>
 
 
@@ -39,16 +44,14 @@
         <b>Status: Declined</b>
 
       </div>
-      <div>
-        Buyer: <br> lalalalala {{userName}} lalalala
-        <button mat-button class="button_fill" [routerLink]="['/user', transaction.buyerId]" routerLinkActive="active" ><mat-icon >account_circle</mat-icon>{{transaction.buyerId}}</button>
 
         <br>
+        <b>Bought by:</b>
+
         {{transaction.deliveryFirstName}} {{transaction.deliveryLastName}}<br>
         {{transaction.deliveryStreet}}<br>
         {{transaction.deliveryPin}} {{transaction.deliveryCity}}<br>
         {{transaction.deliveryCountry}}<br>
-      </div>
 
 
     </mat-card>

@@ -6,6 +6,7 @@ import {ProductService} from "../../../services/product.service";
 import {environment} from "../../../../environments/environment";
 import {Transaction} from "../../../models/transaction.model";
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { Directive, Output, EventEmitter, Input, SimpleChange} from '@angular/core';
 
 @Component({
   selector: 'app-boughtproducts',
@@ -21,15 +22,18 @@ export class BoughtproductsComponent implements OnInit {
     sellerName: string;
     sellerFirstName: string;
     sellerLastName: string;
+    productName: string;
+    buyerName: string;
     id: number;
 
+  @Output() onCreate: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private httpClient: HttpClient, private _snackBar: MatSnackBar, private userService: UserService, private productService: ProductService) { }
 
   ngOnInit(): void {
       this.userId = this.userService.getUserId();
       this.getBoughtProducts();
-
+      this.onCreate.emit();
   }
 
 
@@ -42,20 +46,36 @@ export class BoughtproductsComponent implements OnInit {
 
 
   getSeller(id:number){
-      console.log(this.id);
-      this.userService.getUser(this.id).subscribe((instances: any) => {
+      this.userService.getUser(id).subscribe((instances: any) => {
          //this.sellerId = instances.userId;
          this.sellerName = instances.userName;
          this.sellerFirstName = instances.firstName;
          this.sellerLastName = instances.lastName;
-
-
        },(error: any) => {
-         let action = "";
-         let message = "There is no corresponding User!";
-         this.openSnackBar(message, action);
+
      });
    }
+
+   getBuyer(uid:number){
+         this.userService.getUser(uid).subscribe((instances: any) => {
+            //this.sellerId = instances.userId;
+            this.buyerName = instances.userName;
+
+          },(error: any) => {
+
+        });
+      }
+
+
+  getProduct(pid:number){
+    this.productService.getProduct(pid).subscribe((instances: any) => {
+
+          this.productName = instances.productName;
+
+
+      },(error: any) => {
+    });
+  }
 
   openSnackBar(message: string, action: string) {
         this._snackBar.open(message, action, {

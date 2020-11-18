@@ -1,39 +1,47 @@
 <hr>
-<p>soldproducts works!</p>
+<h2>Inbox: Buy requests</h2>
 
 
 <div  fxLayout="row wrap" fxLayoutGap="2% grid" fxLayoutAlign="space-evenly stretch">
-  <div fxFlex="10%" fxFlex.xl="15%" fxFlex.lg="20%" fxFlex.md="25%" fxFlex.sm="33%" fxFlex.xs="50%" *ngFor="let productItem of productList">
+  <div fxFlex="10%" fxFlex.xl="15%" fxFlex.lg="20%" fxFlex.md="25%" fxFlex.sm="33%" fxFlex.xs="50%" *ngFor="let transaction of transactionList">
     <mat-card class="productItem_Card">
-      <mat-card-header>
-        <!--<img mat-card-avatar src="" alt="Profile Picture">-->
-        <mat-card-title>{{productItem.productName}}</mat-card-title>
-        <mat-card-subtitle>posted on {{productItem.uploadDate | date: "dd.MM.yy, HH:mm"}}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <div *ngIf="productItem.isApproved">
-          <p class="text">Approved</p>
-        </div>
-        <div *ngIf="!productItem.isApproved">
-          <b class="text">Awaiting approval</b>
+
+
+        <p>
+          transactionId: {{transaction.transactionId}}<br>
+
+          <br>
+          <button mat-flat-button class="button_fill"  [routerLink]="['/productDetail', transaction.productId]" routerLinkActive="active" ><b>productId: {{transaction.productId}}</b></button>
+
+          userId: {{transaction.userId}}<br>
+          transactionStatus: {{transaction.transactionStatus}}<br>
+
+        </p>
+        <div *ngIf="transaction.transactionStatus==1">
+          <b>Status: Please confirm transaction</b>
+          <br>
+          <button mat-flat-button class="button_standard" (click)="sell(transaction.transactionId)">Sell</button>
+          <button mat-flat-button class="button_standard" (click)="decline(transaction.transactionId)">Decline</button>
         </div>
 
-        <div *ngIf="productItem.isAvailable">
-          <p class="text">Available</p>
-        </div>
-        <div *ngIf="!productItem.isAvailable">
-          <b class="text">Sold!</b>
-        </div>
-      </mat-card-content>
-      <mat-card-actions align="end">
-        <button mat-flat-button class="button_standard" [routerLink]="['/productForm/', productItem.productId]" routerLinkActive="active">Edit</button>
-        <button mat-flat-button class="button_standard" (click)="deleteProduct([productItem.productId])">Delete</button>
-      </mat-card-actions>
-      <hr>
+        <div *ngIf="transaction.transactionStatus==2">
+          <b>Status: Sold</b>
 
-      <br>
-      <button mat-button class="button_fill" [routerLink]="['/', productItem.productCategory]" routerLinkActive="active" ><mat-icon >chevron_right</mat-icon>{{productItem.productCategory}}</button>
-      <button mat-button class="button_fill" [routerLink]="['/', productItem.productLocation]" routerLinkActive="active"><mat-icon >place</mat-icon>{{productItem.productLocation}}</button>
+        </div>
+
+        <div *ngIf="transaction.transactionStatus==3">
+          <b>Status: Declined</b>
+
+        </div>
+
+        <button mat-button class="button_fill" [routerLink]="['/user', transaction.buyerId]" routerLinkActive="active" ><mat-icon >account_circle</mat-icon>{{transaction.buyerIdggggg}}</button>
+
+          Buyer: {{transaction.deliveryFirstName}} {{transaction.deliveryLastName}}<br>
+          {{transaction.deliveryStreet}}<br>
+          {{transaction.deliveryPin}} {{transaction.deliveryCity}}<br>
+          {{transaction.deliveryCountry}}<br>
+
+
 
     </mat-card>
   </div>

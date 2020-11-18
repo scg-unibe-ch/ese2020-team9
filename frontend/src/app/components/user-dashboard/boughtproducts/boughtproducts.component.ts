@@ -4,6 +4,8 @@ import {ProductItem} from "../../../models/product-item.model";
 import {HttpClient} from "@angular/common/http";
 import {ProductService} from "../../../services/product.service";
 import {environment} from "../../../../environments/environment";
+import {Transaction} from "../../../models/transaction.model";
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-boughtproducts',
@@ -14,21 +16,21 @@ export class BoughtproductsComponent implements OnInit {
 
     userId: any;
     userName: string;
-    productList: ProductItem[];
+    transactionList: Transaction[];
 
-  constructor(private userService: UserService, private productService: ProductService) { }
+  constructor(private httpClient: HttpClient, private _snackBar: MatSnackBar, private userService: UserService, private productService: ProductService) { }
 
   ngOnInit(): void {
       this.userId = this.userService.getUserId();
-      this.getProductUser();
+      this.getBoughtProducts();
 
   }
 
 
   // products - get all products of user
-  getProductUser(){
-     this.productService.getUserProduct(this.userId).subscribe((data: ProductItem[]) => {
-        this.productList = data;
+  getBoughtProducts(){
+     this.productService.getBoughtProducts(this.userId).subscribe((data: Transaction[]) => {
+        this.transactionList = data;
      });
   }
 

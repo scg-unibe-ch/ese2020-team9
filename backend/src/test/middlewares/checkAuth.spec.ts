@@ -148,7 +148,7 @@ describe('Test checkAuth middlewares', () => {
 
         it('should not pass with token generated with wrong secret', function(done) {
             const wrongSecret = process.env.JWT_SECRET;
-            const token = jwt.sign({ userName: 'testy', userId: 1 }, wrongSecret, { expiresIn: '15m' })
+            const token = jwt.sign({ userName: 'testy', userId: 1 }, wrongSecret, { expiresIn: '15m' });
             const req = mockRequest({
                 headers: {
                     authorization: 'Bearer ' + token

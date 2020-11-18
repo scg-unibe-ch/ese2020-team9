@@ -84,7 +84,6 @@ export class ProductDetailComponent implements OnInit {
 
 
   getSeller(sellerId: number){
-
     this.userService.getUser(this.sellerId).subscribe((instances: any) => {
           //this.sellerId = instances.userId;
           this.sellerName = instances.userName;
@@ -101,7 +100,7 @@ export class ProductDetailComponent implements OnInit {
 
   // Check to make sure User has enough Cash to buy product
  checkCash(){
-    return (this.userWallet >= this.productPrice ? false : true);
+    return (this.userWallet >= this.productPrice);
   }
 
 

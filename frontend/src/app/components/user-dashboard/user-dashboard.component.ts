@@ -78,6 +78,11 @@ export class UserDashboardComponent implements OnInit {
         });
   }
 
+
+  trackByFn(index, item){
+    return item.id;
+  }
+
   openSnackBar(message: string, action: string) {
         this._snackBar.open(message, action, {
           duration: 3000

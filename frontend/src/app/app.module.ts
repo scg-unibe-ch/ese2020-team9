@@ -46,6 +46,7 @@ import { SearchBarComponent } from "./components/search-bar/search-bar.component
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatSliderModule } from "@angular/material/slider";
+import { UserComponent } from "./components/user/user.component";
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { MatSliderModule } from "@angular/material/slider";
     ProductDisplayComponent,
     FilterComponent,
     SearchBarComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,

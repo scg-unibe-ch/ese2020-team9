@@ -47,6 +47,9 @@ export class ShippingComponent implements OnInit {
   buyerAddressCountry = '';
   buyerAddressStreet = '';
   buyerWallet: any;
+  buyerLastName = '';
+  buyerFirstName = '';
+
 
 
   otherAddressPin = '';
@@ -87,6 +90,8 @@ export class ShippingComponent implements OnInit {
   getBuyer(){this.userService.getUser(this.buyerId).subscribe((instances: any) => {
          //this.sellerId = instances.userId;
          this.buyerName = instances.userName;
+         this.buyerFirstName = instances.firstName;
+         this.buyerLastName = instances.lastName;
          this.buyerAddressPin = instances.addressPin;
          this.buyerAddressStreet = instances.addressStreet;
          this.buyerAddressCity = instances.addressCity;
@@ -127,20 +132,6 @@ export class ShippingComponent implements OnInit {
     });
   }
 
-  buyProduct(){
-  this.productService.buyProduct(this.id).subscribe((instances: any) => {
-
-    let message = "Buying not implemented yet!"
-    let action = "OK"
-    this.openSnackBar(message, action);
-  },(error: any) => {
-        let message = "Buying not implemented yet!"
-        let action = "OK"
-        this.openSnackBar(message, action);
-        //this.userAuth = 'There is no corresponding Product!';
-      });
-  }
-
 
   getSeller(sellerId: number){
 
@@ -156,6 +147,36 @@ export class ShippingComponent implements OnInit {
       let message = "There is no corresponding Seller!";
       this.openSnackBar(message, action);
     });
+  }
+
+  //Initializes a new transaction
+  buyProduct(): void {
+    this.httpClient.post(environment.endpointURL + 'transaction/', {
+      //transactionId : this.transactionId,
+      productId: this.productId,
+      userId: this.sellerId,
+      buyerId: this.buyerId,
+      //transactionStatus: this.transactionStatus,
+      deliveryFirstName: this.buyerFirstName,
+      deliveryLastName: this.buyerLastName,
+      deliveryStreet: this.buyerAddressStreet,
+      deliveryPin: this.buyerAddressPin,
+      deliveryCity: this.buyerAddressCity,
+      deliveryCountry: this.buyerAddressCountry,
+    }).subscribe((res: any) => {
+
+      //navigates to productItem
+      this.router.navigate(['/user']);
+      let message = "Seller has been contacted, please await approval of buy request"
+      let action = "OK";
+      this.openSnackBar(message, action);
+
+    }, (error: any) => {
+      let message = "An Error occurred!";
+      let action = "OK";
+      this.openSnackBar(message, action);
+    });
+
   }
 
   openSnackBar(message: string, action: string) {

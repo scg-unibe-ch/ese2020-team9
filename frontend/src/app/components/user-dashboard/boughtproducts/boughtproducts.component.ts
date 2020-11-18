@@ -18,6 +18,12 @@ export class BoughtproductsComponent implements OnInit {
     userName: string;
     transactionList: Transaction[];
 
+    sellerName: string;
+    sellerFirstName: string;
+    sellerLastName: string;
+    id: number;
+
+
   constructor(private httpClient: HttpClient, private _snackBar: MatSnackBar, private userService: UserService, private productService: ProductService) { }
 
   ngOnInit(): void {
@@ -32,6 +38,29 @@ export class BoughtproductsComponent implements OnInit {
      this.productService.getBoughtProducts(this.userId).subscribe((data: Transaction[]) => {
         this.transactionList = data;
      });
+  }
+
+
+  getSeller(id:number){
+      console.log(this.id);
+      this.userService.getUser(this.id).subscribe((instances: any) => {
+         //this.sellerId = instances.userId;
+         this.sellerName = instances.userName;
+         this.sellerFirstName = instances.firstName;
+         this.sellerLastName = instances.lastName;
+
+
+       },(error: any) => {
+         let action = "";
+         let message = "There is no corresponding User!";
+         this.openSnackBar(message, action);
+     });
+   }
+
+  openSnackBar(message: string, action: string) {
+        this._snackBar.open(message, action, {
+          duration: 3000
+        });
   }
 
 

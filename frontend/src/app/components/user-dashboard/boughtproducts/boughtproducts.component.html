@@ -5,8 +5,15 @@
 
 <div  fxLayout="row wrap" fxLayoutGap="2% grid" fxLayoutAlign="space-evenly stretch">
   <div fxFlex="10%" fxFlex.xl="15%" fxFlex.lg="20%" fxFlex.md="25%" fxFlex.sm="33%" fxFlex.xs="50%" *ngFor="let transaction of transactionList">
+
     <mat-card class="productItem_Card">
 
+      <div *ngIf="transaction" (onCreate)="getSeller(transaction.userId)">
+
+        <button mat-button class="button_fill" (click)="getSeller(transaction.buyerId)" ><mat-icon >account_circle</mat-icon>{{transaction.buyerId}}</button>
+
+        <p>lalaalal2</p>
+      </div>
 
       <p>
         transactionId: {{transaction.transactionId}}<br>
@@ -33,8 +40,8 @@
 
       </div>
       <div>
-        Buyer: <br>
-        <button mat-button class="button_fill" [routerLink]="['/user', transaction.buyerId]" routerLinkActive="active" ><mat-icon >account_circle</mat-icon>{{transaction.buyerIdggggg}}</button>
+        Buyer: <br> lalalalala {{userName}} lalalala
+        <button mat-button class="button_fill" [routerLink]="['/user', transaction.buyerId]" routerLinkActive="active" ><mat-icon >account_circle</mat-icon>{{transaction.buyerId}}</button>
 
         <br>
         {{transaction.deliveryFirstName}} {{transaction.deliveryLastName}}<br>

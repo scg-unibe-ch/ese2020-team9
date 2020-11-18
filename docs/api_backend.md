@@ -433,6 +433,102 @@ Makes the user with the id set in the url as parameter to an admin user. Request
     ```
     </details>
 
+### POST on `"/user/passwordForgotten"`
+
+A request on this endpoint will trigger an email sent with a link to a page, where the user may enter his new password. User must be registered and enter a valid email. The link will contain a token, which is necessary to perform the request on the "/user/restorePassword" endpoint
+
+- **Details**
+
+    <details>
+
+    <summary>Request</summary>
+
+    ```json
+    {
+        "userEmail": "string"
+    }
+    ```
+    
+    </details>
+
+    <details>
+
+    <summary>Response (STATUS 200)</summary>
+
+    ```json
+    {
+        "message": "We sent you an email, check out your mail box!"
+    }
+    ```
+
+    </details>
+
+    <details>
+
+    <summary>Response (STATUS 404)</summary>
+
+    ```json
+    {
+        "message": "We sent you an email, check out your mail box!"
+    }
+    ```
+
+    </details>
+
+### POST on `"/user/restorePassword"`
+
+Request will reset the password of the user indicated in the token, which must be added to the Authorization header. Only a token received from the endpoint "/user/passwordForgotten" will be accepted.
+
+- **Details**
+
+    <details>
+
+    <summary>Request</summary>
+
+    ```json
+    {
+        "password": "string"
+    }
+    ```
+
+    </details>
+
+    <details>
+
+    <summary>Response (STATUS 200)</summary>
+
+    ```json
+    {
+        "message": "Successfully changed the password, you now may sign in!"
+    }
+    ```
+
+    </details>
+
+    <details>
+
+    <summary>Response (STATUS 403)</summary>
+
+    ```json
+    {
+        "message": "Unauthorized"
+    }
+    ```
+
+    </details>
+
+    <details>
+
+    <summary>Response (STATUS 500)</summary>
+
+    ```json
+    {
+        "message": "Failed to change the password, please try again!"
+    }
+    ```
+
+    </details>
+
 ## Product API
 
 ### POST on `"/products/"`

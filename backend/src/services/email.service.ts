@@ -57,7 +57,7 @@ export class EmailService {
             subject: 'STOR - Reset password',
             html: '<p>Hi ' + username + ',<br>' +
                 'We got a request to reset your STOR password. Click on the link below, to do so.<br></p>' +
-                '<a href="http://localhost:3000/resetPassword/' + token + '">Reset Password</a><br>' +
+                '<a href="http://localhost:4200/resetPassword/' + token + '">Reset Password</a><br>' +
                 '<p>The link is only valid for 15 minutes. If you did not request the password change, you may ' +
                 'ignore this email.<br><br>' +
                 'Greetings <br> Your STOR Team</p>'

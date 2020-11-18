@@ -84,7 +84,6 @@ export class ProductDetailComponent implements OnInit {
 
 
   getSeller(sellerId: number){
-
     this.userService.getUser(this.sellerId).subscribe((instances: any) => {
           //this.sellerId = instances.userId;
           this.sellerName = instances.userName;

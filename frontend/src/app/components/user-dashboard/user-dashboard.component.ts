@@ -27,6 +27,7 @@ export class UserDashboardComponent implements OnInit {
   userWallet: number;
 
 
+
   constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -83,6 +84,8 @@ export class UserDashboardComponent implements OnInit {
   trackByFn(index, item){
     return item.id;
   }
+
+
 
   openSnackBar(message: string, action: string) {
         this._snackBar.open(message, action, {

@@ -36,7 +36,7 @@ import { OtherUserDashboardComponent } from './components/other-user-dashboard/o
 import { SoldproductsComponent } from './components/user-dashboard/soldproducts/soldproducts.component';
 import { BoughtproductsComponent } from './components/user-dashboard/boughtproducts/boughtproducts.component';
 import { MatStepperModule } from '@angular/material/stepper';
- import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [

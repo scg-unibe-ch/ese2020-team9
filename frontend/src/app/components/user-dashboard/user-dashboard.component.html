@@ -1,5 +1,4 @@
 
-
 <mat-card>
   <mat-card-header>
     <mat-card-title>My Profile</mat-card-title>
@@ -30,7 +29,7 @@
 
 
 <br>
-
+<h2>Your products</h2>
   <div  fxLayout="row wrap" fxLayoutGap="2% grid" fxLayoutAlign="space-evenly stretch">
     <div fxFlex="10%" fxFlex.xl="15%" fxFlex.lg="20%" fxFlex.md="25%" fxFlex.sm="33%" fxFlex.xs="50%" *ngFor="let productItem of productList">
       <mat-card class="productItem_Card">
@@ -50,13 +49,15 @@
           <div *ngIf="productItem.isAvailable">
             <p class="text">Available</p>
           </div>
+
           <div *ngIf="!productItem.isAvailable">
-            <b class="text">Sold!</b>
+            <p class="text"> <b>A buy request is in your inbox</b><br></p>
+
           </div>
         </mat-card-content>
         <mat-card-actions align="end">
           <button mat-flat-button class="button_standard" [routerLink]="['/productForm/', productItem.productId]" routerLinkActive="active">Edit</button>
-          <button mat-flat-button class="button_standard" (click)="deleteProduct([productItem.productId])">Delete</button>
+          <button mat-flat-button class="button_standard" (click)="deleteProduct([productItem.productId])" [disabled]="!productItem.isAvailable">Delete</button>
         </mat-card-actions>
         <hr>
 
@@ -67,7 +68,6 @@
       </mat-card>
     </div>
   </div>
-
 
 <app-soldproducts></app-soldproducts>
 <app-boughtproducts></app-boughtproducts>

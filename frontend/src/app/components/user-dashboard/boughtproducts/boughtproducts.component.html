@@ -8,16 +8,16 @@
 
     <mat-card class="productItem_Card">
 
-      <div *ngIf="transaction" [ngClass]="{check:getProduct(transaction.productId)}" >
+      <div *ngIf="transaction" >
         <br>
-        <h1> {{productName}}</h1>
+        <h1> Productname: {{productName}}</h1>
 
 
       </div>
       <h2>Sold by: </h2>
 
-      <div *ngIf="transaction" [ngClass]="{check:getSeller(transaction.userId)}" >
-        <button mat-button class="button_fill" [routerLink]="['/user', transaction.buyerId]" routerLinkActive="active" ><mat-icon >account_circle</mat-icon>{{sellerName}}</button>
+      <div *ngIf="transaction" >
+        <button mat-button class="button_fill" [routerLink]="['/user', transaction.userId]" routerLinkActive="active" ><mat-icon >account_circle</mat-icon>{{transaction.userId}}{{sellerName}}</button>
         <br>
       </div>
 
@@ -38,6 +38,13 @@
       <div *ngIf="transaction.transactionStatus==2">
         <b>Status: Sold</b>
 
+        <br>
+        <b>Bought by:</b>
+        <br>
+        {{transaction.deliveryFirstName}} {{transaction.deliveryLastName}}<br>
+        {{transaction.deliveryStreet}}<br>
+        {{transaction.deliveryPin}} {{transaction.deliveryCity}}<br>
+        {{transaction.deliveryCountry}}<br>
       </div>
 
       <div *ngIf="transaction.transactionStatus==3">
@@ -45,13 +52,6 @@
 
       </div>
 
-        <br>
-        <b>Bought by:</b>
-
-        {{transaction.deliveryFirstName}} {{transaction.deliveryLastName}}<br>
-        {{transaction.deliveryStreet}}<br>
-        {{transaction.deliveryPin}} {{transaction.deliveryCity}}<br>
-        {{transaction.deliveryCountry}}<br>
 
 
     </mat-card>

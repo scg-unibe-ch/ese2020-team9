@@ -19,6 +19,7 @@ export class BoughtproductsComponent implements OnInit {
     userName: string;
     transactionList: Transaction[];
 
+    sellerId:number;
     sellerName: string;
     sellerFirstName: string;
     sellerLastName: string;
@@ -46,8 +47,9 @@ export class BoughtproductsComponent implements OnInit {
 
 
   getSeller(id:number){
+    console.log(id)
       this.userService.getUser(id).subscribe((instances: any) => {
-         //this.sellerId = instances.userId;
+         this.sellerId = instances.userId;
          this.sellerName = instances.userName;
          this.sellerFirstName = instances.firstName;
          this.sellerLastName = instances.lastName;

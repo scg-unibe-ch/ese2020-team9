@@ -1,14 +1,14 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {CategoryList} from "../../../mock-category-list";
 import {MatSelect} from "@angular/material/select";
+import {CategoryList} from "../../mock-category-list";
 
 @Component({
-  selector: 'app-filter',
-  templateUrl: './filter.component.html',
-  styleUrls: ['./filter.component.css']
+  selector: 'app-search',
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.css']
 })
-export class FilterComponent implements OnInit {
+export class SearchComponent implements OnInit {
 
   @ViewChild(MatSelect)
   matSelect: MatSelect;
@@ -26,17 +26,12 @@ export class FilterComponent implements OnInit {
   //hide Filter option
   clickFilter: boolean = false;
 
-  constructor(private router: Router, private route: ActivatedRoute) {
-  }
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.category = this.route.snapshot.queryParamMap.get('c');
     this.name = this.route.snapshot.queryParamMap.get('n');
-    /*
-    this.route.queryParams.subscribe(params => {
-      this.category = params['c'];
-      this.name = params['n'];*/
-      this.navigateTo();
+    this.navigateTo();
   }
 
   ngAfterViewInit() {
@@ -47,6 +42,16 @@ export class FilterComponent implements OnInit {
         })
       }
     })
+  }
+
+  clearName(){
+    this.name = '';
+    this.navigateTo();
+  }
+
+  clearCategory(){
+    this.category = '';
+    this.navigateTo();
   }
 
   clearLocation(){
@@ -64,7 +69,12 @@ export class FilterComponent implements OnInit {
     this.navigateTo();
   }
 
-  clearAll(){
+  clearDelivery(){
+    this.delivery = '';
+    this.navigateTo();
+  }
+
+  clearFilter(){
     this.category = '';
     this.location = '';
     this.priceMin = '';
@@ -74,15 +84,16 @@ export class FilterComponent implements OnInit {
   }
 
   navigateTo(){
-      this.router.navigate(['/search'], {
-        queryParams: {
-          n: this.name,
-          c: this.category,
-          l: this.location,
-          min: this.priceMin,
-          max: this.priceMax,
-          d: this.delivery,
-        }
-      })
-    }
+    this.router.navigate(['/search'], {
+      queryParams: {
+        n: this.name,
+        c: this.category,
+        l: this.location,
+        min: this.priceMin,
+        max: this.priceMax,
+        d: this.delivery,
+      }
+    })
+  }
 }
+

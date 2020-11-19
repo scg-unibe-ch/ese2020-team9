@@ -12,7 +12,6 @@ export class UserService {
 
   userToken: string;
   userName: string;
-  isAdmin: any;
   userId: any;
   userWallet: any;
   users: User[] ;
@@ -20,7 +19,7 @@ export class UserService {
 
   public isUserLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public isUserAdmin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public isUserName: BehaviorSubject<string> = new BehaviorSubject<string>(this.getUserName());
+  public isUserName: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   constructor(private httpClient: HttpClient) { }
 
@@ -34,20 +33,7 @@ export class UserService {
     localStorage.clear();
   }
 
-  /** Functions to get specific user attributes from local storag e**/
-
-  getIsLoggedIn(){
-    this.userToken = localStorage.getItem('userToken');
-    return !!(this.userToken);
-  }
-
-  getIsAdmin(){
-    this.isAdmin = localStorage.getItem('admin');
-    if (this.isAdmin === true){
-      return true;
-    }
-    return false;
-  }
+  /** Functions to get specific user attributes from local storage e**/
 
   getToken(){
     return this.userToken = localStorage.getItem('userToken');

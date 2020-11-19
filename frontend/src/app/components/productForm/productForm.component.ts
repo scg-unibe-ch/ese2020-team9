@@ -8,6 +8,7 @@ import {environment} from "../../../environments/environment";
 import { ActivatedRoute} from "@angular/router";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { Location} from "@angular/common";
+import {CategoryList} from "../../mock-category-list";
 
 @Component({
   selector: 'app-productForm',
@@ -37,6 +38,7 @@ export class ProductFormComponent implements OnInit {
   product: ProductItem;
   id: any;
   add: boolean;
+  categories = CategoryList;
 
   constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private _ngZone: NgZone, private productService: ProductService, private route: ActivatedRoute, private location: Location) { }
 
@@ -76,6 +78,37 @@ export class ProductFormComponent implements OnInit {
       this.userAuth = 'There is no corresponding Product!';
     });
   }
+
+  /*
+  addProduct(){
+    this.productService.postProduct( {
+      productId: '',
+      productName: this.productName,
+      productDescription: this.productDescription,
+      productImage: this.productImage,
+      productPrice: this.productPrice,
+      productCategory: this.productCategory,
+      productLocation: this.productLocation,
+      productDelivery: this.productDelivery,
+      uploadDate:    new Date(),
+      sellDate: '',
+      isApproved: false,
+      isService: this.isService,
+      isRentable: this.isRentable,
+      isAvailable: true,
+      userId: this.userId,
+      userReview: this.userReview}).subscribe((res: any) => {
+
+      //navigates to dashboard
+      this.router.navigate(['/user']);
+      let action = "";
+      this.openSnackBar(res.message, action);
+    }, (error: any) => {
+      let action = "";
+      this.openSnackBar(error.message, action);
+
+    });
+  }*/
 
   addProduct(): void {
     this.httpClient.post(environment.endpointURL + 'products/', {

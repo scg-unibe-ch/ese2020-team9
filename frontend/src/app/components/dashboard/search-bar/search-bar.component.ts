@@ -1,18 +1,19 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import { CategoryList } from "../../../mock-category-list";
 import {MatSelect} from "@angular/material/select";
+import {CategoryList} from "../../../mock-category-list";
 
 @Component({
-  selector: 'app-search-category',
-  templateUrl: './search-category.component.html',
-  styleUrls: ['./search-category.component.css']
+  selector: 'app-search-bar',
+  templateUrl: './search-bar.component.html',
+  styleUrls: ['./search-bar.component.css']
 })
-export class SearchCategoryComponent implements OnInit {
+export class SearchBarComponent implements OnInit {
 
   @ViewChild(MatSelect)
   matSelect: MatSelect;
 
   categories = CategoryList;
+  name = '';
 
   constructor() {
   }
@@ -30,5 +31,8 @@ export class SearchCategoryComponent implements OnInit {
     })
   }
 
+  clearName(){
+    return this.name = '';
+  }
 
 }

@@ -21,7 +21,7 @@ export class AdminPanelComponent implements OnInit {
  userId: any;
  userToken: string;
  productId: any;
- users: User[] ;
+ userList: User[] ;
  productList: ProductItem[];
 
   constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private productService: ProductService, private userService: UserService) {}
@@ -33,15 +33,14 @@ export class AdminPanelComponent implements OnInit {
 
   }
   getUserList(){
-    console.log('lll');
-    this.httpClient.get(environment.endpointURL + 'user').subscribe((instances: any) => {
-      this.users = instances.map((instance : any) => new User(instance.userId, instance.userName, instance.admin));
-    })
+    this.userService.getUserList().subscribe((data: User [] ) => {
+      this.userList = data;
+    });
   }
 
   onUserDelete(user: User): void{
     this.httpClient.delete(environment.endpointURL + 'user/' + user.userId).subscribe(() => {
-      this.users.splice(this.users.indexOf(user), 1); //delete one user
+      this.userList.splice(this.userList.indexOf(user), 1); //delete one user
     });
   }
 
@@ -64,18 +63,18 @@ export class AdminPanelComponent implements OnInit {
 
     }).subscribe((res: any)  => {
             this.getProductList();
-             let message = "Product approved"
-             let action = "Ok"
+             let message = "Product approved";
+             let action = "Ok";
              this.openSnackBar(message, action);
            }, (error: any) => {
-             let message = "Can not delete this Product"
-             let action = ""
+             let message = "Can not delete this Product";
+             let action = "";
              this.openSnackBar(message, action);
            });
   }
 
-  deleteProduct(productId: number){
-   this.httpClient.delete(environment.endpointURL + 'products/' + productId,{}).subscribe((res: any)  => {
+  deleteProduct(){
+   this.productService.deleteProduct(this.productId).subscribe((res: any)  => {
           this.getProductList();
           let message = "Product deleted"
           let action = "Ok"

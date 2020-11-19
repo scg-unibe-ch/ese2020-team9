@@ -1,10 +1,12 @@
 import express from 'express';
 import { Router, Request, Response } from 'express';
-import { verifyAdmin, verifyToken } from '../middlewares/checkAuth';
+import { productBelongsToUser, verifyAdmin} from '../middlewares/checkAuth';
+import { uploadFile } from '../middlewares/uploadFile';
 import { ProductService } from '../services/product.service';
 
 const productController: Router = express.Router();
 const productService = new ProductService();
+
 
 productController.post('/', (req: Request, res: Response) => {
     productService.create(req.body).then(() =>
@@ -86,6 +88,29 @@ productController.post('/search', (req: Request, res: Response) => {
     productService.searchProduct(req.body).then(productList => res.send(productList))
     .catch(err => res.status(400).send(err));
 }); // search product by keyword and filters
+
+productController.post('/uploadImage/:productId', productBelongsToUser , uploadFile,
+ (req: Request, res: Response) => {
+    productService.uploadImage(req.file, parseInt(req.params.productId, 10)).then(() => res.send('Successfully uploaded Picture!'))
+    .catch(err => res.status(404).send(err));
+});
+
+productController.get('/getImageIds/:productId',
+ (req: Request, res: Response) => {
+    productService.getImagesOfProduct(parseInt(req.params.productId, 10)).then(images => res.send(images))
+    .catch(err => res.status(404).send(err));
+});
+
+productController.get('/getImageById/:imageId', (req: Request, res: Response) => {
+    const path = require('path');
+    const fs = require('fs');
+
+    productService.getImageById(parseInt(req.params.imageId, 10))
+    .then(images => res.sendFile(images, {root: path.join(__dirname, '../../temp')}, () => {
+        fs.unlinkSync('temp/' + images);
+    })).catch(err => res.status(404).send(err));
+
+});
 
 export const ProductController: Router = productController;
 

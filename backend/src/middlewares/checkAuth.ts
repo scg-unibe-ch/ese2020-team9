@@ -1,6 +1,8 @@
 import jwt from 'jsonwebtoken';
 import { Request, Response } from 'express';
-import { any } from 'sequelize/types/lib/operators';
+import { Product } from '../models/product.model';
+
+
 
 // this function verifies if Token is valid
 export function verifyToken(req: Request, res: Response, next: any) {
@@ -29,6 +31,22 @@ export function verifyAdmin(req: Request, res: Response, next: any) {
     res.status(403).send({ message: 'This User is not an Admin' });
     }
 }
+export function productBelongsToUser(req: Request, res: Response, next: any) {
+    try {
+        const {userId} = decodeToken(req, res);
+        const id = parseInt(req.params.productId, 10);
+        Product.findByPk(id).then(product => {
+            if (product && product.userId === userId) {
+                next();
+            } else {
+                res.status(403).send({ message: 'Product does not belong to user' });
+            }
+        });
+    } catch (err) {
+        res.status(403).send({ message: 'Product does not belong to user' });
+    }
+}
+
 // helper-function which decodes the Token
 function decodeToken (req: Request, res: Response): any {
 
@@ -39,3 +57,5 @@ function decodeToken (req: Request, res: Response): any {
         return decoded;
 
  }
+
+

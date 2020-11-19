@@ -29,6 +29,24 @@ export function verifyAdmin(req: Request, res: Response, next: any) {
     res.status(403).send({ message: 'This User is not an Admin' });
     }
 }
+
+// checks if the token for the password change request is valid
+export function verifyPasswordToken(req: Request, res: Response, next: any) {
+    try {
+        const secret = process.env.JWT_PW_SECRET;
+        const token = req.headers.authorization.split(' ')[1];
+        const decoded = jwt.verify(token, secret);
+
+        if (decoded == null) {
+            res.status(403).send({ message: 'Unauthorized'});
+        }
+        req.body.tokenPayload = decoded;
+        next();
+    } catch (err) {
+        res.status(403).send({ message: 'Unauthorized' });
+    }
+}
+
 // helper-function which decodes the Token
 function decodeToken (req: Request, res: Response): any {
 

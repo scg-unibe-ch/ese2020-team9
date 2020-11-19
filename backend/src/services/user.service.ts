@@ -1,9 +1,16 @@
+import { EmailService } from './email.service';
 import { UserAttributes, UserEditingAttributes, User } from '../models/user.model';
 import { LoginResponse, LoginRequest } from '../models/login.model';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 export class UserService {
+
+    private emailService: EmailService;
+
+    public constructor() {
+        this.emailService = new EmailService();
+    }
 
     public register(user: UserAttributes): Promise<UserAttributes> {
         const saltRounds = 12;
@@ -87,5 +94,40 @@ export class UserService {
     public changeUser(user: UserEditingAttributes): Promise<User> {
         return User.findByPk(user.userId).then(foundUser => foundUser.update(user))
             .catch(err => Promise.reject({message: err}));
+    }
+
+    // sends an email with a link to restore a forgotten password
+    public sendEmailWithResetLink(email: string): Promise<any> {
+        const secret = process.env.JWT_PW_SECRET;
+        return User.findOne({
+            where: { userMail: email}
+        }).then(user => {
+            if (user === null) {
+                return Promise.reject('No such user!');
+            }
+            const token: string = jwt.sign({ userName: user.userName, userId: user.userId }, secret, { expiresIn: '15m' });
+            return this.emailService.sendPasswordRestorationMail(user.userName, email, token);
+        }).then(info => {
+            return Promise.resolve(info);
+        })
+        .catch(err => Promise.reject({message: err}));
+
+    }
+
+    // restores a forgotten password
+    public restorePassword(userLogin: string, newPassword: string): Promise<void> {
+        const { Op } = require('sequelize');
+        const saltRounds = 12;
+        const hashedPassword: string = bcrypt.hashSync(newPassword, saltRounds);
+
+        return User.findOne({
+            where:  { userName: userLogin }
+        }).then(user => {
+            user.update({
+                password: hashedPassword
+            });
+            return Promise.resolve();
+        }) .catch(err => Promise.reject({message: err}));
+
     }
 }

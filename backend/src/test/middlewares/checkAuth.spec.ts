@@ -3,7 +3,7 @@ import { Response } from 'express';
 import { expect } from 'chai';
 import { mockRequest, mockResponse } from 'mock-req-res';
 import sinon, { SinonSpy, SinonStub } from 'sinon';
-import { verifyToken, verifyAdmin } from './../../middlewares/checkAuth';
+import { verifyToken, verifyAdmin, verifyPasswordToken } from './../../middlewares/checkAuth';
 
 describe('Test checkAuth middlewares', () => {
     const res: Response = mockResponse();
@@ -111,6 +111,53 @@ describe('Test checkAuth middlewares', () => {
             expect(statusStub.called).to.be.eq(false);
             expect(sendSpy.called).to.be.eq(false);
             expect(nextSpy.calledOnce).to.be.eq(true);
+            done();
+        });
+    });
+    describe('Test verifyPasswordToken', () => {
+
+        const secret = process.env.JWT_PW_SECRET;
+
+        afterEach('reset the spies', function(done) {
+            resetStubs();
+            done();
+        });
+
+        it('should block when no authorization', function(done) {
+            const req = mockRequest();
+            verifyPasswordToken(req, res, nextSpy);
+            expect(statusStub.calledWith(sinon.match(403))).to.be.eq(true);
+            expect(sendSpy.calledWith(sinon.match({message: 'Unauthorized'}))).to.be.eq(true);
+            expect(nextSpy.called).to.be.eq(false);
+            done();
+        });
+
+        it('should pass with valid token in header', function(done) {
+            const token = jwt.sign({ userName: 'testy', userId: 1 }, secret, { expiresIn: '15m' });
+            const req = mockRequest({
+                headers: {
+                    authorization: 'Bearer ' + token
+                }
+            });
+            verifyPasswordToken(req, res, nextSpy);
+            expect(statusStub.called).to.be.eq(false);
+            expect(sendSpy.called).to.be.eq(false);
+            expect(nextSpy.calledOnce).to.be.eq(true);
+            done();
+        });
+
+        it('should not pass with token generated with wrong secret', function(done) {
+            const wrongSecret = process.env.JWT_SECRET;
+            const token = jwt.sign({ userName: 'testy', userId: 1 }, wrongSecret, { expiresIn: '15m' });
+            const req = mockRequest({
+                headers: {
+                    authorization: 'Bearer ' + token
+                }
+            });
+            verifyPasswordToken(req, res, nextSpy);
+            expect(statusStub.calledWith(sinon.match(403))).to.be.eq(true);
+            expect(sendSpy.calledWith(sinon.match({message: 'Unauthorized'}))).to.be.eq(true);
+            expect(nextSpy.called).to.be.eq(false);
             done();
         });
     });

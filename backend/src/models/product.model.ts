@@ -7,7 +7,6 @@ export interface ProductAttributes {
     productId: number;
     productName: string;
     productDescription: string;
-    productImage: String;
     productPrice: number;
     productCategory: string;
     productLocation: string;
@@ -29,7 +28,6 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
     productId!: number;
     productName!: string;
     productDescription!: string;
-    productImage!: String;
     productPrice!: number;
     productCategory!: string;
     productLocation!: string;
@@ -57,9 +55,6 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
             },
             productDescription: {
                 type: DataTypes.TEXT
-            },
-            productImage: {
-                type: DataTypes.STRING
             },
             productPrice: {
                 type: DataTypes.NUMBER,

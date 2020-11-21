@@ -22,8 +22,8 @@ describe('UserService Tests', () => {
         addressCity: 'Hannington Town',
         addressCountry: 'Saint Isles',
         gameScore: 0,
-        activityScore: 0,
-        overallScore: 0
+        activityScore: 2,
+        overallScore: 2
     };
 
     describe('Test register', () => {
@@ -345,4 +345,16 @@ describe('UserService Tests', () => {
             });
         });
     });
+    describe('Test updateGameScore', () => {
+        it('should successfully update the game and overall score', function(done) {
+            testedUserService.updateGameScore(1, 5).then(() => {
+                User.findByPk(1).then((user) => {
+                    expect(user).not.to.be.eq(null);
+                    expect(user.gameScore).to.be.eq(5);
+                    expect(user.overallScore).to.be.eq(7);
+                    done();
+                })
+            })
+        })
+    })
 });

@@ -130,4 +130,17 @@ export class UserService {
         }) .catch(err => Promise.reject({message: err}));
 
     }
+
+    public updateGameScore(userId: number, highscore: number): Promise<User> {
+        return User.findByPk(userId)
+        .then(user => {
+            const newOverallScore = user.activityScore + highscore;
+            return user.update({
+                gameScore: highscore,
+                overallScore: newOverallScore
+            });
+        }).catch(err => {
+            return Promise.reject({message: err});
+        });
+    }
 }

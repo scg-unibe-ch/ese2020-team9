@@ -24,7 +24,7 @@ describe('TransactionService Test', () => {
         addressPin: '77889',
         addressCity: 'Hannington Town',
         addressCountry: 'Saint Isles',
-        gameScore: 0,
+        gameScore: 3,
         activityScore: 0,
         overallScore: 0
     };
@@ -45,7 +45,7 @@ describe('TransactionService Test', () => {
         addressPin: null,
         addressCity: null,
         addressCountry: 'England',
-        gameScore: 0,
+        gameScore: 3,
         activityScore: 0,
         overallScore: 0
     };
@@ -262,6 +262,17 @@ describe('TransactionService Test', () => {
                 done();
             });
         });
+        it('should update the buyer\' s overall score successfully', function(done) {
+            User.findOne({
+                where: {
+                    userId: 2,
+                    overallScore: 4 
+                }
+            }).then(foundUser => {
+                expect(foundUser).not.to.be.eq(null);
+                done();
+            });
+        });
         it('should update the seller\'s wallet successfully', function(done) {
             User.findOne({
                 where: {
@@ -278,6 +289,17 @@ describe('TransactionService Test', () => {
                 where: {
                     userId: 1,
                     activityScore: 2
+                }
+            }).then(foundUser => {
+                expect(foundUser).not.to.be.eq(null);
+                done();
+            });
+        });
+        it('should update the seller\'s overall score successfully', function(done) {
+            User.findOne({
+                where: {
+                    userId: 1,
+                    overallScore: 5
                 }
             }).then(foundUser => {
                 expect(foundUser).not.to.be.eq(null);

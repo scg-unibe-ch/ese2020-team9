@@ -37,19 +37,24 @@ export class TransactionService {
                     })
                     .then((foundBuyer) => {
                         if (foundProduct.productPrice <= foundBuyer.wallet) {
+                            const activityScoreIncrement = foundProduct.productPrice * 0.1
                             return User.increment('wallet', {
                                 by: -foundProduct.productPrice,
                                 where: {
                                     userId: foundTransaction.buyerId
                                 }
                             }).then(() => {
-                                const activityScoreIncrement = foundProduct.productPrice * 0.1
                                 return User.increment('activityScore', {
                                     by: activityScoreIncrement,
                                     where: {
                                         userId: foundTransaction.buyerId
                                     }
                                 });
+                            }).then(() => {
+                                const gameScore = foundBuyer.gameScore;
+                                const newOverallScore = gameScore + activityScoreIncrement;
+                                foundBuyer.overallScore = newOverallScore;
+                                return foundBuyer.save();
                             });
                         } else {
                             return Promise.reject('Not enough money available to buy the product!');
@@ -68,6 +73,13 @@ export class TransactionService {
                                 where: {
                                     userId: foundTransaction.userId
                                 }
+                            }).then(() => {
+                                return User.findByPk(foundTransaction.userId);
+                            }).then((foundSeller) => {
+                                const gameScore = foundSeller.gameScore;
+                                const newOverallScore = gameScore + activityScoreIncrement;
+                                foundSeller.overallScore = newOverallScore;
+                                return foundSeller.save();
                             });
                         });
                     });

@@ -17,6 +17,8 @@ export interface UserAttributes {
     addressPin: string;
     addressCity: string;
     addressCountry: string;
+    gameScore: number;
+    activityScore: number;
 }
 
 export interface UserEditingAttributes {
@@ -50,7 +52,8 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
     addressPin!: string;
     addressCity!: string;
     addressCountry!: string;
-    balance: number;
+    gameScore!: number;
+    activityScore!: number;
 
 
     public static initialize(sequelize: Sequelize) {
@@ -112,6 +115,16 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
             addressCountry: {
                 type: DataTypes.STRING,
                 allowNull: true
+            },
+            gameScore: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                defaultValue: 0
+            },
+            activityScore: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                defaultValue: 0
             }
 
         },

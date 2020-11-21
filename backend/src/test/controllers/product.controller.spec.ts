@@ -63,7 +63,9 @@ const user1: UserAttributes = {
     addressStreet: null,
     addressPin: null,
     addressCity: null,
-    addressCountry: 'England'
+    addressCountry: 'England',
+    gameScore: 0,
+    activityScore: 0
 };
 
 const product3: ProductAttributes = {

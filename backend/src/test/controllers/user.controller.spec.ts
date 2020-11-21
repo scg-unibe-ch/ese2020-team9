@@ -22,7 +22,9 @@ const user1: UserAttributes = {
     addressStreet: null,
     addressPin: null,
     addressCity: null,
-    addressCountry: 'Middleearth'
+    addressCountry: 'Middleearth',
+    gameScore: 0,
+    activityScore: 0
 };
 const adminUser: UserAttributes = {
     userId: 2,
@@ -38,7 +40,9 @@ const adminUser: UserAttributes = {
     addressStreet: null,
     addressPin: null,
     addressCity: null,
-    addressCountry: 'England'
+    addressCountry: 'England',
+    gameScore: 0,
+    activityScore: 0
 };
 
 describe('UserController Test', () => {
@@ -228,7 +232,9 @@ describe('UserController Test', () => {
             addressStreet: null,
             addressPin: null,
             addressCity: null,
-            addressCountry: 'Spamland'
+            addressCountry: 'Spamland',
+            gameScore: 0,
+            activityScore: 0
         };
         before('init two user into db', function(done) {
             User.create(user1).then(() => {

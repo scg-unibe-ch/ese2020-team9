@@ -20,7 +20,9 @@ describe('UserService Tests', () => {
         addressStreet: 'Pinnacle Street',
         addressPin: '77889',
         addressCity: 'Hannington Town',
-        addressCountry: 'Saint Isles'
+        addressCountry: 'Saint Isles',
+        gameScore: 0,
+        activityScore: 0
     };
 
     describe('Test register', () => {
@@ -54,7 +56,9 @@ describe('UserService Tests', () => {
                 addressStreet: 'Kensington Road',
                 addressPin: '4404',
                 addressCity: 'Creed Town',
-                addressCountry: 'Mercy Islands'
+                addressCountry: 'Mercy Islands',
+                gameScore: 0,
+                activityScore: 0
             };
             testedUserService.register(user2).catch(error => {
                 expect(error.message).to.be.eq('This username or email address is already being used!');
@@ -76,7 +80,9 @@ describe('UserService Tests', () => {
                 addressStreet: 'Kensington Road',
                 addressPin: '4404',
                 addressCity: 'Creed Town',
-                addressCountry: 'Mercy Islands'
+                addressCountry: 'Mercy Islands',
+                gameScore: 0,
+                activityScore: 0
             };
             testedUserService.register(user2).catch(error => {
                 expect(error.message).to.be.eq('This username or email address is already being used!');
@@ -98,7 +104,9 @@ describe('UserService Tests', () => {
                 addressStreet: null,
                 addressPin: null,
                 addressCity: null,
-                addressCountry: null
+                addressCountry: null,
+                gameScore: 0,
+                activityScore: 0
             };
             testedUserService.register(user2).catch(error => {
                 expect(error).not.to.be.eq(null);

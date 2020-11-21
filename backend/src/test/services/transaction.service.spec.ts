@@ -23,7 +23,9 @@ describe('TransactionService Test', () => {
         addressStreet: 'Pinnacle Street',
         addressPin: '77889',
         addressCity: 'Hannington Town',
-        addressCountry: 'Saint Isles'
+        addressCountry: 'Saint Isles',
+        gameScore: 0,
+        activityScore: 0
     };
 
     // second user: two users are required for a transaction
@@ -41,7 +43,9 @@ describe('TransactionService Test', () => {
         addressStreet: null,
         addressPin: null,
         addressCity: null,
-        addressCountry: 'England'
+        addressCountry: 'England',
+        gameScore: 0,
+        activityScore: 0
     };
 
     const product1: ProductAttributes = {

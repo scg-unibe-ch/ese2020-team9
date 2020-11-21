@@ -15,7 +15,7 @@ export function uploadFile(req: Request, res: Response, next: any) {
     const upload = multer({storage: storage,
         fileFilter: (_req, file, cb) => {
         if (!(file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg')) {
-            res.status(400).send('Only .png, .jpg and .jpeg format allowed!');
+            res.status(400).send({ message: 'Only .png, .jpg and .jpeg format allowed!'});
         } else {
             cb(null, true);
         }}}).single('image');

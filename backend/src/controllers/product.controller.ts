@@ -91,13 +91,14 @@ productController.post('/search', (req: Request, res: Response) => {
 
 productController.post('/uploadImage/:productId', productBelongsToUser , uploadFile,
  (req: Request, res: Response) => {
-    productService.uploadImage(req.file, parseInt(req.params.productId, 10)).then(() => res.send('Successfully uploaded Picture!'))
+    productService.uploadImage(req.file, parseInt(req.params.productId, 10))
+    .then(() => res.send({ message: 'Successfully uploaded Picture!'}))
     .catch(err => res.status(404).send(err));
 });
 
 productController.get('/getImageIds/:productId',
  (req: Request, res: Response) => {
-    productService.getImagesOfProduct(parseInt(req.params.productId, 10)).then(images => res.send(images))
+    productService.getImageIds(parseInt(req.params.productId, 10)).then(images => res.send(images))
     .catch(err => res.status(404).send(err));
 });
 

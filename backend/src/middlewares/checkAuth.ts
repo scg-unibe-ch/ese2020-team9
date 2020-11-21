@@ -39,11 +39,11 @@ export function productBelongsToUser(req: Request, res: Response, next: any) {
             if (product && product.userId === userId) {
                 next();
             } else {
-                res.status(403).send({ message: 'Product does not belong to user' });
+                res.status(403).send({ message: 'Product does not belong to User' });
             }
         });
     } catch (err) {
-        res.status(403).send({ message: 'Product does not belong to user' });
+        res.status(403).send({ message: 'Product does not belong to User' });
     }
 }
 

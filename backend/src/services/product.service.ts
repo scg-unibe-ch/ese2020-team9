@@ -202,20 +202,16 @@ export class ProductService {
         fs.writeFileSync(imageParameters.path, image.data);
         fs.unlinkSync(imageParameters.path);
         return image;
-    }).catch(err => Promise.reject({message: err}));
+    }).catch(err => Promise.reject(err));
 
 
     }
 
-    public async getImagesOfProduct(productId: number): Promise<Array<any>> {
-        const result = await ProductImage.findAll({
+    public getImageIds(productId: number): Promise<Array<any>> {
+        return ProductImage.findAll({
             attributes: ['imageId'],
             where: { productId: productId }
         });
-
-        return result;
-
-
     }
 
     public getImageById(imageId: number): Promise<string> {

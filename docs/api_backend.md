@@ -530,6 +530,47 @@ The Response body delivers a list of products that match the keyword and the fil
     ```
     
     </details>
+
+### POST on `"/products/uploadImage/:id"`
+
+Adds a new Image to the Product with the given productId. 
+Requires the Authorization Header on the Request with a valid token from the User the product belongs to.
+Accepts Images in the format .png, .jpg and .jpeg, type should be "image/*".
+
+- **Details**
+    
+    <details>
+     
+     <summary>Response (STATUS 200)</summary>
+
+    ```json
+    {
+        "message": "Product successfully created!"
+    }
+    ```
+    </details>
+
+    <details>
+     
+     <summary>Response (STATUS 400) if Image has wrong format</summary>
+
+    ```json
+    {
+        "message": "Only .png, .jpg and .jpeg format allowed!"
+    }
+    ```
+    </details>
+
+    <details>
+     
+     <summary>Response (STATUS 403) if Product does not belong to User</summary>
+
+    ```json
+    {
+        "message": "Product does not belong to User"
+    }
+    ```
+    </details>
     
 ### PUT on `"/products/:id"`
 
@@ -1053,6 +1094,34 @@ Gets a single product with the id indicated in the url.
     ```
     
     </details>
+
+### GET on `"/products/getImageIds/:id"` 
+
+Gets all imageIds of a a product with the product id indicated in the url.
+
+- **Details**
+
+     <details>
+     
+     <summary>Response (STATUS 200)</summary>
+     
+    ```json
+    [
+        {   
+            "imageId": "number"
+        }, 
+        {   
+            "imageId": "number"
+        },
+        ...
+    ]
+    ```
+    </details>
+
+### GET on `"/products/getImageById/:id"` 
+
+Gets the image with the id indicated in the url.
+Returns the Image in the format that it has been saved in (either .png, .jpg or .jpeg).
 
 ## Transaction API
 

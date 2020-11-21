@@ -42,6 +42,14 @@ export class TransactionService {
                                 where: {
                                     userId: foundTransaction.buyerId
                                 }
+                            }).then(() => {
+                                const activityScoreIncrement = foundProduct.productPrice * 0.1
+                                return User.increment('activityScore', {
+                                    by: activityScoreIncrement,
+                                    where: {
+                                        userId: foundTransaction.buyerId
+                                    }
+                                });
                             });
                         } else {
                             return Promise.reject('Not enough money available to buy the product!');
@@ -53,6 +61,14 @@ export class TransactionService {
                             where: {
                                 userId: foundTransaction.userId
                             }
+                        }).then(() => {
+                            const activityScoreIncrement = 2 * foundProduct.productPrice * 0.1
+                            return User.increment('activityScore', {
+                                by: activityScoreIncrement,
+                                where: {
+                                    userId: foundTransaction.userId
+                                }
+                            });
                         });
                     });
                 })

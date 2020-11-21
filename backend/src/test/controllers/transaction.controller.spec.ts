@@ -34,7 +34,8 @@ describe('TransactionController Test', () => { // bundles the tests related to t
         addressCity: 'Hannington Town',
         addressCountry: 'Saint Isles',
         gameScore: 0,
-        activityScore: 0
+        activityScore: 0,
+        overallScore: 0
     };
 
     // second user: two users are required for a transaction
@@ -54,7 +55,8 @@ describe('TransactionController Test', () => { // bundles the tests related to t
         addressCity: null,
         addressCountry: 'England',
         gameScore: 0,
-        activityScore: 0
+        activityScore: 0,
+        overallScore: 0
     };
 
     const product1: ProductAttributes = {

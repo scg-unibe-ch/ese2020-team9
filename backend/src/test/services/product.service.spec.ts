@@ -24,7 +24,8 @@ describe('ProductService Tests', () => {
         addressCity: 'Hannington Town',
         addressCountry: 'Saint Isles',
         gameScore: 0,
-        activityScore: 0
+        activityScore: 0,
+        overallScore: 0
     };
 
     const product1: ProductAttributes = {

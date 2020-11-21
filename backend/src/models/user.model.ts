@@ -19,6 +19,7 @@ export interface UserAttributes {
     addressCountry: string;
     gameScore: number;
     activityScore: number;
+    overallScore: number;
 }
 
 export interface UserEditingAttributes {
@@ -54,6 +55,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
     addressCountry!: string;
     gameScore!: number;
     activityScore!: number;
+    overallScore!: number;
 
 
     public static initialize(sequelize: Sequelize) {
@@ -125,6 +127,11 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 defaultValue: 0
+            },
+            overallScore: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                defaultValue: 0
             }
 
         },
@@ -133,6 +140,12 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
                 tableName: 'users'
             }
         );
+    }
+
+    public static calculateOverallScore(gameScore: number, activityScore: number) {
+        User.rawAttributes
+        const overallScore = gameScore + activityScore;
+        return overallScore;
     }
 
     public static createAssociations() {

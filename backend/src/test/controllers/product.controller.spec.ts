@@ -139,7 +139,7 @@ describe('ProductController Test', () => { // bundles the tests related to the P
             .end(function(err, res){
                 expect(err).to.be.eq(null);
                 expect(res).to.have.status(200);
-                expect(res.body.message).to.be.eq('Successfully uploaded Image!')
+                expect(res.body.message).to.be.eq('Successfully uploaded Image with id 1!')
                 done();
             });
         });
@@ -193,6 +193,15 @@ describe('ProductController Test', () => { // bundles the tests related to the P
         });
     });
     describe('Test Delete', () => {
+        it('should successfully delete an image', function(done) {
+            chai.request(app).delete('/products/images/1')
+            .end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body.message).to.be.eq('Image successfully deleted!');
+                done();
+            });
+        });        
         it('should successfully delete a product', function(done) {
             chai.request(app).delete('/products/1')
             .end(function(err, res) {

@@ -542,7 +542,7 @@ Accepts Images in the format .png, .jpg and .jpeg, type should be "image/*".
 
     ```json
     {
-        "message": "Successfully uploaded Image!"
+        "message": "Successfully uploaded Image with id <imageId>!"
     }
     ```
     </details>
@@ -624,6 +624,23 @@ Deletes the product with the id indicated in the url.
     ```json
     {
         "message": "Product successfully deleted!"
+    }
+    ```
+    </details>
+
+### DELETE on `"/products/images/:imageId"`
+
+Deletes the image with the id indicated in the url.
+
+- **Details**
+
+     <details>
+     
+     <summary>Response (STATUS 200)</summary>
+
+    ```json
+    {
+        "message": "Image successfully deleted!"
     }
     ```
     </details>

@@ -187,7 +187,7 @@ export class ProductService {
         }).catch(err => Promise.reject({message: err}));
     }
 
-    public uploadImage(imageParameters: ImageGetAttributes, productId: number): Promise<number> {
+    public uploadImage(imageParameters: ImageGetAttributes, productId: number): Promise<ProductImage> {
         const fs = require('fs');
         const imageData = fs.readFileSync(imageParameters.path);
 
@@ -200,7 +200,7 @@ export class ProductService {
         }).then(image => {
             fs.writeFileSync(imageParameters.path, image.data);
             fs.unlinkSync(imageParameters.path);
-            return image.imageId;
+            return image;
         }).catch(err => Promise.reject(err));
     }
 

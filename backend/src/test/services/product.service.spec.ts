@@ -3,7 +3,7 @@ import { Product, ProductAttributes   } from './../../models/product.model';
 import { expect } from 'chai';
 import { User, UserAttributes } from '../../models/user.model';
 import {SearchRequest} from '../../models/search.model';
-import {ImageGetAttributes} from '../../models/productimage.model';
+import {ImageGetAttributes, ProductImage} from '../../models/productimage.model';
 import path from 'path';
 
 
@@ -592,12 +592,23 @@ describe('ProductService Tests', () => {
             testedProductService.getImageById(3).then(image => {
                 const imagePath = path.join(__dirname, '../../../temp/' + image);
                 expect(image).to.be.eq(path.basename(imagePath));
-                console.log(path.basename(imagePath));
                 fs.unlinkSync(imagePath);
                 done();
             });
         });
     });            
+
+    describe('Test deleteImage()', () => {
+        it('should delete an image by id', function(done) {
+            testedProductService.deleteImage(3).then(() => {
+                ProductImage.findByPk(3)
+                .then(foundImage => {
+                    expect(foundImage).to.be.eq(null);
+                    done();
+                });
+            });
+        });
+    });
 
     describe('Test deleteProduct()', () => {
         it('should delete a product by id', function(done) {

@@ -94,7 +94,7 @@ productController.get('/sold/:userId', (req: Request, res: Response) => {
 productController.post('/images/upload/:productId', productBelongsToUser , uploadFile,
  (req: Request, res: Response) => {
     productService.uploadImage(req.file, parseInt(req.params.productId, 10))
-    .then((id) => res.send({ message: 'Successfully uploaded Image with id ' + id + '!'}))
+    .then((id) => res.send({ message: 'Successfully uploaded Image with id ' + id.imageId + '!'}))
     .catch(err => res.status(404).send(err));
 });
 

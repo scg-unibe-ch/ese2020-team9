@@ -542,7 +542,7 @@ Accepts Images in the format .png, .jpg and .jpeg, type should be "image/*".
 
     ```json
     {
-        "message": "Product successfully created!"
+        "message": "Successfully uploaded Image!"
     }
     ```
     </details>

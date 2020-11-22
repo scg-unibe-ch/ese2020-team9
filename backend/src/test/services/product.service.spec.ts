@@ -3,6 +3,9 @@ import { Product, ProductAttributes   } from './../../models/product.model';
 import { expect } from 'chai';
 import { User, UserAttributes } from '../../models/user.model';
 import {SearchRequest} from '../../models/search.model';
+import {ImageGetAttributes} from '../../models/productimage.model';
+import path from 'path';
+
 
 describe('ProductService Tests', () => {
     const testedProductService: ProductService = new ProductService();
@@ -554,7 +557,48 @@ describe('ProductService Tests', () => {
                 });
             });    
         });
+
+    describe('Test uploadImage()', () => {
+        it('should successfully upload an image to a product', function(done) {
+            const imagePath = path.join(__dirname, '../../test/test.jpeg');
+            const fs = require('fs');
+            const request: ImageGetAttributes = {
+                filename: "test.jpeg",
+                path: imagePath
+            }
+            testedProductService.uploadImage(request, 1).then((image) => {
+                fs.writeFileSync(request.path, image.data);
+                expect(image.imageId).to.be.eq(3);
+                expect(image.imageType).to.be.eq('jpeg');
+                expect(image.productId).to.be.eq(1);
+                done();
+            });
+        });
+    });        
     
+    describe('Test getImageIds()', () => {
+        it('should successfully get the imageIds from a product', function(done) {
+            testedProductService.getImageIds(1).then(ids => {
+                expect(ids[0].imageId).to.be.eq(3);
+                expect(ids.length).to.be.eq(1);
+                done();
+            });
+        });
+    });        
+
+    describe('Test getImageById()', () => {
+        const fs = require('fs');
+        it('should successfully get the image with the given id', function(done) {
+            testedProductService.getImageById(3).then(image => {
+                const imagePath = path.join(__dirname, '../../../temp/' + image);
+                expect(image).to.be.eq(path.basename(imagePath));
+                console.log(path.basename(imagePath));
+                fs.unlinkSync(imagePath);
+                done();
+            });
+        });
+    });            
+
     describe('Test deleteProduct()', () => {
         it('should delete a product by id', function(done) {
             testedProductService.deleteProduct(1).then(() => {

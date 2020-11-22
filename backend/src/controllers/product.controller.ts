@@ -92,7 +92,7 @@ productController.post('/search', (req: Request, res: Response) => {
 productController.post('/uploadImage/:productId', productBelongsToUser , uploadFile,
  (req: Request, res: Response) => {
     productService.uploadImage(req.file, parseInt(req.params.productId, 10))
-    .then(() => res.send({ message: 'Successfully uploaded Picture!'}))
+    .then(() => res.send({ message: 'Successfully uploaded Image!'}))
     .catch(err => res.status(404).send(err));
 });
 

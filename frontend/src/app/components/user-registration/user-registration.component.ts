@@ -225,14 +225,14 @@ export class UserRegistrationComponent implements OnInit {
           country: "CH",
           apikey: '4bc7d070-229b-11eb-8bf2-6be81465cc4d'
     };
-    if (this.addressPin.length >= 4){this.httpClient.get('https://app.zipcodebase.com/api/v1/search', {params}).subscribe((res: any) => {
-       console.log(this.addressPin);
-        const apiResponse = res;
-        console.log(apiResponse);
-        this.addressCity = res.results.city;
-        console.log(this.addressCity)
+    if (this.addressPin.length == 4){this.httpClient.get('https://app.zipcodebase.com/api/v1/search', {params}).subscribe((res: any) => {
+        if (res != null) {
+            this.addressCity = res.results[this.addressPin][0].city;
+            console.log(res.results[this.addressPin][0].city)
+        }
+
       }, (error: any) => {
-        console.log(error);
+            this.addressCity = "";
       });
     }
   }

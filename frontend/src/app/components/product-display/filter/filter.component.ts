@@ -2,6 +2,9 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {CategoryList} from "../../../mock-category-list";
 import {MatSelect} from "@angular/material/select";
+import {MatSliderModule} from '@angular/material/slider';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-filter',
@@ -26,7 +29,12 @@ export class FilterComponent implements OnInit {
   //hide Filter option
   clickFilter: boolean = false;
 
-  constructor(private router: Router, private route: ActivatedRoute) {
+  distance: number;
+  addressPin: any;
+  value: number;
+  addressCity: string;
+
+  constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient) {
   }
 
   ngOnInit(): void {
@@ -85,4 +93,55 @@ export class FilterComponent implements OnInit {
         }
       })
     }
+
+   formatLabel(value: number) {
+        return value  + 'km';
+      }
+
+  nearYou(addressPin:number){
+     console.log(this.value)
+     console.log(this.addressPin)
+     this.getCity(this.addressPin)
+
+  }
+
+  getCity(pin: string){
+    console.log(this.addressPin)
+    let params = {
+          codes: this.addressPin,
+          country: "CH",
+          apikey: '4bc7d070-229b-11eb-8bf2-6be81465cc4d'
+    };
+    if (this.addressPin.length == 4){this.httpClient.get('https://app.zipcodebase.com/api/v1/search', {params}).subscribe((res: any) => {
+        if (res != null) {
+
+            this.addressCity = res.results[this.addressPin][0].city;
+            console.log(res.results[this.addressPin][0].city)
+            this.getCityPins(this.addressCity)
+        }
+
+      }, (error: any) => {
+      });
+    }
+  }
+
+  getCityPins(addressCity: string){
+      console.log(this.addressCity, "getCityPins")
+      let params = {
+            city: this.addressCity,
+            country: "CH",
+            apikey: '4bc7d070-229b-11eb-8bf2-6be81465cc4d'
+      };
+      this.httpClient.get('https://app.zipcodebase.com/api/v1/code/city', {params}).subscribe((res: any) => {
+
+
+              console.log(res.results)
+
+
+        }, (error: any) => {
+        });
+
+    }
+
 }
+

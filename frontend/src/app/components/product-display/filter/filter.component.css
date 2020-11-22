@@ -141,3 +141,8 @@ mat-radio-button{
   color: #F0F0F0;
 }
 */
+
+mat-slider {
+  width: 300px;
+}
+

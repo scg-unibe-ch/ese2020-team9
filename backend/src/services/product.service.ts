@@ -187,8 +187,7 @@ export class ProductService {
         }).catch(err => Promise.reject({message: err}));
     }
 
-
-    public uploadImage(imageParameters: ImageGetAttributes, productId: number): Promise<ProductImage> {
+    public uploadImage(imageParameters: ImageGetAttributes, productId: number): Promise<number> {
         const fs = require('fs');
         const imageData = fs.readFileSync(imageParameters.path);
 
@@ -198,13 +197,11 @@ export class ProductService {
         data: imageData,
         productId: productId
 
-    }).then(image => {
-        fs.writeFileSync(imageParameters.path, image.data);
-        fs.unlinkSync(imageParameters.path);
-        return image;
-    }).catch(err => Promise.reject(err));
-
-
+        }).then(image => {
+            fs.writeFileSync(imageParameters.path, image.data);
+            fs.unlinkSync(imageParameters.path);
+            return image.imageId;
+        }).catch(err => Promise.reject(err));
     }
 
     public getImageIds(productId: number): Promise<Array<any>> {
@@ -220,6 +217,13 @@ export class ProductService {
             fs.writeFileSync('temp/' + image.imageName, image.data);
             return image.imageName;
         }).catch(() => Promise.reject({message: 'This image does not exist'}));
+    }
+
+    public deleteImage(id: number): Promise<ProductImage> {
+        return ProductImage.findByPk(id)
+        .then(isFound =>  isFound.destroy()
+            .then(() => Promise.resolve(isFound))
+            .catch(err => Promise.reject(err)));
     }
 }
 

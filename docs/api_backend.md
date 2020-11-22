@@ -528,7 +528,7 @@ The Response body delivers a list of products that match the keyword and the fil
     
     </details>
 
-### POST on `"/products/uploadImage/:id"`
+### POST on `"/products/images/upload/:id"`
 
 Adds a new Image to the Product with the given productId. 
 Requires the Authorization Header on the Request with a valid token from the User the product belongs to.
@@ -1076,7 +1076,7 @@ Gets a single product with the id indicated in the url.
     
     </details>
 
-### GET on `"/products/getImageIds/:id"` 
+### GET on `"/products/images/getIds/:id"` 
 
 Gets all imageIds of a a product with the product id indicated in the url.
 
@@ -1099,7 +1099,7 @@ Gets all imageIds of a a product with the product id indicated in the url.
     ```
     </details>
 
-### GET on `"/products/getImageById/:id"` 
+### GET on `"/products/images/getById/:id"` 
 
 Gets the image with the id indicated in the url.
 Returns the Image in the format that it has been saved in (either .png, .jpg or .jpeg).

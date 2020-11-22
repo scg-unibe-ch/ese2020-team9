@@ -133,7 +133,7 @@ describe('ProductController Test', () => { // bundles the tests related to the P
             });
         });
         it('should upload an image successfully', function(done) {
-            chai.request(app).post('/products/uploadImage/1')
+            chai.request(app).post('/products/images/upload/1')
             .set({'Authorization': 'Bearer ' + token})
             .attach('image', fs.readFileSync( path.join(__dirname, '../../test/test.jpeg')), 'test.jpeg')
             .end(function(err, res){
@@ -144,7 +144,7 @@ describe('ProductController Test', () => { // bundles the tests related to the P
             });
         });
         it('should not successfully upload an image due to false format', function(done) {
-            chai.request(app).post('/products/uploadImage/1')
+            chai.request(app).post('/products/images/upload/1')
             .set({'Authorization': 'Bearer ' + token})
             .attach('image', fs.readFileSync( path.join(__dirname, '../../test/test.gif')), 'test.gif')
             .end(function(err, res){
@@ -155,7 +155,7 @@ describe('ProductController Test', () => { // bundles the tests related to the P
             });
         });
         it('should not successfully upload an image due to no token', function(done) {
-            chai.request(app).post('/products/uploadImage/1')
+            chai.request(app).post('/products/images/upload/1')
             .attach('image', fs.readFileSync( path.join(__dirname, '../../test/test.jpeg')), 'test.jpeg')
             .end(function(err, res){
                 expect(err).to.be.eq(null);
@@ -210,7 +210,7 @@ describe('ProductController Test', () => { // bundles the tests related to the P
                      Product.create(product3);
                 })
             }).then(() => {
-                    chai.request(app).post('/products/uploadImage/1')
+                    chai.request(app).post('/products/images/upload/1')
                     .set({'Authorization': 'Bearer ' + token})
                     .attach('image', fs.readFileSync( path.join(__dirname, '../../test/test.jpeg')), 'test.jpeg')
                     .end(function(err, res){
@@ -283,7 +283,7 @@ describe('ProductController Test', () => { // bundles the tests related to the P
             });
         });
         it('should successfully get the imageIds of product', function(done){
-            chai.request(app).get('/products/getImageIds/1').end(function(err, res) {
+            chai.request(app).get('/products/images/getIds/1').end(function(err, res) {
                 expect(err).to.be.eq(null);
                 expect(res).to.have.status(200);
                 expect(res.body[0].imageId).to.be.eq(2);
@@ -291,7 +291,7 @@ describe('ProductController Test', () => { // bundles the tests related to the P
             });
         });
         it('should successfully get the image file of the given imageId', function(done){
-            chai.request(app).get('/products/getImageById/2').end(function(err, res) {
+            chai.request(app).get('/products/images/getById/2').end(function(err, res) {
                 expect(err).to.be.eq(null);
                 expect(res).to.have.status(200);
                 expect(res).to.have.header('content-type');
@@ -302,7 +302,7 @@ describe('ProductController Test', () => { // bundles the tests related to the P
             });
         });
         it('should successfully throw an error on a non-existant image', function(done){
-            chai.request(app).get('/products/getImageById/1').end(function(err, res) {
+            chai.request(app).get('/products/images/getById/1').end(function(err, res) {
                 expect(err).to.be.eq(null);
                 expect(res).to.have.status(404);
                 expect(res.body.message).to.be.eq('This image does not exist');

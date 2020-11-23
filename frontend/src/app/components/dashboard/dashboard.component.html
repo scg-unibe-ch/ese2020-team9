@@ -1,15 +1,14 @@
-<br>
-<h2>Product List</h2>
+<app-search-bar></app-search-bar>
+<app-search-category></app-search-category>
 
 <div class="productList_dashboard" fxLayout="row wrap" fxLayoutGap="2% grid" fxLayoutAlign="space-evenly stretch">
-  <div fxFlex="10%" fxFlex.xl="10%" fxFlex.lg="15%" fxFlex.md="20%" fxFlex.sm="33%" fxFlex.xs="50%" *ngFor="let productItem of productList; trackBy: trackByFn">
-
+  <div fxFlex="10%" fxFlex.xl="10%" fxFlex.lg="15%" fxFlex.md="20%" fxFlex.sm="33%" fxFlex.xs="50%" *ngFor="let productItem of productList">
     <mat-card>
 
       <mat-card-header>
         <!--<img mat-card-avatar src="" alt="Profile Picture">-->
         <mat-card-title>
-          <button mat-button class="button_fill" [routerLink]="['/productDetail', productItem.productId]" routerLinkActive="active" ><b>{{productItem.productName}}</b>
+          <button mat-flat-button [routerLink]="['/productDetail', productItem.productId]" routerLinkActive="active" ><b>{{productItem.productName}}</b>
           </button>
         </mat-card-title>
 
@@ -29,24 +28,6 @@
         </p>
       </mat-card-content>
 
-      <mat-card-actions *ngIf="isUserLoggedIn" align="end">
-        <button mat-flat-button class="button_fill" color="warn"  [routerLink]="['/productDetail', productItem.productId]" routerLinkActive="active" ><b>Check Details</b></button>
-
-      </mat-card-actions>
-
-        <hr>
-
-      <br>
-      <button mat-button class="button_fill" [routerLink]="['/', productItem.productCategory]" routerLinkActive="active" ><mat-icon >chevron_right</mat-icon>{{productItem.productCategory}}</button>
-      <button mat-button class="button_fill" [routerLink]="['/', productItem.productLocation]" routerLinkActive="active"><mat-icon >place</mat-icon>{{productItem.productLocation}}</button>
-
-      <mat-card-footer>
-        <span>{{productItem.productCategory}} </span>
-        <span>{{productItem.productLocation}} </span>
-        <span *ngIf="productItem.isService">Service </span>
-        <span *ngIf="productItem.isRentable">rentable </span>
-        <span *ngIf="productItem.isAvailable">available</span>
-      </mat-card-footer>
     </mat-card>
   </div>
 </div>

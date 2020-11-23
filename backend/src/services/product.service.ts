@@ -80,7 +80,8 @@ export class ProductService {
     public getAllApproved(): Promise<Product[]> {
         return Product.findAll({
             where: {
-                isApproved: true
+                isApproved: true,
+                isAvailable: true
             },
         }).catch(err => Promise.reject(err));
     }

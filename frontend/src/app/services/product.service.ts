@@ -3,6 +3,8 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {ProductItem} from "../models/product-item.model";
+import {Transaction} from "../models/transaction.model";
+
 
 @Injectable({
   providedIn: 'root'
@@ -38,14 +40,25 @@ export class ProductService {
     return this.httpClient.get(environment.endpointURL + 'products/' + productId);
   }
 
-  //get all Products from the same user -> not implemented
+  //get all Products from the same user
   getUserProduct(userId: number) {
     return this.httpClient.get(environment.endpointURL + 'products/user/' + userId);
   }
 
-  //get all Products from the same user -> not implemented
-  buyProduct(productId: number) {
-    return this.httpClient.get(environment.endpointURL + 'products/buy/' + productId);
+  //get products a user bought
+  getBoughtProducts(userId: number) {
+    return this.httpClient.get(environment.endpointURL + 'transaction/buy/  ' + userId);
   }
+
+ //get products a user sold
+ getSoldProducts(userId: number) {
+   return this.httpClient.get(environment.endpointURL + 'transaction/sell/' + userId);
+ }
+
+  //
+  buyProduct(productId: number) {
+    return this.httpClient.get(environment.endpointURL + 'products/' + productId);
+  }
+
 
 }

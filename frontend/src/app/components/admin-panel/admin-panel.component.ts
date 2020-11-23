@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { ProductItem } from '../../models/product-item.model';
-import { User } from '../../models/user.model';
+import { User } from "../../models/user.model";
 import { ProductService } from "../../services/product.service";
 import { UserService } from "../../services/user.service";
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 
@@ -15,7 +15,6 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   styleUrls: ['./admin-panel.component.css']
 })
 export class AdminPanelComponent implements OnInit {
-
 
  admin: any;
  userName :any;
@@ -29,15 +28,15 @@ export class AdminPanelComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProductList();
-    this.userToken = this.userService.getToken();
     this.getUserList();
+    this.userToken = this.userService.getToken();
 
   }
-  // get all Users
   getUserList(){
+    console.log('lll');
     this.httpClient.get(environment.endpointURL + 'user').subscribe((instances: any) => {
-        this.users = instances.map((instance: any) => new User(instance.userId, instance.userName, instance.admin));
-    });
+      this.users = instances.map((instance : any) => new User(instance.userId, instance.userName, instance.admin));
+    })
   }
 
   onUserDelete(user: User): void{
@@ -64,6 +63,7 @@ export class AdminPanelComponent implements OnInit {
    this.httpClient.put(environment.endpointURL + 'products/approve/' + productId,{
 
     }).subscribe((res: any)  => {
+            this.getProductList();
              let message = "Product approved"
              let action = "Ok"
              this.openSnackBar(message, action);
@@ -76,7 +76,7 @@ export class AdminPanelComponent implements OnInit {
 
   deleteProduct(productId: number){
    this.httpClient.delete(environment.endpointURL + 'products/' + productId,{}).subscribe((res: any)  => {
-
+          this.getProductList();
           let message = "Product deleted"
           let action = "Ok"
           this.openSnackBar(message, action);

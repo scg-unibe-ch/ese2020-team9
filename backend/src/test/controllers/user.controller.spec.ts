@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken';
 import { User, UserAttributes } from './../../models/user.model';
 import { applicationPromise } from './../../server';
 import chai, { expect } from 'chai';
@@ -497,6 +498,77 @@ describe('UserController Test', () => {
                 truncate: true,
                 restartIdentity: true,
             }).then(() => {
+                done();
+            });
+        });
+    });
+    describe('Test /passwordForgotten', function() {
+        this.timeout(12000);
+        before('init db', function(done) {
+            User.create(user1).then(user => {
+                done();
+            });
+        });
+        after('clear db', function(done) {
+            User.destroy({
+                truncate: true,
+                restartIdentity: true
+            }).then(() => {
+                done();
+            });
+        });
+        it('should send email successfully', function(done) {
+            chai.request(app).post('/user/passwordForgotten').send({
+                userEmail: 'gandalf@wizards.me'
+            }).end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res.status).to.be.eq(200);
+                expect(res.body.message).to.be.eq('We sent you an email, check out your mail box!');
+                done();
+            });
+        });
+        it('should return 404 when user not exists with email', function(done) {
+            chai.request(app).post('/user/passwordForgotten').send({
+                userEmail: 'notExistent@me.com'
+            }).end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res.status).to.be.eq(404);
+                expect(res.body.message).to.be.eq('No such user!');
+                done();
+            });
+        });
+    });
+    describe('Test /restorePassword', function() {
+        before('init db', function(done) {
+            User.create(user1).then(user => {
+                done();
+            });
+        });
+        after('clear db', function(done) {
+            User.destroy({
+                truncate: true,
+                restartIdentity: true
+            }).then(() => {
+                done();
+            });
+        });
+        it('should restore password successfully with correct token', function(done) {
+            const token = jwt.sign({ userName: 'gandalf', userId: 1 }, process.env.JWT_PW_SECRET, { expiresIn: '15m' });
+            chai.request(app).post('/user/restorePassword').set('Authorization', 'Bearer ' + token).send({
+                password: 'hereAgain'
+            }).end(function(err, res) {
+                expect(res).to.have.status(200);
+                expect(res.body.message).to.be.eq('Successfully changed the password, you now may sign in!');
+                done();
+            });
+        });
+        it('should return 403 when no valid token', function(done) {
+            const token = jwt.sign({ userName: 'gandalf', userId: 1 }, process.env.JWT_SECRET, { expiresIn: '15m' });
+            chai.request(app).post('/user/restorePassword').set('Authorization', 'Bearer ' + token).send({
+                password: 'hereAgain'
+            }).end(function(err, res) {
+                expect(res).to.have.status(403);
+                expect(res.body.message).to.be.eq('Unauthorized');
                 done();
             });
         });

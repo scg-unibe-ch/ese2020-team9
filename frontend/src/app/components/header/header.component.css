@@ -1,6 +1,6 @@
 mat-toolbar{
   width: 100%;
-  background-color: #f0f0f0;
+  background-color: #082A5D;
 }
 
 .logo {
@@ -20,5 +20,5 @@ mat-toolbar{
 }
 
 .storMainColor {
-  color: #B82D70;
+  color:  #B82D70;
 }

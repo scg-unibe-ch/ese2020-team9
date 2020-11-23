@@ -143,4 +143,24 @@ export class UserService {
             return Promise.reject({message: err});
         });
     }
+
+    public getGameHighScores() {
+        return User.findAll({
+            order:[
+                ['gameScore', 'DESC']
+            ],
+            attributes: ['userId', 'userName', 'gameScore'],
+            limit: 10
+        });
+    }
+
+    public getOverallHighScores() {
+        return User.findAll({
+            order:[
+                ['overallScore', 'DESC']
+            ],
+            attributes: ['userId', 'userName', 'overallScore'],
+            limit: 3
+        });
+    }
 }

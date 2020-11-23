@@ -1,6 +1,7 @@
 import { UserService } from './../../services/user.service';
 import { User, UserAttributes } from './../../models/user.model';
 import { expect } from 'chai';
+import { userInfo } from 'os';
 
 describe('UserService Tests', () => {
 
@@ -353,8 +354,56 @@ describe('UserService Tests', () => {
                     expect(user.gameScore).to.be.eq(5);
                     expect(user.overallScore).to.be.eq(7);
                     done();
-                })
-            })
-        })
-    })
+                });
+            });
+        });
+    });
+    describe('Test getGameHighScore', () => {
+        it('should add another user', function(done) {
+            const user2: UserAttributes = {
+                userId: 2,
+                admin: false,
+                wallet: 500,
+                userName: 'brent',
+                password: 'j1234',
+                userMail: 'brent@gmail.com',
+                firstName: 'Brent',
+                lastName: 'Eastwood',
+                gender: 'male',
+                phoneNumber: 7655555,
+                addressStreet: 'Kensington Road',
+                addressPin: '4404',
+                addressCity: 'Creed Town',
+                addressCountry: 'Mercy Islands',
+                gameScore: 6,
+                activityScore: 0,
+                overallScore: 6
+            };
+            testedUserService.register(user2).then(user => {
+                expect(user).not.to.be.eq(null);
+                done();
+            });
+        });
+        it('should successfully get the ten game high scores', function(done) {
+            testedUserService.getGameHighScores().then((users) => {
+                expect(users[0].userId).to.be.eq(2);
+                expect(users[0].userName).to.be.eq('brent');
+                expect(users[0].gameScore).to.be.eq(6);
+                expect(users[1].userId).to.be.eq(1);
+                done();
+            });
+        });
+    });
+    describe('Test getOverallHighScore', () => {
+        it('should successfully get the three overall high scores', function(done) {
+            testedUserService.getOverallHighScores().then((users) => {
+                expect(users[1].userId).to.be.eq(2);
+                expect(users[1].userName).to.be.eq('brent');
+                expect(users[1].overallScore).to.be.eq(6);
+                expect(users[0].userId).to.be.eq(1);
+                expect(users[0].overallScore).to.be.eq(7);
+                done();
+            });
+        });
+    });
 });

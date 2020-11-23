@@ -13,7 +13,7 @@ describe('TransactionService Test', () => {
         userId: 1,
         admin: false,
         wallet: 500,
-        userName: 'jacky',
+        userName: 'shello',
         password: 'jacky123',
         userMail: 'jacky@gmail.com',
         firstName: 'Jack',
@@ -31,7 +31,7 @@ describe('TransactionService Test', () => {
         userId: 2,
         admin: true,
         wallet: 500,
-        userName: 'admin',
+        userName: 'jacko',
         password: '$2b$12$XVwWZfAd2fjjd.QjrvMJXOh4WPuxJ4.tpNzkg9wpSSNOShAoDOYWC', // adminPW
         userMail: 'superAdmin@admins.com',
         firstName: 'Jack',
@@ -177,6 +177,10 @@ describe('TransactionService Test', () => {
                 expect(transaction[0].buyerId).to.be.eq(1);
                 expect(transaction[0].userId).to.be.eq(2);
                 expect(transaction[0].product.productName).to.be.eq('Formaggio');
+                expect(transaction[0].seller.userName).to.be.eq('jacko');
+                expect(transaction[0].seller.userId).to.be.eq(2);
+                expect(transaction[0].buyer.userName).to.be.eq('shello');
+                expect(transaction[0].buyer.userId).to.be.eq(1);
             }).then(() =>{
                 done();
             });
@@ -188,6 +192,10 @@ describe('TransactionService Test', () => {
                 expect(transaction[0].buyerId).to.be.eq(1);
                 expect(transaction[0].userId).to.be.eq(2);
                 expect(transaction[0].product.productName).to.be.eq('Formaggio');
+                expect(transaction[0].seller.userName).to.be.eq('jacko');
+                expect(transaction[0].seller.userId).to.be.eq(2);
+                expect(transaction[0].buyer.userName).to.be.eq('shello');
+                expect(transaction[0].buyer.userId).to.be.eq(1);
             }).then(() =>{
                 done();
             });
@@ -199,6 +207,10 @@ describe('TransactionService Test', () => {
                 expect(transaction[0].buyerId).to.be.eq(1);
                 expect(transaction[0].userId).to.be.eq(2);
                 expect(transaction[0].product.productName).to.be.eq('Formaggio');
+                expect(transaction[0].seller.userName).to.be.eq('jacko');
+                expect(transaction[0].seller.userId).to.be.eq(2);
+                expect(transaction[0].buyer.userName).to.be.eq('shello');
+                expect(transaction[0].buyer.userId).to.be.eq(1);
             }).then(() =>{
                 done();
             });
@@ -210,6 +222,10 @@ describe('TransactionService Test', () => {
                 expect(transaction[0].buyerId).to.be.eq(2);
                 expect(transaction[0].userId).to.be.eq(1);
                 expect(transaction[0].product.productName).to.be.eq('Schoggi');
+                expect(transaction[0].seller.userName).to.be.eq('shello');
+                expect(transaction[0].seller.userId).to.be.eq(1);
+                expect(transaction[0].buyer.userName).to.be.eq('jacko');
+                expect(transaction[0].buyer.userId).to.be.eq(2);
             }).then(() =>{
                 done();
             });

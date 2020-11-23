@@ -55,9 +55,7 @@ Swiss privacy laws. This includes registration data as well as purchased product
 ![](Use_Case_Diagram_I.png)
 
 #### An extended use case diagram
-![](Use_Case_Diagram_II.png)
-
-The above diagrams were created from: https://online.visual-paradigm.com/ 
+![](Use_Case_Diagram_III.png)
 
 <br/><br/>
 
@@ -313,5 +311,5 @@ The application could consist of the following classes described as CRC-Cards. *
 
 The following Diagram shows graphically the identified classes and their relationsship.
 
-![](UML_Class_Diagram_I.png)
+![](UML_Class_Diagram_II.png)
 

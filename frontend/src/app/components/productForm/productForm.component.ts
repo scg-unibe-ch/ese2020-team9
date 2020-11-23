@@ -8,6 +8,7 @@ import {environment} from "../../../environments/environment";
 import { ActivatedRoute} from "@angular/router";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { Location} from "@angular/common";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-productForm',
@@ -37,6 +38,15 @@ export class ProductFormComponent implements OnInit {
   product: ProductItem;
   id: any;
   add: boolean;
+  selectedFiles: FileList;
+  progressInfos = [];
+  fileInfos: Observable<any>;
+
+  selectedFile: File;
+
+  imageSelected: boolean;
+  imageName: string;
+  fileName: string;
 
   constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private _ngZone: NgZone, private productService: ProductService, private route: ActivatedRoute, private location: Location) { }
 
@@ -160,4 +170,35 @@ export class ProductFormComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+
+
+  onFileChanged(event) {
+      this.selectedFile = event.target.files[0]
+      this.imageName =event.target.files[0].name;
+  }
+
+
+
+
+
+  selectFiles(event) {
+    this.progressInfos = [];
+    this.imageSelected = true;
+    this.selectedFiles = event.target.files;
+    for (let i = 0; i < this.selectedFiles.length; i++) {
+              this.getName(i, this.selectedFiles[i]);
+            }
+  }
+
+  getName(idx, file){
+      this.progressInfos[idx] = { fileName: file.name };
+  }
+
+  onUpload() {
+        for (let i = 0; i < this.selectedFiles.length; i++) {
+              //
+          }
+    }
+
+
 }

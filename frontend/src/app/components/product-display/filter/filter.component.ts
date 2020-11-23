@@ -5,7 +5,7 @@ import {MatSelect} from "@angular/material/select";
 import {MatSliderModule} from '@angular/material/slider';
 import { HttpClient } from '@angular/common/http';
 import {MatSnackBar} from '@angular/material/snack-bar';
-
+import {from} from 'rxjs';
 
 
 @Component({
@@ -40,7 +40,7 @@ export class FilterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.value = 0;
+    this.value = "0";
     this.category = this.route.snapshot.queryParamMap.get('c');
     this.name = this.route.snapshot.queryParamMap.get('n');
     /*
@@ -101,46 +101,7 @@ export class FilterComponent implements OnInit {
         return value  + 'km';
       }
 
-  nearYou(addressPin:number){
-     console.log(this.value)
-     console.log(this.addressPin)
-     this.getCity(this.addressPin)
 
-  }
-
-  getCity(pin: string){
-    let params = {
-          codes: this.addressPin,
-          country: "CH",
-          apikey: '4bc7d070-229b-11eb-8bf2-6be81465cc4d',
-    };
-    if (this.addressPin.length == 4){this.httpClient.get('https://app.zipcodebase.com/api/v1/search', {params}).subscribe((res: any) => {
-
-          this.addressCity = res.results[this.addressPin][0].city;
-          console.log(res.results[this.addressPin][0].city)
-          this.getCityPins(this.addressCity)
-
-
-      }, (error: any) => {
-      });
-    }
-  }
-
-  getCityPins(addressCity: string){
-      console.log(this.addressCity, "getCityPins")
-      let params = {
-            city: this.addressCity,
-            country: "CH",
-            apikey: '4bc7d070-229b-11eb-8bf2-6be81465cc4d'
-      };
-      this.httpClient.get('https://app.zipcodebase.com/api/v1/code/city', {params}).subscribe((res: any) => {
-
-            console.log(res.results)
-
-        }, (error: any) => {
-        });
-
-    }
 
   //gets Pins within a certain radius
   getPinsInRadius(addressPin: string){
@@ -152,7 +113,7 @@ export class FilterComponent implements OnInit {
             this.openSnackBar(message, action);
             return;
         }
-        if (this.value == 0){
+        if (this.value == "0"){
             let message = "Radius can not be Zero.";
             let action = "";
             this.openSnackBar(message, action);

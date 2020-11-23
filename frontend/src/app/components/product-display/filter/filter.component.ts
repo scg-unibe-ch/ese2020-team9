@@ -110,15 +110,14 @@ export class FilterComponent implements OnInit {
     let params = {
           codes: this.addressPin,
           country: "CH",
-          apikey: '4bc7d070-229b-11eb-8bf2-6be81465cc4d'
+          apikey: '4bc7d070-229b-11eb-8bf2-6be81465cc4d',
     };
     if (this.addressPin.length == 4){this.httpClient.get('https://app.zipcodebase.com/api/v1/search', {params}).subscribe((res: any) => {
-        if (res != null) {
 
-            this.addressCity = res.results[this.addressPin][0].city;
-            console.log(res.results[this.addressPin][0].city)
-            this.getCityPins(this.addressCity)
-        }
+          this.addressCity = res.results[this.addressPin][0].city;
+          console.log(res.results[this.addressPin][0].city)
+          this.getCityPins(this.addressCity)
+
 
       }, (error: any) => {
       });
@@ -134,9 +133,7 @@ export class FilterComponent implements OnInit {
       };
       this.httpClient.get('https://app.zipcodebase.com/api/v1/code/city', {params}).subscribe((res: any) => {
 
-
-              console.log(res.results)
-
+            console.log(res.results)
 
         }, (error: any) => {
         });

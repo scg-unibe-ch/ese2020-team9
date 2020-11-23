@@ -1,4 +1,5 @@
 import { Product } from './product.model';
+import { User } from './user.model';
 import { Optional, Model, Sequelize, DataTypes, Association } from 'sequelize';
 
 
@@ -22,8 +23,10 @@ export class Transaction extends Model<TransactionAttributes, TransactionCreatio
 
     public static associations: {
         product: Association<Transaction, Product>;
+        seller: Association<Transaction, User>;
+        buyer: Association<Transaction, User>;
     };
-    
+
     transactionId!: number;
     productId!: number;
     userId!: number;
@@ -37,6 +40,9 @@ export class Transaction extends Model<TransactionAttributes, TransactionCreatio
     deliveryCountry!: string;
 
     public readonly product?: Product;
+    public readonly seller?: User;
+    public readonly buyer?: User;
+
 
     public static initialize(sequelize: Sequelize) {
         Transaction.init({
@@ -95,6 +101,19 @@ export class Transaction extends Model<TransactionAttributes, TransactionCreatio
             targetKey: 'productId',
             onDelete: 'cascade'
         });
+
+        Transaction.belongsTo(User, {
+            as: 'seller',
+            foreignKey: 'userId',
+            targetKey: 'userId'
+        });
+
+        Transaction.belongsTo(User, {
+            as: 'buyer',
+            foreignKey: 'buyerId',
+            targetKey: 'userId'
+        });
+
     }
 
 }

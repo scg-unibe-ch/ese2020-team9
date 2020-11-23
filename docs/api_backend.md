@@ -532,7 +532,7 @@ The Response body delivers a list of products that match the keyword and the fil
 
 Adds a new Image to the Product with the given productId. 
 Requires the Authorization Header on the Request with a valid token from the User the product belongs to.
-Accepts Images in the format .png, .jpg and .jpeg, type should be "image/*".
+Accepts Images in the format .png, .jpg and .jpeg, type should be "image/*". Images are sent as formdata (input tag -> name="image").
 
 - **Details**
     

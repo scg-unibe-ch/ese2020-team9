@@ -105,29 +105,27 @@
 <!--Near you-->
 <div>
   <mat-card>
-    <h2>Products near you:</h2>
-
+    <h2>Enter your zipcode and select a radius</h2>
 
     <mat-form-field>
-      <input matInput placeholder="Zip code" [(ngModel)]="addressPin" name="addressPin" (ngModelChange)="nearYou(addressPin)">
-    </mat-form-field>
+      <input matInput placeholder="Zipcode" [(ngModel)]="addressPin" name="addressPin" >
 
-    <br>
-    <h3>Range in "km"</h3>
+
+    </mat-form-field>
+      <button mat-button (click)="getPinsInRadius(addressPin)"><mat-icon>search</mat-icon></button>
+
+
+    <p>{{value}} km near you</p>
 
     <mat-slider
       thumbLabel
       [displayWith]="formatLabel"
       tickInterval="1000"
       min="1"
-      max="500"
+      max="100"
       [(ngModel)]="value">
     </mat-slider>
 
-    <mat-form-field class="example-margin">
-      <mat-label>Value</mat-label>
-      <input matInput type="number" [(ngModel)]="value">
-    </mat-form-field>
 
   </mat-card>
 </div>

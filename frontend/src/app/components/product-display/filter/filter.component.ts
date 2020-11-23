@@ -4,6 +4,8 @@ import {CategoryList} from "../../../mock-category-list";
 import {MatSelect} from "@angular/material/select";
 import {MatSliderModule} from '@angular/material/slider';
 import { HttpClient } from '@angular/common/http';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 
 
 @Component({
@@ -31,13 +33,14 @@ export class FilterComponent implements OnInit {
 
   distance: number;
   addressPin: any;
-  value: number;
+  value: string;
   addressCity: string;
 
-  constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient) {
+  constructor(private _snackBar: MatSnackBar, private router: Router, private route: ActivatedRoute, private httpClient: HttpClient) {
   }
 
   ngOnInit(): void {
+    this.value = 0;
     this.category = this.route.snapshot.queryParamMap.get('c');
     this.name = this.route.snapshot.queryParamMap.get('n');
     /*
@@ -106,7 +109,6 @@ export class FilterComponent implements OnInit {
   }
 
   getCity(pin: string){
-    console.log(this.addressPin)
     let params = {
           codes: this.addressPin,
           country: "CH",
@@ -139,6 +141,44 @@ export class FilterComponent implements OnInit {
         });
 
     }
+
+  //gets Pins within a certain radius
+  getPinsInRadius(addressPin: string){
+        console.log(this.addressPin, "getPinsInRadius")
+
+        if (this.addressPin == null){
+            let message = "Please enter a zipcode";
+            let action = "Ok";
+            this.openSnackBar(message, action);
+            return;
+        }
+        if (this.value == 0){
+            let message = "Radius can not be Zero.";
+            let action = "";
+            this.openSnackBar(message, action);
+            return;
+        }
+        let params = {
+              code: this.addressPin,
+              radius: this.value,
+              country: "CH",
+              apikey: '4bc7d070-229b-11eb-8bf2-6be81465cc4d'
+        };
+        if (this.addressPin.length == 4){this.httpClient.get('https://app.zipcodebase.com/api/v1/radius', {params}).subscribe((res: any) => {
+
+              console.log(res.results, "getPinsInRadius")
+
+          }, (error: any) => {
+          });
+        }
+  }
+
+
+  openSnackBar(message: string, action: string) {
+        this._snackBar.open(message, action, {
+          duration: 3000
+        });
+  }
 
 }
 

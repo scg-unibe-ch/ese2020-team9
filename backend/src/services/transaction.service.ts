@@ -98,11 +98,17 @@ export class TransactionService {
     public getAllTransactionsOfSeller(sellerId: number): Promise<Transaction[]> {
         const {Op} = require('sequelize');
         return Transaction.findAll({
+            include: [
+                Transaction.associations.product,
+                Transaction.associations.seller,
+                Transaction.associations.buyer
+            ],
             where: {
                 [Op.and]: [
                     { userId: sellerId }
                 ]
-            }
+            },
+            
         })
         .catch(err => Promise.reject(err));
     }
@@ -110,6 +116,11 @@ export class TransactionService {
     public getAllTransactionsOfBuyer(buyerId: number): Promise<Transaction[]> {
         const {Op} = require('sequelize');
         return Transaction.findAll({
+            include: [
+                Transaction.associations.product,
+                Transaction.associations.seller,
+                Transaction.associations.buyer
+            ],
             where: {
                 [Op.and]: [
                     { buyerId: buyerId }
@@ -122,6 +133,11 @@ export class TransactionService {
     public getTransactionsOfSeller(sellerId: number, transactionStatus: number): Promise<Transaction[]> {
         const {Op} = require('sequelize');
         return Transaction.findAll({
+            include: [
+                Transaction.associations.product,
+                Transaction.associations.seller,
+                Transaction.associations.buyer
+            ],
             where: {
                 [Op.and]: [
                     {
@@ -137,6 +153,11 @@ export class TransactionService {
     public getTransactionsOfBuyer(buyerId: number, transactionStatus: number): Promise<Transaction[]> {
         const {Op} = require('sequelize');
         return Transaction.findAll({
+            include: [
+                Transaction.associations.product,
+                Transaction.associations.seller,
+                Transaction.associations.buyer
+            ],
             where: {
                 [Op.and]: [
                     {

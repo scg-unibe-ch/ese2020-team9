@@ -1,5 +1,5 @@
 import { Product } from './product.model';
-import { Optional, Model, Sequelize, DataTypes } from 'sequelize';
+import { Optional, Model, Sequelize, DataTypes, Association } from 'sequelize';
 
 
 export interface TransactionAttributes {
@@ -19,6 +19,11 @@ export interface TransactionAttributes {
 export interface TransactionCreationAttributes extends Optional<TransactionAttributes, 'transactionId'> {}
 
 export class Transaction extends Model<TransactionAttributes, TransactionCreationAttributes> implements TransactionAttributes {
+
+    public static associations: {
+        product: Association<Transaction, Product>;
+    };
+    
     transactionId!: number;
     productId!: number;
     userId!: number;
@@ -30,6 +35,8 @@ export class Transaction extends Model<TransactionAttributes, TransactionCreatio
     deliveryPin!: string;
     deliveryCity!: string;
     deliveryCountry!: string;
+
+    public readonly product?: Product;
 
     public static initialize(sequelize: Sequelize) {
         Transaction.init({

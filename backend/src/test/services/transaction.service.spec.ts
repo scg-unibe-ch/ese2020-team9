@@ -176,6 +176,7 @@ describe('TransactionService Test', () => {
                 expect(transaction[0].productId).to.be.eq(2);
                 expect(transaction[0].buyerId).to.be.eq(1);
                 expect(transaction[0].userId).to.be.eq(2);
+                expect(transaction[0].product.productName).to.be.eq('Formaggio');
             }).then(() =>{
                 done();
             });
@@ -186,6 +187,7 @@ describe('TransactionService Test', () => {
                 expect(transaction[0].productId).to.be.eq(2);
                 expect(transaction[0].buyerId).to.be.eq(1);
                 expect(transaction[0].userId).to.be.eq(2);
+                expect(transaction[0].product.productName).to.be.eq('Formaggio');
             }).then(() =>{
                 done();
             });
@@ -196,6 +198,7 @@ describe('TransactionService Test', () => {
                 expect(transaction[0].productId).to.be.eq(2);
                 expect(transaction[0].buyerId).to.be.eq(1);
                 expect(transaction[0].userId).to.be.eq(2);
+                expect(transaction[0].product.productName).to.be.eq('Formaggio');
             }).then(() =>{
                 done();
             });
@@ -206,6 +209,7 @@ describe('TransactionService Test', () => {
                 expect(transaction[0].productId).to.be.eq(1);
                 expect(transaction[0].buyerId).to.be.eq(2);
                 expect(transaction[0].userId).to.be.eq(1);
+                expect(transaction[0].product.productName).to.be.eq('Schoggi');
             }).then(() =>{
                 done();
             });

@@ -1223,7 +1223,10 @@ Gets all transactions of the seller with the id indicated in the url.
             "deliveryStreet": "string",
             "deliveryPin": "string",
             "deliveryCity": "string",
-            "deliveryCountry": "string"
+            "deliveryCountry": "string",
+            "product": "Product",
+            "seller": "User",
+            "buyer": "User"
         }, 
         {   
             "transactionId": "number",
@@ -1236,7 +1239,10 @@ Gets all transactions of the seller with the id indicated in the url.
             "deliveryStreet": "string",
             "deliveryPin": "string",
             "deliveryCity": "string",
-            "deliveryCountry": "string"
+            "deliveryCountry": "string",
+            "product": "Product",
+            "seller": "User",
+            "buyer": "User"
         },
         ...
     ]
@@ -1266,7 +1272,10 @@ Gets all transactions of a buyer with the id indicated in the url.
             "deliveryStreet": "string",
             "deliveryPin": "string",
             "deliveryCity": "string",
-            "deliveryCountry": "string"
+            "deliveryCountry": "string",
+            "product": "Product",
+            "seller": "User",
+            "buyer": "User"
         }, 
         {   
             "transactionId": "number",
@@ -1279,7 +1288,10 @@ Gets all transactions of a buyer with the id indicated in the url.
             "deliveryStreet": "string",
             "deliveryPin": "string",
             "deliveryCity": "string",
-            "deliveryCountry": "string"
+            "deliveryCountry": "string",
+            "product": "Product",
+            "seller": "User",
+            "buyer": "User"
         },
         ...
     ]
@@ -1310,7 +1322,10 @@ Gets all transactions with a certain transaction status of a seller, with the id
             "deliveryStreet": "string",
             "deliveryPin": "string",
             "deliveryCity": "string",
-            "deliveryCountry": "string"
+            "deliveryCountry": "string",
+            "product": "Product",
+            "seller": "User",
+            "buyer": "User"
         }, 
         {   
             "transactionId": "number",
@@ -1323,13 +1338,67 @@ Gets all transactions with a certain transaction status of a seller, with the id
             "deliveryStreet": "string",
             "deliveryPin": "string",
             "deliveryCity": "string",
-            "deliveryCountry": "string"
+            "deliveryCountry": "string",
+            "product": "Product",
+            "seller": "User",
+            "buyer": "User"
         },
         ...
     ]
     ```
 
      </details>
+
+###  GET on `"/transaction/buy/:buyerId/status/:transactionStatus"`
+
+Gets all transactions with a certain transaction status of a buyer, with the id and the transaction status indicated in the url. 
+
+- **Details**
+  
+    <details>
+
+    <summary>Response (STATUS 200)</summary>    
+
+    ```json
+    [
+        {   
+            "transactionId": "number",
+            "productId": "number",
+            "userId": "number",
+            "buyerId": "number",   
+            "transactionStatus": "number",
+            "deliveryFirstName": "string",
+            "deliveryLastName": "string",
+            "deliveryStreet": "string",
+            "deliveryPin": "string",
+            "deliveryCity": "string",
+            "deliveryCountry": "string",
+            "product": "Product",
+            "seller": "User",
+            "buyer": "User"
+        }, 
+        {   
+            "transactionId": "number",
+            "productId": "number",
+            "userId": "number",
+            "buyerId": "number",   
+            "transactionStatus": "number",
+            "deliveryFirstName": "string",
+            "deliveryLastName": "string",
+            "deliveryStreet": "string",
+            "deliveryPin": "string",
+            "deliveryCity": "string",
+            "deliveryCountry": "string",
+            "product": "Product",
+            "seller": "User",
+            "buyer": "User"
+        },
+        ...
+    ]
+    ```
+
+     </details>
+
 
 ###  PUT on `"/transaction/confirm/:transactionId"`
 

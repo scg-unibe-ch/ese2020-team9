@@ -12,7 +12,7 @@
           <br><br>
           <h3>Status: Please confirm transaction</h3>
           <br>
-          <button mat-flat-button class="button_standard" (click)="sell(transaction.transactionId)">Sell</button>
+          <button mat-flat-button class="button_standard" routerLink="/user" routerLinkActive="active" (click)="sell(transaction.transactionId)">Sell</button>
           <button mat-flat-button class="button_standard" (click)="decline(transaction.transactionId)">Decline</button>
         </div>
 

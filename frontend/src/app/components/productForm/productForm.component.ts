@@ -35,7 +35,6 @@ export class ProductFormComponent implements OnInit {
   userReview = '';
   userAuth = '';
 
-  product: ProductItem;
   id: any;
   add: boolean;
   categories = CategoryList;
@@ -72,43 +71,10 @@ export class ProductFormComponent implements OnInit {
           this.isAvailable = instances.isAvailable;
           this.userId = instances.userId;
           this.userReview = instances.userReview;
-          //this.changeDetection.detectChanges();
-
       },(error: any) => {
       this.userAuth = 'There is no corresponding Product!';
     });
   }
-
-  /*
-  addProduct(){
-    this.productService.postProduct( {
-      productId: '',
-      productName: this.productName,
-      productDescription: this.productDescription,
-      productImage: this.productImage,
-      productPrice: this.productPrice,
-      productCategory: this.productCategory,
-      productLocation: this.productLocation,
-      productDelivery: this.productDelivery,
-      uploadDate:    new Date(),
-      sellDate: '',
-      isApproved: false,
-      isService: this.isService,
-      isRentable: this.isRentable,
-      isAvailable: true,
-      userId: this.userId,
-      userReview: this.userReview}).subscribe((res: any) => {
-
-      //navigates to dashboard
-      this.router.navigate(['/user']);
-      let action = "";
-      this.openSnackBar(res.message, action);
-    }, (error: any) => {
-      let action = "";
-      this.openSnackBar(error.message, action);
-
-    });
-  }*/
 
   addProduct(): void {
     this.httpClient.post(environment.endpointURL + 'products/', {
@@ -119,7 +85,7 @@ export class ProductFormComponent implements OnInit {
       productCategory: this.productCategory,
       productLocation: this.productLocation,
       productDelivery: this.productDelivery,
-      uploadDate:    new Date(),
+      uploadDate: new Date(),
       sellDate: '',
       isApproved: false,
       isService: this.isService,
@@ -127,17 +93,15 @@ export class ProductFormComponent implements OnInit {
       isAvailable: true,
       userId: this.userId,
       userReview: this.userReview,
-
     }).subscribe((res: any) => {
-
-      //navigates to dashboard
-      this.router.navigate(['/user']);
-       let action = "";
-       this.openSnackBar(res.message, action);
+      //navigates back to user dashboard
+      this.goBack();
+      let action = "";
+      this.openSnackBar(res.message, action);
     }, (error: any) => {
-        let action = "";
-        this.openSnackBar(error.message, action);
-
+      let message = "Can not add this product!";
+      let action = "X";
+      this.openSnackBar(message, action);
     });
   }
 
@@ -157,21 +121,18 @@ export class ProductFormComponent implements OnInit {
       isRentable: this.isRentable,
       isAvailable: this.isAvailable,
       userId: this.userId,
-      userReview: this.userReview,
-
+      userReview: this.userReview
     }).subscribe((res: any) => {
-
-      //navigates to productItem
-      this.router.navigate(['/user']);
-      let action = "";
-      this.openSnackBar(res.message, action);
-
-    }, (error: any) => {
-      let message = "Your Product Information is invalid!";
+      //navigates back to user dashboard
+      this.goBack();
+      let message = "Product successfully edited!";
       let action = "";
       this.openSnackBar(message, action);
+    }, (error: any) => {
+      let message = "Your Product Information is invalid!";
+      let action = "X";
+      this.openSnackBar(message, action);
     });
-
   }
 
   //check if field is empty

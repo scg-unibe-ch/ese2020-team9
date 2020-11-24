@@ -7,7 +7,7 @@
 <div class="catContainer" >
   <div class="bigDisplay" *ngFor="let category of categories">
     <button class="categoryButton" [routerLink]="['/s']" [queryParams]="{c: category.value}">
-      {{category.viewValue}}
+      {{category.value}}
     </button>
   </div>
 

@@ -44,8 +44,8 @@
       </mat-grid-tile-content>
       <mat-grid-tile-footer style="backgroundColor: white; color: black">
         <mat-radio-group [(ngModel)]="productItem.isApproved">
-          <mat-radio-button value="true" (click)="approveProduct([productItem.productId])" >Approve</mat-radio-button>
-          <mat-radio-button value="false" (click)="deleteProduct([productItem.productId])" >Delete</mat-radio-button>
+          <mat-radio-button value="true" (click)="approveProduct(productItem)" >Approve</mat-radio-button>
+          <mat-radio-button value="false" (click)="deleteProduct(productItem)" >Delete</mat-radio-button>
         </mat-radio-group>
       </mat-grid-tile-footer>
     </mat-grid-tile>

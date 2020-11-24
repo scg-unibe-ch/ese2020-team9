@@ -47,7 +47,6 @@ export class BoughtproductsComponent implements OnInit {
 
 
   getSeller(id:number){
-    console.log(id)
       this.userService.getUser(id).subscribe((instances: any) => {
          this.sellerId = instances.userId;
          this.sellerName = instances.userName;

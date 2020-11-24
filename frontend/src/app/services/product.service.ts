@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { ProductItem } from "../models/product-item.model";
+import {Observable} from "rxjs";
+import {Search} from "../models/search.model";
+import {map} from "rxjs/operators";
 
 
 @Injectable({
@@ -12,25 +15,28 @@ export class ProductService {
   constructor(private httpClient: HttpClient) { }
 
   /** post requests **/
-  addProduct() {
-    return this.httpClient.post(environment.endpointURL + 'products/',   ((product: ProductItem) => {
-          product.productName;
-      }));
+  //should be used in productForm
+  addProduct(product: ProductItem): Observable<any> {
+    return this.httpClient.post(environment.endpointURL + 'products/',   product);
   }
 
-  approveProduct(productId: number){
-    return this.httpClient.put(environment.endpointURL + 'products/approve/' + productId,{});
+  //should be used in productDisplay
+  searchProduct(search: Search): Observable<any> {
+    return this.httpClient.post(environment.endpointURL + 'products/search/', search);
   }
 
   /** put requests **/
-  editProduct(productId: number){
-    return this.httpClient.put(environment.endpointURL + 'products/' + productId, {
-      ProductItem
-    });
+  approveProduct(product: ProductItem): Observable<ProductItem> {
+    return this.httpClient.put<ProductItem>(environment.endpointURL + 'products/approve/' + product.productId, product);
+  }
+
+  //should be used in productForm
+  editProduct(product: ProductItem): Observable<ProductItem> {
+    return this.httpClient.put<ProductItem>(environment.endpointURL + 'products/' + product.productId, product);
   }
   /** delete requests **/
-  deleteProduct(productId: number){
-    return this.httpClient.delete(environment.endpointURL + 'products/' + productId, {});
+  deleteProduct(product: ProductItem): Observable<ProductItem> {
+    return this.httpClient.delete<ProductItem>(environment.endpointURL + 'products/' + product.productId);
   }
 
   /** get requests **/
@@ -58,7 +64,11 @@ export class ProductService {
 
   //get a specific Product
   getProduct(productId: number) {
-    return this.httpClient.get(environment.endpointURL + 'products/' + productId);
+    return this.httpClient.get(environment.endpointURL + 'products/' + productId).pipe(
+      map((data: ProductItem) => {
+        return data;
+      })
+    );
   }
 
   //get all Products from the same user
@@ -71,15 +81,8 @@ export class ProductService {
     return this.httpClient.get(environment.endpointURL + 'transaction/buy/  ' + userId);
   }
 
- //get products a user sold
+  //get products a user sold
   getSoldProducts(userId: number) {
    return this.httpClient.get(environment.endpointURL + 'transaction/sell/' + userId);
  }
-
-  //
-  buyProduct(productId: number) {
-    return this.httpClient.get(environment.endpointURL + 'products/' + productId);
-  }
-
-
 }

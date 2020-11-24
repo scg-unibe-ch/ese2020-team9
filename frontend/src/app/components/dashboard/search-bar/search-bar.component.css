@@ -31,9 +31,9 @@ input[type=text]{
 }
 
 /* category */
-@media (max-width: 573px){
+@media (max-width: 611px){
   .bigDisplay {
-    display: none; /* hides categories if display < 573px */
+    display: none; /* hides categories if display < 611px */
   }
 }
 
@@ -51,9 +51,9 @@ input[type=text]{
   background-color: transparent;
 }
 
-@media (min-width: 573px){
+@media (min-width: 611px){
   .smallDisplay {
-    display: none; /* hides categories if display > 573px */
+    display: none; /* hides categories if display > 611px */
   }
 }
 .smallDisplay{

@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {MatSelect} from "@angular/material/select";
 import {CategoryList} from "../../mock-category-list";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-search',
@@ -25,6 +26,7 @@ export class SearchComponent implements OnInit {
 
   //hide Filter option
   clickFilter: boolean = false;
+  subscription: Subscription;
 
   constructor(private route: ActivatedRoute, private router: Router) { }
 
@@ -35,13 +37,17 @@ export class SearchComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.matSelect.openedChange.subscribe(opened => {
+    this.subscription = this.matSelect.openedChange.subscribe(opened => {
       if (opened) {
         this.matSelect.panel.nativeElement.addEventListener('mouseleave', () => {
           this.matSelect.close();
         })
       }
     })
+  }
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 
   clearName(){

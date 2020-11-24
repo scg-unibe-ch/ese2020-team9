@@ -4,9 +4,9 @@ import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import {ProductService} from "../../services/product.service";
-import {environment} from "../../../environments/environment";
 import {ActivatedRoute} from "@angular/router";
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { Location } from "@angular/common";
 
 @Component({
   selector: 'app-product-detail',
@@ -32,6 +32,7 @@ export class ProductDetailComponent implements OnInit {
 
   userReview = '';
   userWallet: any;
+  userLoggedIn: boolean;
 
 
   sellerId: any;
@@ -43,11 +44,14 @@ export class ProductDetailComponent implements OnInit {
   product: ProductItem;
   id: any;
 
-  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService,private productService: ProductService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
+  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService,private productService: ProductService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef, private location: Location) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.userWallet = this.userService.getUserWallet();
+    this.userService.isUserLoggedIn.subscribe(value => {
+      this.userLoggedIn = value;
+    });
     this.getProduct();
     //this.userId = this.userService.getUserId();
   }
@@ -70,10 +74,9 @@ export class ProductDetailComponent implements OnInit {
           this.isAvailable = instances.isAvailable;
           this.sellerId = instances.userId;
           this.userReview = instances.userReview;
-          //this.changeDetection.detectChanges();
 
           this.getSeller(this.sellerId);
-
+      console.log(this.isAvailable);
       },(error: any) => {
         let message = "There is no corresponding Product!";
         let action = "OK";
@@ -100,7 +103,7 @@ export class ProductDetailComponent implements OnInit {
 
   // Check to make sure User has enough Cash to buy product
  checkCash(){
-    return (this.userWallet >= this.productPrice);
+    return (this.userWallet < this.productPrice);
   }
 
 
@@ -109,7 +112,9 @@ export class ProductDetailComponent implements OnInit {
           duration: 3000
         });
       }
-
+  goBack(): void {
+    this.location.back();
+  }
 
 
 }

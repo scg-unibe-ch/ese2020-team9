@@ -1,13 +1,9 @@
-import {Component, Input, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {ProductItem} from "../../models/product-item.model";
 import {HttpClient} from "@angular/common/http";
-import {ActivatedRoute, Router} from "@angular/router";
-import {ProductService} from "../../services/product.service";
-import {Search} from "../../models/search.model";
-import { switchMap } from "rxjs/operators";
-import {any} from "codelyzer/util/function";
-import { CategoryList } from "../../mock-category-list";
+import {ActivatedRoute} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-product-display',
@@ -25,7 +21,7 @@ export class ProductDisplayComponent implements OnInit {
 
   productList: ProductItem[];
 
-  constructor(private httpClient: HttpClient, private route: ActivatedRoute, private router: Router) { }
+  constructor(private httpClient: HttpClient, private route: ActivatedRoute, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -49,24 +45,21 @@ export class ProductDisplayComponent implements OnInit {
       delivery: this.delivery,
     }).subscribe((data: ProductItem[]) => {
       this.productList = data;
-    }, (error: any) => {
-      return 'Could not Search';
+      if(data.length === 0){
+        let message = "There is no such product available!";
+        let action = "X";
+        this.openSnackBar(message, action);
+      }
+    }, () => {
+      let message = "Your search has been unsuccessful. Try again!";
+      let action = "X";
+      this.openSnackBar(message, action);
     });
   }
 
-/*
-  searchProduct(event){
-    this.httpClient.post(environment.endpointURL + 'products/search/', {
-      name: event.name,
-      location: event.location,
-      priceMin: event.priceMin,
-      priceMax: event.priceMax,
-      delivery: event.delivery,
-      available: event.available,
-    }).subscribe((data: ProductItem[]) => {
-      this.productList = data;
-    }, (error: any) => {
-      return 'Could not Search';
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 3000
     });
-  }*/
+  }
 }

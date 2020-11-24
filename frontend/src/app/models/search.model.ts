@@ -4,8 +4,7 @@ export class Search {
     public location: string,
     public priceMin: string,
     public priceMax: string,
-    public delivery: string,
-    public available: string,
+    public delivery: boolean,
     public category: string,
   ){}
 }

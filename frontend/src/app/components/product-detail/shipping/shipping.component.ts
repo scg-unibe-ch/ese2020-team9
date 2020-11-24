@@ -9,6 +9,8 @@ import {ActivatedRoute} from "@angular/router";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { Location } from "@angular/common";
 import {MatTabsModule} from '@angular/material/tabs';
+import {TransactionService} from "../../../services/transaction.service";
+import {Transaction} from "../../../models/transaction.model";
 
 @Component({
   selector: 'app-shipping',
@@ -21,7 +23,7 @@ export class ShippingComponent implements OnInit {
   productName = '';
   productDescription = '';
   productImage = '';
-  productPrice = '';
+  productPrice: number;
   productCategory = '';
   productLocation = '';
   productDelivery = '';
@@ -51,8 +53,6 @@ export class ShippingComponent implements OnInit {
   buyerLastName = '';
   buyerFirstName = '';
 
-
-
   otherAddressPin = '';
   otherAddressCity = '';
   otherAddressCountry = '';
@@ -60,16 +60,19 @@ export class ShippingComponent implements OnInit {
 
   product: ProductItem;
   id: any;
+  userLoggedIn: boolean;
+  userWallet: number;
 
-  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute, private location: Location) { }
+  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute, private location: Location, private transactionService: TransactionService) { }
 
   ngOnInit(): void {
     this.buyerId = this.userService.getUserId();
     this.getBuyer();
     this.id = this.route.snapshot.paramMap.get('id');
-
     this.getProduct();
-
+    this.userService.isUserLoggedIn.subscribe(value => {
+      this.userLoggedIn = value;
+    });
   }
 
 
@@ -84,11 +87,12 @@ export class ShippingComponent implements OnInit {
   }
 
   checkCash(){
-    return (this.buyerWallet >= this.productPrice ? false : true);
+    return (this.buyerWallet < this.productPrice);
   }
 
 
-  getBuyer(){this.userService.getUser(this.buyerId).subscribe((instances: any) => {
+  getBuyer(){
+    this.userService.getUser(this.buyerId).subscribe((instances: any) => {
          //this.sellerId = instances.userId;
          this.buyerName = instances.userName;
          this.buyerFirstName = instances.firstName;
@@ -125,7 +129,6 @@ export class ShippingComponent implements OnInit {
           this.isAvailable = instances.isAvailable;
           this.sellerId = instances.userId;
           this.userReview = instances.userReview;
-          //this.changeDetection.detectChanges();
           this.getSeller(this.sellerId);
 
       },(error: any) => {
@@ -165,7 +168,9 @@ export class ShippingComponent implements OnInit {
       deliveryCity: this.buyerAddressCity,
       deliveryCountry: this.buyerAddressCountry,
     }).subscribe((res: any) => {
-
+      //observable for user wallet in user-dashboard
+      //this.userWallet = Number(this.userWallet - this.productPrice);
+      //this.userService.actualWallet.next(Number(this.userWallet));
       //navigates to productItem
       this.router.navigate(['/user']);
       let message = "Seller has been contacted, please await approval of buy request"

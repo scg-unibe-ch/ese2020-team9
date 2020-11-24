@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable} from "rxjs";
 import { environment} from "../../environments/environment";
 import { User } from "../models/user.model";
 import { map } from "rxjs/operators";
+import {ProductItem} from "../models/product-item.model";
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,7 @@ export class UserService {
   public isUserLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public isUserAdmin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public isUserName: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  public actualWallet: BehaviorSubject<number> = new BehaviorSubject<number>(this.userWallet);
 
   constructor(private httpClient: HttpClient) { }
 
@@ -51,11 +53,33 @@ export class UserService {
     return this.userWallet = localStorage.getItem('userWallet')
   }
 
+  /** get requests **/
   getUser(id: number){
     return this.httpClient.get(environment.endpointURL + 'user/' + id);
   }
 
   getUserList(){
     return this.httpClient.get(environment.endpointURL + 'user');
+  }
+
+  /** post requests **/
+  registration(user: User) {
+    this.httpClient.post(environment.endpointURL + 'user/register', user).pipe(map((res: any)=>{
+        // Set user data in local storage
+        localStorage.setItem('userToken', res.token);
+        localStorage.setItem('userId', res.userId);
+        localStorage.setItem('userName', res.userName);
+        localStorage.setItem('admin', res.admin);
+        localStorage.setItem('userWallet', res.wallet);
+    }));
+  }
+
+  saveUser(user: User) {
+    this.httpClient.post(environment.endpointURL + 'user/edit/', user).pipe(map((res: any) => {
+      localStorage.setItem('userToken', res.token);
+      localStorage.setItem('userId', res.userId);
+      localStorage.setItem('userName', res.userName);
+      localStorage.setItem('admin', res.admin);
+    }));
   }
 }

@@ -52,7 +52,6 @@ export class OtherUserDashboardComponent implements OnInit {
           this.addressPin = instances.addressPin;
           this.addressCity = instances.addressCity;
           this.addressCountry = instances.addressCountry;
-
       },(error: any) => {
 
     });
@@ -61,5 +60,4 @@ export class OtherUserDashboardComponent implements OnInit {
   trackByFn(index, item){
     return item.id;
   }
-
 }

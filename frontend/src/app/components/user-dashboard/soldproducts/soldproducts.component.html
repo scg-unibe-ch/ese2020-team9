@@ -12,8 +12,8 @@
           <br><br>
           <h3>Status: Please confirm transaction</h3>
           <br>
-          <button mat-flat-button class="button_standard" (click)="sell(transaction.transactionId)">Sell</button>
-          <button mat-flat-button class="button_standard" (click)="decline(transaction.transactionId)">Decline</button>
+          <button mat-flat-button class="button_standard" (click)="sellProduct(transaction)">Sell</button>
+          <button mat-flat-button class="button_standard" (click)="declineProduct(transaction)">Decline</button>
         </div>
 
         <div *ngIf="transaction.transactionStatus==2">

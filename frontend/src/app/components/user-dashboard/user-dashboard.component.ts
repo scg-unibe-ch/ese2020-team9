@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ProductService} from "../../services/product.service";
 import {environment} from "../../../environments/environment";
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'app-user-dashboard',
@@ -25,13 +26,15 @@ export class UserDashboardComponent implements OnInit {
   userAddressCountry: string;
   userWallet: number;
 
-  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute) { }
+  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService) { }
 
   ngOnInit(): void {
     this.userId = this.userService.getUserId();
     this.getUser();
     this.getProductUser();
-
+    this.userService.actualWallet.subscribe(value => {
+      this.userWallet = value;
+    });
   }
 
 
@@ -46,7 +49,8 @@ export class UserDashboardComponent implements OnInit {
          this.userAddressCity = instances.addressCity;
          this.userAddressCountry = instances.addressCountry;
          this.userWallet = instances.wallet;
-
+         //this.userService.actualWallet.next(instances.wallet);
+        // this.userService.actualWallet.next(7);
 
        },(error: any) => {
          let action = "";
@@ -62,25 +66,18 @@ export class UserDashboardComponent implements OnInit {
      });
   }
 
-
-  deleteProduct(productId: number){
-    this.httpClient.delete(environment.endpointURL + 'products/' + productId,{}).subscribe((res: any) => {
-          this.getProductUser();
-          //navigates to productItem
-          this.router.navigate(['/user']);
-          let action = "Ok";
-          this.openSnackBar(res.message, action);
-        }, (error: any) => {
-          let message = "Can not delete this Product";
-          let action = "";
-          this.openSnackBar(message, action);
-          //this.userAuth = 'Your Product Information is invalid!';
-        });
-  }
-
-
-  trackByFn(index, item){
-    return item.id;
+  deleteProduct(product: ProductItem): void {
+    this.productService.deleteProduct(product).subscribe((res: any) => {
+      //removes product from productList
+      this.productList = this.productList.filter(item => item !== product);
+      let message = "Product successfully deleted!";
+      let action = "X";
+      this.openSnackBar(message, action);
+      }, (error: any) => {
+      let message = "Can not delete this Product!";
+      let action = "X";
+      this.openSnackBar(message, action);
+    });
   }
 
   openSnackBar(message: string, action: string) {

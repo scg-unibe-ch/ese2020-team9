@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="moreFilter" *ngIf="clickFilter">
-      <mat-radio-group [(ngModel)]="delivery" color="#46FFFD">
+      <mat-radio-group [(ngModel)]="delivery" color="#46FFFD" name="delivery">
         <a>Delivery:</a>
         <mat-radio-button value="" (change)="navigateTo()">doesn't matter</mat-radio-button>
         <mat-radio-button value="true" (change)="navigateTo()">possible</mat-radio-button>
@@ -76,9 +76,9 @@
       <mat-divider></mat-divider>
       <mat-form-field>
         <mat-label>Select Product Category</mat-label>
-        <mat-select [(ngModel)]="category" (selectionChange)="navigateTo()" value="category">
+        <mat-select [(ngModel)]="category" (selectionChange)="navigateTo()" name="category">
           <mat-option class="selectPanel" [value]="">None</mat-option>
-          <mat-option class="selectPanel" *ngFor="let category of categories" [value]="category.value">{{category.viewValue}}</mat-option>
+          <mat-option class="selectPanel" *ngFor="let category of categories" [value]="category.value">{{category.value}}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field>
@@ -93,11 +93,11 @@
       <mat-form-field>
         <input matInput [(ngModel)]="priceMax" (keyup)="navigateTo()" placeholder="max Price">
       </mat-form-field>
-      <mat-radio-group [(ngModel)]="delivery" class="smRadioGroup" color="#46FFFD">
+      <mat-radio-group [(ngModel)]="delivery" [selected]="navigateTo()" class="smRadioGroup" color="#46FFFD">
         <span>Delivery:</span>
-        <mat-radio-button value="" (change)="navigateTo()">doesn't matter</mat-radio-button>
-        <mat-radio-button value="true" (change)="navigateTo()">possible</mat-radio-button>
-        <mat-radio-button value="false" (change)="navigateTo()">not possible</mat-radio-button>
+        <mat-radio-button value="">doesn't matter</mat-radio-button>
+        <mat-radio-button value="true">possible</mat-radio-button>
+        <mat-radio-button value="false">not possible</mat-radio-button>
       </mat-radio-group>
       <!-- alternative option -->
       <!--<mat-list>

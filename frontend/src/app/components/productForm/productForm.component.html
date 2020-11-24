@@ -17,7 +17,28 @@
 
       <input matInput placeholder="Product Image" [(ngModel)]="productImage" name="productImage">
       <div *ngIf="empty(productImage)" class="invalid-feedback">Please add a Photo</div>
+
     </mat-form-field>
+    <br>
+
+
+
+
+    <input
+    style="display: none"
+    type="file" multiple (change)="selectFiles($event)"
+    #fileInput>
+    <button mat-flat-button class="button_standard" (click)="fileInput.click()">Select File</button>
+
+
+
+    <button mat-flat-button class="button_standard" (click)="onUpload()">Upload!</button>
+    <br>
+    <div *ngIf="imageSelected">
+      <div *ngFor="let progressInfo of progressInfos">
+       {{progressInfo.fileName}}
+      </div>
+    </div>
   </mat-card>
 
   <mat-card>

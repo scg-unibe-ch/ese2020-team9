@@ -42,7 +42,17 @@ export class BoughtproductsComponent implements OnInit {
   getBoughtProducts(){
      this.productService.getBoughtProducts(this.userId).subscribe((data: Transaction[]) => {
         this.transactionList = data;
+        this.getAdditionalData();
      });
+  }
+
+  getAdditionalData(){
+  /**
+    for loop:
+    for each transaction get productname and seller and buyerName
+    -> write to transaction
+
+    **/
   }
 
 

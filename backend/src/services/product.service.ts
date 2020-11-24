@@ -179,6 +179,18 @@ export class ProductService {
             };
         }
 
+        if (searchParameters.isRentable === true || searchParameters.isRentable === false) {
+            where.isRentable = {
+                [Op.eq]: searchParameters.isRentable
+            };
+        }
+
+        if (searchParameters.isService === true || searchParameters.isService === false) {
+            where.isService = {
+                [Op.eq]: searchParameters.isService
+            };
+        }
+
         return Product.findAll({
             where: where
         }).catch(err => Promise.reject({message: err}));

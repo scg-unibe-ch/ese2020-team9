@@ -47,6 +47,7 @@ import { MatExpansionModule } from "@angular/material/expansion";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatSliderModule } from "@angular/material/slider";
 import { UserComponent } from "./components/user/user.component";
+import { LeaderBoardComponent } from './components/leaderboard/leaderboard.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { UserComponent } from "./components/user/user.component";
     FilterComponent,
     SearchBarComponent,
     UserComponent,
+    LeaderBoardComponent,
   ],
   imports: [
     BrowserModule,

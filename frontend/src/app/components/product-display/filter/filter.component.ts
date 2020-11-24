@@ -135,43 +135,6 @@ export class FilterComponent implements OnInit {
   }
 
 
-  getData(): Observable <any> {
-
-
-      if (this.addressPin == null){
-                  let message = "Please enter a zipcode";
-                  let action = "Ok";
-                  this.openSnackBar(message, action);
-                  return;
-              }
-      if (this.value == "0"){
-          let message = "Radius can not be Zero.";
-          let action = "";
-          this.openSnackBar(message, action);
-          return;
-      }
-      var url = new URL("https://app.zipcodebase.com/api/v1/radius"),
-          params = {code: this.addressPin,
-                                        radius: this.value,
-                                        country: "CH",
-                                        apikey: '4bc7d070-229b-11eb-8bf2-6be81465cc4d'}
-      Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
-
-      return from(
-
-        fetch(
-          url // the url you are trying to access
-          ,{
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            method: 'GET',
-            mode: 'no-cors' // avoid cross origin error
-          }
-        ));
-    }
-
-
   openSnackBar(message: string, action: string) {
         this._snackBar.open(message, action, {
           duration: 3000

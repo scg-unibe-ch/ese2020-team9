@@ -157,7 +157,7 @@ export class ProductService {
 
         if (searchParameters.delivery === true || searchParameters.delivery === false) {
             where.productDelivery = {
-                [Op.is]: searchParameters.delivery
+                [Op.eq]: searchParameters.delivery
             };
         }
 
@@ -169,7 +169,7 @@ export class ProductService {
 
         if (searchParameters.available === true || searchParameters.available === false) {
             where.isAvailable = {
-                [Op.is]: searchParameters.available
+                [Op.eq]: searchParameters.available
             };
         }
 

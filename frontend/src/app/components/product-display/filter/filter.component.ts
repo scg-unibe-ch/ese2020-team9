@@ -35,6 +35,7 @@ export class FilterComponent implements OnInit {
   addressPin: any;
   value: string;
   addressCity: string;
+  pinList: any;
 
   constructor(private _snackBar: MatSnackBar, private router: Router, private route: ActivatedRoute, private httpClient: HttpClient) {
   }
@@ -126,8 +127,15 @@ export class FilterComponent implements OnInit {
               apikey: '4bc7d070-229b-11eb-8bf2-6be81465cc4d'
         };
         if (this.addressPin.length == 4){this.httpClient.get('https://app.zipcodebase.com/api/v1/radius', {params}).subscribe((res: any) => {
-
+              console.log (res.results.length)
               console.log(res.results, "getPinsInRadius")
+              this.pinList = res.results
+
+              for (let i = 0; i < res.results.length; i++) {
+
+                console.log ("Result" + i + "   " + res.results[i].code + "   " + res.results[i].city) + res.results[i].distance + " km  " ;
+              }
+
 
           }, (error: any) => {
           });

@@ -42,7 +42,6 @@ export class SoldproductsComponent implements OnInit {
   sell(transactionId: number){
    this.httpClient.put(environment.endpointURL + 'transaction/confirm/' + transactionId, {}).subscribe((res: any) => {
 
-        //navigates to productItem
         let message = "You sold the product"
         let action = "OK";
         this.openSnackBar(message, action);
@@ -58,7 +57,6 @@ export class SoldproductsComponent implements OnInit {
    decline(transactionId: number){
       this.httpClient.put(environment.endpointURL + 'transaction/decline/' + transactionId, {}).subscribe((res: any) => {
 
-           //navigates to productItem
            let message = "You declined the transaction"
            let action = "OK";
            this.openSnackBar(message, action);

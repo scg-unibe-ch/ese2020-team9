@@ -38,15 +38,10 @@ export class ProductFormComponent implements OnInit {
   product: ProductItem;
   id: any;
   add: boolean;
-  selectedFiles: FileList;
-  progressInfos = [];
-  fileInfos: Observable<any>;
-
-  selectedFile: File;
 
   imageSelected: boolean;
   imageName: string;
-  fileName: string;
+  selectedFile: File;
 
   constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private _ngZone: NgZone, private productService: ProductService, private route: ActivatedRoute, private location: Location) { }
 
@@ -173,32 +168,25 @@ export class ProductFormComponent implements OnInit {
 
 
   onFileChanged(event) {
-      this.selectedFile = event.target.files[0]
-      this.imageName =event.target.files[0].name;
-  }
-
-
-
-
-
-  selectFiles(event) {
-    this.progressInfos = [];
+    this.selectedFile = event.target.files[0]
     this.imageSelected = true;
-    this.selectedFiles = event.target.files;
-    for (let i = 0; i < this.selectedFiles.length; i++) {
-              this.getName(i, this.selectedFiles[i]);
-            }
+    this.imageName = event.target.files[0].name
+
+
   }
 
-  getName(idx, file){
-      this.progressInfos[idx] = { fileName: file.name };
-  }
 
-  onUpload() {
-        for (let i = 0; i < this.selectedFiles.length; i++) {
-              //
-          }
-    }
+ onUpload() {
+   const uploadData = new FormData();
+   uploadData.append('myFile', this.selectedFile, this.selectedFile.name);
+   this.httpClient.post(environment.endpointURL + 'products/images/upload', uploadData, {
+     reportProgress: true,
+     observe: 'events'
+   })
+     .subscribe(event => {
+       console.log(event); // handle event here
+     });
+ }
 
 
 }

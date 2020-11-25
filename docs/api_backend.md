@@ -521,7 +521,6 @@ Adds a new Product to the system.
         "productId": "number",
         "productName": "string",
         "productDescription": "string",
-        "productImage": "String",
         "productPrice": "number",
         "productCategory": "string",
         "productLocation": "string",
@@ -584,7 +583,6 @@ The Response body delivers a list of products that match the keyword and the fil
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "String",
             "productLocation": "string",
@@ -604,7 +602,6 @@ The Response body delivers a list of products that match the keyword and the fil
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "String",
             "productLocation": "string",
@@ -626,6 +623,47 @@ The Response body delivers a list of products that match the keyword and the fil
     ```
     
     </details>
+
+### POST on `"/products/images/upload/:id"`
+
+Adds a new Image to the Product with the given productId. 
+Requires the Authorization Header on the Request with a valid token from the User the product belongs to.
+Accepts Images in the format .png, .jpg and .jpeg, type should be "image/*". Images are sent as formdata (input tag -> name="image").
+
+- **Details**
+    
+    <details>
+     
+     <summary>Response (STATUS 200)</summary>
+
+    ```json
+    {
+        "message": "Successfully uploaded Image with id <imageId>!"
+    }
+    ```
+    </details>
+
+    <details>
+     
+     <summary>Response (STATUS 400) if Image has wrong format</summary>
+
+    ```json
+    {
+        "message": "Only .png, .jpg and .jpeg format allowed!"
+    }
+    ```
+    </details>
+
+    <details>
+     
+     <summary>Response (STATUS 403) if Product does not belong to User</summary>
+
+    ```json
+    {
+        "message": "Product does not belong to User"
+    }
+    ```
+    </details>
     
 ### PUT on `"/products/:id"`
 
@@ -642,7 +680,6 @@ Changes the product with the id set as parameter in the url. Product will be upd
         "productId": "number",
         "productName": "string",
         "productDescription": "string",
-        "productImage": "String",
         "productPrice": "number",
         "productCategory": "string",
         "productLocation": "string",
@@ -683,6 +720,23 @@ Deletes the product with the id indicated in the url.
     ```json
     {
         "message": "Product successfully deleted!"
+    }
+    ```
+    </details>
+
+### DELETE on `"/products/images/:imageId"`
+
+Deletes the image with the id indicated in the url.
+
+- **Details**
+
+     <details>
+     
+     <summary>Response (STATUS 200)</summary>
+
+    ```json
+    {
+        "message": "Image successfully deleted!"
     }
     ```
     </details>
@@ -731,7 +785,6 @@ Gets all products in the system.
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "string",
             "productLocation": "string",
@@ -749,7 +802,6 @@ Gets all products in the system.
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "string",
             "productLocation": "string",
@@ -784,7 +836,6 @@ Gets all products, which have status approved.
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "string",
             "productLocation": "string",
@@ -802,7 +853,6 @@ Gets all products, which have status approved.
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "string",
             "productLocation": "string",
@@ -837,7 +887,6 @@ Gets all products, which have status not approved.
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "string",
             "productLocation": "string",
@@ -855,7 +904,6 @@ Gets all products, which have status not approved.
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "string",
             "productLocation": "string",
@@ -921,7 +969,6 @@ Gets all products belonging to a certain category, indicated with the parameter 
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "food",
             "productLocation": "string",
@@ -939,7 +986,6 @@ Gets all products belonging to a certain category, indicated with the parameter 
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "food",
             "productLocation": "string",
@@ -974,7 +1020,6 @@ Gets all products belonging to the user with the id indicated in the url.
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "String",
             "productLocation": "string",
@@ -992,7 +1037,6 @@ Gets all products belonging to the user with the id indicated in the url.
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "String",
             "productLocation": "string",
@@ -1027,7 +1071,6 @@ Gets all bought products of the user with the id indicated in the url.
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "String",
             "productLocation": "string",
@@ -1045,7 +1088,6 @@ Gets all bought products of the user with the id indicated in the url.
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "String",
             "productLocation": "string",
@@ -1080,7 +1122,6 @@ Gets all sold products of the user with the id indicated in the url.
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "String",
             "productLocation": "string",
@@ -1098,7 +1139,6 @@ Gets all sold products of the user with the id indicated in the url.
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "String",
             "productLocation": "string",
@@ -1132,7 +1172,6 @@ Gets a single product with the id indicated in the url.
         "productId": "5",
         "productName": "string",
         "productDescription": "string",
-        "productImage": "String",
         "productPrice": "number",
         "productCategory": "string",
         "productLocation": "string",
@@ -1149,6 +1188,34 @@ Gets a single product with the id indicated in the url.
     ```
     
     </details>
+
+### GET on `"/products/images/getIds/:id"` 
+
+Gets all imageIds of a a product with the product id indicated in the url.
+
+- **Details**
+
+     <details>
+     
+     <summary>Response (STATUS 200)</summary>
+     
+    ```json
+    [
+        {   
+            "imageId": "number"
+        }, 
+        {   
+            "imageId": "number"
+        },
+        ...
+    ]
+    ```
+    </details>
+
+### GET on `"/products/images/getById/:id"` 
+
+Gets the image with the id indicated in the url.
+Returns the Image in the format that it has been saved in (either .png, .jpg or .jpeg).
 
 ## Transaction API
 

@@ -40,7 +40,7 @@ describe('ProductService Tests', () => {
         sellDate: null,
         isApproved: false,
         isService: false,
-        isRentable: null,
+        isRentable: false,
         isAvailable: true,
         userId: 1,
         userReview: null,
@@ -59,7 +59,7 @@ describe('ProductService Tests', () => {
         sellDate: null,
         isApproved: false,
         isService: false,
-        isRentable: null,
+        isRentable: false,
         isAvailable: true,
         userId: 1,
         userReview: null,
@@ -78,7 +78,7 @@ describe('ProductService Tests', () => {
         sellDate: null,
         isApproved: false,
         isService: false,
-        isRentable: null,
+        isRentable: false,
         isAvailable: true,
         userId: 1,
         userReview: null,
@@ -97,7 +97,7 @@ describe('ProductService Tests', () => {
         sellDate: null,
         isApproved: true,
         isService: false,
-        isRentable: null,
+        isRentable: true,
         isAvailable: true,
         userId: 1,
         userReview: null,
@@ -116,7 +116,7 @@ describe('ProductService Tests', () => {
         sellDate: null,
         isApproved: true,
         isService: false,
-        isRentable: null,
+        isRentable: true,
         isAvailable: false,
         userId: 1,
         userReview: null,
@@ -135,7 +135,7 @@ describe('ProductService Tests', () => {
         sellDate: null,
         isApproved: true,
         isService: true,
-        isRentable: null,
+        isRentable: false,
         isAvailable: true,
         userId: 1,
         userReview: null,
@@ -155,7 +155,7 @@ describe('ProductService Tests', () => {
         sellDate: null,
         isApproved: false,
         isService: false,
-        isRentable: null,
+        isRentable: false,
         isAvailable: true,
         userId: 1,
         userReview: null,
@@ -510,6 +510,51 @@ describe('ProductService Tests', () => {
                 done();
                 });
             });
+        it('should successfully search products that are rentable', function(done){
+            const request: SearchRequest = {
+                isRentable: true
+            };
+            testedProductService.searchProduct(request).then(product => {
+                expect(product[0].productId).to.be.eq(3);
+                expect(product[1].productId).to.be.eq(4);
+                expect(product.length).to.be.eq(2);
+                done();
+                });
+            });
+        it('should successfully search products that are not rentable', function(done){
+            const request: SearchRequest = {
+                isRentable: false
+            };
+            testedProductService.searchProduct(request).then(product => {
+                expect(product[0].productId).to.be.eq(1);
+                expect(product[1].productId).to.be.eq(5);
+                expect(product.length).to.be.eq(2);
+                done();
+                });
+            });    
+        it('should successfully search products that are services', function(done){
+            const request: SearchRequest = {
+                 isService: true
+            };
+            testedProductService.searchProduct(request).then(product => {
+                expect(product[0].productId).to.be.eq(5);
+                expect(product.length).to.be.eq(1);
+                done();
+                });
+            });  
+        it('should successfully search products that are not services', function(done){
+            const request: SearchRequest = {
+                 isService: false
+            };
+            testedProductService.searchProduct(request).then(product => {
+                expect(product[0].productId).to.be.eq(1);
+                expect(product[1].productId).to.be.eq(3);
+                expect(product[2].productId).to.be.eq(4);
+                expect(product.length).to.be.eq(3);
+                done();
+                });
+            });                             
+                              
         it('should successfully search products that are in the category \"Miscellaneous\"', function(done){
             const request: SearchRequest = {
                 category: 'Miscellaneous'

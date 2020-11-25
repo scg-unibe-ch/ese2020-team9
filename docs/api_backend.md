@@ -562,12 +562,14 @@ The Response body delivers a list of products that match the keyword and the fil
     ```json
     {   
         "name": "string",
+        "location": "string",
+        "category": "string",
         "priceMin": "number",
         "priceMax": "number",
         "delivery": "boolean",
-        "location": "string",
-        "available": "string",
-        "category": "string"
+        "available": "boolean",
+        "isRentable": "boolean",
+        "isService": "boolean"
     }
     ```
     </details>

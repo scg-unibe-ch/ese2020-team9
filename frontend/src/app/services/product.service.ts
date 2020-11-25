@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
-import {BehaviorSubject, Observable, Subject} from "rxjs";
-import {ProductItem} from "../models/product-item.model";
-import {Transaction} from "../models/transaction.model";
+import { ProductItem } from "../models/product-item.model";
 
 
 @Injectable({
@@ -13,6 +11,29 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient) { }
 
+  /** post requests **/
+  addProduct() {
+    return this.httpClient.post(environment.endpointURL + 'products/',   ((product: ProductItem) => {
+          product.productName;
+      }));
+  }
+
+  approveProduct(productId: number){
+    return this.httpClient.put(environment.endpointURL + 'products/approve/' + productId,{});
+  }
+
+  /** put requests **/
+  editProduct(productId: number){
+    return this.httpClient.put(environment.endpointURL + 'products/' + productId, {
+      ProductItem
+    });
+  }
+  /** delete requests **/
+  deleteProduct(productId: number){
+    return this.httpClient.delete(environment.endpointURL + 'products/' + productId, {});
+  }
+
+  /** get requests **/
   //get all Products
   getAll(){
     return this.httpClient.get(environment.endpointURL + 'products');
@@ -51,7 +72,7 @@ export class ProductService {
   }
 
  //get products a user sold
- getSoldProducts(userId: number) {
+  getSoldProducts(userId: number) {
    return this.httpClient.get(environment.endpointURL + 'transaction/sell/' + userId);
  }
 

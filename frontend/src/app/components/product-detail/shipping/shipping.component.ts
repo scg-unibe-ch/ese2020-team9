@@ -7,6 +7,7 @@ import {ProductService} from "../../../services/product.service";
 import {environment} from "../../../../environments/environment";
 import {ActivatedRoute} from "@angular/router";
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { Location } from "@angular/common";
 import {MatTabsModule} from '@angular/material/tabs';
 
 @Component({
@@ -60,7 +61,7 @@ export class ShippingComponent implements OnInit {
   product: ProductItem;
   id: any;
 
-  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
+  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute, private location: Location) { }
 
   ngOnInit(): void {
     this.buyerId = this.userService.getUserId();
@@ -183,5 +184,9 @@ export class ShippingComponent implements OnInit {
           this._snackBar.open(message, action, {
             duration: 3000
           });
-        }
+  }
+
+  goBack(): void {
+    this.location.back();
+  }
 }

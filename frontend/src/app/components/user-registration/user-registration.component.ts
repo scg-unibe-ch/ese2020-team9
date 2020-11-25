@@ -5,10 +5,7 @@ import {Router} from "@angular/router";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { ActivatedRoute} from "@angular/router";
 import {UserService} from "../../services/user.service";
-import {MatStepperModule} from '@angular/material/stepper';
-import { FormBuilder } from '@angular/forms';
-import { FormGroup } from '@angular/forms';
-import { Validators } from '@angular/forms';
+import { Location } from "@angular/common";
 
 
 @Component({
@@ -46,7 +43,7 @@ export class UserRegistrationComponent implements OnInit {
 
 
 
-  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
+  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private route: ActivatedRoute, private location: Location) { }
 
   ngOnInit() {
       this.userId = this.userService.getUserId();
@@ -151,6 +148,7 @@ export class UserRegistrationComponent implements OnInit {
   }
 
   confirmPassword(cpw):boolean{
+    if (this.password == cpw)
        return (this.password == cpw ? true : false);
    }
 
@@ -245,7 +243,7 @@ export class UserRegistrationComponent implements OnInit {
     let pw3 = this.passwordHasNumber(this.password);
     let pw4 = this.passwordContainsMixedLetters(this.password);
     let pw5 = this.passwordContainsSpecialChar(this.password);
-    let cpw = this.evaluate(this.confPassword);
+    let cpw = this.confirmPassword(this.confPassword);
     if (em && un && cpw && pw1 && pw2 && pw3 && pw4 && pw5){ return true}
         else {
           return false
@@ -268,5 +266,9 @@ export class UserRegistrationComponent implements OnInit {
         duration: 3000
       });
     }
+
+  goBack(): void {
+    this.location.back();
+  }
 
  }

@@ -1,6 +1,6 @@
 
 <mat-card>
-  <mat-list-item *ngFor="let user of users" >
+  <mat-list-item *ngFor="let user of userList" >
   <app-user
         [user]="user"
         (update)="onUserUpdate($event)"

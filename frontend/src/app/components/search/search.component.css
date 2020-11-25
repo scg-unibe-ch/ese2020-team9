@@ -16,6 +16,11 @@
   padding: 0px;
 }
 
+::ng-deep.mat-form-field .mat-form-field-label {
+  /*change color of underline*/
+  color: #F0F0F0;
+}
+
 mat-checkbox{
   color: #F0F0F0;
   font-size: 15px;

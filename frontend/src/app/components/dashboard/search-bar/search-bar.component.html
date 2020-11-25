@@ -1,13 +1,13 @@
 <div class="searchBar">
   <input type="text" [(ngModel)]="name" placeholder="Search" name="name">
   <button mat-button class="searchButton" [routerLink]="['/s']" [queryParams]="{n: name}"><mat-icon>search</mat-icon>Search</button>
-  <button mat-button class="clearIcon" *ngIf="name !== ''" matSuffix mat-icon-button (click)="clearName()"><mat-icon>clear</mat-icon></button>
+  <button mat-button class="clearIcon" *ngIf="name !== ''" matSuffix mat-icon-button (click)="name = ''"><mat-icon>clear</mat-icon></button>
 </div>
 
 <div class="catContainer" >
   <div class="bigDisplay" *ngFor="let category of categories">
     <button class="categoryButton" [routerLink]="['/s']" [queryParams]="{c: category.value}">
-      {{category.viewValue}}
+      {{category.value}}
     </button>
   </div>
 

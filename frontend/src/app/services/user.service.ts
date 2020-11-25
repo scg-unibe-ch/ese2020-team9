@@ -20,6 +20,7 @@ export class UserService {
   public isUserLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public isUserAdmin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public isUserName: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  public actualWallet: BehaviorSubject<number> = new BehaviorSubject<number>(this.userWallet);
 
   constructor(private httpClient: HttpClient) { }
 

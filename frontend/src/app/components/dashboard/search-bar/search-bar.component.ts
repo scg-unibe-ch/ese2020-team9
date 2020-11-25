@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSelect} from "@angular/material/select";
 import {CategoryList} from "../../../mock-category-list";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-search-bar',
@@ -14,6 +15,7 @@ export class SearchBarComponent implements OnInit {
 
   categories = CategoryList;
   name = '';
+  subscription: Subscription;
 
   constructor() {
   }
@@ -22,7 +24,7 @@ export class SearchBarComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.matSelect.openedChange.subscribe(opened => {
+    this.subscription = this.matSelect.openedChange.subscribe(opened => {
       if (opened) {
         this.matSelect.panel.nativeElement.addEventListener('mouseleave', () => {
           this.matSelect.close();
@@ -31,8 +33,7 @@ export class SearchBarComponent implements OnInit {
     })
   }
 
-  clearName(){
-    return this.name = '';
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
-
 }

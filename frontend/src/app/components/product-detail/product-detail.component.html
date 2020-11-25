@@ -39,7 +39,7 @@
     {{addressCity}}<br>
     {{addressCountry}}<br>
 
-    <button mat-flat-button color="warn"  [routerLink]="['/shipping', productId]" routerLinkActive="active" [disabled]="checkCash() && !isAvailable">Buy</button>
+    <button mat-flat-button color="warn"  [routerLink]="['/shipping', productId]" routerLinkActive="active" [disabled]="checkCash() || !isAvailable || !isUserLoggedIn">Buy</button>
 
 
   </mat-card>

@@ -6,6 +6,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import { ActivatedRoute} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import { Location } from "@angular/common";
+import {User} from "../../models/user.model";
 
 
 @Component({
@@ -35,13 +36,8 @@ export class UserRegistrationComponent implements OnInit {
 
   edit: boolean;
   id: any;
-  userAuth = '';
   message ='';
   action = '';
-
-
-
-
 
   constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private route: ActivatedRoute, private location: Location) { }
 

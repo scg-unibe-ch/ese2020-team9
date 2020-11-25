@@ -9,6 +9,8 @@ import {ActivatedRoute} from "@angular/router";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { Location } from "@angular/common";
 import {MatTabsModule} from '@angular/material/tabs';
+import {Transaction} from "../../../models/transaction.model";
+import {TransactionService} from "../../../services/transaction.service";
 
 @Component({
   selector: 'app-shipping',
@@ -51,24 +53,30 @@ export class ShippingComponent implements OnInit {
   buyerLastName = '';
   buyerFirstName = '';
 
-
-
   otherAddressPin = '';
   otherAddressCity = '';
   otherAddressCountry = '';
   otherAddressStreet = '';
 
-  product: ProductItem;
-  id: any;
+  deliveryPin: any;
+  deliveryStreet = '';
+  deliveryCity = '';
+  deliveryCountry = '';
 
-  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute, private location: Location) { }
+  id: any;
+  isUserLoggedIn: boolean;
+  transaction: Transaction;
+
+  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute, private location: Location, private transactionService: TransactionService) { }
 
   ngOnInit(): void {
     this.buyerId = this.userService.getUserId();
     this.getBuyer();
     this.id = this.route.snapshot.paramMap.get('id');
-
     this.getProduct();
+    this.userService.isUserLoggedIn.subscribe(value => {
+      this.isUserLoggedIn = value;
+    });
 
   }
 
@@ -79,12 +87,12 @@ export class ShippingComponent implements OnInit {
 
 
   checkCountryCode(c:string):boolean{
-    let check = "CH"
+    let check = "CH";
     return (c==check ? true : false);
   }
 
   checkCash(){
-    return (this.buyerWallet >= this.productPrice ? false : true);
+    return (this.buyerWallet < this.productPrice);
   }
 
 
@@ -98,7 +106,6 @@ export class ShippingComponent implements OnInit {
          this.buyerAddressCity = instances.addressCity;
          this.buyerAddressCountry = instances.addressCountry;
          this.buyerWallet = instances.wallet;
-
 
        },(error: any) => {
          let action = "";
@@ -135,7 +142,6 @@ export class ShippingComponent implements OnInit {
 
 
   getSeller(sellerId: number){
-
     this.userService.getUser(this.sellerId).subscribe((instances: any) => {
           //this.sellerId = instances.userId;
           this.sellerName = instances.userName;
@@ -151,30 +157,63 @@ export class ShippingComponent implements OnInit {
   }
 
   //Initializes a new transaction
+
   buyProduct(): void {
-    this.httpClient.post(environment.endpointURL + 'transaction/', {
-      //transactionId : this.transactionId,
+    if(this.buyerAddressPin == '' && this.otherAddressPin !== ''){
+      this.deliveryPin = this.otherAddressPin;
+    } else if(this.buyerAddressPin !== '' && this.otherAddressPin == ''){
+      this.deliveryPin = this.buyerAddressPin;
+    } else {
+      this.deliveryPin = '';
+    }
+
+    if(this.buyerAddressStreet == '' && this.otherAddressStreet !== ''){
+      this.deliveryStreet = this.otherAddressStreet;
+    } else if(this.buyerAddressStreet !== '' && this.otherAddressStreet == ''){
+      this.deliveryStreet = this.buyerAddressStreet;
+    } else {
+      this.deliveryStreet = '';
+    }
+
+    if(this.buyerAddressCity == '' && this.otherAddressCity !== ''){
+      this.deliveryCity = this.otherAddressCity;
+    } else if(this.buyerAddressCity !== '' && this.otherAddressCity == ''){
+      this.deliveryCity = this.buyerAddressCity;
+    } else {
+      this.deliveryCity = '';
+    }
+    if(this.buyerAddressCountry == '' && this.otherAddressCountry!== ''){
+      this.deliveryCountry = this.otherAddressCountry;
+    } else if(this.buyerAddressCountry !== '' && this.otherAddressCountry == ''){
+      this.deliveryCountry = this.buyerAddressCountry;
+    } else {
+      this.deliveryCountry = '';
+    }
+
+    this.transaction = {
+      transactionId : null,
       productId: this.productId,
       userId: this.sellerId,
       buyerId: this.buyerId,
-      //transactionStatus: this.transactionStatus,
+      transactionStatus: null,
       deliveryFirstName: this.buyerFirstName,
       deliveryLastName: this.buyerLastName,
-      deliveryStreet: this.buyerAddressStreet,
-      deliveryPin: this.buyerAddressPin,
-      deliveryCity: this.buyerAddressCity,
-      deliveryCountry: this.buyerAddressCountry,
-    }).subscribe((res: any) => {
+      deliveryPin: this.deliveryPin,
+      deliveryStreet: this.deliveryStreet,
+      deliveryCity: this.deliveryCity,
+      deliveryCountry: this.deliveryCountry,
+    };
 
-      //navigates to productItem
+    this.transactionService.buyProduct(this.transaction).subscribe((res: any) => {
+      //navigates to user dashboard
       this.router.navigate(['/user']);
-      let message = "Seller has been contacted, please await approval of buy request"
-      let action = "OK";
+      let message = "Seller has been contacted, please await approval of buy request!";
+      let action = "X";
       this.openSnackBar(message, action);
 
     }, (error: any) => {
       let message = "An Error occurred!";
-      let action = "OK";
+      let action = "X";
       this.openSnackBar(message, action);
     });
 

@@ -44,7 +44,7 @@ export class AdminPanelComponent implements OnInit {
     });
   }
 
-  // user - UPDATE (upgrade to admin)
+  // user - upgrade to admin
   onUserUpdate(user: User): void{
     this.httpClient.put(environment.endpointURL + 'user/makeAdmin/' + user.userId, {
       admin: user.admin,
@@ -58,32 +58,32 @@ export class AdminPanelComponent implements OnInit {
     });
   }
 
-  approveProduct(productId: number){
-   this.httpClient.put(environment.endpointURL + 'products/approve/' + productId,{
-
-    }).subscribe((res: any)  => {
-            this.getProductList();
-             let message = "Product approved";
-             let action = "Ok";
-             this.openSnackBar(message, action);
-           }, (error: any) => {
-             let message = "Can not delete this Product";
-             let action = "";
-             this.openSnackBar(message, action);
-           });
+  approveProduct(product: ProductItem){
+    this.productService.approveProduct(product).subscribe((res: any)  => {
+      //removes product from productList
+      this.productList = this.productList.filter(item => item !== product);
+      let message = "Product successfully approved!";
+      let action = "X";
+      this.openSnackBar(message, action);
+    }, (error: any) => {
+      let message = "Can not approve this product!";
+      let action = "X";
+      this.openSnackBar(message, action);
+    });
   }
 
-  deleteProduct(){
-   this.productService.deleteProduct(this.productId).subscribe((res: any)  => {
-          this.getProductList();
-          let message = "Product deleted"
-          let action = "Ok"
-          this.openSnackBar(message, action);
-        }, (error: any) => {
-          let message = "Can not delete this Product"
-          let action = ""
-          this.openSnackBar(message, action);
-        });
+  deleteProduct(product: ProductItem): void {
+    this.productService.deleteProduct(product).subscribe((res: any)  => {
+      //removes product from productList
+      this.productList = this.productList.filter(item => item !== product);
+      let message = "Product successfully deleted!";
+      let action = "Ok";
+      this.openSnackBar(message, action);
+    }, (error: any) => {
+      let message = "Can not delete this product!";
+      let action = "";
+      this.openSnackBar(message, action);
+    });
   }
 
   openSnackBar(message: string, action: string) {

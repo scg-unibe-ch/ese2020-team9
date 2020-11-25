@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {MatSelect} from "@angular/material/select";
 import {CategoryList} from "../../mock-category-list";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-search',
@@ -15,16 +16,20 @@ export class SearchComponent implements OnInit {
 
   name = '';
   location = '';
+  category = '';
   priceMin = '';
   priceMax = '';
   delivery = '';
-  category = '';
+  isRentable ='';
+  isService = '';
 
   // mock category list
   categories = CategoryList;
 
   //hide Filter option
   clickFilter: boolean = false;
+
+  subscription: Subscription;
 
   constructor(private route: ActivatedRoute, private router: Router) { }
 
@@ -35,7 +40,7 @@ export class SearchComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.matSelect.openedChange.subscribe(opened => {
+    this.subscription = this.matSelect.openedChange.subscribe(opened => {
       if (opened) {
         this.matSelect.panel.nativeElement.addEventListener('mouseleave', () => {
           this.matSelect.close();
@@ -44,34 +49,8 @@ export class SearchComponent implements OnInit {
     })
   }
 
-  clearName(){
-    this.name = '';
-    this.navigateTo();
-  }
-
-  clearCategory(){
-    this.category = '';
-    this.navigateTo();
-  }
-
-  clearLocation(){
-    this.location = '';
-    this.navigateTo();
-  }
-
-  clearMinPrice(){
-    this.priceMin = '';
-    this.navigateTo();
-  }
-
-  clearMaxPrice(){
-    this.priceMax = '';
-    this.navigateTo();
-  }
-
-  clearDelivery(){
-    this.delivery = '';
-    this.navigateTo();
+  ngOnDestroy(){
+  this.subscription.unsubscribe();
   }
 
   clearFilter(){
@@ -80,6 +59,8 @@ export class SearchComponent implements OnInit {
     this.priceMin = '';
     this.priceMax = '';
     this.delivery = '';
+    this.isRentable = '';
+    this.isService = '';
     this.navigateTo();
   }
 
@@ -92,6 +73,8 @@ export class SearchComponent implements OnInit {
         min: this.priceMin,
         max: this.priceMax,
         d: this.delivery,
+        r: this.isRentable,
+        s: this.isService,
       }
     })
   }

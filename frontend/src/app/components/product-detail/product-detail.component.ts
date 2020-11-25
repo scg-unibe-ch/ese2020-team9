@@ -42,6 +42,7 @@ export class ProductDetailComponent implements OnInit {
 
   product: ProductItem;
   id: any;
+  isUserLoggedIn: boolean;
 
   constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService,private productService: ProductService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
 
@@ -49,7 +50,9 @@ export class ProductDetailComponent implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id');
     this.userWallet = this.userService.getUserWallet();
     this.getProduct();
-    //this.userId = this.userService.getUserId();
+    this.userService.isUserLoggedIn.subscribe(value => {
+      this.isUserLoggedIn = value;
+    });
   }
 
   getProduct(){
@@ -100,7 +103,7 @@ export class ProductDetailComponent implements OnInit {
 
   // Check to make sure User has enough Cash to buy product
  checkCash(){
-    return (this.userWallet >= this.productPrice);
+   return (this.userWallet < this.productPrice);
   }
 
 

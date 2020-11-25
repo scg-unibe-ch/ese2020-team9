@@ -1,6 +1,6 @@
 <div class="searchBar">
   <input type="text" [(ngModel)]="name" placeholder="Search" name="name">
-  <button class="clearIcon" mat-button *ngIf="name !== ''" matSuffix mat-icon-button (click)="clearName()"><mat-icon>clear</mat-icon></button>
+  <button class="clearIcon" mat-button *ngIf="name !== ''" matSuffix mat-icon-button (click)="name = ''; navigateTo()"><mat-icon>clear</mat-icon></button>
   <button mat-button class="searchButton" (click)="navigateTo()"><mat-icon>search</mat-icon>Search</button>
 </div>
 
@@ -16,15 +16,15 @@
       </mat-form-field>
       <mat-form-field>
         <input matInput [(ngModel)]="location" (keyup)="navigateTo()" placeholder="Location" name="location">
-        <button class="clearIcon" mat-button *ngIf="location !== ''" matSuffix mat-icon-button (click)="clearLocation()"><mat-icon>close</mat-icon></button>
+        <button class="clearIcon" mat-button *ngIf="location !== ''" matSuffix mat-icon-button (click)="location = ''; navigateTo()"><mat-icon>close</mat-icon></button>
       </mat-form-field>
       <mat-form-field>
         <input matInput class="priceInput" [(ngModel)]="priceMin" (keyup)="navigateTo()" placeholder="min Price">
-        <button class="clearIcon" mat-button *ngIf="priceMin !== ''" matSuffix mat-icon-button (click)="clearMinPrice()"><mat-icon>close</mat-icon></button>
+        <button class="clearIcon" mat-button *ngIf="priceMin !== ''" matSuffix mat-icon-button (click)="priceMin = ''; navigateTo()"><mat-icon>close</mat-icon></button>
       </mat-form-field>
       <mat-form-field>
         <input matInput class="priceInput" [(ngModel)]="priceMax" (keyup)="navigateTo()" placeholder="max Price">
-        <button class="clearIcon" mat-button *ngIf="priceMax !== ''" matSuffix mat-icon-button (click)="clearMaxPrice()"><mat-icon>close</mat-icon></button>
+        <button class="clearIcon" mat-button *ngIf="priceMax !== ''" matSuffix mat-icon-button (click)="priceMax = ''; navigateTo()"><mat-icon>close</mat-icon></button>
       </mat-form-field>
 
       <!-- other layout options for price input -->
@@ -59,6 +59,18 @@
     <div class="moreFilter" *ngIf="clickFilter">
       <mat-radio-group [(ngModel)]="delivery" color="#46FFFD">
         <a>Delivery:</a>
+        <mat-radio-button value="" (change)="navigateTo()">doesn't matter</mat-radio-button>
+        <mat-radio-button value="true" (change)="navigateTo()">possible</mat-radio-button>
+        <mat-radio-button value="false" (change)="navigateTo()">not possible</mat-radio-button>
+      </mat-radio-group>
+      <mat-radio-group [(ngModel)]="isRentable" color="#46FFFD">
+        <span>Rentable:</span>
+        <mat-radio-button value="" (change)="navigateTo()">doesn't matter</mat-radio-button>
+        <mat-radio-button value="true" (change)="navigateTo()">possible</mat-radio-button>
+        <mat-radio-button value="false" (change)="navigateTo()">not possible</mat-radio-button>
+      </mat-radio-group>
+      <mat-radio-group [(ngModel)]="isService" color="#46FFFD">
+        <span>Service:</span>
         <mat-radio-button value="" (change)="navigateTo()">doesn't matter</mat-radio-button>
         <mat-radio-button value="true" (change)="navigateTo()">possible</mat-radio-button>
         <mat-radio-button value="false" (change)="navigateTo()">not possible</mat-radio-button>
@@ -99,6 +111,18 @@
         <mat-radio-button value="true" (change)="navigateTo()">possible</mat-radio-button>
         <mat-radio-button value="false" (change)="navigateTo()">not possible</mat-radio-button>
       </mat-radio-group>
+      <mat-radio-group [(ngModel)]="isRentable" class="smRadioGroup" color="#46FFFD">
+        <span>Rentable:</span>
+        <mat-radio-button value="" (change)="navigateTo()">doesn't matter</mat-radio-button>
+        <mat-radio-button value="true" (change)="navigateTo()">possible</mat-radio-button>
+        <mat-radio-button value="false" (change)="navigateTo()">not possible</mat-radio-button>
+      </mat-radio-group>
+      <mat-radio-group [(ngModel)]="isService" class="smRadioGroup" color="#46FFFD">
+        <span>Service:</span>
+        <mat-radio-button value="" (change)="navigateTo()">doesn't matter</mat-radio-button>
+        <mat-radio-button value="true" (change)="navigateTo()">possible</mat-radio-button>
+        <mat-radio-button value="false" (change)="navigateTo()">not possible</mat-radio-button>
+      </mat-radio-group>
       <!-- alternative option -->
       <!--<mat-list>
         <mat-list-item>
@@ -115,19 +139,25 @@
 <div class="filterChips">
   <mat-chip-list>
     <mat-chip *ngIf="category">{{category}}
-      <button class="clearIcon" matSuffix mat-icon-button (click)="clearCategory()"><mat-icon>close</mat-icon></button>
+      <button class="clearIcon" matSuffix mat-icon-button (click)="category = ''; navigateTo()"><mat-icon>close</mat-icon></button>
     </mat-chip>
     <mat-chip *ngIf="location">{{location}}
-      <button class="clearIcon" matSuffix mat-icon-button (click)="clearLocation()"><mat-icon>close</mat-icon></button>
+      <button class="clearIcon" matSuffix mat-icon-button (click)="location = ''; navigateTo()"><mat-icon>close</mat-icon></button>
     </mat-chip>
     <mat-chip *ngIf="priceMin">min Price: {{priceMin}} CHF
-      <button class="clearIcon" matSuffix mat-icon-button (click)="clearMinPrice()"><mat-icon>close</mat-icon></button>
+      <button class="clearIcon" matSuffix mat-icon-button (click)="priceMin = ''; navigateTo()"><mat-icon>close</mat-icon></button>
     </mat-chip>
     <mat-chip *ngIf="priceMax">max Price: {{priceMax}} CHF
-      <button class="clearIcon" matSuffix mat-icon-button (click)="clearMaxPrice()"><mat-icon>close</mat-icon></button>
+      <button class="clearIcon" matSuffix mat-icon-button (click)="priceMax = ''; navigateTo()"><mat-icon>close</mat-icon></button>
     </mat-chip>
     <mat-chip *ngIf="delivery">Delivery: {{delivery}}
-      <button class="clearIcon" matSuffix mat-icon-button (click)="clearDelivery()"><mat-icon>close</mat-icon></button>
+      <button class="clearIcon" matSuffix mat-icon-button (click)="delivery = ''; navigateTo()"><mat-icon>close</mat-icon></button>
+    </mat-chip>
+    <mat-chip *ngIf="isRentable">Rentable: {{isRentable}}
+      <button class="clearIcon" matSuffix mat-icon-button (click)="isRentable = ''; navigateTo()"><mat-icon>close</mat-icon></button>
+    </mat-chip>
+    <mat-chip *ngIf="isService">Service: {{isService}}
+      <button class="clearIcon" matSuffix mat-icon-button (click)="isService = ''; navigateTo()"><mat-icon>close</mat-icon></button>
     </mat-chip>
   </mat-chip-list>
 </div>

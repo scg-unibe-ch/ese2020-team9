@@ -126,7 +126,7 @@ export class FilterComponent implements OnInit {
               country: "CH",
               apikey: '4bc7d070-229b-11eb-8bf2-6be81465cc4d'
         };
-        if (this.addressPin.length == 4){this.httpClient.get('https://app.zipcodebase.com/api/v1/radius', {params}).subscribe((res: any) => {
+        if (this.addressPin.length == 4){this.httpClient.get('http://localhost:4200/api/v1/radius', {params}).subscribe((res: any) => {
               console.log (res.results.length)
               console.log(res.results, "getPinsInRadius")
               this.pinList = res.results

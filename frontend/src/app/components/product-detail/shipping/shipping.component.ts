@@ -217,7 +217,7 @@ export class ShippingComponent implements OnInit {
             country: "CH",
             apikey: '4bc7d070-229b-11eb-8bf2-6be81465cc4d'
       };
-      if (this.otherAddressPin.length == 4){this.httpClient.get('https://app.zipcodebase.com/api/v1/search', {params}).subscribe((res: any) => {
+      if (this.otherAddressPin.length == 4){this.httpClient.get('http://localhost:4200/api/v1/search', {params}).subscribe((res: any) => {
           if (res != null) {
               this.otherAddressCity = res.results[this.otherAddressPin][0].city;
               console.log(res.results[this.otherAddressPin][0].city)

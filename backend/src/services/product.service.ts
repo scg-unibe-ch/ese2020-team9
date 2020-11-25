@@ -1,5 +1,9 @@
+import { promises } from 'fs';
+import { Multer } from 'multer';
+import { ImageAttributes, ImageGetAttributes, ProductImage } from '../models/productimage.model';
 import {  Product, ProductAttributes } from './../models/product.model';
 import {SearchRequest} from './../models/search.model';
+import sequelize from 'sequelize';
 
 export class ProductService {
 
@@ -183,6 +187,44 @@ export class ProductService {
             where: where
         }).catch(err => Promise.reject({message: err}));
     }
-}
 
+    public uploadImage(imageParameters: ImageGetAttributes, productId: number): Promise<ProductImage> {
+        const fs = require('fs');
+        const imageData = fs.readFileSync(imageParameters.path);
+
+        return ProductImage.create({
+        imageType: imageParameters.filename.split('.')[1],
+        imageName: imageParameters.filename,
+        data: imageData,
+        productId: productId
+
+        }).then(image => {
+            fs.writeFileSync(imageParameters.path, image.data);
+            fs.unlinkSync(imageParameters.path);
+            return image;
+        }).catch(err => Promise.reject(err));
+    }
+
+    public getImageIds(productId: number): Promise<Array<any>> {
+        return ProductImage.findAll({
+            attributes: ['imageId'],
+            where: { productId: productId }
+        });
+    }
+
+    public getImageById(imageId: number): Promise<string> {
+        const fs = require('fs');
+        return ProductImage.findByPk(imageId).then(image => {
+            fs.writeFileSync('temp/' + image.imageName, image.data);
+            return image.imageName;
+        }).catch(() => Promise.reject({message: 'This image does not exist'}));
+    }
+
+    public deleteImage(id: number): Promise<ProductImage> {
+        return ProductImage.findByPk(id)
+        .then(isFound =>  isFound.destroy()
+            .then(() => Promise.resolve(isFound))
+            .catch(err => Promise.reject(err)));
+    }
+}
 

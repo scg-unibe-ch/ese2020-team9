@@ -51,11 +51,33 @@ export class UserService {
     return this.userWallet = localStorage.getItem('userWallet')
   }
 
+  /** get requests **/
   getUser(id: number){
     return this.httpClient.get(environment.endpointURL + 'user/' + id);
   }
 
   getUserList(){
     return this.httpClient.get(environment.endpointURL + 'user');
+  }
+
+  /** post requests **/
+  registration(user: User) {
+    this.httpClient.post(environment.endpointURL + 'user/register', user).pipe(map((res: any)=>{
+      // Set user data in local storage
+      localStorage.setItem('userToken', res.token);
+      localStorage.setItem('userId', res.userId);
+      localStorage.setItem('userName', res.userName);
+      localStorage.setItem('admin', res.admin);
+      localStorage.setItem('userWallet', res.wallet);
+    }));
+  }
+
+  saveUser(user: User) {
+    this.httpClient.post(environment.endpointURL + 'user/edit/', user).pipe(map((res: any) => {
+      localStorage.setItem('userToken', res.token);
+      localStorage.setItem('userId', res.userId);
+      localStorage.setItem('userName', res.userName);
+      localStorage.setItem('admin', res.admin);
+    }));
   }
 }

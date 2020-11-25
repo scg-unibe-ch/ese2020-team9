@@ -12,6 +12,9 @@ export class Transaction {
       public deliveryPin: number,
       public deliveryCity: string,
       public deliveryCountry: string,
+      public product: string,
+      public seller: string,
+      public buyer: string,
 
     ) {}
 

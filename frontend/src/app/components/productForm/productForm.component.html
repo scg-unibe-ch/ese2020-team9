@@ -21,12 +21,12 @@
     </mat-form-field>
     <br>
 
-
+    <p>Please add a Photo(.png, .jpg, .jpeg):</p>
     <input
       style="display: none"
       type="file" (change)="onFileChanged($event)"
       #fileInput>
-    <button mat-flat-button class="button_standard" (click)="fileInput.click()">Select File (.png, .jpg, .jpeg)</button>
+    <button mat-flat-button class="button_standard" (click)="fileInput.click()">Select File </button>
     <button mat-flat-button class="button_standard" (click)="onUpload()">Upload</button>
 
     <div *ngIf="imageSelected">

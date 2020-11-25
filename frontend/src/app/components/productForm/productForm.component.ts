@@ -178,7 +178,7 @@ export class ProductFormComponent implements OnInit {
 
  onUpload() {
    const uploadData = new FormData();
-   uploadData.append('myFile', this.selectedFile, this.selectedFile.name);
+   uploadData.append('image', this.selectedFile, this.selectedFile.name);
    this.httpClient.post(environment.endpointURL + 'products/images/upload', uploadData, {
      reportProgress: true,
      observe: 'events'

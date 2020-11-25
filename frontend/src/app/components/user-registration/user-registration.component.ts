@@ -151,6 +151,7 @@ export class UserRegistrationComponent implements OnInit {
   }
 
   confirmPassword(cpw):boolean{
+       console.log((this.password == cpw ? true : false))
        return (this.password == cpw ? true : false);
    }
 
@@ -245,7 +246,7 @@ export class UserRegistrationComponent implements OnInit {
     let pw3 = this.passwordHasNumber(this.password);
     let pw4 = this.passwordContainsMixedLetters(this.password);
     let pw5 = this.passwordContainsSpecialChar(this.password);
-    let cpw = this.evaluate(this.confPassword);
+    let cpw = this.confirmPassword(this.confPassword);
     if (em && un && cpw && pw1 && pw2 && pw3 && pw4 && pw5){ return true}
         else {
           return false

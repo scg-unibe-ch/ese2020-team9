@@ -159,6 +159,7 @@ export class ShippingComponent implements OnInit {
       //transactionStatus: this.transactionStatus,
       deliveryFirstName: this.buyerFirstName,
       deliveryLastName: this.buyerLastName,
+
       deliveryStreet: this.buyerAddressStreet,
       deliveryPin: this.buyerAddressPin,
       deliveryCity: this.buyerAddressCity,
@@ -178,6 +179,39 @@ export class ShippingComponent implements OnInit {
     });
 
   }
+
+   //Initializes a new transaction
+    otherAddressBuyProduct(): void {
+      this.httpClient.post(environment.endpointURL + 'transaction/', {
+        //transactionId : this.transactionId,
+        productId: this.productId,
+        userId: this.sellerId,
+        buyerId: this.buyerId,
+        //transactionStatus: this.transactionStatus,
+        deliveryFirstName: this.buyerFirstName,
+        deliveryLastName: this.buyerLastName,
+
+        deliveryStreet: this.otherAddressStreet,
+        deliveryPin: this.otherAddressPin,
+        deliveryCity: this.otherAddressCity,
+        deliveryCountry: this.otherAddressCountry,
+      }).subscribe((res: any) => {
+
+        //navigates to productItem
+        this.router.navigate(['/user']);
+        let message = "Seller has been contacted, please await approval of buy request"
+        let action = "OK";
+        this.openSnackBar(message, action);
+
+      }, (error: any) => {
+        let message = "An Error occurred!";
+        let action = "OK";
+        this.openSnackBar(message, action);
+      });
+
+    }
+
+
 
   openSnackBar(message: string, action: string) {
           this._snackBar.open(message, action, {

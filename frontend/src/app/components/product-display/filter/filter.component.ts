@@ -31,11 +31,12 @@ export class FilterComponent implements OnInit {
   //hide Filter option
   clickFilter: boolean = false;
 
-  distance: number;
+  distance: string;
   addressPin: any;
   value: string;
   addressCity: string;
   pinList: any;
+
 
   constructor(private _snackBar: MatSnackBar, private router: Router, private route: ActivatedRoute, private httpClient: HttpClient) {
   }
@@ -133,7 +134,7 @@ export class FilterComponent implements OnInit {
 
               for (let i = 0; i < res.results.length; i++) {
 
-                console.log ("Result" + i + "   " + res.results[i].code + "   " + res.results[i].city) + res.results[i].distance + " km  " ;
+                console.log ("Result" + i + "   " + res.results[i].code + "   " + res.results[i].city + "   " + res.results[i].distance + " km  " )
               }
 
 

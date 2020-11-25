@@ -6,11 +6,9 @@ import { Sequelize } from 'sequelize';
 import { User } from './models/user.model';
 import { Transaction } from './models/transaction.model';
 import { TransactionController } from './controllers/transaction.controller';
-
-
-
 import cors from 'cors';
 import { ProductController } from './controllers/product.controller';
+import { ProductImage } from './models/productimage.model';
 
 export class Server {
     private server: Application;
@@ -25,9 +23,11 @@ export class Server {
         User.initialize(this.sequelize);
         Product.initialize(this.sequelize);
         Transaction.initialize(this.sequelize);
+        ProductImage.initialize(this.sequelize);
         User.createAssociations();
         Product.createAssociations();
         Transaction.createAssociations();
+        ProductImage.createAssociations();
     }
 
     private configureServer(): Application {

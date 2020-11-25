@@ -1,12 +1,12 @@
 import { User } from './user.model';
 import { Optional, Model, Sequelize, DataTypes } from 'sequelize';
 import { Transaction} from './transaction.model';
+import { ProductImage } from './productimage.model';
 
 export interface ProductAttributes {
     productId: number;
     productName: string;
     productDescription: string;
-    productImage: String;
     productPrice: number;
     productCategory: string;
     productLocation: string;
@@ -28,7 +28,6 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
     productId!: number;
     productName!: string;
     productDescription!: string;
-    productImage!: String;
     productPrice!: number;
     productCategory!: string;
     productLocation!: string;
@@ -56,9 +55,6 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
             },
             productDescription: {
                 type: DataTypes.TEXT
-            },
-            productImage: {
-                type: DataTypes.STRING
             },
             productPrice: {
                 type: DataTypes.NUMBER,
@@ -121,6 +117,10 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
         });
         Product.hasMany(Transaction, {
             as: 'transactions',
+            foreignKey: 'productId'
+        });
+        Product.hasMany(ProductImage, {
+            as: 'productImages',
             foreignKey: 'productId'
         });
     }

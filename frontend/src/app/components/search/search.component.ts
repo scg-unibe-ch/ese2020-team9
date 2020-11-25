@@ -19,9 +19,9 @@ export class SearchComponent implements OnInit {
   category = '';
   priceMin = '';
   priceMax = '';
-  delivery = '';
-  isRentable ='';
-  isService = '';
+  delivery: any = '';
+  isRentable: any = '';
+  isService: any = '';
 
   // mock category list
   categories = CategoryList;
@@ -78,5 +78,48 @@ export class SearchComponent implements OnInit {
       }
     })
   }
+
+  selection = [
+    {value: 'true', name: 'possible'},
+    {value: 'false', name: 'not possible'},
+    {value: '', name: 'does not matter'},
+  ];
+
+  showDelivery(value){
+    if(value == 'true'){
+      this.delivery = true;
+      this.navigateTo();
+    } else if(value == 'false') {
+      this.delivery = false;
+      this.navigateTo();
+    } else  if (value == '')
+      this.delivery = null;
+    this.navigateTo();
+  }
+
+  showRenatble(value){
+    if(value == 'true'){
+      this.isRentable = true;
+      this.navigateTo();
+    } else if(value == 'false') {
+      this.isRentable = false;
+      this.navigateTo();
+    } else  if (value == '')
+      this.isRentable = null;
+    this.navigateTo();
+  }
+
+  showService(value){
+    if(value == 'true'){
+      this.isService = true;
+      this.navigateTo();
+    } else if(value == 'false') {
+      this.isService = false;
+      this.navigateTo();
+    } else  if (value == '')
+      this.isService = null;
+    this.navigateTo();
+  }
 }
+
 

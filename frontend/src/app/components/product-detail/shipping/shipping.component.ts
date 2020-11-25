@@ -123,7 +123,7 @@ export class ShippingComponent implements OnInit {
           this.isRentable = instances.isRentable;
           this.isAvailable = instances.isAvailable;
           this.sellerId = instances.userId;
-          this.userReview = instances.userReview;
+          //this.userReview = instances.userReview;
           //this.changeDetection.detectChanges();
           this.getSeller(this.sellerId);
 
@@ -180,35 +180,53 @@ export class ShippingComponent implements OnInit {
 
   }
 
-   //Initializes a new transaction
-    otherAddressBuyProduct(): void {
-      this.httpClient.post(environment.endpointURL + 'transaction/', {
-        //transactionId : this.transactionId,
-        productId: this.productId,
-        userId: this.sellerId,
-        buyerId: this.buyerId,
-        //transactionStatus: this.transactionStatus,
-        deliveryFirstName: this.buyerFirstName,
-        deliveryLastName: this.buyerLastName,
+  //Initializes a new transaction
+  otherAddressBuyProduct(): void {
+    this.httpClient.post(environment.endpointURL + 'transaction/', {
+      //transactionId : this.transactionId,
+      productId: this.productId,
+      userId: this.sellerId,
+      buyerId: this.buyerId,
+      //transactionStatus: this.transactionStatus,
+      deliveryFirstName: this.buyerFirstName,
+      deliveryLastName: this.buyerLastName,
 
-        deliveryStreet: this.otherAddressStreet,
-        deliveryPin: this.otherAddressPin,
-        deliveryCity: this.otherAddressCity,
-        deliveryCountry: this.otherAddressCountry,
-      }).subscribe((res: any) => {
+      deliveryStreet: this.otherAddressStreet,
+      deliveryPin: this.otherAddressPin,
+      deliveryCity: this.otherAddressCity,
+      deliveryCountry: this.otherAddressCountry,
+    }).subscribe((res: any) => {
 
-        //navigates to productItem
-        this.router.navigate(['/user']);
-        let message = "Seller has been contacted, please await approval of buy request"
-        let action = "OK";
-        this.openSnackBar(message, action);
+      //navigates to productItem
+      this.router.navigate(['/user']);
+      let message = "Seller has been contacted, please await approval of buy request"
+      let action = "OK";
+      this.openSnackBar(message, action);
 
-      }, (error: any) => {
-        let message = "An Error occurred!";
-        let action = "OK";
-        this.openSnackBar(message, action);
-      });
+    }, (error: any) => {
+      let message = "An Error occurred!";
+      let action = "OK";
+      this.openSnackBar(message, action);
+    });
 
+  }
+
+  requestCity(){
+      let params = {
+            codes: this.otherAddressPin,
+            country: "CH",
+            apikey: '4bc7d070-229b-11eb-8bf2-6be81465cc4d'
+      };
+      if (this.otherAddressPin.length == 4){this.httpClient.get('https://app.zipcodebase.com/api/v1/search', {params}).subscribe((res: any) => {
+          if (res != null) {
+              this.otherAddressCity = res.results[this.otherAddressPin][0].city;
+              console.log(res.results[this.otherAddressPin][0].city)
+          }
+
+        }, (error: any) => {
+              this.otherAddressCity = "";
+        });
+      }
     }
 
 

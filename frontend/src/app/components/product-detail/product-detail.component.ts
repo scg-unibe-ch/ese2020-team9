@@ -69,7 +69,7 @@ export class ProductDetailComponent implements OnInit {
           this.isRentable = instances.isRentable;
           this.isAvailable = instances.isAvailable;
           this.sellerId = instances.userId;
-          this.userReview = instances.userReview;
+          //this.userReview = instances.userReview;
           //this.changeDetection.detectChanges();
 
           this.getSeller(this.sellerId);

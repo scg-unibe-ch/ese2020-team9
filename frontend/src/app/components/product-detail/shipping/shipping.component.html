@@ -69,7 +69,7 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput placeholder="Zip code" [(ngModel)]="otherAddressPin" name="otherAddressPin" >
+          <input matInput placeholder="Zip code" [(ngModel)]="otherAddressPin" name="otherAddressPin" (ngModelChange)="requestCity()">
         </mat-form-field>
 
 

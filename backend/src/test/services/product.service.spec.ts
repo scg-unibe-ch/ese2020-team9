@@ -35,7 +35,7 @@ describe('ProductService Tests', () => {
         productPrice: 10,
         productCategory: 'food',
         productLocation: null,
-        productDelivery: null,
+        productDelivery: true,
         uploadDate: new Date(Date.now()),
         sellDate: null,
         isApproved: false,
@@ -54,7 +54,7 @@ describe('ProductService Tests', () => {
         productPrice: 20,
         productCategory: 'food',
         productLocation: null,
-        productDelivery: null,
+        productDelivery: true,
         uploadDate: new Date(Date.now()),
         sellDate: null,
         isApproved: false,
@@ -73,7 +73,7 @@ describe('ProductService Tests', () => {
         productPrice: 30,
         productCategory: 'food',
         productLocation: null,
-        productDelivery: null,
+        productDelivery: true,
         uploadDate: new Date(Date.now()),
         sellDate: null,
         isApproved: false,
@@ -150,7 +150,7 @@ describe('ProductService Tests', () => {
         productPrice: 30,
         productCategory: 'food',
         productLocation: null,
-        productDelivery: null,
+        productDelivery: true,
         uploadDate: new Date(Date.now()),
         sellDate: null,
         isApproved: false,
@@ -472,8 +472,9 @@ describe('ProductService Tests', () => {
                 delivery: true
             };
             testedProductService.searchProduct(request).then(product => {
-                expect(product[0].productId).to.be.eq(3);
-                expect(product.length).to.be.eq(1);
+                expect(product[0].productId).to.be.eq(1);
+                expect(product[1].productId).to.be.eq(3);
+                expect(product.length).to.be.eq(2);
                 done();
                 });
             });
@@ -540,8 +541,9 @@ describe('ProductService Tests', () => {
                 available: true
             };
             testedProductService.searchProduct(request).then(product => {
-                expect(product[0].productId).to.be.eq(3);
-                expect(product.length).to.be.eq(1);
+                expect(product[0].productId).to.be.eq(1);
+                expect(product[1].productId).to.be.eq(3);
+                expect(product.length).to.be.eq(2);
                 done();
                 });
             });    

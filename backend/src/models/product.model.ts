@@ -68,7 +68,9 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
                 type: DataTypes.STRING
             },
             productDelivery: {
-                type: DataTypes.BOOLEAN
+                type: DataTypes.BOOLEAN,
+                defaultValue: false,
+                allowNull: false
             },
             uploadDate: {
                 type: DataTypes.DATE,
@@ -79,17 +81,22 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
             },
             isApproved: {
                 type: DataTypes.BOOLEAN,
+                defaultValue: false,
                 allowNull: false
             },
             isService: {
                 type: DataTypes.BOOLEAN,
+                defaultValue: false,
                 allowNull: false
             },
             isRentable: {
-                type: DataTypes.BOOLEAN
+                type: DataTypes.BOOLEAN,
+                defaultValue: false,
+                allowNull: false
             },
             isAvailable: {
                 type: DataTypes.BOOLEAN,
+                defaultValue: true,
                 allowNull: false
             },
             userId: {

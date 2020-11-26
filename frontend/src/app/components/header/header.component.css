@@ -22,3 +22,9 @@ mat-toolbar{
 .storMainColor {
   color:  #B82D70;
 }
+
+.homeButton{
+ font-family: 'Press Start 2P', cursive; 
+ color: #46FFFD;
+
+}

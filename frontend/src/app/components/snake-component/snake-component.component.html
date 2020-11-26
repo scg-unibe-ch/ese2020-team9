@@ -1,0 +1,20 @@
+<div class="game">
+
+<div class="cells" [ngStyle]="ngStyleCells">
+  <div class="cell" [ngStyle]="ngStyleCell(pos)" *ngFor="let pos of positions"></div>
+</div>
+
+<div class="board">
+  <div class="instructions">
+    Welcome to the STOR integrated snake game. To play press "PLAY" and use the keys AWSD to control the snake. Have Fun!
+  </div>
+  <div class="score">
+    Your actual score: {{this.score}} <br>
+    {{ this.dead? 'You died.' : '' }}
+  </div>
+  <div class="buttons">
+    <button (click)="play()">Play</button>
+  </div>
+</div>
+
+</div>

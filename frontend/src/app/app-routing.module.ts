@@ -1,3 +1,4 @@
+import { SnakeComponentComponent } from './components/snake-component/snake-component.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from "@angular/router";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'user/:id', component: OtherUserDashboardComponent},
   { path: 'search', component: ProductDisplayComponent},
   { path: 'input', component: FilterComponent},
+  { path: 'game', component: SnakeComponentComponent},
   //default route
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   //wildcard route for 404 page

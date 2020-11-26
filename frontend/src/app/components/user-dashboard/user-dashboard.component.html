@@ -1,4 +1,6 @@
+<mat-tab-group>
 
+  <mat-tab label ="my Profile" >
 <mat-card>
   <mat-card-header>
     <mat-card-title>My Profile</mat-card-title>
@@ -26,9 +28,9 @@
   </mat-card-actions>
 </mat-card>
 
+</mat-tab>
 
-
-<br>
+<mat-tab label = "Your current Products">
 <h2>Your products</h2>
   <div  fxLayout="row wrap" fxLayoutGap="2% grid" fxLayoutAlign="space-evenly stretch">
     <div fxFlex="10%" fxFlex.xl="15%" fxFlex.lg="20%" fxFlex.md="25%" fxFlex.sm="33%" fxFlex.xs="50%" *ngFor="let productItem of productList">
@@ -68,6 +70,12 @@
       </mat-card>
     </div>
   </div>
+</mat-tab>
 
+<mat-tab label="sold Products">
 <app-soldproducts></app-soldproducts>
+</mat-tab>
+<mat-tab label="bought Products">
 <app-boughtproducts></app-boughtproducts>
+</mat-tab>
+</mat-tab-group>

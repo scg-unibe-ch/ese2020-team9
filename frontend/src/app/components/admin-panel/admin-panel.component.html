@@ -1,5 +1,7 @@
 
-<mat-card>
+<div class="admin-view">
+  <mat-tab-group>
+    <mat-tab class = 'navigation' label="List Of Users">
   <mat-list-item *ngFor="let user of userList" >
   <app-user
         [user]="user"
@@ -8,7 +10,7 @@
       ></app-user>
 
   </mat-list-item>
-</mat-card>
+    </mat-tab>
 <!--
 <div class="shaded">
   <mat-list *ngFor="let user of userList">
@@ -21,7 +23,7 @@
 </div>
 -->
 
-<mat-card >
+<mat-tab label="Products To Approve">
   <mat-grid-list cols="4" [gutterSize]="'5px'" rowHeight="450px">
     <mat-grid-tile *ngFor="let productItem of productList" style="backgroundColor: white">
 
@@ -50,4 +52,4 @@
       </mat-grid-tile-footer>
     </mat-grid-tile>
   </mat-grid-list>
-</mat-card>
+</mat-tab>

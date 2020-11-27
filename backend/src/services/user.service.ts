@@ -134,7 +134,7 @@ export class UserService {
     public updateGameScore(userId: number, highscore: number): Promise<User> {
         return User.findByPk(userId)
         .then(user => {
-            const newOverallScore = user.activityScore + highscore;
+            const newOverallScore = user.activityScore * highscore;
             return user.update({
                 gameScore: highscore,
                 overallScore: newOverallScore

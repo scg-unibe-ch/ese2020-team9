@@ -352,7 +352,7 @@ describe('UserService Tests', () => {
                 User.findByPk(1).then((user) => {
                     expect(user).not.to.be.eq(null);
                     expect(user.gameScore).to.be.eq(5);
-                    expect(user.overallScore).to.be.eq(7);
+                    expect(user.overallScore).to.be.eq(10);
                     done();
                 });
             });
@@ -384,7 +384,7 @@ describe('UserService Tests', () => {
                 done();
             });
         });
-        it('should successfully get the ten game high scores', function(done) {
+        it('should successfully get game high scores', function(done) {
             testedUserService.getGameHighScores().then((users) => {
                 expect(users[0].userId).to.be.eq(2);
                 expect(users[0].userName).to.be.eq('brent');
@@ -401,7 +401,7 @@ describe('UserService Tests', () => {
                 expect(users[1].userName).to.be.eq('brent');
                 expect(users[1].overallScore).to.be.eq(6);
                 expect(users[0].userId).to.be.eq(1);
-                expect(users[0].overallScore).to.be.eq(7);
+                expect(users[0].overallScore).to.be.eq(10);
                 done();
             });
         });

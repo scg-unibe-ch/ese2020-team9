@@ -1,6 +1,11 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ProductService } from './../../../services/product.service';
+import { UserService } from './../../../services/user.service';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SoldproductsComponent } from './soldproducts.component';
+import { Overlay } from '@angular/cdk/overlay';
 
 describe('SoldproductsComponent', () => {
   let component: SoldproductsComponent;
@@ -8,7 +13,9 @@ describe('SoldproductsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SoldproductsComponent ]
+      imports: [HttpClientTestingModule],
+      declarations: [ SoldproductsComponent ],
+      providers: [HttpTestingController, UserService, ProductService, MatSnackBar, Overlay]
     })
     .compileComponents();
   }));

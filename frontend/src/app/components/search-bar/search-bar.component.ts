@@ -21,6 +21,6 @@ export class SearchBarComponent implements OnInit {
       queryParams: {
         n: this.name,
       }
-    })
+    });
   }
 }

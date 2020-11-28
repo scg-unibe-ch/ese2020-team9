@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from "../../services/user.service";
-import {ProductItem} from "../../models/product-item.model";
-import {HttpClient} from "@angular/common/http";
-import {ActivatedRoute, Router} from "@angular/router";
-import {ProductService} from "../../services/product.service";
-import {environment} from "../../../environments/environment";
+import {UserService} from '../../services/user.service';
+import {ProductItem} from '../../models/product-item.model';
+import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
+import {ProductService} from '../../services/product.service';
+import {environment} from '../../../environments/environment';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
@@ -25,7 +25,8 @@ export class UserDashboardComponent implements OnInit {
   userAddressCountry: string;
   userWallet: number;
 
-  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute) { }
+  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router,
+              private userService: UserService, private productService: ProductService) { }
 
   ngOnInit(): void {
     this.userId = this.userService.getUserId();
@@ -37,7 +38,7 @@ export class UserDashboardComponent implements OnInit {
 
   getUser(){
       this.userService.getUser(this.userId).subscribe((instances: any) => {
-         //this.sellerId = instances.userId;
+         // this.sellerId = instances.userId;
          this.userName = instances.userName;
          this.userFirstName = instances.firstName;
          this.userLastName = instances.lastName;

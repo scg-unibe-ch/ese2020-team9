@@ -42,11 +42,12 @@ export class UserRegistrationComponent implements OnInit {
   message ='';
   action = '';
 
-
-
-
-
-  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
+  constructor(private _snackBar: MatSnackBar,
+              private httpClient: HttpClient,
+              private router: Router,
+              private userService: UserService,
+              private route: ActivatedRoute,
+              private changeDetection: ChangeDetectorRef) { }
 
   ngOnInit() {
       this.userId = this.userService.getUserId();

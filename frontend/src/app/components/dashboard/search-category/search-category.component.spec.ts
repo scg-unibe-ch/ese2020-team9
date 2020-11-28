@@ -1,6 +1,10 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSelect } from '@angular/material/select';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchCategoryComponent } from './search-category.component';
+import { InjectionToken } from '@angular/core';
 
 describe('SearchCategoryComponent', () => {
   let component: SearchCategoryComponent;
@@ -8,7 +12,8 @@ describe('SearchCategoryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SearchCategoryComponent ]
+      imports: [ MatSelectModule, BrowserAnimationsModule ],
+      declarations: [ SearchCategoryComponent, MatSelect ]
     })
     .compileComponents();
   }));

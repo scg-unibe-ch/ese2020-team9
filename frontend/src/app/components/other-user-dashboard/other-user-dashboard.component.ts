@@ -22,7 +22,11 @@ export class OtherUserDashboardComponent implements OnInit {
   isUserLoggedIn: boolean;
   id: any;
 
-  constructor(private userService: UserService, private productService: ProductService, private changeDetection: ChangeDetectorRef, private router: Router, private route: ActivatedRoute) { }
+  constructor(private userService: UserService,
+              private productService: ProductService,
+              private changeDetection: ChangeDetectorRef,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
 
   ngOnInit(): void {

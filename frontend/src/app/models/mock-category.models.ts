@@ -1,4 +1,4 @@
 export interface MockCategory {
-  value: string,
+  value: string;
   viewValue: string;
 }

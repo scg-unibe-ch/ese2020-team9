@@ -29,7 +29,10 @@ export class BoughtproductsComponent implements OnInit {
 
   @Output() onCreate: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private httpClient: HttpClient, private _snackBar: MatSnackBar, private userService: UserService, private productService: ProductService) { }
+  constructor(private httpClient: HttpClient,
+              private _snackBar: MatSnackBar,
+              private userService: UserService,
+              private productService: ProductService) { }
 
   ngOnInit(): void {
       this.userId = this.userService.getUserId();

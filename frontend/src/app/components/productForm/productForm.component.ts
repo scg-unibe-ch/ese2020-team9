@@ -38,7 +38,13 @@ export class ProductFormComponent implements OnInit {
   id: any;
   add: boolean;
 
-  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private _ngZone: NgZone, private productService: ProductService, private route: ActivatedRoute, private location: Location) { }
+  constructor(private _snackBar: MatSnackBar,
+              private httpClient: HttpClient,
+              private router: Router,
+              private userService: UserService,
+              private productService: ProductService,
+              private route: ActivatedRoute,
+              private location: Location) { }
 
   ngOnInit(): void {
     this.userId = this.userService.getUserId();

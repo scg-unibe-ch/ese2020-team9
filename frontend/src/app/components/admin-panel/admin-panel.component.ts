@@ -24,7 +24,10 @@ export class AdminPanelComponent implements OnInit {
  users: User[] ;
  productList: ProductItem[];
 
-  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private productService: ProductService, private userService: UserService) {}
+  constructor(private _snackBar: MatSnackBar,
+              private httpClient: HttpClient,
+              private productService: ProductService,
+              private userService: UserService) {}
 
   ngOnInit(): void {
     this.getProductList();

@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import { CategoryList } from "../../../mock-category-list";
-import {MatSelect} from "@angular/material/select";
+import { CategoryList } from '../../../mock-category-list';
+import {MatSelect} from '@angular/material/select';
 
 @Component({
   selector: 'app-search-category',
@@ -25,9 +25,9 @@ export class SearchCategoryComponent implements OnInit {
       if (opened) {
         this.matSelect.panel.nativeElement.addEventListener('mouseleave', () => {
           this.matSelect.close();
-        })
+        });
       }
-    })
+    });
   }
 
 

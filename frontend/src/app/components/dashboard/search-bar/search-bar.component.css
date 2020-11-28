@@ -3,6 +3,13 @@
   margin-top: 8px;
   display:flex;
   flex-direction:row;
+  
+}
+
+.bar{
+  box-shadow: 2px 2px 20px #46FFFD;
+  background-color: transparent;
+  color: white;
 }
 
 input:focus {
@@ -22,6 +29,8 @@ input[type=text]{
   border:1px solid #46FFFD;
   background:#46FFFD;
   color:black;
+  box-shadow: 2px 2px 20px #46FFFD;
+
 }
 
 .searchBar .clearIcon {
@@ -49,6 +58,7 @@ input[type=text]{
   border: 1px solid #46FFFD;
   border-radius: 4px;
   background-color: transparent;
+  
 }
 
 @media (min-width: 611px){

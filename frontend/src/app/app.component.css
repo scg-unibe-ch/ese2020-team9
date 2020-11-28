@@ -42,11 +42,18 @@
   font-family:'Press Start 2P', cursive;
 }
 
-::ng-deep .mat-tab-labels{
+::ng-deep .mat-tab-label{
   color: white !important;
+  background-color: #F72871;
   margin: 10px;
   font-family:'Press Start 2P', cursive !important;
+  box-shadow:0px 0px 10px #46FFFD;
 
+}
+
+::ng-deep .mat-flat-button{
+  box-shadow:0px 0px 10px #46FFFD;
+  
 }
 
 .app {

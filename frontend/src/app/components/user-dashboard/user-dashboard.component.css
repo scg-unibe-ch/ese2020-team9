@@ -1,8 +1,12 @@
-mat-card {
+.myProfile{
+  background-color: #082A5D;
+  font-family:'Press Start 2P', cursive !important;
+  color: white;
+  
+
 }
 
-img {
-}
+
 
 .productItem_Card{
   margin: 5px;

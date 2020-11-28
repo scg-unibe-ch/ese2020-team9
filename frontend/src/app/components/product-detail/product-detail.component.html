@@ -1,5 +1,5 @@
 
-
+<button mat-Button class="backIcon" (click)="goBack()" matSuffix mat-icon-button><mat-icon>arrow_back</mat-icon></button>
 <div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start" >
 
 <mat-card>
@@ -27,8 +27,6 @@
   </mat-card-content>
 </mat-card>
 
-
-
   <mat-card>
     <h2>Sellerinfo:</h2>
     <br><br>
@@ -39,8 +37,7 @@
     {{addressCity}}<br>
     {{addressCountry}}<br>
 
-    <button mat-flat-button color="warn"  [routerLink]="['/shipping', productId]" routerLinkActive="active" [disabled]="checkCash() || !isAvailable || !isUserLoggedIn">Buy</button>
-
+    <button mat-flat-button color="warn"  [routerLink]="['/shipping', productId]" routerLinkActive="active" [disabled]="checkCash() || !isAvailable || !isUserLoggedIn || checkUser()">Buy</button>
 
   </mat-card>
 </div>

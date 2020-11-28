@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {MatSelect} from "@angular/material/select";
-import {CategoryList} from "../../mock-category-list";
+import {CategoryList} from "../../category-list";
 import {Subscription} from "rxjs";
 
 @Component({
@@ -82,6 +82,11 @@ export class SearchComponent implements OnInit {
   selection = [
     {value: 'true', name: 'possible'},
     {value: 'false', name: 'not possible'},
+    {value: '', name: 'does not matter'},
+  ];
+  selection2 = [
+    {value: 'true', name: 'Service'},
+    {value: 'false', name: 'Product'},
     {value: '', name: 'does not matter'},
   ];
 

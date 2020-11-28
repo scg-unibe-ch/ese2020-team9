@@ -1,4 +1,4 @@
-import { MockCategory } from './mock-category.models';
+import { Cat } from './category.models';
 
 describe('MockCategory', () => {
   it('should create an instance', () => {

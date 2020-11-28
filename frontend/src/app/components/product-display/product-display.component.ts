@@ -7,7 +7,7 @@ import {ProductService} from "../../services/product.service";
 import {Search} from "../../models/search.model";
 import { switchMap } from "rxjs/operators";
 import {any} from "codelyzer/util/function";
-import { CategoryList } from "../../mock-category-list";
+import { CategoryList } from "../../category-list";
 
 @Component({
   selector: 'app-product-display',
@@ -57,10 +57,11 @@ export class ProductDisplayComponent implements OnInit {
       isRentable: this.isRentable,
       isService: this.isService,
     };
+
     this.productService.searchProduct(this.search).subscribe((data: ProductItem[]) => {
       this.productList = data;
     }, (error: any) => {
-      return 'Could not Search';
+      return 'An error occurred!';
     });
   }
 }

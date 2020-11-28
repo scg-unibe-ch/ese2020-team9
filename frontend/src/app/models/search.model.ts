@@ -1,13 +1,11 @@
-export class Search {
-  constructor(
-    public name: string,
-    public category: string,
-    public location: string,
-    public priceMin?: number,
-    public priceMax?: number,
-    public delivery?: boolean,
-    public available?: boolean,
-    public isRentable?: boolean,
-    public isService?: boolean,
-  ){}
+export interface Search {
+  name?: string;
+  location?: string;
+  category?: string;
+  priceMin?: number;
+  priceMax?: number;
+  delivery?: boolean;
+  available?: boolean;
+  isRentable?: boolean;
+  isService?: boolean;
 }

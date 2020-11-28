@@ -1,14 +1,14 @@
-import {ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {ProductItem} from "../../models/product-item.model";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import {ProductService} from "../../services/product.service";
-import {environment} from "../../../environments/environment";
 import { ActivatedRoute} from "@angular/router";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { Location} from "@angular/common";
-import {CategoryList} from "../../mock-category-list";
+import {CategoryList} from "../../category-list";
+import {_isNumberValue} from "@angular/cdk/coercion";
 
 @Component({
   selector: 'app-productForm',
@@ -43,6 +43,7 @@ export class ProductFormComponent implements OnInit {
   constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private _ngZone: NgZone, private productService: ProductService, private route: ActivatedRoute, private location: Location) { }
 
   ngOnInit(): void {
+
     this.userId = this.userService.getUserId();
     this.id = this.route.snapshot.paramMap.get('id');
 
@@ -80,11 +81,11 @@ export class ProductFormComponent implements OnInit {
 
   addProduct(): void {
     this.product = {
-      productId: parseFloat(''),
+      productId: 0,
       productName: this.productName,
       productDescription: this.productDescription,
+      productPrice: Number(this.productPrice),
       productImage: this.productImage,
-      productPrice: parseFloat(this.productPrice),
       productCategory: this.productCategory,
       productLocation: this.productLocation,
       productDelivery: Boolean(this.productDelivery),
@@ -116,7 +117,7 @@ export class ProductFormComponent implements OnInit {
       productName: this.productName,
       productDescription: this.productDescription,
       productImage: this.productImage,
-      productPrice: parseFloat(this.productPrice),
+      productPrice: Number(this.productPrice),
       productCategory: this.productCategory,
       productLocation: this.productLocation,
       productDelivery: Boolean(this.productDelivery),
@@ -126,7 +127,7 @@ export class ProductFormComponent implements OnInit {
       isService: Boolean(this.isService),
       isRentable: Boolean(this.isRentable),
       isAvailable: true,
-      userId: parseFloat(this.userId),
+      userId: Number(this.userId),
       userReview: this.userReview,
     };
     this.productService.editProduct(this.product).subscribe((res: any) => {
@@ -142,14 +143,18 @@ export class ProductFormComponent implements OnInit {
     });
   }
 
-  //check if field is empty
-  empty(input):boolean{
-    if (input === "") return true;
-    else return false
+  // check if all required fields are filled
+  allFilled(a, b, c):boolean {
+    return (a === '' || b === '' || c === '');
   }
 
-  allFieldsAreFilled():boolean{
-    return true;
+  empty(input){
+    return (input === '');
+  }
+
+  // check if field is number
+  checkNumber(input):boolean{
+   return (!_isNumberValue(input));
   }
 
   openSnackBar(message: string, action: string) {

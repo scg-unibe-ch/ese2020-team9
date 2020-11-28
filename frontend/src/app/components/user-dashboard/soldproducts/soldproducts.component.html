@@ -6,7 +6,7 @@
   <div fxFlex="10%" fxFlex.xl="15%" fxFlex.lg="20%" fxFlex.md="25%" fxFlex.sm="33%" fxFlex.xs="50%" *ngFor="let transaction of transactionList">
     <mat-card class="productItem_Card">
 
-            <div *ngIf="transaction.transactionStatus==1">
+      <div *ngIf="transaction.transactionStatus==1">
           <h1> Productname: {{productName}}</h1>
           <button mat-flat-button class="button_fill"  [routerLink]="['/productDetail', transaction.productId]" routerLinkActive="active" ><b>{{productName}} {{transaction.productId}}</b></button>
           <br><br>

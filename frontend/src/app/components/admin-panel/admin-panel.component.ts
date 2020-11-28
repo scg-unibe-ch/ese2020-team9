@@ -1,13 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { environment } from '../../../environments/environment';
 import { ProductItem } from '../../models/product-item.model';
-import { User } from "../../models/user.model";
+import { User} from "../../models/user.model";
 import { ProductService } from "../../services/product.service";
 import { UserService } from "../../services/user.service";
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-
 
 @Component({
   selector: 'app-admin-panel',
@@ -24,6 +21,7 @@ export class AdminPanelComponent implements OnInit {
  userList: User[] ;
  productList: ProductItem[];
 
+
   constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private productService: ProductService, private userService: UserService) {}
 
   ngOnInit(): void {
@@ -38,17 +36,29 @@ export class AdminPanelComponent implements OnInit {
     });
   }
 
-  onUserDelete(user: User): void{
-    this.httpClient.delete(environment.endpointURL + 'user/' + user.userId).subscribe(() => {
-      this.userList.splice(this.userList.indexOf(user), 1); //delete one user
-    });
+  // user - delete user
+  deleteUser(user: User): void{
+    this.userService.deleteUser(user).subscribe((res: any) => {
+      this.userList.splice(this.userList.indexOf(user), 1);//delete one user
+      let action = "X";
+      this.openSnackBar(res.message, action);
+    }, (error => {
+      let action = "X";
+      this.openSnackBar(error.message, action);
+    }));
   }
 
   // user - upgrade to admin
-  onUserUpdate(user: User): void{
-    this.httpClient.put(environment.endpointURL + 'user/makeAdmin/' + user.userId, {
-      admin: user.admin,
-    }).subscribe();
+  upgradeUser(user: User): void{
+    this.userService.upgradeUser(user.userId, user.admin).subscribe((res: any)  => {
+      // updates admin value for user
+      let message = "User has been successfully upgraded to admin!";
+      let action = "X";
+      this.openSnackBar(message, action);
+      }, (error: any) => {
+      let action = "X";
+      this.openSnackBar(error.message, action);
+    });
   }
 
   // products - get all Unapproved ProductItems
@@ -62,13 +72,11 @@ export class AdminPanelComponent implements OnInit {
     this.productService.approveProduct(product).subscribe((res: any)  => {
       //removes product from productList
       this.productList = this.productList.filter(item => item !== product);
-      let message = "Product successfully approved!";
       let action = "X";
-      this.openSnackBar(message, action);
+      this.openSnackBar(res.message, action);
     }, (error: any) => {
-      let message = "Can not approve this product!";
       let action = "X";
-      this.openSnackBar(message, action);
+      this.openSnackBar(error.message, action);
     });
   }
 
@@ -76,12 +84,11 @@ export class AdminPanelComponent implements OnInit {
     this.productService.deleteProduct(product).subscribe((res: any)  => {
       //removes product from productList
       this.productList = this.productList.filter(item => item !== product);
-      let message = "Product successfully deleted!";
-      let action = "Ok";
-      this.openSnackBar(message, action);
+      let action = "X";
+      this.openSnackBar(res.message, action);
     }, (error: any) => {
       let message = "Can not delete this product!";
-      let action = "";
+      let action = "X";
       this.openSnackBar(message, action);
     });
   }

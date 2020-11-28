@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import {BehaviorSubject, Observable} from "rxjs";
 import { environment} from "../../environments/environment";
-import { User } from "../models/user.model";
-import { map } from "rxjs/operators";
+import {EditUser, RegisterUser, User} from "../models/user.model";
 
 @Injectable({
   providedIn: 'root'
@@ -20,21 +19,48 @@ export class UserService {
   public isUserLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public isUserAdmin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public isUserName: BehaviorSubject<string> = new BehaviorSubject<string>('');
-  public actualWallet: BehaviorSubject<number> = new BehaviorSubject<number>(this.userWallet);
 
   constructor(private httpClient: HttpClient) { }
 
-  login(userLogin: string, password: string){
+  /** get requests **/
+  getUser(id: number){
+    return this.httpClient.get(environment.endpointURL + 'user/' + id);
+  }
+
+  getUserList(){
+    return this.httpClient.get(environment.endpointURL + 'user');
+  }
+
+  /** post requests **/
+  registration(user: RegisterUser): Observable<any> {
+    return this.httpClient.post(environment.endpointURL + 'user/register', user);
+  }
+
+  login(userLogin: string, password: string): Observable<any> {
     return this.httpClient.post(environment.endpointURL + 'user/login', {
       userLogin, password
     });
   }
 
+  editUser(user: EditUser): Observable<any> {
+    return this.httpClient.post(environment.endpointURL + 'user/edit/', user);
+  }
+
+  /** delete request **/
+  deleteUser(user: User): Observable<User> {
+    return this.httpClient.delete<User>(environment.endpointURL + 'user/' + user.userId);
+  }
+
+  /** put request **/
+  upgradeUser(userId: number, admin: boolean) {
+    return this.httpClient.put(environment.endpointURL + 'user/makeAdmin/' + userId, admin);
+  }
+
+  /** Functions to get specific user attributes from local storage **/
+
   logout(){
     localStorage.clear();
   }
-
-  /** Functions to get specific user attributes from local storage e**/
 
   getToken(){
     return this.userToken = localStorage.getItem('userToken');
@@ -50,35 +76,5 @@ export class UserService {
 
   getUserWallet(){
     return this.userWallet = localStorage.getItem('userWallet')
-  }
-
-  /** get requests **/
-  getUser(id: number){
-    return this.httpClient.get(environment.endpointURL + 'user/' + id);
-  }
-
-  getUserList(){
-    return this.httpClient.get(environment.endpointURL + 'user');
-  }
-
-  /** post requests **/
-  registration(user: User) {
-    this.httpClient.post(environment.endpointURL + 'user/register', user).pipe(map((res: any)=>{
-      // Set user data in local storage
-      localStorage.setItem('userToken', res.token);
-      localStorage.setItem('userId', res.userId);
-      localStorage.setItem('userName', res.userName);
-      localStorage.setItem('admin', res.admin);
-      localStorage.setItem('userWallet', res.wallet);
-    }));
-  }
-
-  saveUser(user: User) {
-    this.httpClient.post(environment.endpointURL + 'user/edit/', user).pipe(map((res: any) => {
-      localStorage.setItem('userToken', res.token);
-      localStorage.setItem('userId', res.userId);
-      localStorage.setItem('userName', res.userName);
-      localStorage.setItem('admin', res.admin);
-    }));
   }
 }

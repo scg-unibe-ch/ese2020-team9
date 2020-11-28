@@ -1,12 +1,12 @@
-import {ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ProductItem} from "../../models/product-item.model";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import {ProductService} from "../../services/product.service";
-import {environment} from "../../../environments/environment";
 import {ActivatedRoute} from "@angular/router";
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-product-detail',
@@ -32,8 +32,6 @@ export class ProductDetailComponent implements OnInit {
 
   userReview = '';
   userWallet: any;
-
-
   sellerId: any;
   sellerName = '';
   addressPin = '';
@@ -43,12 +41,14 @@ export class ProductDetailComponent implements OnInit {
   product: ProductItem;
   id: any;
   isUserLoggedIn: boolean;
+  userName: string;
 
-  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService,private productService: ProductService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
+  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService,private productService: ProductService, private route: ActivatedRoute, private location: Location) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.userWallet = this.userService.getUserWallet();
+    this.userName = this.userService.getUserName();
     this.getProduct();
     this.userService.isUserLoggedIn.subscribe(value => {
       this.isUserLoggedIn = value;
@@ -73,13 +73,12 @@ export class ProductDetailComponent implements OnInit {
           this.isAvailable = instances.isAvailable;
           this.sellerId = instances.userId;
           this.userReview = instances.userReview;
-          //this.changeDetection.detectChanges();
 
           this.getSeller(this.sellerId);
 
       },(error: any) => {
         let message = "There is no corresponding Product!";
-        let action = "OK";
+        let action = "X";
         this.openSnackBar(message, action);
     });
   }
@@ -95,7 +94,7 @@ export class ProductDetailComponent implements OnInit {
           this.addressCountry = instances.addressCountry;
 
       },(error: any) => {
-      let action = "";
+      let action = "X";
       let message = "There is no corresponding Seller!";
       this.openSnackBar(message, action);
     });
@@ -106,6 +105,9 @@ export class ProductDetailComponent implements OnInit {
    return (this.userWallet < this.productPrice);
   }
 
+  checkUser(){
+    return (this.sellerName == this.userName);
+  }
 
   openSnackBar(message: string, action: string) {
         this._snackBar.open(message, action, {
@@ -113,6 +115,7 @@ export class ProductDetailComponent implements OnInit {
         });
       }
 
-
-
+  goBack(): void {
+    this.location.back();
+  }
 }

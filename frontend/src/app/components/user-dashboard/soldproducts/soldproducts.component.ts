@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../../../services/user.service";
-import {ProductItem} from "../../../models/product-item.model";
 import {HttpClient} from "@angular/common/http";
 import {ProductService} from "../../../services/product.service";
-import {environment} from "../../../../environments/environment";
 import {Transaction} from "../../../models/transaction.model";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {TransactionService} from "../../../services/transaction.service";
@@ -27,29 +25,22 @@ export class SoldproductsComponent implements OnInit {
   ngOnInit(): void {
       this.userId = this.userService.getUserId();
       this.getSoldProducts();
-
   }
 
-
-  //
   getSoldProducts(){
-
      this.productService.getSoldProducts(this.userId).subscribe((data: Transaction[]) => {
         this.transactionList = data;
      });
   }
 
-
   sellProduct(transaction: Transaction){
     this.transactionService.sellProduct(transaction).subscribe((res: any) => {
-      //navigates to productItem
-      let message = "You sold the product!";
       let action = "X";
-      this.openSnackBar(message, action);
+      this.openSnackBar(res.message, action);
       this.getSoldProducts();
 
     }, (error: any) => {
-      let message = "The Buyer does not have enough money!";
+      let message = "An error has occurred!";
       let action = "X";
       this.openSnackBar(message, action);
     });
@@ -57,24 +48,20 @@ export class SoldproductsComponent implements OnInit {
 
   declineProduct(transaction: Transaction): void {
     this.transactionService.declineProduct(transaction).subscribe((res: any) => {
-      //navigates to productItem
-      let message = "You declined the transaction!";
+      this.transactionList = this.transactionList.filter(item => item !== transaction);
       let action = "X";
-      this.openSnackBar(message, action);
+      this.openSnackBar(res.message, action);
 
     }, (error: any) => {
-      let message = "Error";
+      let message = "An error has occurred!";
       let action = "X";
       this.openSnackBar(message, action);
     });
   }
-
 
   openSnackBar(message: string, action: string) {
         this._snackBar.open(message, action, {
           duration: 3000
         });
       }
-
-
 }

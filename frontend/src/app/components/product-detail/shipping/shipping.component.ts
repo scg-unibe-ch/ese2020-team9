@@ -1,15 +1,12 @@
-import {ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
-import {ProductItem} from "../../../models/product-item.model";
+import { Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {UserService} from "../../../services/user.service";
 import {ProductService} from "../../../services/product.service";
-import {environment} from "../../../../environments/environment";
 import {ActivatedRoute} from "@angular/router";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { Location } from "@angular/common";
-import {MatTabsModule} from '@angular/material/tabs';
-import {Transaction} from "../../../models/transaction.model";
+import {NewTransaction, Transaction} from "../../../models/transaction.model";
 import {TransactionService} from "../../../services/transaction.service";
 
 @Component({
@@ -35,7 +32,6 @@ export class ShippingComponent implements OnInit {
   isAvailable = '';
   userId = '';
   userReview = '';
-  userAuth = '';
 
   sellerId: any;
   sellerName = '';
@@ -65,7 +61,7 @@ export class ShippingComponent implements OnInit {
 
   id: any;
   isUserLoggedIn: boolean;
-  transaction: Transaction;
+  transaction: NewTransaction;
 
   constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute, private location: Location, private transactionService: TransactionService) { }
 
@@ -80,22 +76,6 @@ export class ShippingComponent implements OnInit {
 
   }
 
-
-  empty(o):boolean{
-        return (o === "" ? true : false);
-      }
-
-
-  checkCountryCode(c:string):boolean{
-    let check = "CH";
-    return (c==check ? true : false);
-  }
-
-  checkCash(){
-    return (this.buyerWallet < this.productPrice);
-  }
-
-
   getBuyer(){this.userService.getUser(this.buyerId).subscribe((instances: any) => {
          //this.sellerId = instances.userId;
          this.buyerName = instances.userName;
@@ -108,7 +88,7 @@ export class ShippingComponent implements OnInit {
          this.buyerWallet = instances.wallet;
 
        },(error: any) => {
-         let action = "";
+         let action = "X";
          let message = "There is no corresponding Seller!";
          this.openSnackBar(message, action);
      });
@@ -132,14 +112,14 @@ export class ShippingComponent implements OnInit {
           this.isAvailable = instances.isAvailable;
           this.sellerId = instances.userId;
           this.userReview = instances.userReview;
-          //this.changeDetection.detectChanges();
           this.getSeller(this.sellerId);
 
       },(error: any) => {
-      this.userAuth = 'There is no corresponding Product!';
+      let action = "X";
+      let message = "There is no corresponding Product!";
+      this.openSnackBar(message, action);
     });
   }
-
 
   getSeller(sellerId: number){
     this.userService.getUser(this.sellerId).subscribe((instances: any) => {
@@ -150,52 +130,41 @@ export class ShippingComponent implements OnInit {
           this.sellerAddressCountry = instances.addressCountry;
 
       },(error: any) => {
-      let action = "";
+      let action = "X";
       let message = "There is no corresponding Seller!";
       this.openSnackBar(message, action);
     });
   }
 
   //Initializes a new transaction
-
   buyProduct(): void {
-    if(this.buyerAddressPin == '' && this.otherAddressPin !== ''){
-      this.deliveryPin = this.otherAddressPin;
-    } else if(this.buyerAddressPin !== '' && this.otherAddressPin == ''){
+    if(this.buyerAddressPin !== '' && this.otherAddressPin == '') {
       this.deliveryPin = this.buyerAddressPin;
     } else {
-      this.deliveryPin = '';
-    }
+      this.deliveryPin = this.otherAddressPin;}
 
-    if(this.buyerAddressStreet == '' && this.otherAddressStreet !== ''){
-      this.deliveryStreet = this.otherAddressStreet;
-    } else if(this.buyerAddressStreet !== '' && this.otherAddressStreet == ''){
+    if(this.buyerAddressStreet !== '' && this.otherAddressStreet == '') {
       this.deliveryStreet = this.buyerAddressStreet;
     } else {
-      this.deliveryStreet = '';
+      this.deliveryStreet = this.otherAddressStreet;
     }
 
-    if(this.buyerAddressCity == '' && this.otherAddressCity !== ''){
-      this.deliveryCity = this.otherAddressCity;
-    } else if(this.buyerAddressCity !== '' && this.otherAddressCity == ''){
+    if(this.buyerAddressCity !== '' && this.otherAddressCity == '') {
       this.deliveryCity = this.buyerAddressCity;
     } else {
-      this.deliveryCity = '';
+      this.deliveryCity = this.otherAddressCity;
     }
-    if(this.buyerAddressCountry == '' && this.otherAddressCountry!== ''){
-      this.deliveryCountry = this.otherAddressCountry;
-    } else if(this.buyerAddressCountry !== '' && this.otherAddressCountry == ''){
+
+    if(this.buyerAddressCountry !== '' && this.otherAddressCountry == '') {
       this.deliveryCountry = this.buyerAddressCountry;
     } else {
-      this.deliveryCountry = '';
+      this.deliveryCountry = this.otherAddressCountry;
     }
 
     this.transaction = {
-      transactionId : null,
       productId: this.productId,
       userId: this.sellerId,
       buyerId: this.buyerId,
-      transactionStatus: null,
       deliveryFirstName: this.buyerFirstName,
       deliveryLastName: this.buyerLastName,
       deliveryPin: this.deliveryPin,
@@ -207,16 +176,31 @@ export class ShippingComponent implements OnInit {
     this.transactionService.buyProduct(this.transaction).subscribe((res: any) => {
       //navigates to user dashboard
       this.router.navigate(['/user']);
-      let message = "Seller has been contacted, please await approval of buy request!";
+      let message = "Seller has been contacted. " + res.message;
       let action = "X";
       this.openSnackBar(message, action);
 
     }, (error: any) => {
-      let message = "An Error occurred!";
+      let message = "An error has occurred!";
       let action = "X";
       this.openSnackBar(message, action);
     });
 
+  }
+
+  // check if all address fields are filled
+  empty(a, b, c, d):boolean {
+    return (a === '' || b === '' || c === '' || d === '');
+  }
+
+ /*
+  checkCountryCode(c:string):boolean{
+    let check = "CH";
+    return (c==check);
+  }*/
+
+  checkCash(){
+    return (this.buyerWallet < this.productPrice);
   }
 
   openSnackBar(message: string, action: string) {

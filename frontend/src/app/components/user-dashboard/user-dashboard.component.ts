@@ -4,7 +4,6 @@ import {ProductItem} from "../../models/product-item.model";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProductService} from "../../services/product.service";
-import {environment} from "../../../environments/environment";
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
@@ -31,12 +30,7 @@ export class UserDashboardComponent implements OnInit {
     this.userId = this.userService.getUserId();
     this.getUser();
     this.getProductUser();
-    this.userService.actualWallet.subscribe(value => {
-      this.userWallet = value;
-    });
-
   }
-
 
   getUser(){
       this.userService.getUser(this.userId).subscribe((instances: any) => {
@@ -49,13 +43,10 @@ export class UserDashboardComponent implements OnInit {
          this.userAddressCity = instances.addressCity;
          this.userAddressCountry = instances.addressCountry;
          this.userWallet = instances.wallet;
-        //this.userService.actualWallet.next(instances.wallet);
-        // this.userService.actualWallet.next(7);
 
        },(error: any) => {
-         let action = "";
-         let message = "There is no corresponding User!";
-         this.openSnackBar(message, action);
+         let action = "X";
+         this.openSnackBar(error.message, action);
      });
    }
 
@@ -70,9 +61,8 @@ export class UserDashboardComponent implements OnInit {
     this.productService.deleteProduct(product).subscribe((res: any) => {
       //removes product from productList
       this.productList = this.productList.filter(item => item !== product);
-      let message = "Product successfully deleted!";
       let action = "X";
-      this.openSnackBar(message, action);
+      this.openSnackBar(res.message, action);
     }, (error: any) => {
       let message = "Can not delete this Product!";
       let action = "X";

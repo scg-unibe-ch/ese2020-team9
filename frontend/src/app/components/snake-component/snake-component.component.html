@@ -5,15 +5,28 @@
 </div>
 
 <div class="board">
+  <div class="console">
+    {{ playing ? 'Your score is ' + score : message }}
+  </div>
   <div class="instructions">
-    Welcome to the STOR integrated snake game. To play press "PLAY" and use the keys AWSD to control the snake. Have Fun!
+    <h3>Instructions</h3>
+    To start, press PLAY! <br>
+    Navigate with 'A', 'W', 'S' and 'D' to turn left, up, down or right.<br>
+    You are the red snake, pay attention not to head into your tail!<br>
+    To grow, collect the orange eggs.<br>
+    Have you ever tried to run through a wall? Then you know why it's not wise to head into grey squares.<br>
+    Blinking squares will help you: they shrink your tail and add score! <br>
+    Finally, if you have enough of snake, consider saving your highscore to show off ;) <br>
+    Have fun!
   </div>
   <div class="score">
-    Your actual score: {{this.score}} <br>
-    {{ this.dead? 'You died.' : '' }}
+    Your highscore in this session: {{this.highscore}} <br>
+    {{ 'You scored ' + this.score + ' in the last run' }}
   </div>
   <div class="buttons">
-    <button (click)="play()">Play</button>
+    <button (click)="play()">PLAY</button>
+    <button (click)="saveHighscore()">Save Highscore</button>
+    <button (click)="quit()">quit</button>
   </div>
 </div>
 

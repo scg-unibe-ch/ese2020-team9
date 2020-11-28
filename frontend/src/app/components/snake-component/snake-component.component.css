@@ -2,11 +2,63 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 5em;
 }
 
 .cells {
   display: flex;
   flex-wrap: wrap;
+}
+
+.board {
+  width: 260px;
+  height: 500px;
+  background-color: rgb(49, 47, 47);
+  border: black solid 10px;
+}
+
+.console {
+  text-align: center;
+  font-size: x-large;
+  top: 0;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  border-bottom: black solid 10px;
+  animation: console 1s infinite;
+}
+
+.instructions {
+  text-align: center;
+  border-bottom: black solid 10px;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.instructions h3 {
+  margin-bottom: 8px;
+}
+
+.score {
+  text-align: center;
+  border-bottom: black solid 10px;
+}
+
+.buttons {
+  display: flex;
+  align-content: center;
+  padding-top: 2px;
+}
+
+.buttons button {
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+@keyframes console {
+  0% { color: rgb(49, 47, 47); }
+  33% { color:  rgb(119, 114, 114)}
+  66% { color: rgb(192, 186, 186);}
+  100% { color: rgb(255, 255, 255);}
 }
 
 @keyframes specialEgg {

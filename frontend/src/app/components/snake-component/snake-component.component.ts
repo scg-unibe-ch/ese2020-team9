@@ -1,5 +1,5 @@
 import { Board } from './objects/board';
-import { Component, OnInit, HostListener, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, HostListener, ChangeDetectorRef, EventEmitter } from '@angular/core';
 import { Snake } from './objects/snake';
 import { Direction } from './objects/direction';
 import { Position } from './objects/position';
@@ -24,30 +24,54 @@ export class SnakeComponentComponent implements OnInit {
   readonly ngStyleCells = {
     width: `${this.size * this.cellWidth}px`
   };
-  readonly snake: Snake = new Snake();
   readonly direnum = Direction;
-  dead = false;
 
+  dead = false;
   score = 0;
+  highscore = 0;
+  playing = false;
+
+  message: string;
 
   board: Board = new Board(this.size);
   positions: Position[] = this.initializePositions();
+  snake: Snake = new Snake();
 
-  paused = false;
+  public constructor() {
+    this.message = 'Welcome to Snake!';
+  }
 
   public ngOnInit(): void {
     this.board.newGame();
   }
 
-  public doTogglePause(): void {
-    this.paused = !this.paused;
+  public play(): void {
+    this.message = 'Enjoy playing!';
+    setTimeout(() => {
+      this.message = 'Snake begins in 3';
+      setTimeout(() => {
+        this.message = 'Snake begins in 2';
+        setTimeout(() => {
+          this.message = 'Snake begins in 1';
+          setTimeout(() => {
+            this.message = 'START';
+            setTimeout(() => {
+              this.playing = true;
+              this.run();
+            }, 700);
+          }, 1000);
+        }, 1000);
+      }, 1000);
+    }, 1000);
   }
 
-  public play(): void {
+  public saveHighscore(): void { }
+
+  public quit(): void { }
+
+  public run(): void {
     if (this.dead) {
-      this.board.newGame();
-      this.score = 0;
-      this.dead = false;
+      this.initializeNewGame();
     }
     const runTime = () => {
       setTimeout(() => {
@@ -55,6 +79,8 @@ export class SnakeComponentComponent implements OnInit {
         this.dead = this.dead || this.snake.checkSelfDead();
         if (!this.dead) {
           runTime();
+        } else {
+          this.die();
         }
       }, this.timestep);
     };
@@ -88,6 +114,23 @@ export class SnakeComponentComponent implements OnInit {
       const dir: Direction = KeyCodes[event.code];
       this.changeDirAndGoStep(dir);
     }
+  }
+
+  private die(): void {
+    this.message = 'You Died!';
+    this.playing = false;
+    this.updateHighscore();
+  }
+
+  private updateHighscore(): void {
+    this.highscore = this.score > this.highscore ? this.score : this.highscore;
+  }
+
+  private initializeNewGame(): void {
+    this.snake = new Snake()
+    this.board.newGame();
+    this.score = 0;
+    this.dead = false;
   }
 
   private initializePositions(): Position[] {

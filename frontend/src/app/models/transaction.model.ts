@@ -15,6 +15,8 @@ export class Transaction {
       public product: string,
       public seller: string,
       public buyer: string,
+      public picture?: any,
+
 
     ) {}
 

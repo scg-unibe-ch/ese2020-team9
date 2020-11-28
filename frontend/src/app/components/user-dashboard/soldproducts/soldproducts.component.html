@@ -7,6 +7,8 @@
     <mat-card class="productItem_Card">
       <button mat-flat-button class="button_fill"  [routerLink]="['/productDetail', transaction.productId]" routerLinkActive="active" ><b>{{transaction.product.productName}} </b></button>
 
+
+
       <div *ngIf="transaction.transactionStatus==1">
           <br>
           <b>Status: Please confirm transaction</b>

@@ -8,6 +8,8 @@ import {environment} from "../../../../environments/environment";
 import {ActivatedRoute} from "@angular/router";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatTabsModule} from '@angular/material/tabs';
+import { DomSanitizer } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-shipping',
@@ -59,8 +61,10 @@ export class ShippingComponent implements OnInit {
 
   product: ProductItem;
   id: any;
+  picture: any;
+  image: any;
 
-  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
+  constructor(private sanitizer : DomSanitizer, private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.buyerId = this.userService.getUserId();
@@ -123,6 +127,25 @@ export class ShippingComponent implements OnInit {
           this.isRentable = instances.isRentable;
           this.isAvailable = instances.isAvailable;
           this.sellerId = instances.userId;
+          this.picture = [];
+                    this.productService.getPhotoIds(this.productId).subscribe((photoId: any[]) => {
+
+                      for(let id of photoId){
+                         this.productService.getPhoto(id.imageId).subscribe((blob: any) => {
+
+                               console.log(blob)
+
+                               let objectURL = URL.createObjectURL(blob);
+                               this.image = this.sanitizer.bypassSecurityTrustResourceUrl(objectURL);
+                               console.log(this.image,"img")
+                               this.picture.push(this.image);
+                               console.log(this.picture, "objectURL");
+
+
+                        });
+                      }
+
+                    });
           //this.userReview = instances.userReview;
           //this.changeDetection.detectChanges();
           this.getSeller(this.sellerId);

@@ -7,6 +7,7 @@ import {environment} from "../../../../environments/environment";
 import {Transaction} from "../../../models/transaction.model";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { Directive, Output, EventEmitter, Input, SimpleChange} from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-boughtproducts',
@@ -42,6 +43,7 @@ export class BoughtproductsComponent implements OnInit {
   getBoughtProducts(){
      this.productService.getBoughtProducts(this.userId).subscribe((data: Transaction[]) => {
         this.transactionList = data;
+
      });
   }
 

@@ -6,6 +6,7 @@ import {ProductService} from "../../../services/product.service";
 import {environment} from "../../../../environments/environment";
 import {Transaction} from "../../../models/transaction.model";
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({

@@ -1,0 +1,7 @@
+
+.small {
+  object-fit: cover; /* Do not scale the image */
+  height: 100px;
+  width: auto;
+  opacity: 0.7;
+}

@@ -45,7 +45,7 @@ export class ProductDetailComponent implements OnInit {
   product: ProductItem;
   id: any;
 
-  picture: any;
+  picture: any = [];
   image: any;
 
   constructor(private sanitizer : DomSanitizer, private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService,private productService: ProductService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }

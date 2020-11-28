@@ -4,7 +4,6 @@ export class ProductItem {
     public productId: number,
     public productName: string,
     public productDescription: string,
-    public productImage: string,
     public productPrice: number,
     public productCategory: string,
     public productLocation: string,
@@ -16,7 +15,7 @@ export class ProductItem {
     public isRentable: boolean,
     public isAvailable: boolean,
     public userId: number,
-    public userReview: string,
+    public picture?: any,
   ) {}
 
 }

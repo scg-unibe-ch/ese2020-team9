@@ -9,7 +9,7 @@ import { ProductItem } from "../../models/product-item.model";
 export class ProductItemComponent {
 
   @Input()
-  productItem: ProductItem = new ProductItem(null, '', '', null, null, '', '', null, null, null, null, null, null, null, null, '');
+  productItem: ProductItem = new ProductItem(null, '', '', null, '', '', null, null, null, null, null, null, null, null, null);
 
   @Output()
   update = new EventEmitter<ProductItem>();

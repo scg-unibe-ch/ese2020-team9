@@ -38,10 +38,12 @@ export class FilterComponent implements OnInit {
   pinList: any;
 
 
+
   constructor(private _snackBar: MatSnackBar, private router: Router, private route: ActivatedRoute, private httpClient: HttpClient) {
   }
 
   ngOnInit(): void {
+    let queryParam: Array<number>;
     this.value = "0";
     this.category = this.route.snapshot.queryParamMap.get('c');
     this.name = this.route.snapshot.queryParamMap.get('n');
@@ -107,8 +109,6 @@ export class FilterComponent implements OnInit {
 
   //gets Pins within a certain radius
   getPinsInRadius(addressPin: string){
-        console.log(this.addressPin, "getPinsInRadius")
-
         if (this.addressPin == null){
             let message = "Please enter a zipcode";
             let action = "Ok";
@@ -128,15 +128,14 @@ export class FilterComponent implements OnInit {
               apikey: '4bc7d070-229b-11eb-8bf2-6be81465cc4d'
         };
         if (this.addressPin.length == 4){this.httpClient.get('http://localhost:4200/api/v1/radius', {params}).subscribe((res: any) => {
-              console.log (res.results.length)
-              console.log(res.results, "getPinsInRadius")
-              this.pinList = res.results
-
+              console.log(res.results, "getPinsInRadius");
+              this.pinList = res.results;
+              let queryParam = []
               for (let i = 0; i < res.results.length; i++) {
 
-                console.log ("Result" + i + "   " + res.results[i].code + "   " + res.results[i].city + "   " + res.results[i].distance + " km  " )
+                console.log ("Result" + i + "   " + res.results[i].code + "   " + res.results[i].city + "   " + res.results[i].distance + " km  " );
               }
-
+              console.log(this.pinList, "pinList");
 
           }, (error: any) => {
           });

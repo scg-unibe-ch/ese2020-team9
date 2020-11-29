@@ -37,7 +37,7 @@ export class TransactionService {
                     })
                     .then((foundBuyer) => {
                         if (foundProduct.productPrice <= foundBuyer.wallet) {
-                            const activityScoreIncrement = foundProduct.productPrice * 0.1
+                            const activityScoreIncrement = foundProduct.productPrice * 0.1;
                             return User.increment('wallet', {
                                 by: -foundProduct.productPrice,
                                 where: {
@@ -67,7 +67,7 @@ export class TransactionService {
                                 userId: foundTransaction.userId
                             }
                         }).then(() => {
-                            const activityScoreIncrement = 2 * foundProduct.productPrice * 0.1
+                            const activityScoreIncrement = 2 * foundProduct.productPrice * 0.1;
                             return User.increment('activityScore', {
                                 by: activityScoreIncrement,
                                 where: {

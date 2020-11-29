@@ -1,13 +1,13 @@
-import {ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
-import {ProductItem} from "../../../models/product-item.model";
+import { Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {UserService} from "../../../services/user.service";
 import {ProductService} from "../../../services/product.service";
-import {environment} from "../../../../environments/environment";
 import {ActivatedRoute} from "@angular/router";
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {MatTabsModule} from '@angular/material/tabs';
+import { Location } from "@angular/common";
+import {NewTransaction, Transaction} from "../../../models/transaction.model";
+import {TransactionService} from "../../../services/transaction.service";
 
 @Component({
   selector: 'app-shipping',
@@ -32,7 +32,6 @@ export class ShippingComponent implements OnInit {
   isAvailable = '';
   userId = '';
   userReview = '';
-  userAuth = '';
 
   sellerId: any;
   sellerName = '';
@@ -50,42 +49,32 @@ export class ShippingComponent implements OnInit {
   buyerLastName = '';
   buyerFirstName = '';
 
-
-
   otherAddressPin = '';
   otherAddressCity = '';
   otherAddressCountry = '';
   otherAddressStreet = '';
 
-  product: ProductItem;
-  id: any;
+  deliveryPin: any;
+  deliveryStreet = '';
+  deliveryCity = '';
+  deliveryCountry = '';
 
-  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
+  id: any;
+  isUserLoggedIn: boolean;
+  transaction: NewTransaction;
+
+  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute, private location: Location, private transactionService: TransactionService) { }
 
   ngOnInit(): void {
     this.buyerId = this.userService.getUserId();
     this.getBuyer();
     this.id = this.route.snapshot.paramMap.get('id');
-
     this.getProduct();
+    this.userService.isUserLoggedIn.subscribe(value => {
+      this.isUserLoggedIn = value;
+    });
 
   }
-
-
-  empty(o):boolean{
-        return (o === "" ? true : false);
-      }
-
-
-  checkCountryCode(c:string):boolean{
-    let check = "CH"
-    return (c==check ? true : false);
-  }
-
-  checkCash(){
-    return (this.buyerWallet >= this.productPrice ? false : true);
-  }
-
 
   getBuyer(){this.userService.getUser(this.buyerId).subscribe((instances: any) => {
          //this.sellerId = instances.userId;
@@ -98,9 +87,8 @@ export class ShippingComponent implements OnInit {
          this.buyerAddressCountry = instances.addressCountry;
          this.buyerWallet = instances.wallet;
 
-
        },(error: any) => {
-         let action = "";
+         let action = "X";
          let message = "There is no corresponding Seller!";
          this.openSnackBar(message, action);
      });
@@ -124,17 +112,16 @@ export class ShippingComponent implements OnInit {
           this.isAvailable = instances.isAvailable;
           this.sellerId = instances.userId;
           this.userReview = instances.userReview;
-          //this.changeDetection.detectChanges();
           this.getSeller(this.sellerId);
 
       },(error: any) => {
-      this.userAuth = 'There is no corresponding Product!';
+      let action = "X";
+      let message = "There is no corresponding Product!";
+      this.openSnackBar(message, action);
     });
   }
 
-
   getSeller(sellerId: number){
-
     this.userService.getUser(this.sellerId).subscribe((instances: any) => {
           //this.sellerId = instances.userId;
           this.sellerName = instances.userName;
@@ -143,7 +130,7 @@ export class ShippingComponent implements OnInit {
           this.sellerAddressCountry = instances.addressCountry;
 
       },(error: any) => {
-      let action = "";
+      let action = "X";
       let message = "There is no corresponding Seller!";
       this.openSnackBar(message, action);
     });
@@ -151,37 +138,78 @@ export class ShippingComponent implements OnInit {
 
   //Initializes a new transaction
   buyProduct(): void {
-    this.httpClient.post(environment.endpointURL + 'transaction/', {
-      //transactionId : this.transactionId,
+    if(this.buyerAddressPin !== '' && this.otherAddressPin == '') {
+      this.deliveryPin = this.buyerAddressPin;
+    } else {
+      this.deliveryPin = this.otherAddressPin;}
+
+    if(this.buyerAddressStreet !== '' && this.otherAddressStreet == '') {
+      this.deliveryStreet = this.buyerAddressStreet;
+    } else {
+      this.deliveryStreet = this.otherAddressStreet;
+    }
+
+    if(this.buyerAddressCity !== '' && this.otherAddressCity == '') {
+      this.deliveryCity = this.buyerAddressCity;
+    } else {
+      this.deliveryCity = this.otherAddressCity;
+    }
+
+    if(this.buyerAddressCountry !== '' && this.otherAddressCountry == '') {
+      this.deliveryCountry = this.buyerAddressCountry;
+    } else {
+      this.deliveryCountry = this.otherAddressCountry;
+    }
+
+    this.transaction = {
       productId: this.productId,
       userId: this.sellerId,
       buyerId: this.buyerId,
-      //transactionStatus: this.transactionStatus,
       deliveryFirstName: this.buyerFirstName,
       deliveryLastName: this.buyerLastName,
-      deliveryStreet: this.buyerAddressStreet,
-      deliveryPin: this.buyerAddressPin,
-      deliveryCity: this.buyerAddressCity,
-      deliveryCountry: this.buyerAddressCountry,
-    }).subscribe((res: any) => {
+      deliveryPin: this.deliveryPin,
+      deliveryStreet: this.deliveryStreet,
+      deliveryCity: this.deliveryCity,
+      deliveryCountry: this.deliveryCountry,
+    };
 
-      //navigates to productItem
+    this.transactionService.buyProduct(this.transaction).subscribe((res: any) => {
+      //navigates to user dashboard
       this.router.navigate(['/user']);
-      let message = "Seller has been contacted, please await approval of buy request"
-      let action = "OK";
+      let message = "Seller has been contacted. " + res.message;
+      let action = "X";
       this.openSnackBar(message, action);
 
     }, (error: any) => {
-      let message = "An Error occurred!";
-      let action = "OK";
+      let message = "An error has occurred!";
+      let action = "X";
       this.openSnackBar(message, action);
     });
 
+  }
+
+  // check if all address fields are filled
+  empty(a, b, c, d):boolean {
+    return (a === '' || b === '' || c === '' || d === '');
+  }
+
+ /*
+  checkCountryCode(c:string):boolean{
+    let check = "CH";
+    return (c==check);
+  }*/
+
+  checkCash(){
+    return (this.buyerWallet < this.productPrice);
   }
 
   openSnackBar(message: string, action: string) {
           this._snackBar.open(message, action, {
             duration: 3000
           });
-        }
+  }
+
+  goBack(): void {
+    this.location.back();
+  }
 }

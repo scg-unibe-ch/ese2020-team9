@@ -1,13 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { environment } from '../../../environments/environment';
 import { ProductItem } from '../../models/product-item.model';
-import { User } from "../../models/user.model";
+import { User} from "../../models/user.model";
 import { ProductService } from "../../services/product.service";
 import { UserService } from "../../services/user.service";
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-
 
 @Component({
   selector: 'app-admin-panel',
@@ -21,8 +18,9 @@ export class AdminPanelComponent implements OnInit {
  userId: any;
  userToken: string;
  productId: any;
- users: User[] ;
+ userList: User[] ;
  productList: ProductItem[];
+
 
   constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private productService: ProductService, private userService: UserService) {}
 
@@ -33,23 +31,34 @@ export class AdminPanelComponent implements OnInit {
 
   }
   getUserList(){
-    console.log('lll');
-    this.httpClient.get(environment.endpointURL + 'user').subscribe((instances: any) => {
-      this.users = instances.map((instance : any) => new User(instance.userId, instance.userName, instance.admin));
-    })
-  }
-
-  onUserDelete(user: User): void{
-    this.httpClient.delete(environment.endpointURL + 'user/' + user.userId).subscribe(() => {
-      this.users.splice(this.users.indexOf(user), 1); //delete one user
+    this.userService.getUserList().subscribe((data: User [] ) => {
+      this.userList = data;
     });
   }
 
-  // user - UPDATE (upgrade to admin)
-  onUserUpdate(user: User): void{
-    this.httpClient.put(environment.endpointURL + 'user/makeAdmin/' + user.userId, {
-      admin: user.admin,
-    }).subscribe();
+  // user - delete user
+  deleteUser(user: User): void{
+    this.userService.deleteUser(user).subscribe((res: any) => {
+      this.userList.splice(this.userList.indexOf(user), 1);//delete one user
+      let action = "X";
+      this.openSnackBar(res.message, action);
+    }, (error => {
+      let action = "X";
+      this.openSnackBar(error.message, action);
+    }));
+  }
+
+  // user - upgrade to admin
+  upgradeUser(user: User): void{
+    this.userService.upgradeUser(user.userId, user.admin).subscribe((res: any)  => {
+      // updates admin value for user
+      let message = "User has been successfully upgraded to admin!";
+      let action = "X";
+      this.openSnackBar(message, action);
+      }, (error: any) => {
+      let action = "X";
+      this.openSnackBar(error.message, action);
+    });
   }
 
   // products - get all Unapproved ProductItems
@@ -59,32 +68,29 @@ export class AdminPanelComponent implements OnInit {
     });
   }
 
-  approveProduct(productId: number){
-   this.httpClient.put(environment.endpointURL + 'products/approve/' + productId,{
-
-    }).subscribe((res: any)  => {
-            this.getProductList();
-             let message = "Product approved"
-             let action = "Ok"
-             this.openSnackBar(message, action);
-           }, (error: any) => {
-             let message = "Can not delete this Product"
-             let action = ""
-             this.openSnackBar(message, action);
-           });
+  approveProduct(product: ProductItem){
+    this.productService.approveProduct(product).subscribe((res: any)  => {
+      //removes product from productList
+      this.productList = this.productList.filter(item => item !== product);
+      let action = "X";
+      this.openSnackBar(res.message, action);
+    }, (error: any) => {
+      let action = "X";
+      this.openSnackBar(error.message, action);
+    });
   }
 
-  deleteProduct(productId: number){
-   this.httpClient.delete(environment.endpointURL + 'products/' + productId,{}).subscribe((res: any)  => {
-          this.getProductList();
-          let message = "Product deleted"
-          let action = "Ok"
-          this.openSnackBar(message, action);
-        }, (error: any) => {
-          let message = "Can not delete this Product"
-          let action = ""
-          this.openSnackBar(message, action);
-        });
+  deleteProduct(product: ProductItem): void {
+    this.productService.deleteProduct(product).subscribe((res: any)  => {
+      //removes product from productList
+      this.productList = this.productList.filter(item => item !== product);
+      let action = "X";
+      this.openSnackBar(res.message, action);
+    }, (error: any) => {
+      let message = "Can not delete this product!";
+      let action = "X";
+      this.openSnackBar(message, action);
+    });
   }
 
   openSnackBar(message: string, action: string) {

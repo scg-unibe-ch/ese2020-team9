@@ -2,7 +2,7 @@
 <div class="admin-view">
   <mat-tab-group>
     <mat-tab class = 'navigation' label="List Of Users">
-  <mat-list-item *ngFor="let user of userList" >
+  <mat-list-item *ngFor="let user of userList" class= "user_list" >
   <app-user
         [user]="user"
         (update)="onUserUpdate($event)"
@@ -32,7 +32,6 @@
         <mat-card-title>{{productItem.productName}} </mat-card-title>
         <img class = "center-cropped" src="{{productItem.productImage}}" alt="{{productItem.productName}}" >
        <mat-card-content >
-        
        <br>
      {{productItem.productDescription}}
     <br><br>

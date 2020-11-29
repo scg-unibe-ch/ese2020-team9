@@ -34,3 +34,15 @@ mat-radio-button{
 .mat-card-title{
   font-size: 15px;
 }
+
+::ng-deep .mat-list-item{
+  font-family:'Press Start 2P', cursive !important;
+}
+ .mat-flat-button {
+  background-color: violet !important;
+  font-size: small;
+}
+::ng-deep .mat-checkbox-layout{
+  font-family:'Press Start 2P', cursive !important;
+
+}

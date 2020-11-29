@@ -22,6 +22,38 @@
 .userRegistration{
   background-color: #082A5D!important;
 }
-::ng-deep .mat-form-field {
+::ng-deep .mat-form-field .mat-stepper-horizontal{
   background-color: #082A5D!important;
+  color: white;
+}
+
+.mat-stepper-horizontal{
+  background-color: #082A5D!important;
+  color: white;
+  font-family: 'Press Start 2P', cursive;
+
+}
+
+::ng-deep .mat-horizontal-stepper-content{
+  background-color: #082A5D!important;
+  color: white;
+  font-family: 'Press Start 2P', cursive;
+
+}
+::ng-deep .mat-card{
+  background-color: #082A5D!important;
+  color: white;
+  font-family: 'Press Start 2P', cursive;
+}
+
+::ng-deep .mat-typography{
+  color: white;
+  font-family: 'Press Start 2P', cursive;
+
+}
+
+::ng-deep .mat-step-label .mat-step-label-active .mat-step-label-selected{
+  color: white;
+  font-family: 'Press Start 2P', cursive;
+
 }

@@ -28,3 +28,12 @@ mat-toolbar{
  color: #46FFFD;
 
 }
+
+.center-cropped{
+  object-fit: cover; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+  height: 60px;
+  width: 60px;
+  opacity: 0.8;
+
+}

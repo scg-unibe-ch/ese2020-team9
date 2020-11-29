@@ -39,6 +39,12 @@ input[type=text]{
   color: #46FFFD;
 }
 
+.categoryIcon{
+  height:90px;
+  /*box-shadow:0px 0px 15px white;*/
+  border-radius: 7px;
+}
+
 /* category */
 @media (max-width: 611px){
   .bigDisplay {
@@ -51,6 +57,8 @@ input[type=text]{
   display:flex;
   flex-flow: row wrap;
   justify-content: space-between;
+
+
 }
 
 .categoryButton{

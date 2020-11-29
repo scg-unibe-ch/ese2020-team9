@@ -4,6 +4,7 @@
     <div class="nav">
       <a routerLink="/home">
         <img src="assets/cd/loader.gif"  class="logo" alt="gif of diskette" />
+
       </a>
     </div>
     <span class="spacer"></span>
@@ -12,7 +13,7 @@
       <button mat-button class="storMainColor" routerLink="/login" routerLinkActive="active">Login<mat-icon>login</mat-icon></button>
     </div>
     <div *ngIf="isUserLoggedIn">
-      <button class="storMainColor" mat-button color="storMainColor" [matMenuTriggerFor]="menu"><mat-icon >account_circle</mat-icon>{{isUserName}}</button>
+      <button class="storMainColor" mat-button color="storMainColor" [matMenuTriggerFor]="menu"><img class ="center-cropped"src ="../assets/cd/hammer.gif"><br> {{isUserName}}</button>
     </div>
     <mat-menu #menu>
       <button mat-menu-item routerLink="/user" routerLinkActive="active">My Profile</button>

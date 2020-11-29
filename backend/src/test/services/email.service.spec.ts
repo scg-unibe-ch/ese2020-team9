@@ -1,4 +1,4 @@
-import { EmailService } from '../../services/email.service';
+/*import { EmailService } from '../../services/email.service';
 import { expect } from 'chai';
 import nodemailer from 'nodemailer';
 
@@ -31,3 +31,4 @@ describe('EmailService Test', () => {
         });
     });
 });
+*/

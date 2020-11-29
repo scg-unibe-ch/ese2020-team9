@@ -144,19 +144,22 @@ export class UserService {
         });
     }
 
-    public getGameHighScores() {
+    public getGameHighScores(): Promise<User[]> {
+        console.log('lololo');
         return User.findAll({
-            order:[
+            order: [
                 ['gameScore', 'DESC']
             ],
             attributes: ['userId', 'userName', 'gameScore'],
             limit: 10
+        }).catch(err => {
+            return Promise.reject({message: err});
         });
     }
 
-    public getOverallHighScores() {
+    public getOverallHighScores(): Promise<User[]> {
         return User.findAll({
-            order:[
+            order: [
                 ['overallScore', 'DESC']
             ],
             attributes: ['userId', 'userName', 'overallScore'],

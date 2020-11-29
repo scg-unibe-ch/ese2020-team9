@@ -37,7 +37,6 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from "@angular/material/select";
 import { MatChipsModule} from "@angular/material/chips";
-import { ProductViewComponent } from './components/product-view/product-view.component';
 import { ProductDisplayComponent } from './components/product-display/product-display.component';
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
@@ -62,7 +61,6 @@ import { SearchBarComponent } from "./components/dashboard/search-bar/search-bar
     OtherUserDashboardComponent,
     SoldproductsComponent,
     BoughtproductsComponent,
-    ProductViewComponent,
     ProductDisplayComponent,
     SearchBarComponent,
     SearchComponent,

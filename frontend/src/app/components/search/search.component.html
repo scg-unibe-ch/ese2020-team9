@@ -102,11 +102,11 @@
         <a>Delivery:</a>
         <mat-radio-button *ngFor="let data of selection" [checked]="data.value" (click)="showDelivery(data.value)">{{data.name}}</mat-radio-button>
       </mat-radio-group>
-      <mat-radio-group [(ngModel)]="isRentable" color="#46FFFD" name="isRentable">
+      <mat-radio-group [(ngModel)]="isRentable" class="smRadioGroup" color="#46FFFD" name="isRentable">
         <a>Rentable:</a>
         <mat-radio-button *ngFor="let data of selection" [checked]="data.value" (click)="showRenatble(data.value)">{{data.name}}</mat-radio-button>
       </mat-radio-group>
-      <mat-radio-group [(ngModel)]="isService" color="#46FFFD" name="isService">
+      <mat-radio-group [(ngModel)]="isService" class="smRadioGroup" color="#46FFFD" name="isService">
         <a>Product Type:</a>
         <mat-radio-button *ngFor="let data of selection2" [checked]="data.value" (click)="showService(data.value)">{{data.name}}</mat-radio-button>
       </mat-radio-group>

@@ -313,3 +313,13 @@ The following Diagram shows graphically the identified classes and their relatio
 
 ![](UML_Class_Diagram_II.png)
 
+
+## Activity Diagrams
+
+The first Activity Diagram shows the flow of the action "beating the current highscore".
+
+![](Activity_Diagram_I.jpg)
+
+The second Activity Diagram shows the flow of the action "buy an item".
+
+![](Activity_Diagram_II.png)

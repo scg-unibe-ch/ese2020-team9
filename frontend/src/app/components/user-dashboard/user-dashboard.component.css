@@ -9,5 +9,18 @@
 
 .productItem_Card{
   margin: 5px;
+  box-shadow: 2px 2px 30px  #F72871;
+  background-color: #082A5D;
+ /* border-color: teal;
+  border-width: 2px;*/
+  border-radius: 30px;
+  color: whitesmoke;
+  font-family:'Press Start 2P', cursive !important;
+  font-size: 7px;
 }
-
+.mat-card-content{
+  font-size: 9px;
+}
+.mat-card-title{
+  font-size: 15px;
+}

@@ -24,6 +24,36 @@
 -->
 
 <mat-tab label="Products To Approve">
+
+
+  <div  fxLayout="row" fxLayoutGap="2% grid" fxLayoutAlign="space-evenly stretch">
+    <div fxFlex="10%" fxFlex.xl="15%" fxFlex.lg="20%" fxFlex.md="25%" fxFlex.sm="33%" fxFlex.xs="50%" *ngFor="let productItem of productList">
+      <mat-card class="productItem_Card">
+        <mat-card-title>{{productItem.productName}} </mat-card-title>
+        <img class = "center-cropped" src="{{productItem.productImage}}" alt="{{productItem.productName}}" >
+       <mat-card-content >
+        
+       <br>
+     {{productItem.productDescription}}
+    <br><br>
+    Posted on {{productItem.uploadDate | date: "dd.MM.yy, HH:mm"}}
+  </mat-card-content> 
+  <mat-card-footer>
+        <mat-radio-group [(ngModel)]="productItem.isApproved">
+          <mat-radio-button value="true" (click)="approveProduct(productItem)" >Approve</mat-radio-button>
+          <mat-radio-button value="false" (click)="deleteProduct(productItem)" >Delete</mat-radio-button>
+        </mat-radio-group>
+      </mat-card-footer>
+      </mat-card>
+    
+      </div>
+    </div>
+
+
+</mat-tab>
+
+<!--
+
   <mat-grid-list cols="4" [gutterSize]="'5px'" rowHeight="450px">
     <mat-grid-tile *ngFor="let productItem of productList" style="backgroundColor: white">
 
@@ -52,4 +82,4 @@
       </mat-grid-tile-footer>
     </mat-grid-tile>
   </mat-grid-list>
-</mat-tab>
+  -->

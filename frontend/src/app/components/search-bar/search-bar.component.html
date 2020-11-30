@@ -1,6 +1,0 @@
-<div class="searchBar">
-  <input type="text" [(ngModel)]="name" placeholder="Search" name="name">
-  <button mat-button class="searchButton" [routerLink]="['/input']" [queryParams]="{n: name}"><mat-icon>search</mat-icon>Search</button>
-  <button mat-button *ngIf="name !== ''" matSuffix mat-icon-button (click)="clearName()"><mat-icon>clear</mat-icon></button>
-</div>
-

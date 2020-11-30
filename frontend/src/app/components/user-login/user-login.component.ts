@@ -15,9 +15,6 @@ export class UserLoginComponent implements OnInit {
   userLogin = '';
   password = '';
   userWallet = '';
-  //userToken: string;
-  //loggedIn = false;
-
   userAuth = '';
   isUserLoggedIn: boolean;
 
@@ -47,10 +44,8 @@ export class UserLoginComponent implements OnInit {
       //navigates to dashboard
       this.router.navigate(['/home']);
       }, (error: any) => {
-        //let message = "Your Username/Email and/or Password is wrong, try again!"
-        let action = "Retry"
+        let action = "Retry";
         this.openSnackBar(error.error.message, action);
-        //this.userAuth = 'Your Username/Email and/or Password is wrong, try again!';
       });
   }
 

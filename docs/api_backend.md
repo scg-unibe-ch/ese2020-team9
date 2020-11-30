@@ -542,8 +542,22 @@ Adds a new Product to the system.
      <summary>Response (STATUS 200)</summary>
 
     ```json
-    {
-        "message": "Product successfully created!"
+    {   
+        "productId": "number",
+        "productName": "string",
+        "productDescription": "string",
+        "productPrice": "number",
+        "productCategory": "string",
+        "productLocation": "string",
+        "productDelivery": "boolean",
+        "uploadDate": "Date",
+        "sellDate": "Date",
+        "isApproved": "boolean",
+        "isService": "boolean",
+        "isRentable": "boolean",
+        "isAvailable": "boolean",
+        "userId": "number",
+        "userReview": "string"
     }
     ```
     </details>

@@ -1,13 +1,14 @@
-import {ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {ProductItem} from "../../models/product-item.model";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import {ProductService} from "../../services/product.service";
-import {environment} from "../../../environments/environment";
 import { ActivatedRoute} from "@angular/router";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { Location} from "@angular/common";
+import {CategoryList} from "../../category-list";
+import {_isNumberValue} from "@angular/cdk/coercion";
 
 @Component({
   selector: 'app-productForm',
@@ -37,10 +38,12 @@ export class ProductFormComponent implements OnInit {
   product: ProductItem;
   id: any;
   add: boolean;
+  categories = CategoryList;
 
   constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private _ngZone: NgZone, private productService: ProductService, private route: ActivatedRoute, private location: Location) { }
 
   ngOnInit(): void {
+
     this.userId = this.userService.getUserId();
     this.id = this.route.snapshot.paramMap.get('id');
 
@@ -70,7 +73,6 @@ export class ProductFormComponent implements OnInit {
           this.isAvailable = instances.isAvailable;
           this.userId = instances.userId;
           this.userReview = instances.userReview;
-          //this.changeDetection.detectChanges();
 
       },(error: any) => {
       this.userAuth = 'There is no corresponding Product!';
@@ -78,77 +80,81 @@ export class ProductFormComponent implements OnInit {
   }
 
   addProduct(): void {
-    this.httpClient.post(environment.endpointURL + 'products/', {
+    this.product = {
+      productId: 0,
       productName: this.productName,
       productDescription: this.productDescription,
+      productPrice: Number(this.productPrice),
       productImage: this.productImage,
-      productPrice: this.productPrice,
       productCategory: this.productCategory,
       productLocation: this.productLocation,
-      productDelivery: this.productDelivery,
-      uploadDate:    new Date(),
-      sellDate: '',
+      productDelivery: Boolean(this.productDelivery),
+      uploadDate: new Date(),
+      sellDate: null,
       isApproved: false,
-      isService: this.isService,
-      isRentable: this.isRentable,
+      isService: Boolean(this.isService),
+      isRentable: Boolean(this.isRentable),
       isAvailable: true,
-      userId: this.userId,
+      userId: parseFloat(this.userId),
       userReview: this.userReview,
+    };
 
-    }).subscribe((res: any) => {
-
-      //navigates to dashboard
-      this.router.navigate(['/user']);
-       let action = "";
-       this.openSnackBar(res.message, action);
+    this.productService.addProduct(this.product).subscribe((res: any) => {
+      //navigates back to user dashboard
+      this.goBack();
+      let action = "X";
+      this.openSnackBar(res.message, action);
     }, (error: any) => {
-        let action = "";
-        this.openSnackBar(error.message, action);
-
+      let message = "Can not add this product!";
+      let action = "X";
+      this.openSnackBar(message, action);
     });
   }
 
   editProduct(): void {
-    this.httpClient.put(environment.endpointURL + 'products/' + this.productId, {
+    this.product = {
+      productId: this.productId,
       productName: this.productName,
       productDescription: this.productDescription,
       productImage: this.productImage,
-      productPrice: this.productPrice,
+      productPrice: Number(this.productPrice),
       productCategory: this.productCategory,
       productLocation: this.productLocation,
-      productDelivery: this.productDelivery,
-      uploadDate: this.uploadDate,
-      sellDate: this.sellDate,
+      productDelivery: Boolean(this.productDelivery),
+      uploadDate: new Date(),
+      sellDate: null,
       isApproved: false,
-      isService: this.isService,
-      isRentable: this.isRentable,
-      isAvailable: this.isAvailable,
-      userId: this.userId,
+      isService: Boolean(this.isService),
+      isRentable: Boolean(this.isRentable),
+      isAvailable: true,
+      userId: Number(this.userId),
       userReview: this.userReview,
-
-    }).subscribe((res: any) => {
-
-      //navigates to productItem
-      this.router.navigate(['/user']);
-      let action = "";
-      this.openSnackBar(res.message, action);
-
-    }, (error: any) => {
-      let message = "Your Product Information is invalid!";
+    };
+    this.productService.editProduct(this.product).subscribe((res: any) => {
+      //navigates back to user dashboard
+      this.goBack();
+      let message = "Product successfully edited!";
       let action = "";
       this.openSnackBar(message, action);
+    }, (error: any) => {
+      let message = "Your Product Information is invalid!";
+      let action = "X";
+      this.openSnackBar(message, action);
     });
-
   }
 
-  //check if field is empty
-  empty(input):boolean{
-    if (input === "") return true;
-    else return false
+  // check if all required fields are filled
+  allFilled(a, b, c):boolean {
+    return (a === '' || b === '' || c === '');
   }
 
-  allFieldsAreFilled():boolean{
-    return true;
+  empty(input){
+    return (input === '');
+  }
+
+  // check if field is number
+  checkNumber(input):boolean{
+   return (!_isNumberValue(input));
   }
 
   openSnackBar(message: string, action: string) {

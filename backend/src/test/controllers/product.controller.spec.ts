@@ -128,7 +128,9 @@ describe('ProductController Test', () => { // bundles the tests related to the P
             }).end(function(err, res) {
                 expect(err).to.be.eq(null);
                 expect(res).to.have.status(200);
-                expect(res.body.message).to.be.eq('Product successfully created!');
+                expect(res.body.productId).to.be.eq(1);
+                expect(res.body.productName).to.be.eq('Schoggi');
+                expect(res.body.productDescription).to.be.eq('E feini Schoggi us Guetemala.');
                 done();
             });
         });

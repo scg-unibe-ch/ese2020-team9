@@ -60,15 +60,14 @@ describe('TransactionController Test', () => { // bundles the tests related to t
         productPrice: 10,
         productCategory: 'food',
         productLocation: null,
-        productDelivery: null,
+        productDelivery: true,
         uploadDate: new Date(Date.now()),
         sellDate: null,
         isApproved: true,
         isService: false,
-        isRentable: null,
+        isRentable: false,
         isAvailable: true,
         userId: 1,
-        userReview: null,
         buyerId: null
     };
     const product2: ProductAttributes = {
@@ -78,15 +77,14 @@ describe('TransactionController Test', () => { // bundles the tests related to t
         productPrice: 30,
         productCategory: 'food',
         productLocation: null,
-        productDelivery: null,
+        productDelivery: true,
         uploadDate: new Date(Date.now()),
         sellDate: null,
         isApproved: false,
         isService: false,
-        isRentable: null,
+        isRentable: false,
         isAvailable: true,
         userId: 1,
-        userReview: null,
         buyerId: null
     };
 

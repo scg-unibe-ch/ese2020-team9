@@ -92,22 +92,18 @@ userController.put('/updateGameScore/:userId/:newScore' ,
 );
 
 
-userController.get('/gameHighscores',
+userController.get('/getHighscores/game',
     (req: Request, res: Response) => {
         userService.getGameHighScores().then(users => {
-            console.log('##########################################');
-            console.log(users);
             res.status(200).send(users);
         })
         .catch(err => res.status(500).send(err));
     }
 );
 
-userController.get('/overallHighscores',
+userController.get('/getHighscores/overall',
     (req: Request, res: Response) => {
         userService.getOverallHighScores().then(users => {
-            console.log('##########################################');
-            console.log(users);
             res.status(200).send(users);
         })
         .catch(err => res.status(500).send(err));

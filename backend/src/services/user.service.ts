@@ -145,7 +145,6 @@ export class UserService {
     }
 
     public getGameHighScores(): Promise<User[]> {
-        console.log('lololo');
         return User.findAll({
             order: [
                 ['gameScore', 'DESC']

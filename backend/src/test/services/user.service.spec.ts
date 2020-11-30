@@ -296,7 +296,7 @@ describe('UserService Tests', () => {
                 done();
             });
         });
-    });/*
+    });
     describe('Test sendEmailWithResetLink', function() {
         this.timeout(12000);
         it('should send email successfully when email exists', function(done) {
@@ -346,7 +346,6 @@ describe('UserService Tests', () => {
             });
         });
     });
-    */
     describe('Test updateGameScore', () => {
         it('should successfully update the game and overall score', function(done) {
             testedUserService.updateGameScore(1, 5).then(() => {

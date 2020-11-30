@@ -9,8 +9,8 @@ const productService = new ProductService();
 
 
 productController.post('/', (req: Request, res: Response) => {
-    productService.create(req.body).then(() =>
-        res.status(200).send({message: 'Product successfully created!'}))
+    productService.create(req.body).then(product =>
+        res.status(200).send({message: 'Product ' + product.productId + ' successfully created!'}))
         .catch(err => res.status(400).send(err));
 });
 

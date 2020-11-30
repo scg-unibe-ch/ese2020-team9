@@ -543,7 +543,7 @@ Adds a new Product to the system.
 
     ```json
     {
-        "message": "Product successfully created!"
+        "message": "Product <productId> successfully created!"
     }
     ```
     </details>

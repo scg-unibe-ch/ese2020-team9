@@ -31,34 +31,7 @@
                       cdkAutosizeMaxRows="20"></textarea>
           </mat-form-field>
 
-        <mat-form-field appearance="fill">
 
-          <mat-label>Select Product Category</mat-label>
-          <select matNativeControl [(ngModel)]="productCategory" value="productCategory">
-            <option value="AntiquesAndArt">Antiques & Art</option>
-            <option value="BabyAndChild">Baby & Child</option>
-            <option value="Books">Books</option>
-            <option value="OfficeAndCommercial">Office & Commercial</option>
-            <option value="ComputerAndComputer accessories">Computer & Computer accessories</option>
-            <option value="Vehicles">Vehicles</option>
-            <option value="Films">Films</option>
-            <option value="PhotoAndVideo">Photo & Video</option>
-            <option value="GardenAndCrafts">Garden & Crafts</option>
-            <option value="Housekeeping">Housekeeping</option>
-            <option value="RealEstate">Real estate</option>
-            <option value="ClothingAndAccessories">Clothing & Accessories</option>
-            <option value="Music">Music</option>
-            <option value="Collect">Collect</option>
-            <option value="ToysAndCrafts">Toys & Crafts</option>
-            <option value="SportsAndOutdoors">Sports & Outdoors</option>
-            <option value="JobOffers">Job offers</option>
-            <option value="TVAndAudio">TV & Audio</option>
-            <option value="PhoneAndNavigation">Phone & Navigation</option>
-            <option value="TicketsAndVouchers">Tickets & Vouchers</option>
-            <option value="Animals">Animals</option>
-            <option value="Miscellaneous">Miscellaneous</option>
-          </select>
-        </mat-form-field>
 
     <mat-checkbox class="checkboxMargin" [(ngModel)]="isRentable">Is your product rentable?</mat-checkbox>
     <div>
@@ -208,29 +181,9 @@
         <mat-form-field appearance="fill">
 
           <mat-label>Select Product Category</mat-label>
-          <select matNativeControl [(ngModel)]="productCategory" value="productCategory">
-            <option value="AntiquesAndArt">Antiques & Art</option>
-            <option value="BabyAndChild">Baby & Child</option>
-            <option value="Books">Books</option>
-            <option value="OfficeAndCommercial">Office & Commercial</option>
-            <option value="ComputerAndComputer accessories">Computer & Computer accessories</option>
-            <option value="Vehicles">Vehicles</option>
-            <option value="Films">Films</option>
-            <option value="PhotoAndVideo">Photo & Video</option>
-            <option value="GardenAndCrafts">Garden & Crafts</option>
-            <option value="Housekeeping">Housekeeping</option>
-            <option value="RealEstate">Real estate</option>
-            <option value="ClothingAndAccessories">Clothing & Accessories</option>
-            <option value="Music">Music</option>
-            <option value="Collect">Collect</option>
-            <option value="ToysAndCrafts">Toys & Crafts</option>
-            <option value="SportsAndOutdoors">Sports & Outdoors</option>
-            <option value="JobOffers">Job offers</option>
-            <option value="TVAndAudio">TV & Audio</option>
-            <option value="PhoneAndNavigation">Phone & Navigation</option>
-            <option value="TicketsAndVouchers">Tickets & Vouchers</option>
-            <option value="Animals">Animals</option>
-            <option value="Miscellaneous">Miscellaneous</option>
+          <select matNativeControl [(ngModel)]="productCategory" value="productCategory" >
+            <option value="">None</option>
+            <option *ngFor="let category of categories" [value]="category.value">{{category.value}}</option>
           </select>
         </mat-form-field>
 

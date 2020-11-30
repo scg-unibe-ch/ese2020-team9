@@ -111,11 +111,8 @@ export class ProductFormComponent implements OnInit {
 
     this.productService.addProduct(this.product).subscribe((res: any) => {
       this.editId = res.productId
+      console.log(this.editId)
 
-      //navigates back to user dashboard
-      this.goBack();
-      let action = "X";
-      this.openSnackBar(res.message, action);
     }, (error: any) => {
       let message = "Can not add this product!";
       let action = "X";
@@ -125,7 +122,7 @@ export class ProductFormComponent implements OnInit {
 
   editProduct(): void {
     this.product = {
-      productId: this.productId,
+      productId: this.editId,
       productName: this.productName,
       productDescription: this.productDescription,
       //productImage: this.productImage,
@@ -188,13 +185,12 @@ export class ProductFormComponent implements OnInit {
     this.imageSelected = true;
     this.imageName = event.target.files[0].name
 
-
   }
 
 
  onUpload() {
    const uploadData = new FormData();
-   console.log(this.editId)
+   //console.log(this.editId)
    uploadData.append('image', this.selectedFile, this.selectedFile.name);
    this.httpClient.post(environment.endpointURL + 'products/images/upload/'+ this.editId, uploadData, {
      reportProgress: true,
@@ -202,24 +198,29 @@ export class ProductFormComponent implements OnInit {
    })
      .subscribe(event => {
        console.log(event); // handle event here
-     });
+       let message = "Upload done!";
+       let action = "X";
+       this.openSnackBar(message, action);
+     }, (error: any) => {
+            let message = "Something went wrwong!";
+            let action = "X";
+            this.openSnackBar(message, action);
+          });
  }
 
 
-  stepOneComplete(){
+  stepOneComplete(productName, productDescription, productPrice, productCategory):boolean {
+    let n = this.productName;
+    let d = this.productDescription;
+    let p = this.productPrice;
+    let c = this.productCategory;
 
-    if (true){ return true}
-        else {
-          return false
-        }
+    return !(n === '' || d === '' || p === undefined || c === '')
   }
 
-  stepTwoComplete(){
-
-      if (true){ return true}
-          else {
-            return false
-          }
+  stepTwoComplete(productLocation){
+      let z = this.productLocation;
+      return !(z === '')
     }
 
 

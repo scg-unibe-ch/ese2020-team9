@@ -6,21 +6,16 @@
 <!--add product only-->
 <div *ngIf="add">
   <mat-horizontal-stepper [linear]="true" #stepper>
+
     <mat-step label="Product information">
       <mat-card>
         <mat-form-field>
 
-          <input matInput placeholder="Product Name" [(ngModel)]="productName" name="productName">
+          <input matInput placeholder="Product Name*" [(ngModel)]="productName" name="productName">
           <div *ngIf="empty(productName)" class="invalid-feedback">Product Name</div>
 
         </mat-form-field>
 
-
-    <mat-form-field>
-      <input matInput placeholder="Product Image" [(ngModel)]="productImage" name="productImage">
-    </mat-form-field>
-  </mat-card>
-  <mat-card>
           <mat-form-field>
             <mat-label>Describe your Product</mat-label>
             <textarea matInput
@@ -31,33 +26,19 @@
                       cdkAutosizeMaxRows="20"></textarea>
           </mat-form-field>
 
+        </mat-card>
 
+          <br>
+        <mat-card>
+          <mat-form-field appearance="fill">
+            <mat-label>Select Product Category</mat-label>
+            <select matNativeControl [(ngModel)]="productCategory" value="productCategory">
+              <option [value]="">None</option>
+              <option *ngFor="let category of categories" [value]="category.value">{{category.viewValue}}<option>
+            </select>
+          </mat-form-field>
+      </mat-card>
 
-    <mat-checkbox class="checkboxMargin" [(ngModel)]="isRentable">Is your product rentable?</mat-checkbox>
-    <div>
-      <br>
-    </div>
-    <mat-form-field appearance="fill">
-      <mat-label>Select Product Category</mat-label>
-      <select matNativeControl [(ngModel)]="productCategory" value="productCategory">
-        <option [value]="">None</option>
-        <option *ngFor="let category of categories" [value]="category.value">{{category.viewValue}}<option>
-      </select>
-    </mat-form-field>
-  </mat-card>
-
-  <mat-card>
-
-    <mat-form-field>
-      <mat-label>Describe your Product</mat-label>
-      <textarea matInput
-                [(ngModel)]="productDescription"
-                cdkTextareaAutosize
-                #autosize="cdkTextareaAutosize"
-                cdkAutosizeMinRows="1"
-                cdkAutosizeMaxRows="20"></textarea>
-    </mat-form-field>
-  </mat-card>
 
   <mat-card>
 
@@ -71,25 +52,13 @@
       </div>
     </mat-form-field>
 
-    <mat-form-field>
-      <input matInput placeholder="Location*" [(ngModel)]="productLocation" name="productLocation">
-    </mat-form-field>
-
     <mat-checkbox class="checkboxMargin" [(ngModel)]="productDelivery">Product delivery possible?</mat-checkbox>
 
   </mat-card>
 
-  <mat-card>
-    <div *ngIf="add">
-    <button mat-flat-button class="button_standard" (click)="addProduct()" [disabled]="allFilled(productName, productPrice, productLocation) || checkNumber(productPrice)">Add Product</button>
-    </div>
-    <div *ngIf="!add">
-    <button mat-flat-button class="button_standard" (click)="editProduct()" [disabled]="allFilled(productName, productPrice, productLocation) || checkNumber(productPrice)">Save Product</button>
-    </div>
-  </mat-card>
-  <p>*Required Fields
+
     <mat-card>
-        <button mat-button matStepperNext [disabled]="!stepOneComplete()">Next</button>
+        <button mat-button matStepperNext [disabled]="!stepOneComplete(productName, productDescription, productPrice, productCategory)">Next</button>
 
       </mat-card>
 
@@ -109,19 +78,11 @@
       <mat-card>
 
         <mat-form-field>
-          <mat-label>Price</mat-label>
-          <input matInput placeholder="" [(ngModel)]="productPrice" name="productPrice">
-          <span matPrefix>CHF&nbsp;</span>
-          <span matSuffix>.00</span>
-          <div *ngIf="empty(productPrice)" class="invalid-feedback">Please add a price</div>
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput placeholder="Your zipcode" [(ngModel)]="productLocation" name="productLocation">
+          <input matInput placeholder="Your zipcode*" [(ngModel)]="productLocation" name="productLocation">
           <div *ngIf="empty(productLocation)" class="invalid-feedback">e.g. 3012</div>
         </mat-form-field>
 
-        <button mat-button matStepperNext [disabled]="!stepOneComplete()" (click)="addProduct()">Next</button>
+        <button mat-button matStepperNext [disabled]="!stepTwoComplete()" (click)="addProduct()">Next</button>
 
       </mat-card>
 
@@ -138,7 +99,7 @@
       type="file" (change)="onFileChanged($event)"
       #fileInput>
     <button mat-flat-button class="button_standard" (click)="fileInput.click()">Select file </button>
-    <button mat-flat-button class="button_standard" (click)="onUpload()">Upload</button>
+    <button mat-flat-button class="button_standard" (click)="onUpload()">Upload Image</button>
 
     <div *ngIf="imageSelected">
       {{imageName}}
@@ -153,7 +114,6 @@
     </mat-step>
 
   </mat-horizontal-stepper>
-
 
 </div>
 
@@ -239,10 +199,12 @@
 
         <div *ngIf="!add">
           <br>
-          <button mat-flat-button class="button_standard" (click)="editProduct()" [disabled]="!allFilled()">Save product</button>
+          {{imageName}}
+          <button mat-flat-button class="button_standard" (click)="editProduct()">Save product</button>
         </div>
 
       </mat-card>
 
 
 </div>
+  <p>*Required Fields</p>

@@ -200,6 +200,7 @@
         <div *ngIf="!add">
           <br>
           {{imageName}}
+          <img class="center-cropped" alt="{{productName}}" [src]="picture[0]" />
           <button mat-flat-button class="button_standard" (click)="editProduct()">Save product</button>
         </div>
 

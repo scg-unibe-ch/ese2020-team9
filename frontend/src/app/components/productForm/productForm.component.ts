@@ -12,6 +12,7 @@ import {_isNumberValue} from "@angular/cdk/coercion";
 import { Observable } from 'rxjs';
 import {MatStepperModule} from '@angular/material/stepper';
 import { environment } from "../../../environments/environment";
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-productForm',
@@ -48,7 +49,10 @@ export class ProductFormComponent implements OnInit {
   selectedFile: File;
   editId: number;
 
-  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private _ngZone: NgZone, private productService: ProductService, private route: ActivatedRoute, private location: Location) { }
+  picture: any = [];
+  image: any;
+
+  constructor(private sanitizer : DomSanitizer, private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private _ngZone: NgZone, private productService: ProductService, private route: ActivatedRoute, private location: Location) { }
 
   ngOnInit(): void {
 
@@ -68,7 +72,6 @@ export class ProductFormComponent implements OnInit {
           this.productId = instances.productId;
           this.productName = instances.productName;
           this.productDescription = instances.productDescription;
-          this.productImage = instances.productImage;
           this.productPrice = instances.productPrice;
           this.productCategory = instances.productCategory;
           this.productLocation = instances.productLocation;
@@ -84,6 +87,25 @@ export class ProductFormComponent implements OnInit {
 
           //this.changeDetection.detectChanges();
           this.editId = instances.productId;
+          this.picture = [];
+            this.productService.getPhotoIds(this.productId).subscribe((photoId: any[]) => {
+
+              for(let id of photoId){
+                 this.productService.getPhoto(id.imageId).subscribe((blob: any) => {
+
+                       //console.log(blob)
+
+                       let objectURL = URL.createObjectURL(blob);
+                       this.image = this.sanitizer.bypassSecurityTrustResourceUrl(objectURL);
+                       //console.log(this.image,"img")
+                       this.picture.push(this.image);
+                       //console.log(this.picture, "objectURL");
+
+
+                     });
+              }
+
+          });
 
       },(error: any) => {
       this.userAuth = 'There is no corresponding Product!';

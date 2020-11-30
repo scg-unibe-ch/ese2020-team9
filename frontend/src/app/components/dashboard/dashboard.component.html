@@ -1,5 +1,4 @@
 <app-search-bar></app-search-bar>
-<app-search-category></app-search-category>
 
 <div class="productList_dashboard" fxLayout="row wrap" fxLayoutGap="2% grid" fxLayoutAlign="space-evenly stretch">
   <div fxFlex="10%" fxFlex.xl="10%" fxFlex.lg="15%" fxFlex.md="20%" fxFlex.sm="33%" fxFlex.xs="50%" *ngFor="let productItem of productList">
@@ -17,8 +16,10 @@
 
 
       <mat-card-content>
+        <br><br>
+        <img class="imgMid" [src]="productItem.picture[0]" />
         <a [routerLink]="['/productDetail', productItem.productId]">
-          <img mat-card-image class="center-cropped”" src="{{productItem.productImage}}" alt="{{productItem.productName}}" >
+          <img mat-card-image class="center-cropped”" src="{{productItem.picture}}" alt="{{productItem.productName}}" >
         </a>
       </mat-card-content>
 

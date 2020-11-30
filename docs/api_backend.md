@@ -325,6 +325,146 @@ Returns the user with the requested id. If user does not exist, will return a no
 
     </details>
 
+### GET on `"/user/highscores/game"`
+
+Returns the ten users with the highest scores in the snake game. 
+
+- **Details**
+
+    <details>
+    <summary>Response (STATUS 200)</summary>
+
+        ```json
+    [
+        {
+            "userId": "number",
+            "admin":  "boolean",
+            "wallet": "number",
+            "userName": "string",
+            "password": "string (Hash)",
+            "userMail": "string",
+            "firstName": "string",
+            "lastName": "string",
+            "gender":   "string",
+            "phoneNumber": "number",
+            "addressStreet": "string",
+            "addressPin": "string",
+            "addressCity": "string",
+            "addressCountry": "string",
+            "gameScore": "number",
+            "activityScore": "number",
+            "overallScore": "number",
+            "createdAt" : "string",
+            "updatedAt" : "string",
+        },
+        {
+            "userId": "number",
+            "admin":  "boolean",
+            "wallet": "number",
+            "userName": "string",
+            "password": "string (Hash)",
+            "userMail": "string",
+            "firstName": "string",
+            "lastName": "string",
+            "gender":   "string",
+            "phoneNumber": "number",
+            "addressStreet": "string",
+            "addressPin": "string",
+            "addressCity": "string",
+            "addressCountry": "string",
+            "gameScore": "number",
+            "activityScore": "number",
+            "overallScore": "number",
+            "createdAt" : "string",
+            "updatedAt" : "string",
+        },
+        ...
+    ]
+    ```
+
+    </details>
+
+    <details>
+    <summary>Response (STATUS 500)</summary>
+
+    ```json
+    {
+        "message": "error message"
+    }
+    ```
+
+    </details>
+
+### GET on `"/user/highscores/game"`
+
+Returns the three users with the highest overall scores. 
+
+- **Details**
+
+    <details>
+    <summary>Response (STATUS 200)</summary>
+
+        ```json
+    [
+        {
+            "userId": "number",
+            "admin":  "boolean",
+            "wallet": "number",
+            "userName": "string",
+            "password": "string (Hash)",
+            "userMail": "string",
+            "firstName": "string",
+            "lastName": "string",
+            "gender":   "string",
+            "phoneNumber": "number",
+            "addressStreet": "string",
+            "addressPin": "string",
+            "addressCity": "string",
+            "addressCountry": "string",
+            "gameScore": "number",
+            "activityScore": "number",
+            "overallScore": "number",
+            "createdAt" : "string",
+            "updatedAt" : "string",
+        },
+        {
+            "userId": "number",
+            "admin":  "boolean",
+            "wallet": "number",
+            "userName": "string",
+            "password": "string (Hash)",
+            "userMail": "string",
+            "firstName": "string",
+            "lastName": "string",
+            "gender":   "string",
+            "phoneNumber": "number",
+            "addressStreet": "string",
+            "addressPin": "string",
+            "addressCity": "string",
+            "addressCountry": "string",
+            "gameScore": "number",
+            "activityScore": "number",
+            "overallScore": "number",
+            "createdAt" : "string",
+            "updatedAt" : "string",
+        },
+        ...
+    ]
+    ```
+
+    </details>
+
+    <details>
+    <summary>Response (STATUS 500)</summary>
+
+    ```json
+    {
+        "message": "error message"
+    }
+    ```
+
+    </details>
+
 ### DELETE on `"/user/:id"`
 
 Deletes the user with the id set as parameter in url. Requires the Authorization Header set with a valid token from a logged-in admin user. 
@@ -407,6 +547,23 @@ Makes the user with the id set in the url as parameter to an admin user. Request
     }
     ```
     </details>
+
+### PUT on `"/user/updateGameScore/:userId/:newScore'"`
+Updates the game score of user with user id with a new score.
+
+- **Details**
+  
+    <details>
+
+    <summary>Response (STATUS 200)</summary>    
+
+    ```json
+    {
+        "message": "Game score successfully updated!"
+    }
+    ```
+
+     </details>
 
 ### POST on `"/user/passwordForgotten"`
 
@@ -1341,7 +1498,7 @@ Confirms a transactions with the id indicated in the url. This method executes t
 
     <summary>Response (STATUS 200)</summary>    
 
-        ```json
+    ```json
     {
         "message": "Transaction successfully confirmed!"
     }
@@ -1349,7 +1506,7 @@ Confirms a transactions with the id indicated in the url. This method executes t
 
      </details>
 
-     ###  PUT on `"/transaction/decline/:transactionId"`
+###  PUT on `"/transaction/decline/:transactionId"`
 
 Declines a transactions with the id indicated in the url. The method should be called when the seller declines a transaction. It sets the product boolean isAvailable back to true.
 

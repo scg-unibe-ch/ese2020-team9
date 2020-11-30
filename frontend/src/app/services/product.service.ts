@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
-import {BehaviorSubject, Observable, Subject} from "rxjs";
-import {ProductItem} from "../models/product-item.model";
-import {Transaction} from "../models/transaction.model";
+import { ProductItem } from "../models/product-item.model";
+import {Observable} from "rxjs";
+import {Search} from "../models/search.model";
 
 
 @Injectable({
@@ -13,6 +13,32 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient) { }
 
+  /** post requests **/
+  //should be used in productForm
+  addProduct(product: ProductItem): Observable<any> {
+    return this.httpClient.post(environment.endpointURL + 'products/',   product);
+  }
+
+  //should be used in productDisplay
+  searchProduct(search: Search): Observable<any> {
+    return this.httpClient.post(environment.endpointURL + 'products/search/', search);
+  }
+
+  /** put requests **/
+  approveProduct(product: ProductItem): Observable<ProductItem> {
+    return this.httpClient.put<ProductItem>(environment.endpointURL + 'products/approve/' + product.productId, product);
+  }
+
+  //should be used in productForm
+  editProduct(product: ProductItem): Observable<ProductItem> {
+    return this.httpClient.put<ProductItem>(environment.endpointURL + 'products/' + product.productId, product);
+  }
+  /** delete requests **/
+  deleteProduct(product: ProductItem): Observable<ProductItem> {
+    return this.httpClient.delete<ProductItem>(environment.endpointURL + 'products/' + product.productId);
+  }
+
+  /** get requests **/
   //get all Products
   getAll(){
     return this.httpClient.get(environment.endpointURL + 'products');
@@ -51,14 +77,7 @@ export class ProductService {
   }
 
  //get products a user sold
- getSoldProducts(userId: number) {
+  getSoldProducts(userId: number) {
    return this.httpClient.get(environment.endpointURL + 'transaction/sell/' + userId);
  }
-
-  //
-  buyProduct(productId: number) {
-    return this.httpClient.get(environment.endpointURL + 'products/' + productId);
-  }
-
-
 }

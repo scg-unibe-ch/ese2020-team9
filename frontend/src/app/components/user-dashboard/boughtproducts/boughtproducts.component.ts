@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../../../services/user.service";
-import {ProductItem} from "../../../models/product-item.model";
 import {HttpClient} from "@angular/common/http";
 import {ProductService} from "../../../services/product.service";
-import {environment} from "../../../../environments/environment";
 import {Transaction} from "../../../models/transaction.model";
 import {MatSnackBar} from '@angular/material/snack-bar';
-import { Directive, Output, EventEmitter, Input, SimpleChange} from '@angular/core';
+import { Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-boughtproducts',
@@ -47,14 +45,12 @@ export class BoughtproductsComponent implements OnInit {
 
 
   getSeller(id:number){
-    console.log(id)
       this.userService.getUser(id).subscribe((instances: any) => {
          this.sellerId = instances.userId;
          this.sellerName = instances.userName;
          this.sellerFirstName = instances.firstName;
          this.sellerLastName = instances.lastName;
        },(error: any) => {
-
      });
    }
 
@@ -62,19 +58,14 @@ export class BoughtproductsComponent implements OnInit {
          this.userService.getUser(uid).subscribe((instances: any) => {
             //this.sellerId = instances.userId;
             this.buyerName = instances.userName;
-
           },(error: any) => {
-
-        });
+         });
       }
 
 
   getProduct(pid:number){
     this.productService.getProduct(pid).subscribe((instances: any) => {
-
           this.productName = instances.productName;
-
-
       },(error: any) => {
     });
   }
@@ -84,6 +75,5 @@ export class BoughtproductsComponent implements OnInit {
           duration: 3000
         });
   }
-
 
 }

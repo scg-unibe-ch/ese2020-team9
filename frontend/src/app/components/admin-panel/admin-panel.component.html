@@ -2,7 +2,7 @@
 <div class="admin-view">
   <mat-tab-group>
     <mat-tab class = 'navigation' label="List Of Users">
-  <mat-list-item *ngFor="let user of userList" class= "user_list" >
+  <mat-list-item *ngFor="let user of userList" class= "caption">
   <app-user
         [user]="user"
         (update)="onUserUpdate($event)"

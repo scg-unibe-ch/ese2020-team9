@@ -626,7 +626,7 @@ describe('UserController Test', () => {
             .catch(err => console.log(err));
         });
         it('should return users in the correct order', function(done) {
-            chai.request(app).get('/user/getHighscores/game').end(function(err, res) {
+            chai.request(app).get('/user/highscores/game').end(function(err, res) {
                 expect(err).to.be.eq(null);
                 expect(res).to.have.status(200);
                 expect(res.body[0].userName).to.be.eq('gandalf');
@@ -654,7 +654,7 @@ describe('UserController Test', () => {
             .catch(err => console.log(err));
         });
         it('should return users in the correct order', function(done) {
-            chai.request(app).get('/user/getHighscores/overall').end(function(err, res) {
+            chai.request(app).get('/user/highscores/overall').end(function(err, res) {
                 expect(err).to.be.eq(null);
                 expect(res).to.have.status(200);
                 expect(res.body[0].userName).to.be.eq('admin');

@@ -1,13 +1,17 @@
 import { Component, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Router} from "@angular/router";
-import {UserService} from "../../../services/user.service";
-import {ProductService} from "../../../services/product.service";
-import {ActivatedRoute} from "@angular/router";
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { HttpClient} from "@angular/common/http";
+import { Router} from "@angular/router";
+import { UserService} from "../../../services/user.service";
+import { ProductService} from "../../../services/product.service";
+import { ActivatedRoute} from "@angular/router";
+import { MatSnackBar} from '@angular/material/snack-bar';
 import { Location } from "@angular/common";
-import {NewTransaction, Transaction} from "../../../models/transaction.model";
-import {TransactionService} from "../../../services/transaction.service";
+import { NewTransaction, Transaction} from "../../../models/transaction.model";
+import { TransactionService} from "../../../services/transaction.service";
+import { MatTabsModule} from '@angular/material/tabs';
+import { DomSanitizer } from '@angular/platform-browser';
+import { environment } from "../../../../environments/environment";
+
 
 @Component({
   selector: 'app-shipping',
@@ -63,7 +67,11 @@ export class ShippingComponent implements OnInit {
   isUserLoggedIn: boolean;
   transaction: NewTransaction;
 
-  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute, private location: Location, private transactionService: TransactionService) { }
+
+  picture: any;
+  image: any;
+
+  constructor(private location: Location, private transactionService: TransactionService, private sanitizer : DomSanitizer, private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.buyerId = this.userService.getUserId();
@@ -111,7 +119,28 @@ export class ShippingComponent implements OnInit {
           this.isRentable = instances.isRentable;
           this.isAvailable = instances.isAvailable;
           this.sellerId = instances.userId;
-          this.userReview = instances.userReview;
+
+          this.picture = [];
+                    this.productService.getPhotoIds(this.productId).subscribe((photoId: any[]) => {
+
+                      for(let id of photoId){
+                         this.productService.getPhoto(id.imageId).subscribe((blob: any) => {
+
+                               console.log(blob)
+
+                               let objectURL = URL.createObjectURL(blob);
+                               this.image = this.sanitizer.bypassSecurityTrustResourceUrl(objectURL);
+                               console.log(this.image,"img")
+                               this.picture.push(this.image);
+                               console.log(this.picture, "objectURL");
+
+
+                        });
+                      }
+
+                    });
+          //this.userReview = instances.userReview;
+          //this.changeDetection.detectChanges();
           this.getSeller(this.sellerId);
 
       },(error: any) => {
@@ -174,7 +203,11 @@ export class ShippingComponent implements OnInit {
     };
 
     this.transactionService.buyProduct(this.transaction).subscribe((res: any) => {
-      //navigates to user dashboard
+
+
+
+
+      //navigates to productItem
       this.router.navigate(['/user']);
       let message = "Seller has been contacted. " + res.message;
       let action = "X";
@@ -202,6 +235,57 @@ export class ShippingComponent implements OnInit {
   checkCash(){
     return (this.buyerWallet < this.productPrice);
   }
+
+  //Initializes a new transaction
+  otherAddressBuyProduct(): void {
+    this.httpClient.post(environment.endpointURL + 'transaction/', {
+      //transactionId : this.transactionId,
+      productId: this.productId,
+      userId: this.sellerId,
+      buyerId: this.buyerId,
+      //transactionStatus: this.transactionStatus,
+      deliveryFirstName: this.buyerFirstName,
+      deliveryLastName: this.buyerLastName,
+
+      deliveryStreet: this.otherAddressStreet,
+      deliveryPin: this.otherAddressPin,
+      deliveryCity: this.otherAddressCity,
+      deliveryCountry: this.otherAddressCountry,
+    }).subscribe((res: any) => {
+
+      //navigates to productItem
+      this.router.navigate(['/user']);
+      let message = "Seller has been contacted, please await approval of buy request"
+      let action = "OK";
+      this.openSnackBar(message, action);
+
+    }, (error: any) => {
+      let message = "An Error occurred!";
+      let action = "OK";
+      this.openSnackBar(message, action);
+    });
+
+  }
+
+  requestCity(){
+      let params = {
+            codes: this.otherAddressPin,
+            country: "CH",
+            apikey: '4bc7d070-229b-11eb-8bf2-6be81465cc4d'
+      };
+      if (this.otherAddressPin.length == 4){this.httpClient.get('http://localhost:4200/api/v1/search', {params}).subscribe((res: any) => {
+          if (res != null) {
+              this.otherAddressCity = res.results[this.otherAddressPin][0].city;
+              console.log(res.results[this.otherAddressPin][0].city)
+          }
+
+        }, (error: any) => {
+              this.otherAddressCity = "";
+        });
+      }
+    }
+
+
 
   openSnackBar(message: string, action: string) {
           this._snackBar.open(message, action, {

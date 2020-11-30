@@ -9,6 +9,9 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import { Location} from "@angular/common";
 import {CategoryList} from "../../category-list";
 import {_isNumberValue} from "@angular/cdk/coercion";
+import { Observable } from 'rxjs';
+import {MatStepperModule} from '@angular/material/stepper';
+import { environment } from "../../../environments/environment";
 
 @Component({
   selector: 'app-productForm',
@@ -21,7 +24,7 @@ export class ProductFormComponent implements OnInit {
   productName = '';
   productDescription = '';
   productImage = '';
-  productPrice = '';
+  productPrice: number;
   productCategory = '';
   productLocation = '';
   productDelivery = '';
@@ -39,6 +42,11 @@ export class ProductFormComponent implements OnInit {
   id: any;
   add: boolean;
   categories = CategoryList;
+
+  imageSelected: boolean;
+  imageName: string;
+  selectedFile: File;
+  editId: number;
 
   constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private _ngZone: NgZone, private productService: ProductService, private route: ActivatedRoute, private location: Location) { }
 
@@ -74,6 +82,9 @@ export class ProductFormComponent implements OnInit {
           this.userId = instances.userId;
           this.userReview = instances.userReview;
 
+          //this.changeDetection.detectChanges();
+          this.editId = instances.productId;
+
       },(error: any) => {
       this.userAuth = 'There is no corresponding Product!';
     });
@@ -84,8 +95,8 @@ export class ProductFormComponent implements OnInit {
       productId: 0,
       productName: this.productName,
       productDescription: this.productDescription,
-      productPrice: Number(this.productPrice),
-      productImage: this.productImage,
+      //productImage: this.productImage,
+      productPrice: this.productPrice,
       productCategory: this.productCategory,
       productLocation: this.productLocation,
       productDelivery: Boolean(this.productDelivery),
@@ -96,14 +107,12 @@ export class ProductFormComponent implements OnInit {
       isRentable: Boolean(this.isRentable),
       isAvailable: true,
       userId: parseFloat(this.userId),
-      userReview: this.userReview,
     };
 
     this.productService.addProduct(this.product).subscribe((res: any) => {
-      //navigates back to user dashboard
-      this.goBack();
-      let action = "X";
-      this.openSnackBar(res.message, action);
+      this.editId = res.productId
+      console.log(this.editId)
+
     }, (error: any) => {
       let message = "Can not add this product!";
       let action = "X";
@@ -113,10 +122,10 @@ export class ProductFormComponent implements OnInit {
 
   editProduct(): void {
     this.product = {
-      productId: this.productId,
+      productId: this.editId,
       productName: this.productName,
       productDescription: this.productDescription,
-      productImage: this.productImage,
+      //productImage: this.productImage,
       productPrice: Number(this.productPrice),
       productCategory: this.productCategory,
       productLocation: this.productLocation,
@@ -128,14 +137,17 @@ export class ProductFormComponent implements OnInit {
       isRentable: Boolean(this.isRentable),
       isAvailable: true,
       userId: Number(this.userId),
-      userReview: this.userReview,
+      //userReview: this.userReview,
     };
     this.productService.editProduct(this.product).subscribe((res: any) => {
       //navigates back to user dashboard
-      this.goBack();
-      let message = "Product successfully edited!";
-      let action = "";
+
+
+      this.router.navigate(['/user']);
+      let action = "Ok";
+      let message = "Success";
       this.openSnackBar(message, action);
+
     }, (error: any) => {
       let message = "Your Product Information is invalid!";
       let action = "X";
@@ -166,4 +178,50 @@ export class ProductFormComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+
+
+  onFileChanged(event) {
+    this.selectedFile = event.target.files[0]
+    this.imageSelected = true;
+    this.imageName = event.target.files[0].name
+
+  }
+
+
+ onUpload() {
+   const uploadData = new FormData();
+   //console.log(this.editId)
+   uploadData.append('image', this.selectedFile, this.selectedFile.name);
+   this.httpClient.post(environment.endpointURL + 'products/images/upload/'+ this.editId, uploadData, {
+     reportProgress: true,
+     observe: 'events'
+   })
+     .subscribe(event => {
+       console.log(event); // handle event here
+       let message = "Upload done!";
+       let action = "X";
+       this.openSnackBar(message, action);
+     }, (error: any) => {
+            let message = "Something went wrwong!";
+            let action = "X";
+            this.openSnackBar(message, action);
+          });
+ }
+
+
+  stepOneComplete(productName, productDescription, productPrice, productCategory):boolean {
+    let n = this.productName;
+    let d = this.productDescription;
+    let p = this.productPrice;
+    let c = this.productCategory;
+
+    return !(n === '' || d === '' || p === undefined || c === '')
+  }
+
+  stepTwoComplete(productLocation){
+      let z = this.productLocation;
+      return !(z === '')
+    }
+
+
 }

@@ -316,10 +316,7 @@ The following Diagram shows graphically the identified classes and their relatio
 
 ## Activity Diagrams
 
-The first Activity Diagram shows the flow of the action "beating the current highscore".
+The Activity Diagram shows the flow of the action "beating the current highscore" and "buying a product".
 
 ![](Activity_Diagram_I.jpg)
 
-The second Activity Diagram shows the flow of the action "buy an item".
-
-![](Activity_Diagram_II.png)

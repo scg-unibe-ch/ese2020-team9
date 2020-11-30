@@ -1,0 +1,176 @@
+/** overall used styles **/
+::ng-deep .mat-form-field-label {
+  /*change color of label*/
+  color: #F0F0F0;
+}
+
+.filterButton{
+  border: 1px solid #46FFFD;
+  margin: 5px;
+  color: #F0F0F0;
+}
+
+.clearIcon{
+  color: #46FFFD;
+  margin: 0px;
+  padding: 0px;
+}
+
+::ng-deep.mat-form-field .mat-form-field-label {
+  /*change color of underline*/
+  color: #F0F0F0;
+}
+
+mat-checkbox{
+  color: #F0F0F0;
+  font-size: 15px;
+}
+
+/** search bar **/
+.searchBar {
+  margin-top: 8px;
+  display:flex;
+  flex-direction:row;
+}
+
+.searchBar .clearIcon {
+  position: absolute;
+  right: 160px;
+  color: #46FFFD;
+}
+
+input:focus {
+  /* removing the input focus blue box */
+  outline: #46FFFD;
+}
+
+input[type=text]{
+  flex-grow:2;
+  border:1px solid #46FFFD;
+  border-radius: 4px;
+  padding-left: 1%;
+  padding-right: 1%;
+}
+
+.searchButton {
+  border:1px solid #46FFFD;
+  background:#46FFFD;
+  color:black;
+}
+
+/** search filter **/
+
+.container{
+  margin: 15px
+}
+
+/** search filter big screen **/
+
+@media (max-width: 705px) {
+  .bigFilter {
+    display: none; /* hides filter if display < 705px */
+  }
+}
+
+.filterOptions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: row;
+  color: #F0F0F0;
+}
+
+.filterButtonContainer {
+  padding: 0px;
+  display: flex;
+  flex-direction: row;
+}
+
+.moreFilter{
+  display: flex;
+  margin-top: 10px;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.moreFilter mat-radio-button{
+  /* style for <705px display */
+  color: #F0F0F0;
+  margin-right: 7px;
+  margin-left: 10px;
+}
+
+/** search filter small screen **/
+
+.filterCheck{
+  padding-right: 5%;
+}
+@media (min-width: 705px){
+  .smFilter {
+    display: none; /* hides filter if display > 705px */
+  }
+}
+@media (min-width: 705px) {
+  .selectPanel {
+    display: none; /* hides select panel if display < 705px */
+  }
+}
+
+::ng-deep .mat-expansion-indicator:after {
+  color: #F0F0F0; /* background-color of extension-panel */
+}
+
+mat-expansion-panel{
+  background-color: #082A5D;
+  border: 1px solid #46FFFD;
+  padding: 0px;
+}
+
+mat-expansion-panel-header{
+  color: #F0F0F0;
+}
+
+mat-divider{
+  border-color: #46FFFD;
+  padding-bottom: 10px;
+}
+
+.smRadioGroup{
+  color: #F0F0F0;
+  display: flex;
+  flex-direction: column;
+}
+
+.smRadioGroup mat-radio-button{
+  /* style for >705px display */
+  margin-top: 3px;
+}
+
+/* filter Chips */
+
+.filterChips{
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: 15px;
+  color: #46FFFD;
+}
+
+/* other layout option for price input style */
+/*
+.pricePanel{
+  width: 170px;
+  background-color: transparent;
+  border: transparent;
+}
+
+.priceButton{
+  background-color: #46FFFD;
+  border-radius: 4px;
+  border: #082A5D;
+}
+
+.priceContainer{
+  background-color: #F0F0F0;
+  color: #F0F0F0;
+}
+*/

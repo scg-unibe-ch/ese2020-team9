@@ -108,7 +108,7 @@ export class TransactionService {
                     { userId: sellerId }
                 ]
             },
-            
+
         })
         .catch(err => Promise.reject(err));
     }

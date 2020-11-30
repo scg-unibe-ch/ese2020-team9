@@ -43,6 +43,9 @@ import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatSliderModule } from "@angular/material/slider";
 import { SearchComponent } from './components/search/search.component';
 import { SearchBarComponent } from "./components/dashboard/search-bar/search-bar.component";
+import { MatDialogModule } from "@angular/material/dialog";
+import { DialogBodyComponent } from './components/dialog-body/dialog-body.component';
+import { PasswordForgottenComponent } from "./components/password-forgotten/password-forgotten.component";
 
 @NgModule({
   declarations: [
@@ -64,6 +67,8 @@ import { SearchBarComponent } from "./components/dashboard/search-bar/search-bar
     ProductDisplayComponent,
     SearchBarComponent,
     SearchComponent,
+    DialogBodyComponent,
+    PasswordForgottenComponent,
   ],
   imports: [
     BrowserModule,
@@ -92,6 +97,7 @@ import { SearchBarComponent } from "./components/dashboard/search-bar/search-bar
     MatExpansionModule,
     MatAutocompleteModule,
     MatSliderModule,
+    MatDialogModule,
   ],
   providers: [
     {

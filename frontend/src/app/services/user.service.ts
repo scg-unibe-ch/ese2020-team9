@@ -46,6 +46,14 @@ export class UserService {
     return this.httpClient.post(environment.endpointURL + 'user/edit/', user);
   }
 
+  passwordForgotten(userEmail: string): Observable<any> {
+    return this.httpClient.post(environment.endpointURL + 'user/passwordForgotten', {userEmail});
+  }
+
+  resetPassword(password: string): Observable<any> {
+    return this.httpClient.post(environment.endpointURL + 'user/restorePassword', {password});
+  }
+
   /** delete request **/
   deleteUser(user: User): Observable<User> {
     return this.httpClient.delete<User>(environment.endpointURL + 'user/' + user.userId);

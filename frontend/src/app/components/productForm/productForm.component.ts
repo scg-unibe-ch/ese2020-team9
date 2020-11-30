@@ -11,6 +11,7 @@ import {CategoryList} from "../../category-list";
 import {_isNumberValue} from "@angular/cdk/coercion";
 import { Observable } from 'rxjs';
 import {MatStepperModule} from '@angular/material/stepper';
+import { environment } from "../../../environments/environment";
 
 @Component({
   selector: 'app-productForm',
@@ -23,7 +24,7 @@ export class ProductFormComponent implements OnInit {
   productName = '';
   productDescription = '';
   productImage = '';
-  productPrice = '';
+  productPrice: number;
   productCategory = '';
   productLocation = '';
   productDelivery = '';
@@ -106,19 +107,15 @@ export class ProductFormComponent implements OnInit {
       isRentable: Boolean(this.isRentable),
       isAvailable: true,
       userId: parseFloat(this.userId),
-      userReview: this.userReview,
     };
 
     this.productService.addProduct(this.product).subscribe((res: any) => {
+      this.editId = res.productId
+
       //navigates back to user dashboard
       this.goBack();
       let action = "X";
       this.openSnackBar(res.message, action);
-    }).subscribe((res: any) => {
-       this.editId = res.productId
-       //console.log(this.editId)
-
-
     }, (error: any) => {
       let message = "Can not add this product!";
       let action = "X";
@@ -147,14 +144,8 @@ export class ProductFormComponent implements OnInit {
     };
     this.productService.editProduct(this.product).subscribe((res: any) => {
       //navigates back to user dashboard
-      this.goBack();
-      let message = "Product successfully edited!";
-      let action = "";
-      this.openSnackBar(message, action);
 
-    }).subscribe((res: any) => {
 
-      //navigates to productItem
       this.router.navigate(['/user']);
       let action = "Ok";
       let message = "Success";

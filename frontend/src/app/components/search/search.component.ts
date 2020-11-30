@@ -3,6 +3,9 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {MatSelect} from "@angular/material/select";
 import {CategoryList} from "../../category-list";
 import {Subscription} from "rxjs";
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {HttpClient} from "@angular/common/http";
+import {MatSliderModule} from '@angular/material/slider';
 
 @Component({
   selector: 'app-search',
@@ -37,7 +40,7 @@ export class SearchComponent implements OnInit {
   addressCity: string;
   pinList: any;
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private httpClient: HttpClient, private _snackBar: MatSnackBar, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.category = this.route.snapshot.queryParamMap.get('c');
@@ -131,6 +134,16 @@ export class SearchComponent implements OnInit {
       this.isService = null;
     this.navigateTo();
   }
+
+  openSnackBar(message: string, action: string) {
+        this._snackBar.open(message, action, {
+          duration: 3000
+        });
+  }
+
+ formatLabel(value: number) {
+        return value  + 'km';
+      }
 
   //gets Pins within a certain radius
     getPinsInRadius(addressPin: string){

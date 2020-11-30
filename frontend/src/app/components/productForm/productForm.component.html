@@ -20,6 +20,7 @@
       <input matInput placeholder="Product Image" [(ngModel)]="productImage" name="productImage">
     </mat-form-field>
   </mat-card>
+  <mat-card>
           <mat-form-field>
             <mat-label>Describe your Product</mat-label>
             <textarea matInput
@@ -71,6 +72,7 @@
       </select>
     </mat-form-field>
   </mat-card>
+
   <mat-card>
 
     <mat-form-field>
@@ -113,7 +115,7 @@
     </div>
   </mat-card>
   <p>*Required Fields
-
+    <mat-card>
         <button mat-button matStepperNext [disabled]="!stepOneComplete()">Next</button>
 
       </mat-card>
@@ -171,7 +173,7 @@
 
           <div *ngIf="add">
             <br>
-            <button mat-flat-button class="button_standard" (click)="editProduct()" [disabled]="!allFieldsAreFilled()">Add product</button>
+            <button mat-flat-button class="button_standard" (click)="editProduct()" [disabled]="allFilled(productName, productPrice, productLocation)">Add product</button>
           </div>
 
         </mat-card>
@@ -284,7 +286,7 @@
 
         <div *ngIf="!add">
           <br>
-          <button mat-flat-button class="button_standard" (click)="editProduct()" [disabled]="!allFieldsAreFilled()">Save product</button>
+          <button mat-flat-button class="button_standard" (click)="editProduct()" [disabled]="!allFilled()">Save product</button>
         </div>
 
       </mat-card>

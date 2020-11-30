@@ -1,19 +1,17 @@
 import { Component, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Router} from "@angular/router";
-import {UserService} from "../../../services/user.service";
-import {ProductService} from "../../../services/product.service";
-import {ActivatedRoute} from "@angular/router";
-import {MatSnackBar} from '@angular/material/snack-bar';
-<<<<<<< HEAD
+import { HttpClient} from "@angular/common/http";
+import { Router} from "@angular/router";
+import { UserService} from "../../../services/user.service";
+import { ProductService} from "../../../services/product.service";
+import { ActivatedRoute} from "@angular/router";
+import { MatSnackBar} from '@angular/material/snack-bar';
 import { Location } from "@angular/common";
-import {NewTransaction, Transaction} from "../../../models/transaction.model";
-import {TransactionService} from "../../../services/transaction.service";
-=======
-import {MatTabsModule} from '@angular/material/tabs';
+import { NewTransaction, Transaction} from "../../../models/transaction.model";
+import { TransactionService} from "../../../services/transaction.service";
+import { MatTabsModule} from '@angular/material/tabs';
 import { DomSanitizer } from '@angular/platform-browser';
+import { environment } from "../../../../environments/environment";
 
->>>>>>> 9cbbb28e1d2f62f0e64745e191de1485b8fb5ac7
 
 @Component({
   selector: 'app-shipping',
@@ -66,17 +64,14 @@ export class ShippingComponent implements OnInit {
   deliveryCountry = '';
 
   id: any;
-<<<<<<< HEAD
   isUserLoggedIn: boolean;
   transaction: NewTransaction;
 
-  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute, private location: Location, private transactionService: TransactionService) { }
-=======
+
   picture: any;
   image: any;
 
-  constructor(private sanitizer : DomSanitizer, private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
->>>>>>> 9cbbb28e1d2f62f0e64745e191de1485b8fb5ac7
+  constructor(private location: Location, private transactionService: TransactionService, private sanitizer : DomSanitizer, private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.buyerId = this.userService.getUserId();
@@ -124,9 +119,7 @@ export class ShippingComponent implements OnInit {
           this.isRentable = instances.isRentable;
           this.isAvailable = instances.isAvailable;
           this.sellerId = instances.userId;
-<<<<<<< HEAD
-          this.userReview = instances.userReview;
-=======
+
           this.picture = [];
                     this.productService.getPhotoIds(this.productId).subscribe((photoId: any[]) => {
 
@@ -148,7 +141,6 @@ export class ShippingComponent implements OnInit {
                     });
           //this.userReview = instances.userReview;
           //this.changeDetection.detectChanges();
->>>>>>> 9cbbb28e1d2f62f0e64745e191de1485b8fb5ac7
           this.getSeller(this.sellerId);
 
       },(error: any) => {
@@ -204,7 +196,6 @@ export class ShippingComponent implements OnInit {
       buyerId: this.buyerId,
       deliveryFirstName: this.buyerFirstName,
       deliveryLastName: this.buyerLastName,
-<<<<<<< HEAD
       deliveryPin: this.deliveryPin,
       deliveryStreet: this.deliveryStreet,
       deliveryCity: this.deliveryCity,
@@ -212,17 +203,11 @@ export class ShippingComponent implements OnInit {
     };
 
     this.transactionService.buyProduct(this.transaction).subscribe((res: any) => {
-      //navigates to user dashboard
-=======
 
-      deliveryStreet: this.buyerAddressStreet,
-      deliveryPin: this.buyerAddressPin,
-      deliveryCity: this.buyerAddressCity,
-      deliveryCountry: this.buyerAddressCountry,
-    }).subscribe((res: any) => {
+
+
 
       //navigates to productItem
->>>>>>> 9cbbb28e1d2f62f0e64745e191de1485b8fb5ac7
       this.router.navigate(['/user']);
       let message = "Seller has been contacted. " + res.message;
       let action = "X";
@@ -236,7 +221,6 @@ export class ShippingComponent implements OnInit {
 
   }
 
-<<<<<<< HEAD
   // check if all address fields are filled
   empty(a, b, c, d):boolean {
     return (a === '' || b === '' || c === '' || d === '');
@@ -252,7 +236,6 @@ export class ShippingComponent implements OnInit {
     return (this.buyerWallet < this.productPrice);
   }
 
-=======
   //Initializes a new transaction
   otherAddressBuyProduct(): void {
     this.httpClient.post(environment.endpointURL + 'transaction/', {
@@ -304,7 +287,6 @@ export class ShippingComponent implements OnInit {
 
 
 
->>>>>>> 9cbbb28e1d2f62f0e64745e191de1485b8fb5ac7
   openSnackBar(message: string, action: string) {
           this._snackBar.open(message, action, {
             duration: 3000

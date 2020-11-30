@@ -41,11 +41,8 @@ import { ProductDisplayComponent } from './components/product-display/product-di
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatSliderModule } from "@angular/material/slider";
-
 import { SearchComponent } from './components/search/search.component';
 import { SearchBarComponent } from "./components/dashboard/search-bar/search-bar.component";
-
-import { UserComponent } from "./components/user/user.component";
 import { LeaderBoardComponent } from './components/leaderboard/leaderboard.component';
 
 @NgModule({
@@ -68,7 +65,6 @@ import { LeaderBoardComponent } from './components/leaderboard/leaderboard.compo
     ProductDisplayComponent,
     SearchBarComponent,
     SearchComponent,
-    UserComponent,
     LeaderBoardComponent,
   ],
   imports: [

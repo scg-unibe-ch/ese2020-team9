@@ -229,57 +229,6 @@ export class UserRegistrationComponent implements OnInit {
   // check if field is number
   checkNumber(input):boolean{
     return (_isNumberValue(input));
-
-  getUser(){
-    this.userService.getUser(this.id).subscribe((instances: any) => {
-            this.userMail = instances.userMail;
-            this.password = instances.password;
-            this.userName = instances.userName;
-            this.firstName = instances.firstName;
-            this.lastName = instances.lastName;
-            this.gender = instances.gender;
-            this.phoneNumber = instances.phoneNumber;
-            this.addressStreet = instances.addressStreet;
-            this.addressPin = instances.addressPin;
-            this.addressCity = instances.addressCity;
-            this.addressCountry = instances.addressCountry;
-
-        },(error: any) => {
-        let action = "";
-        this.openSnackBar(error.message, action);
-     });
-   }
-
-  saveUser(){
-     this.httpClient.post(environment.endpointURL + 'user/edit/', {
-          userId: this.userId,
-          userName: this.userName,
-          userMail: this.userMail,
-          firstName: this.firstName,
-          lastName: this.lastName,
-          gender: this.gender,
-          phoneNumber: this.phoneNumber,
-          addressStreet: this.addressStreet,
-          addressPin: this.addressPin,
-          addressCity: this.addressCity,
-          addressCountry: this.addressCountry,
-
-        }).subscribe((res: any) => {
-          //update user information
-           localStorage.setItem('userToken', res.token);
-           localStorage.setItem('userId', res.userId);
-           localStorage.setItem('userName', res.userName);
-           localStorage.setItem('admin', res.admin);
-          //navigates to productItem
-          this.router.navigate(['/user']);
-          let message = "You successfully updated your profile!";
-          let action = "";
-          this.openSnackBar(message, action);
-        }, (error: any) => {
-          let message = "Your profile update is invalid!";
-          let action = "";
-          this.openSnackBar(message, action);
-        });
   }
 
   requestCity(){
@@ -324,21 +273,5 @@ export class UserRegistrationComponent implements OnInit {
     }
   }
 
-  requestCity(){
-    let params = {
-      codes: this.addressPin,
-      country: "CH",
-      apikey: '4bc7d070-229b-11eb-8bf2-6be81465cc4d'
-    };
-    if (this.addressPin.length >= 4){this.httpClient.get('https://app.zipcodebase.com/api/v1/search', {params}).subscribe((res: any) => {
-      console.log(this.addressPin);
-      const apiResponse = res;
-      console.log(apiResponse);
-      this.addressCity = res.results.city;
-      console.log(this.addressCity)
-    }, (error: any) => {
-      console.log(error);
-    });
-    }
-  }
+
  }

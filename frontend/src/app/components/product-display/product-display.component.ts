@@ -8,7 +8,6 @@ import {Search} from "../../models/search.model";
 import { switchMap } from "rxjs/operators";
 import {any} from "codelyzer/util/function";
 import { CategoryList } from "../../category-list";
-import { CategoryList } from "../../mock-category-list";
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -61,7 +60,7 @@ export class ProductDisplayComponent implements OnInit {
       isRentable: this.isRentable,
       isService: this.isService,
     };
-    }).subscribe((data: ProductItem[]) => {
+    this.productService.searchProduct(this.search).subscribe((data: ProductItem[]) => {
       this.productList = data;
       for (let productItem of this.productList){
                       productItem.picture = [];
@@ -90,10 +89,6 @@ export class ProductDisplayComponent implements OnInit {
     });
   }
 
-    this.productService.searchProduct(this.search).subscribe((data: ProductItem[]) => {
-      this.productList = data;
-    }, (error: any) => {
-      return 'An error occurred!';
-    });
-  }
+
+
 }

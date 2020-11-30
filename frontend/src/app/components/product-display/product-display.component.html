@@ -12,7 +12,9 @@
     <mat-card>
 
       <mat-card-header>
-        <!--<img mat-card-avatar src="" alt="Profile Picture">-->
+        <mat-card-content>
+          <img class="img" [src]="productItem.picture[0]" />
+        </mat-card-content>
         <mat-card-title>
           <button mat-button class="button_fill" [routerLink]="['/productDetail', productItem.productId]" routerLinkActive="active" ><b>{{productItem.productName}}</b>
           </button>

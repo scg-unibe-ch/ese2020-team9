@@ -81,13 +81,13 @@ export class ProductDetailComponent implements OnInit {
             for(let id of photoId){
                this.productService.getPhoto(id.imageId).subscribe((blob: any) => {
 
-                     console.log(blob)
+                     //console.log(blob)
 
                      let objectURL = URL.createObjectURL(blob);
                      this.image = this.sanitizer.bypassSecurityTrustResourceUrl(objectURL);
-                     console.log(this.image,"img")
+                     //console.log(this.image,"img")
                      this.picture.push(this.image);
-                     console.log(this.picture, "objectURL");
+                     //console.log(this.picture, "objectURL");
 
 
               });

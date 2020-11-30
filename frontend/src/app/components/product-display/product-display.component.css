@@ -5,3 +5,12 @@ mat-card-footer {
 .categoryTitle{
   margin: 15px;
 }
+
+
+
+.img {
+  object-fit: cover; /* Do not scale the image */
+  height: 200px;
+  width: auto;
+  opacity: 0.7;
+}

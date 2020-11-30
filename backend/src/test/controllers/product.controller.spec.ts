@@ -29,7 +29,6 @@ const product1: ProductAttributes = {
     isAvailable: true,
     userId: 1,
     buyerId: null,
-    userReview: null
 };
 const product2: ProductAttributes = {
     productId : 2,
@@ -47,7 +46,6 @@ const product2: ProductAttributes = {
     isAvailable: true,
     userId: 1,
     buyerId: null,
-    userReview: null
 };
 
 const user1: UserAttributes = {
@@ -82,7 +80,6 @@ const product3: ProductAttributes = {
     isRentable: false,
     isAvailable: false,
     userId: 1,
-    userReview: null,
     buyerId: 2
 };
 
@@ -124,7 +121,6 @@ describe('ProductController Test', () => { // bundles the tests related to the P
                 isAvailable: true,
                 userId: 1,
                 buyerId: null,
-                userReview: null
             }).end(function(err, res) {
                 expect(err).to.be.eq(null);
                 expect(res).to.have.status(200);
@@ -185,7 +181,6 @@ describe('ProductController Test', () => { // bundles the tests related to the P
                 isAvailable: true,
                 userId: 1,
                 buyerId: null,
-                userReview: null
             }).end(function(err, res) {
                 expect(err).to.be.eq(null);
                 expect(res).to.have.status(200);

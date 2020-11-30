@@ -19,7 +19,6 @@ export interface ProductAttributes {
     isAvailable: boolean;
     userId: number;
     buyerId: number;
-    userReview: string;
 }
 
 export interface ProductCreationAttributes extends Optional<ProductAttributes, 'productId'> { }
@@ -40,7 +39,6 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
     isAvailable!: boolean;
     userId!: number;
     buyerId!: number;
-    userReview!: string;
 
     public static initialize(sequelize: Sequelize) {
         Product.init({
@@ -105,9 +103,6 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
             },
             buyerId: {
                 type: DataTypes.INTEGER
-            },
-            userReview: {
-                type: DataTypes.TEXT
             }
         },
         { sequelize, tableName: 'productTable' }

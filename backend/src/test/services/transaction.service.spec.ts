@@ -59,7 +59,6 @@ describe('TransactionService Test', () => {
         isRentable: false,
         isAvailable: true,
         userId: 1,
-        userReview: null,
         buyerId: null
     };
     const product2: ProductAttributes = {
@@ -77,7 +76,6 @@ describe('TransactionService Test', () => {
         isRentable: false,
         isAvailable: false,
         userId: 1,
-        userReview: null,
         buyerId: null
     };
 

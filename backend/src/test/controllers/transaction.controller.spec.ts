@@ -68,7 +68,6 @@ describe('TransactionController Test', () => { // bundles the tests related to t
         isRentable: false,
         isAvailable: true,
         userId: 1,
-        userReview: null,
         buyerId: null
     };
     const product2: ProductAttributes = {
@@ -86,7 +85,6 @@ describe('TransactionController Test', () => { // bundles the tests related to t
         isRentable: false,
         isAvailable: true,
         userId: 1,
-        userReview: null,
         buyerId: null
     };
 

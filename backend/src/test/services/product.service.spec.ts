@@ -43,7 +43,6 @@ describe('ProductService Tests', () => {
         isRentable: false,
         isAvailable: true,
         userId: 1,
-        userReview: null,
         buyerId: null
     };
 
@@ -62,7 +61,6 @@ describe('ProductService Tests', () => {
         isRentable: false,
         isAvailable: true,
         userId: 1,
-        userReview: null,
         buyerId: null
     };
 
@@ -81,7 +79,6 @@ describe('ProductService Tests', () => {
         isRentable: false,
         isAvailable: true,
         userId: 1,
-        userReview: null,
         buyerId: null
     };
 
@@ -100,7 +97,6 @@ describe('ProductService Tests', () => {
         isRentable: true,
         isAvailable: true,
         userId: 1,
-        userReview: null,
         buyerId: null
 
     };
@@ -119,7 +115,6 @@ describe('ProductService Tests', () => {
         isRentable: true,
         isAvailable: false,
         userId: 1,
-        userReview: null,
         buyerId: null
 
     };
@@ -138,7 +133,6 @@ describe('ProductService Tests', () => {
         isRentable: false,
         isAvailable: true,
         userId: 1,
-        userReview: null,
         buyerId: null
 
     };
@@ -158,7 +152,6 @@ describe('ProductService Tests', () => {
         isRentable: false,
         isAvailable: true,
         userId: 1,
-        userReview: null,
         buyerId: 2
     };
 

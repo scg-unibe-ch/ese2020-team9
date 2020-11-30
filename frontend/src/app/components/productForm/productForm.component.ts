@@ -78,6 +78,7 @@ export class ProductFormComponent implements OnInit {
           this.userId = instances.userId;
           this.userReview = instances.userReview;
           //this.changeDetection.detectChanges();
+          this.editId = instances.productId;
 
       },(error: any) => {
       this.userAuth = 'There is no corresponding Product!';
@@ -104,11 +105,9 @@ export class ProductFormComponent implements OnInit {
 
     }).subscribe((res: any) => {
        this.editId = res.productId
-       console.log(this.editId)
-      //navigates to dashboard
-      //this.router.navigate(['/user']);
-       //let action = "";
-       //this.openSnackBar(res.message, action);
+       //console.log(this.editId)
+
+
     }, (error: any) => {
         let action = "";
         this.openSnackBar(error.message, action);
@@ -117,16 +116,16 @@ export class ProductFormComponent implements OnInit {
   }
 
   editProduct(): void {
-    this.httpClient.put(environment.endpointURL + 'products/' + this.productId, {
+    this.httpClient.put(environment.endpointURL + 'products/' + this.editId, {
       productName: this.productName,
       productDescription: this.productDescription,
-      productImage: this.productImage,
+      //productImage: this.productImage,
       productPrice: this.productPrice,
       productCategory: this.productCategory,
       productLocation: this.productLocation,
       productDelivery: this.productDelivery,
-      uploadDate: this.uploadDate,
-      sellDate: this.sellDate,
+      //uploadDate: this.uploadDate,
+      //sellDate: this.sellDate,
       isApproved: false,
       isService: this.isService,
       isRentable: this.isRentable,
@@ -138,8 +137,9 @@ export class ProductFormComponent implements OnInit {
 
       //navigates to productItem
       this.router.navigate(['/user']);
-      let action = "";
-      this.openSnackBar(res.message, action);
+      let action = "Ok";
+      let message = "Success";
+      this.openSnackBar(message, action);
 
     }, (error: any) => {
       let message = "Your Product Information is invalid!";
@@ -181,8 +181,9 @@ export class ProductFormComponent implements OnInit {
 
  onUpload() {
    const uploadData = new FormData();
+   console.log(this.editId)
    uploadData.append('image', this.selectedFile, this.selectedFile.name);
-   this.httpClient.post(environment.endpointURL + 'products/images/upload/'+ 3, uploadData, {
+   this.httpClient.post(environment.endpointURL + 'products/images/upload/'+ this.editId, uploadData, {
      reportProgress: true,
      observe: 'events'
    })

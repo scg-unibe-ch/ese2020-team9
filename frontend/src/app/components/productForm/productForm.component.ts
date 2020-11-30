@@ -9,6 +9,7 @@ import { ActivatedRoute} from "@angular/router";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { Location} from "@angular/common";
 import { Observable } from 'rxjs';
+import {MatStepperModule} from '@angular/material/stepper';
 
 @Component({
   selector: 'app-productForm',
@@ -42,6 +43,7 @@ export class ProductFormComponent implements OnInit {
   imageSelected: boolean;
   imageName: string;
   selectedFile: File;
+  editId: number;
 
   constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private _ngZone: NgZone, private productService: ProductService, private route: ActivatedRoute, private location: Location) { }
 
@@ -86,7 +88,7 @@ export class ProductFormComponent implements OnInit {
     this.httpClient.post(environment.endpointURL + 'products/', {
       productName: this.productName,
       productDescription: this.productDescription,
-      productImage: this.productImage,
+      //productImage: this.productImage,
       productPrice: this.productPrice,
       productCategory: this.productCategory,
       productLocation: this.productLocation,
@@ -101,11 +103,12 @@ export class ProductFormComponent implements OnInit {
       userReview: this.userReview,
 
     }).subscribe((res: any) => {
-
+       this.editId = res.productId
+       console.log(this.editId)
       //navigates to dashboard
-      this.router.navigate(['/user']);
-       let action = "";
-       this.openSnackBar(res.message, action);
+      //this.router.navigate(['/user']);
+       //let action = "";
+       //this.openSnackBar(res.message, action);
     }, (error: any) => {
         let action = "";
         this.openSnackBar(error.message, action);
@@ -179,7 +182,7 @@ export class ProductFormComponent implements OnInit {
  onUpload() {
    const uploadData = new FormData();
    uploadData.append('image', this.selectedFile, this.selectedFile.name);
-   this.httpClient.post(environment.endpointURL + 'products/images/upload/'+ 2, uploadData, {
+   this.httpClient.post(environment.endpointURL + 'products/images/upload/'+ 3, uploadData, {
      reportProgress: true,
      observe: 'events'
    })
@@ -187,6 +190,23 @@ export class ProductFormComponent implements OnInit {
        console.log(event); // handle event here
      });
  }
+
+
+  stepOneComplete(){
+
+    if (true){ return true}
+        else {
+          return false
+        }
+  }
+
+  stepTwoComplete(){
+
+      if (true){ return true}
+          else {
+            return false
+          }
+    }
 
 
 }

@@ -4,7 +4,8 @@ import {HttpClient} from "@angular/common/http";
 import {ProductService} from "../../../services/product.service";
 import {Transaction} from "../../../models/transaction.model";
 import {MatSnackBar} from '@angular/material/snack-bar';
-import { Output, EventEmitter} from '@angular/core';
+import { Directive, Output, EventEmitter, Input, SimpleChange} from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-boughtproducts',
@@ -40,8 +41,11 @@ export class BoughtproductsComponent implements OnInit {
   getBoughtProducts(){
      this.productService.getBoughtProducts(this.userId).subscribe((data: Transaction[]) => {
         this.transactionList = data;
+
      });
   }
+
+
 
 
   getSeller(id:number){

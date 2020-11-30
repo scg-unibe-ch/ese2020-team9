@@ -5,6 +5,7 @@ import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProductService} from "../../services/product.service";
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -24,7 +25,9 @@ export class UserDashboardComponent implements OnInit {
   userAddressCountry: string;
   userWallet: number;
 
-  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute) { }
+  image: any;
+
+  constructor(private sanitizer : DomSanitizer, private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.userId = this.userService.getUserId();
@@ -54,6 +57,28 @@ export class UserDashboardComponent implements OnInit {
   getProductUser(){
      this.productService.getUserProduct(this.userId).subscribe((data: ProductItem[]) => {
         this.productList = data;
+        for (let productItem of this.productList){
+                productItem.picture = [];
+                this.productService.getPhotoIds(productItem.productId).subscribe((photoId: any[]) => {
+
+                  for(let id of photoId){
+                     this.productService.getPhoto(id.imageId).subscribe((blob: any) => {
+
+                           //console.log(blob)
+
+                           let objectURL = URL.createObjectURL(blob);
+                           this.image = this.sanitizer.bypassSecurityTrustResourceUrl(objectURL);
+                           //console.log(this.image,"img")
+                           productItem.picture.push(this.image);
+                           //console.log(productItem.picture, "objectURL");
+
+
+                    });
+                  }
+
+                });
+
+              }
      });
   }
 

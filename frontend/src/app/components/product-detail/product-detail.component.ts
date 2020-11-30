@@ -7,6 +7,8 @@ import {ProductService} from "../../services/product.service";
 import {ActivatedRoute} from "@angular/router";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Location} from "@angular/common";
+import { DomSanitizer } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-product-detail',
@@ -43,7 +45,11 @@ export class ProductDetailComponent implements OnInit {
   isUserLoggedIn: boolean;
   userName: string;
 
-  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService,private productService: ProductService, private route: ActivatedRoute, private location: Location) { }
+
+  picture: any = [];
+  image: any;
+
+  constructor(private location: Location, private sanitizer : DomSanitizer, private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService,private productService: ProductService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -60,7 +66,6 @@ export class ProductDetailComponent implements OnInit {
           this.productId = instances.productId;
           this.productName = instances.productName;
           this.productDescription = instances.productDescription;
-          this.productImage = instances.productImage;
           this.productPrice = instances.productPrice;
           this.productCategory = instances.productCategory;
           this.productLocation = instances.productLocation;
@@ -72,7 +77,29 @@ export class ProductDetailComponent implements OnInit {
           this.isRentable = instances.isRentable;
           this.isAvailable = instances.isAvailable;
           this.sellerId = instances.userId;
-          this.userReview = instances.userReview;
+
+          //this.userReview = instances.userReview;
+          //this.changeDetection.detectChanges();
+          this.picture = [];
+          this.productService.getPhotoIds(this.productId).subscribe((photoId: any[]) => {
+
+            for(let id of photoId){
+               this.productService.getPhoto(id.imageId).subscribe((blob: any) => {
+
+                     //console.log(blob)
+
+                     let objectURL = URL.createObjectURL(blob);
+                     this.image = this.sanitizer.bypassSecurityTrustResourceUrl(objectURL);
+                     //console.log(this.image,"img")
+                     this.picture.push(this.image);
+                     //console.log(this.picture, "objectURL");
+
+
+              });
+            }
+
+          });
+
 
           this.getSeller(this.sellerId);
 

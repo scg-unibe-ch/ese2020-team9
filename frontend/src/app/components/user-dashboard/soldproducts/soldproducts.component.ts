@@ -5,6 +5,7 @@ import {ProductService} from "../../../services/product.service";
 import {Transaction} from "../../../models/transaction.model";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {TransactionService} from "../../../services/transaction.service";
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({

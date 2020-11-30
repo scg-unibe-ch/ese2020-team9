@@ -43,6 +43,7 @@ import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatSliderModule } from "@angular/material/slider";
 import { SearchComponent } from './components/search/search.component';
 import { SearchBarComponent } from "./components/dashboard/search-bar/search-bar.component";
+import { LeaderBoardComponent } from './components/leaderboard/leaderboard.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { SearchBarComponent } from "./components/dashboard/search-bar/search-bar
     ProductDisplayComponent,
     SearchBarComponent,
     SearchComponent,
+    LeaderBoardComponent,
   ],
   imports: [
     BrowserModule,

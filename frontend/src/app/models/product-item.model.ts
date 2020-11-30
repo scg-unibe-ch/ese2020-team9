@@ -1,21 +1,22 @@
 export interface ProductItem {
 
-  productId: number;
-  productName: string;
-  productDescription: string;
-  productPrice: number;
-  productImage: string,
-  productCategory: string;
-  productLocation: string;
-  productDelivery: boolean;
-  uploadDate: Date;
-  sellDate: Date;
-  isApproved: boolean;
-  isService: boolean;
-  isRentable: boolean;
-  isAvailable: boolean;
-  userId: number;
-  userReview: string;
+  constructor(
+    public productId: number,
+    public productName: string,
+    public productDescription: string,
+    public productPrice: number,
+    public productCategory: string,
+    public productLocation: string,
+    public productDelivery: boolean,
+    public uploadDate: Date,
+    public sellDate: Date,
+    public isApproved: boolean,
+    public isService: boolean,
+    public isRentable: boolean,
+    public isAvailable: boolean,
+    public userId: number,
+    public picture?: any,
+  ) {}
 
 }
 

@@ -51,15 +51,14 @@ describe('TransactionService Test', () => {
         productPrice: 10,
         productCategory: 'food',
         productLocation: null,
-        productDelivery: null,
+        productDelivery: true,
         uploadDate: new Date(Date.now()),
         sellDate: null,
         isApproved: true,
         isService: false,
-        isRentable: null,
+        isRentable: false,
         isAvailable: true,
         userId: 1,
-        userReview: null,
         buyerId: null
     };
     const product2: ProductAttributes = {
@@ -69,15 +68,14 @@ describe('TransactionService Test', () => {
         productPrice: 30,
         productCategory: 'food',
         productLocation: null,
-        productDelivery: null,
+        productDelivery: true,
         uploadDate: new Date(Date.now()),
         sellDate: null,
         isApproved: false,
         isService: false,
-        isRentable: null,
+        isRentable: false,
         isAvailable: false,
         userId: 1,
-        userReview: null,
         buyerId: null
     };
 

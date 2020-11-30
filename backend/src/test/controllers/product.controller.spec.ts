@@ -20,16 +20,15 @@ const product1: ProductAttributes = {
     productPrice: 10,
     productCategory: 'food',
     productLocation: null,
-    productDelivery: null,
+    productDelivery: true,
     uploadDate: new Date(Date.now()),
     sellDate: null,
     isApproved: false,
     isService: false,
-    isRentable: null,
+    isRentable: false,
     isAvailable: true,
     userId: 1,
     buyerId: null,
-    userReview: null
 };
 const product2: ProductAttributes = {
     productId : 2,
@@ -38,16 +37,15 @@ const product2: ProductAttributes = {
     productPrice: 120,
     productCategory: 'service',
     productLocation: null,
-    productDelivery: null,
+    productDelivery: false,
     uploadDate: new Date(Date.now()),
     sellDate: null,
     isApproved: true,
     isService: true,
-    isRentable: null,
+    isRentable: false,
     isAvailable: true,
     userId: 1,
     buyerId: null,
-    userReview: null
 };
 
 const user1: UserAttributes = {
@@ -74,15 +72,14 @@ const product3: ProductAttributes = {
     productPrice: 30,
     productCategory: 'food',
     productLocation: null,
-    productDelivery: null,
+    productDelivery: true,
     uploadDate: new Date(Date.now()),
     sellDate: null,
     isApproved: false,
     isService: false,
-    isRentable: null,
+    isRentable: false,
     isAvailable: false,
     userId: 1,
-    userReview: null,
     buyerId: 2
 };
 
@@ -115,16 +112,15 @@ describe('ProductController Test', () => { // bundles the tests related to the P
                 productPrice: 10,
                 productCategory: 'food',
                 productLocation: null,
-                productDelivery: null,
+                productDelivery: true,
                 uploadDate: new Date(Date.now()),
                 sellDate: null,
                 isApproved: true,
                 isService: false,
-                isRentable: null,
+                isRentable: false,
                 isAvailable: true,
                 userId: 1,
                 buyerId: null,
-                userReview: null
             }).end(function(err, res) {
                 expect(err).to.be.eq(null);
                 expect(res).to.have.status(200);
@@ -176,16 +172,15 @@ describe('ProductController Test', () => { // bundles the tests related to the P
                 productPrice: 10,
                 productCategory: 'food',
                 productLocation: null,
-                productDelivery: null,
+                productDelivery: true,
                 uploadDate: new Date(Date.now()),
                 sellDate: null,
                 isApproved: false,
                 isService: false,
-                isRentable: null,
+                isRentable: false,
                 isAvailable: true,
                 userId: 1,
                 buyerId: null,
-                userReview: null
             }).end(function(err, res) {
                 expect(err).to.be.eq(null);
                 expect(res).to.have.status(200);

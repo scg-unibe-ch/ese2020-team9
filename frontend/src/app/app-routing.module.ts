@@ -12,7 +12,8 @@ import { ShippingComponent } from './components/product-detail/shipping/shipping
 import { OtherUserDashboardComponent } from './components/other-user-dashboard/other-user-dashboard.component';
 import { ProductDisplayComponent } from "./components/product-display/product-display.component";
 import { SearchComponent } from "./components/search/search.component";
-import {PasswordForgottenComponent} from "./components/password-forgotten/password-forgotten.component";
+import { PasswordForgottenComponent } from "./components/password-forgotten/password-forgotten.component";
+import { LeaderBoardComponent } from "./components/leaderboard/leaderboard.component";
 
 const routes: Routes = [
   { path: 'home', component: DashboardComponent},
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'user/:id', component: OtherUserDashboardComponent},
   { path: 'search', component: ProductDisplayComponent},
   { path: 's', component: SearchComponent},
+  { path: 'leaderboard', component: LeaderBoardComponent},
   { path: 'resetPassword/:id', component: PasswordForgottenComponent},
   //default route
   { path: '', redirectTo: '/home', pathMatch: 'full'},

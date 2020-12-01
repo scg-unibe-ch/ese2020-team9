@@ -17,8 +17,10 @@
 
 
       <mat-card-content>
+        <br><br>
+        <img class="imgMid" [src]="productItem.picture[0]" />
         <a [routerLink]="['/productDetail', productItem.productId]">
-          <img mat-card-image class="center-cropped”" src="{{productItem.productImage}}" alt="{{productItem.productName}}" >
+          <img mat-card-image class="center-cropped”" src="{{productItem.picture}}" alt="{{productItem.productName}}" >
         </a>
       </mat-card-content>
 

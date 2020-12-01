@@ -66,8 +66,8 @@
         <mat-radio-button *ngFor="let data of selection" [checked]="data.value" (click)="showRenatble(data.value)">{{data.name}}</mat-radio-button>
       </mat-radio-group>
       <mat-radio-group [(ngModel)]="isService" color="#46FFFD" name="isService">
-        <a>Service:</a>
-        <mat-radio-button *ngFor="let data of selection" [checked]="data.value" (click)="showService(data.value)">{{data.name}}</mat-radio-button>
+        <a>Product Type:</a>
+        <mat-radio-button *ngFor="let data of selection2" [checked]="data.value" (click)="showService(data.value)">{{data.name}}</mat-radio-button>
       </mat-radio-group>
       <!-- alternative option -->
       <!--<mat-checkbox class="filterCheck" [(ngModel)]="delivery" (change)="navigateTo()" [checked]="delivery" color="#46FFFD">Delivery possible</mat-checkbox>-->
@@ -98,24 +98,19 @@
       <mat-form-field>
         <input matInput [(ngModel)]="priceMax" (keyup)="navigateTo()" placeholder="max Price">
       </mat-form-field>
-      <mat-radio-group [(ngModel)]="delivery" class="smRadioGroup" color="#46FFFD">
-        <span>Delivery:</span>
-        <mat-radio-button value="" (change)="navigateTo()">doesn't matter</mat-radio-button>
-        <mat-radio-button value="true" (change)="navigateTo()">possible</mat-radio-button>
-        <mat-radio-button value="false" (change)="navigateTo()">not possible</mat-radio-button>
+      <mat-radio-group [(ngModel)]="delivery" class="smRadioGroup" color="#46FFFD" name="delivery">
+        <a>Delivery:</a>
+        <mat-radio-button *ngFor="let data of selection" [checked]="data.value" (click)="showDelivery(data.value)">{{data.name}}</mat-radio-button>
       </mat-radio-group>
-      <mat-radio-group [(ngModel)]="isRentable" class="smRadioGroup" color="#46FFFD">
-        <span>Rentable:</span>
-        <mat-radio-button value="" (change)="navigateTo()">doesn't matter</mat-radio-button>
-        <mat-radio-button value="true" (change)="navigateTo()">possible</mat-radio-button>
-        <mat-radio-button value="false" (change)="navigateTo()">not possible</mat-radio-button>
+      <mat-radio-group [(ngModel)]="isRentable" class="smRadioGroup" color="#46FFFD" name="isRentable">
+        <a>Rentable:</a>
+        <mat-radio-button *ngFor="let data of selection" [checked]="data.value" (click)="showRenatble(data.value)">{{data.name}}</mat-radio-button>
       </mat-radio-group>
-      <mat-radio-group [(ngModel)]="isService" class="smRadioGroup" color="#46FFFD">
-        <span>Service:</span>
-        <mat-radio-button value="" (change)="navigateTo()">doesn't matter</mat-radio-button>
-        <mat-radio-button value="true" (change)="navigateTo()">possible</mat-radio-button>
-        <mat-radio-button value="false" (change)="navigateTo()">not possible</mat-radio-button>
+      <mat-radio-group [(ngModel)]="isService" class="smRadioGroup" color="#46FFFD" name="isService">
+        <a>Product Type:</a>
+        <mat-radio-button *ngFor="let data of selection2" [checked]="data.value" (click)="showService(data.value)">{{data.name}}</mat-radio-button>
       </mat-radio-group>
+
       <!-- alternative option -->
       <!--<mat-list>
         <mat-list-item>
@@ -143,14 +138,44 @@
     <mat-chip *ngIf="priceMax">max Price: {{priceMax}} CHF
       <button class="clearIcon" matSuffix mat-icon-button (click)="priceMax = ''; navigateTo()"><mat-icon>close</mat-icon></button>
     </mat-chip>
-    <mat-chip *ngIf="delivery">Delivery: {{delivery}}
+
+    <!-- doesn't work yet
+    <mat-chip *ngIf="delivery !== ''">Delivery: {{this.delivery}}
       <button class="clearIcon" matSuffix mat-icon-button (click)="delivery = ''; navigateTo()"><mat-icon>close</mat-icon></button>
     </mat-chip>
-    <mat-chip *ngIf="isRentable">Rentable: {{isRentable}}
+    <mat-chip *ngIf="isRentable !== ''">Rentable: {{this.isRentable}}
       <button class="clearIcon" matSuffix mat-icon-button (click)="isRentable = ''; navigateTo()"><mat-icon>close</mat-icon></button>
     </mat-chip>
-    <mat-chip *ngIf="isService">Service: {{isService}}
+    <mat-chip *ngIf="isService !== ''">Service: {{this.isService}}
       <button class="clearIcon" matSuffix mat-icon-button (click)="isService = ''; navigateTo()"><mat-icon>close</mat-icon></button>
-    </mat-chip>
+    </mat-chip>-->
   </mat-chip-list>
+</div>
+
+<!--Near you-->
+<div>
+  <mat-card>
+    <h2>Enter your zipcode and select a radius</h2>
+
+    <mat-form-field>
+      <input matInput placeholder="Zipcode" [(ngModel)]="addressPin" name="addressPin" >
+
+
+    </mat-form-field>
+    <button mat-button (click)="getPinsInRadius(addressPin)"><mat-icon>search</mat-icon>Go!</button>
+
+
+    <p>{{value}} km near you</p>
+
+    <mat-slider
+      thumbLabel
+      [displayWith]="formatLabel"
+      tickInterval="1000"
+      min="1"
+      max="100"
+      [(ngModel)]="value">
+    </mat-slider>
+
+
+  </mat-card>
 </div>

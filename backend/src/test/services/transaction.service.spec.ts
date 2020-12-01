@@ -23,7 +23,10 @@ describe('TransactionService Test', () => {
         addressStreet: 'Pinnacle Street',
         addressPin: '77889',
         addressCity: 'Hannington Town',
-        addressCountry: 'Saint Isles'
+        addressCountry: 'Saint Isles',
+        gameScore: 3,
+        activityScore: 0,
+        overallScore: 0
     };
 
     // second user: two users are required for a transaction
@@ -41,7 +44,10 @@ describe('TransactionService Test', () => {
         addressStreet: null,
         addressPin: null,
         addressCity: null,
-        addressCountry: 'England'
+        addressCountry: 'England',
+        gameScore: 3,
+        activityScore: 0,
+        overallScore: 0
     };
 
     const product1: ProductAttributes = {
@@ -51,15 +57,14 @@ describe('TransactionService Test', () => {
         productPrice: 10,
         productCategory: 'food',
         productLocation: null,
-        productDelivery: null,
+        productDelivery: true,
         uploadDate: new Date(Date.now()),
         sellDate: null,
         isApproved: true,
         isService: false,
-        isRentable: null,
+        isRentable: false,
         isAvailable: true,
         userId: 1,
-        userReview: null,
         buyerId: null
     };
     const product2: ProductAttributes = {
@@ -69,15 +74,14 @@ describe('TransactionService Test', () => {
         productPrice: 30,
         productCategory: 'food',
         productLocation: null,
-        productDelivery: null,
+        productDelivery: true,
         uploadDate: new Date(Date.now()),
         sellDate: null,
         isApproved: false,
         isService: false,
-        isRentable: null,
+        isRentable: false,
         isAvailable: false,
         userId: 1,
-        userReview: null,
         buyerId: null
     };
 
@@ -252,7 +256,7 @@ describe('TransactionService Test', () => {
                 done();
             });
         });
-        it('should update the buyer successfully', function(done) {
+        it('should update the buyer\' s wallet successfully', function(done) {
             User.findOne({
                 where: {
                     userId: 2,
@@ -263,11 +267,55 @@ describe('TransactionService Test', () => {
                 done();
             });
         });
-        it('should update the seller successfully', function(done) {
+        it('should update the buyer\' s activity score successfully', function(done) {
+            User.findOne({
+                where: {
+                    userId: 2,
+                    activityScore: 1 
+                }
+            }).then(foundUser => {
+                expect(foundUser).not.to.be.eq(null);
+                done();
+            });
+        });
+        it('should update the buyer\' s overall score successfully', function(done) {
+            User.findOne({
+                where: {
+                    userId: 2,
+                    overallScore: 4 
+                }
+            }).then(foundUser => {
+                expect(foundUser).not.to.be.eq(null);
+                done();
+            });
+        });
+        it('should update the seller\'s wallet successfully', function(done) {
             User.findOne({
                 where: {
                     userId: 1,
                     wallet: 510
+                }
+            }).then(foundUser => {
+                expect(foundUser).not.to.be.eq(null);
+                done();
+            });
+        });
+        it('should update the seller\'s activity score successfully', function(done) {
+            User.findOne({
+                where: {
+                    userId: 1,
+                    activityScore: 2
+                }
+            }).then(foundUser => {
+                expect(foundUser).not.to.be.eq(null);
+                done();
+            });
+        });
+        it('should update the seller\'s overall score successfully', function(done) {
+            User.findOne({
+                where: {
+                    userId: 1,
+                    overallScore: 5
                 }
             }).then(foundUser => {
                 expect(foundUser).not.to.be.eq(null);

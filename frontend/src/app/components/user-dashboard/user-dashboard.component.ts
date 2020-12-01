@@ -4,8 +4,8 @@ import {ProductItem} from "../../models/product-item.model";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProductService} from "../../services/product.service";
-import {environment} from "../../../environments/environment";
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -25,18 +25,15 @@ export class UserDashboardComponent implements OnInit {
   userAddressCountry: string;
   userWallet: number;
 
-  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute) { }
+  image: any;
+
+  constructor(private sanitizer : DomSanitizer, private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.userId = this.userService.getUserId();
     this.getUser();
     this.getProductUser();
-    this.userService.actualWallet.subscribe(value => {
-      this.userWallet = value;
-    });
-
   }
-
 
   getUser(){
       this.userService.getUser(this.userId).subscribe((instances: any) => {
@@ -49,13 +46,10 @@ export class UserDashboardComponent implements OnInit {
          this.userAddressCity = instances.addressCity;
          this.userAddressCountry = instances.addressCountry;
          this.userWallet = instances.wallet;
-        //this.userService.actualWallet.next(instances.wallet);
-        // this.userService.actualWallet.next(7);
 
        },(error: any) => {
-         let action = "";
-         let message = "There is no corresponding User!";
-         this.openSnackBar(message, action);
+         let action = "X";
+         this.openSnackBar(error.message, action);
      });
    }
 
@@ -63,6 +57,28 @@ export class UserDashboardComponent implements OnInit {
   getProductUser(){
      this.productService.getUserProduct(this.userId).subscribe((data: ProductItem[]) => {
         this.productList = data;
+        for (let productItem of this.productList){
+                productItem.picture = [];
+                this.productService.getPhotoIds(productItem.productId).subscribe((photoId: any[]) => {
+
+                  for(let id of photoId){
+                     this.productService.getPhoto(id.imageId).subscribe((blob: any) => {
+
+                           //console.log(blob)
+
+                           let objectURL = URL.createObjectURL(blob);
+                           this.image = this.sanitizer.bypassSecurityTrustResourceUrl(objectURL);
+                           //console.log(this.image,"img")
+                           productItem.picture.push(this.image);
+                           //console.log(productItem.picture, "objectURL");
+
+
+                    });
+                  }
+
+                });
+
+              }
      });
   }
 
@@ -70,9 +86,8 @@ export class UserDashboardComponent implements OnInit {
     this.productService.deleteProduct(product).subscribe((res: any) => {
       //removes product from productList
       this.productList = this.productList.filter(item => item !== product);
-      let message = "Product successfully deleted!";
       let action = "X";
-      this.openSnackBar(message, action);
+      this.openSnackBar(res.message, action);
     }, (error: any) => {
       let message = "Can not delete this Product!";
       let action = "X";

@@ -182,10 +182,12 @@
 
       <mat-form-field>
         <input matInput placeholder="Telephone Number" [(ngModel)]="phoneNumber" name="phoneNumber" >
+        <div *ngIf="!empty(phoneNumber)" class="invalid-feedback">
+          <div *ngIf="!checkNumber(phoneNumber)" class="invalid-feedback">Has to be numbers!</div>
+        </div>
       </mat-form-field>
 
-      <button mat-button matStepperNext>Skip</button>
-      <button mat-button matStepperNext>Next</button>
+      <button mat-button matStepperNext [disabled]="!checkNumber(phoneNumber) && phoneNumber !== ''">Next</button>
 
     </mat-card>
   </mat-step>
@@ -383,7 +385,7 @@
 
 
 
-  <button mat-flat-button class="button_standard" [routerLink]="['/user']" routerLinkActive="active" (click)="saveUser()">Save Changes</button>
+  <button mat-flat-button class="button_standard" [routerLink]="['/user']" routerLinkActive="active" (click)="editUser()">Save Changes</button>
 </div>
 
 </div>

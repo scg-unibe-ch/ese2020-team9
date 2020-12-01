@@ -1,6 +1,6 @@
-import {MockCategory} from "./models/mock-category.models";
+import {Category} from "./models/category.models";
 
-export const CategoryList:  MockCategory [] = [
+export const CategoryList:  Category [] = [
   {value: "Video Game Consoles", image:"../assets/cd/gameboy.png"},
   {value: "Audio And Video", image:"../assets/cd/minidiscs.png"},
   {value: "Calculators", image:"../assets/cd/calculator.png"},

@@ -1,4 +1,5 @@
-export interface MockCategory {
+export interface Category {
   value: string,
   image: string,
+
 }

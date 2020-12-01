@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
-import {Transaction} from "../models/transaction.model";
+import {NewTransaction, Transaction} from "../models/transaction.model";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
-import {ProductItem} from "../models/product-item.model";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +13,7 @@ export class TransactionService {
 
   /** post requests **/
   //should be used in product-detail/shipping
-  buyProduct(transaction: Transaction): Observable<any>{
+  buyProduct(transaction: NewTransaction): Observable<any>{
     return this.httpClient.post(environment.endpointURL + 'transaction/', transaction);
   }
 

@@ -22,7 +22,10 @@ const user1: UserAttributes = {
     addressStreet: null,
     addressPin: null,
     addressCity: null,
-    addressCountry: 'Middleearth'
+    addressCountry: 'Middleearth',
+    gameScore: 5,
+    activityScore: 2,
+    overallScore: 10
 };
 const adminUser: UserAttributes = {
     userId: 2,
@@ -38,7 +41,10 @@ const adminUser: UserAttributes = {
     addressStreet: null,
     addressPin: null,
     addressCity: null,
-    addressCountry: 'England'
+    addressCountry: 'England',
+    gameScore: 5,
+    activityScore: 4,
+    overallScore: 20
 };
 
 describe('UserController Test', () => {
@@ -228,7 +234,10 @@ describe('UserController Test', () => {
             addressStreet: null,
             addressPin: null,
             addressCity: null,
-            addressCountry: 'Spamland'
+            addressCountry: 'Spamland',
+            gameScore: 0,
+            activityScore: 0,
+            overallScore: 0
         };
         before('init two user into db', function(done) {
             User.create(user1).then(() => {
@@ -502,6 +511,7 @@ describe('UserController Test', () => {
             });
         });
     });
+    
     describe('Test /passwordForgotten', function() {
         this.timeout(12000);
         before('init db', function(done) {
@@ -538,6 +548,7 @@ describe('UserController Test', () => {
             });
         });
     });
+
     describe('Test /restorePassword', function() {
         before('init db', function(done) {
             User.create(user1).then(user => {
@@ -558,7 +569,7 @@ describe('UserController Test', () => {
                 password: 'hereAgain'
             }).end(function(err, res) {
                 expect(res).to.have.status(200);
-                expect(res.body.message).to.be.eq('Successfully changed the password, you now may sign in!');
+                expect(res.body.message).to.be.eq('Successfully changed the password, you may now sign in!');
                 done();
             });
         });
@@ -569,6 +580,95 @@ describe('UserController Test', () => {
             }).end(function(err, res) {
                 expect(res).to.have.status(403);
                 expect(res.body.message).to.be.eq('Unauthorized');
+                done();
+            });
+        });
+    });
+
+    describe('Test updating game score' , function() {
+        before('init users into db', function(done) {
+            User.create(user1)
+            .then(() => done())
+            .catch(err => console.log(err));
+            
+        });
+        it('should update the game score of a user successfully', function(done) {
+            chai.request(app).put('/user/updateGameScore/1/7').end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body.message).to.be.eq('Game score successfully updated!');
+                User.findByPk(1).then((user) => {
+                    expect(user.gameScore).to.be.eq(7);
+                    expect(user.overallScore).to.be.eq(14);
+                })
+                .then(() => {
+                    done();
+                });
+            });
+        });
+        after('clear db', function(done) {
+            User.destroy({
+                truncate: true,
+                restartIdentity: true,
+            }).then(() => {
+                done();
+            });
+        });
+    })
+
+    describe('Test getting game highscores', () => {
+        before('init users into db', function(done) {
+            User.create(user1)
+            .then(() => {
+                User.create(adminUser);
+            })
+            .then(() => done())
+            .catch(err => console.log(err));
+        });
+        it('should return users in the correct order', function(done) {
+            chai.request(app).get('/user/highscores/game').end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body[0].userName).to.be.eq('gandalf');
+                expect(res.body[1].userName).to.be.eq('admin');
+                done();
+            });
+        });
+        after('clear db', function(done) {
+            User.destroy({
+                truncate: true,
+                restartIdentity: true,
+            }).then(() => {
+                done();
+            });
+        });
+    });
+
+    describe('Test getting overall high scores', () => {
+        before('init users into db', function(done) {
+            User.create(user1)
+            .then(() => {
+                User.create(adminUser);
+            })
+            .then(() => done())
+            .catch(err => console.log(err));
+        });
+        it('should return users in the correct order', function(done) {
+            chai.request(app).get('/user/highscores/overall').end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body[0].userName).to.be.eq('admin');
+                expect(res.body[0].userId).to.be.eq(2);
+                expect(res.body[0].overallScore).to.be.eq(20);
+                expect(res.body[1].userName).to.be.eq('gandalf');
+                done();
+            });
+        });
+        after('clear db', function(done) {
+            User.destroy({
+                truncate: true,
+                restartIdentity: true,
+            }).then(() => {
                 done();
             });
         });

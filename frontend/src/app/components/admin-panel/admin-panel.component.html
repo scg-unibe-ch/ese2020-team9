@@ -1,27 +1,14 @@
 
-<div class="admin-view">
-  <mat-tab-group>
-    <mat-tab class = 'navigation' label="List Of Users">
-  <mat-list-item *ngFor="let user of userList" class= "caption">
-  <app-user
-        [user]="user"
-        (update)="onUserUpdate($event)"
-        (delete)="onUserDelete($event)"
-      ></app-user>
-
-  </mat-list-item>
-    </mat-tab>
-<!--
 <div class="shaded">
   <mat-list *ngFor="let user of userList">
     <mat-list-item>
     Name: {{user.userName}}, ID:  {{user.userId}} , is Admin
-    <mat-checkbox [(ngModel)]="user.admin" (change)="onUserUpdate()" [checked]="user.admin">Admin User</mat-checkbox>
-    <button mat-flat-button color="warn" (click)="onUserDelete()">Delete User</button>
+    <mat-checkbox [(ngModel)]="user.admin" (change)="upgradeUser(user)" [disabled]="user.admin" [checked]="user.admin">Admin User</mat-checkbox>
+    <button mat-flat-button color="warn" (click)="deleteUser(user)">Delete User</button>
     </mat-list-item>
   </mat-list>
 </div>
--->
+
 
 <mat-tab label="Products To Approve">
 

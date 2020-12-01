@@ -3,6 +3,8 @@
   <mat-card>
     <p>You are buying:</p>
     <b> {{productName}}</b>
+    <br>
+    <img class="small" [src]="picture[0]" />
 
     <br><br>
     <p>for <b>{{productPrice}}</b> CHF</p>
@@ -16,9 +18,7 @@
     {{sellerAddressCity}}<br>
     {{sellerAddressCountry}}<br>
 
-
   </mat-card>
-
 
   <mat-card>
     <h2>Please enter your Shipping Address:</h2>
@@ -26,72 +26,49 @@
       <mat-tab label="Use my Address"> <p> </p>
 
         <mat-form-field>
-          <input matInput placeholder="Country Code" [(ngModel)]="buyerAddressCountry" name="buyerAddressCountry">
-          <div *ngIf="!empty(buyerAddressCountry)" class="invalid-feedback">
-            <div *ngIf="!checkCountryCode(buyerAddressCountry)" class="invalid-feedback">e.g. CH</div>
-          </div>
-
-
+          <input matInput placeholder="Country Code*" [(ngModel)]="buyerAddressCountry" name="buyerAddressCountry">
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput placeholder="Zip code" [(ngModel)]="buyerAddressPin" name="buyerAddressPin" >
-        </mat-form-field>
-
-
-        <mat-form-field>
-          <input matInput placeholder="Street" [(ngModel)]="buyerAddressStreet" name="buyerAddressStreet">
+          <input matInput placeholder="Zip code*" [(ngModel)]="buyerAddressPin" name="buyerAddressPin" >
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput placeholder="City" [(ngModel)]="buyerAddressCity" name="buyerAddressCity">
+          <input matInput placeholder="Street*" [(ngModel)]="buyerAddressStreet" name="buyerAddressStreet">
         </mat-form-field>
 
+        <mat-form-field>
+          <input matInput placeholder="City*" [(ngModel)]="buyerAddressCity" name="buyerAddressCity">
+        </mat-form-field>
 
-
-
-        <button mat-flat-button color="warn"  [routerLink]="['/user']" routerLinkActive="active" [disabled]="checkCash() || !isUserLoggedIn" (click)="buyProduct()">Buy</button>
-
-
+        <button mat-flat-button color="warn"  [routerLink]="['/user']" routerLinkActive="active" [disabled]="checkCash() || !isUserLoggedIn || empty(buyerAddressCountry, buyerAddressPin, buyerAddressStreet, buyerAddressCity)" (click)="buyProduct()">Buy</button>
 
       </mat-tab>
+
       <mat-tab label="Use other Address">
 
         <mat-form-field>
-
-          <input matInput placeholder="Country Code" [(ngModel)]="otherAddressCountry" name="otherAddressCountry">
-          <div *ngIf="!empty(otherAddressCountry)" class="invalid-feedback">
-            <div *ngIf="!checkCountryCode(otherAddressCountry)" class="invalid-feedback">e.g. CH</div>
-          </div>
-
-
+          <input matInput placeholder="Country Code*" [(ngModel)]="otherAddressCountry" name="otherAddressCountry">
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput placeholder="Zip code" [(ngModel)]="otherAddressPin" name="otherAddressPin" >
-        </mat-form-field>
 
-
-        <mat-form-field>
-          <input matInput placeholder="Street" [(ngModel)]="otherAddressStreet" name="otherAddressStreet">
+          <input matInput placeholder="Zip code" [(ngModel)]="otherAddressPin" name="otherAddressPin" (ngModelChange)="requestCity()">
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput placeholder="City" [(ngModel)]="otherAddressCity" name="otherAddressCity">
+          <input matInput placeholder="Street*" [(ngModel)]="otherAddressStreet" name="otherAddressStreet">
         </mat-form-field>
 
+        <mat-form-field>
+          <input matInput placeholder="City*" [(ngModel)]="otherAddressCity" name="otherAddressCity">
+        </mat-form-field>
 
-
-        <button mat-flat-button color="warn"  [routerLink]="['/user']" routerLinkActive="active" [disabled]="checkCash || !isUserLoggedIn" (click)="buyProduct()">Buy</button>
+        <button mat-flat-button color="warn"  [routerLink]="['/user']" routerLinkActive="active" [disabled]="checkCash() || !isUserLoggedIn || empty(otherAddressCountry, otherAddressPin, otherAddressStreet, otherAddressCity)" (click)="otherAddressBuyProduct()">Buy</button>
 
 
       </mat-tab>
     </mat-tab-group>
-
-
-
   </mat-card>
-
-
-
+  <p>*Required Fields</p>
 </div>

@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSelect} from "@angular/material/select";
-import {CategoryList} from "../../../mock-category-list";
+import {CategoryList} from "../../../category-list";
 import {Subscription} from "rxjs";
 
 @Component({

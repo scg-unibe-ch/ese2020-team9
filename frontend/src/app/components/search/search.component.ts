@@ -84,6 +84,8 @@ export class SearchComponent implements OnInit {
         d: this.delivery,
         r: this.isRentable,
         s: this.isService,
+        p: this.addressPin,
+        v: this.value,
       }
     })
   }
@@ -144,41 +146,6 @@ export class SearchComponent implements OnInit {
  formatLabel(value: number) {
         return value  + 'km';
       }
-
-  //gets Pins within a certain radius
-    getPinsInRadius(addressPin: string){
-          if (this.addressPin == null){
-              let message = "Please enter a zipcode";
-              let action = "Ok";
-              this.openSnackBar(message, action);
-              return;
-          }
-          if (this.value == "0"){
-              let message = "Radius can not be Zero.";
-              let action = "";
-              this.openSnackBar(message, action);
-              return;
-          }
-          let params = {
-                code: this.addressPin,
-                radius: this.value,
-                country: "CH",
-                apikey: '4bc7d070-229b-11eb-8bf2-6be81465cc4d'
-          };
-          if (this.addressPin.length == 4){this.httpClient.get('http://localhost:4200/api/v1/radius', {params}).subscribe((res: any) => {
-                console.log(res.results, "getPinsInRadius");
-                this.pinList = res.results;
-                let queryParam = []
-                for (let i = 0; i < res.results.length; i++) {
-
-                  console.log ("Result" + i + "   " + res.results[i].code + "   " + res.results[i].city + "   " + res.results[i].distance + " km  " );
-                }
-                console.log(this.pinList, "pinList");
-
-            }, (error: any) => {
-            });
-          }
-    }
 }
 
 

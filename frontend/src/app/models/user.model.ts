@@ -13,6 +13,9 @@ export interface User {
   addressPin: string;
   addressCity: string;
   addressCountry: string;
+  gameScore: number;
+  activityScore: number;
+  overallScore: number;
 }
 
 export interface RegisterUser {

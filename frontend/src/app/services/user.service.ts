@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {BehaviorSubject, Observable} from "rxjs";
 import { environment} from "../../environments/environment";
 import {EditUser, RegisterUser, User} from "../models/user.model";
@@ -44,6 +44,18 @@ export class UserService {
 
   editUser(user: EditUser): Observable<any> {
     return this.httpClient.post(environment.endpointURL + 'user/edit/', user);
+  }
+
+  passwordForgotten(userEmail: string): Observable<any> {
+    return this.httpClient.post(environment.endpointURL + 'user/passwordForgotten', {userEmail});
+  }
+
+  resetPassword(password: string, token): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    return this.httpClient.post(environment.endpointURL + 'user/restorePassword', {password}, { headers: headers });
   }
 
   /** delete request **/

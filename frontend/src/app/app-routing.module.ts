@@ -12,7 +12,9 @@ import { ProductDetailComponent } from "./components/product-detail/product-deta
 import { ShippingComponent } from './components/product-detail/shipping/shipping.component';
 import { OtherUserDashboardComponent } from './components/other-user-dashboard/other-user-dashboard.component';
 import { ProductDisplayComponent } from "./components/product-display/product-display.component";
-import { FilterComponent } from "./components/product-display/filter/filter.component";
+import { SearchComponent } from "./components/search/search.component";
+import { PasswordForgottenComponent } from "./components/password-forgotten/password-forgotten.component";
+import { LeaderBoardComponent } from "./components/leaderboard/leaderboard.component";
 
 const routes: Routes = [
   { path: 'home', component: DashboardComponent},
@@ -24,12 +26,14 @@ const routes: Routes = [
   { path: 'productDetail/:id', component: ProductDetailComponent},
   { path: 'shipping/:id', component: ShippingComponent},
   { path: 'user/:id', component: OtherUserDashboardComponent},
-  { path: 'search', component: ProductDisplayComponent},
-  { path: 'input', component: FilterComponent},
+  { path: 'search', component: ProductDisplayComponent },
   { path: 'game', component: SnakeComponentComponent},
-  //default route
+  { path: 's', component: SearchComponent},
+  { path: 'leaderboard', component: LeaderBoardComponent},
+  { path: 'resetPassword/:id', component: PasswordForgottenComponent},
+  // default route
   { path: '', redirectTo: '/home', pathMatch: 'full'},
-  //wildcard route for 404 page
+  // wildcard route for 404 page
   { path: '**', component: PageNotFoundComponent}
 ];
 

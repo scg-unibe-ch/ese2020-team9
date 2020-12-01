@@ -325,6 +325,146 @@ Returns the user with the requested id. If user does not exist, will return a no
 
     </details>
 
+### GET on `"/user/highscores/game"`
+
+Returns the ten users with the highest scores in the snake game. 
+
+- **Details**
+
+    <details>
+    <summary>Response (STATUS 200)</summary>
+
+        ```json
+    [
+        {
+            "userId": "number",
+            "admin":  "boolean",
+            "wallet": "number",
+            "userName": "string",
+            "password": "string (Hash)",
+            "userMail": "string",
+            "firstName": "string",
+            "lastName": "string",
+            "gender":   "string",
+            "phoneNumber": "number",
+            "addressStreet": "string",
+            "addressPin": "string",
+            "addressCity": "string",
+            "addressCountry": "string",
+            "gameScore": "number",
+            "activityScore": "number",
+            "overallScore": "number",
+            "createdAt" : "string",
+            "updatedAt" : "string",
+        },
+        {
+            "userId": "number",
+            "admin":  "boolean",
+            "wallet": "number",
+            "userName": "string",
+            "password": "string (Hash)",
+            "userMail": "string",
+            "firstName": "string",
+            "lastName": "string",
+            "gender":   "string",
+            "phoneNumber": "number",
+            "addressStreet": "string",
+            "addressPin": "string",
+            "addressCity": "string",
+            "addressCountry": "string",
+            "gameScore": "number",
+            "activityScore": "number",
+            "overallScore": "number",
+            "createdAt" : "string",
+            "updatedAt" : "string",
+        },
+        ...
+    ]
+    ```
+
+    </details>
+
+    <details>
+    <summary>Response (STATUS 500)</summary>
+
+    ```json
+    {
+        "message": "error message"
+    }
+    ```
+
+    </details>
+
+### GET on `"/user/highscores/game"`
+
+Returns the three users with the highest overall scores. 
+
+- **Details**
+
+    <details>
+    <summary>Response (STATUS 200)</summary>
+
+        ```json
+    [
+        {
+            "userId": "number",
+            "admin":  "boolean",
+            "wallet": "number",
+            "userName": "string",
+            "password": "string (Hash)",
+            "userMail": "string",
+            "firstName": "string",
+            "lastName": "string",
+            "gender":   "string",
+            "phoneNumber": "number",
+            "addressStreet": "string",
+            "addressPin": "string",
+            "addressCity": "string",
+            "addressCountry": "string",
+            "gameScore": "number",
+            "activityScore": "number",
+            "overallScore": "number",
+            "createdAt" : "string",
+            "updatedAt" : "string",
+        },
+        {
+            "userId": "number",
+            "admin":  "boolean",
+            "wallet": "number",
+            "userName": "string",
+            "password": "string (Hash)",
+            "userMail": "string",
+            "firstName": "string",
+            "lastName": "string",
+            "gender":   "string",
+            "phoneNumber": "number",
+            "addressStreet": "string",
+            "addressPin": "string",
+            "addressCity": "string",
+            "addressCountry": "string",
+            "gameScore": "number",
+            "activityScore": "number",
+            "overallScore": "number",
+            "createdAt" : "string",
+            "updatedAt" : "string",
+        },
+        ...
+    ]
+    ```
+
+    </details>
+
+    <details>
+    <summary>Response (STATUS 500)</summary>
+
+    ```json
+    {
+        "message": "error message"
+    }
+    ```
+
+    </details>
+
 ### DELETE on `"/user/:id"`
 
 Deletes the user with the id set as parameter in url. Requires the Authorization Header set with a valid token from a logged-in admin user. 
@@ -407,6 +547,23 @@ Makes the user with the id set in the url as parameter to an admin user. Request
     }
     ```
     </details>
+
+### PUT on `"/user/updateGameScore/:userId/:newScore'"`
+Updates the game score of user with user id with a new score.
+
+- **Details**
+  
+    <details>
+
+    <summary>Response (STATUS 200)</summary>    
+
+    ```json
+    {
+        "message": "Game score successfully updated!"
+    }
+    ```
+
+     </details>
 
 ### POST on `"/user/passwordForgotten"`
 
@@ -521,7 +678,6 @@ Adds a new Product to the system.
         "productId": "number",
         "productName": "string",
         "productDescription": "string",
-        "productImage": "String",
         "productPrice": "number",
         "productCategory": "string",
         "productLocation": "string",
@@ -543,8 +699,22 @@ Adds a new Product to the system.
      <summary>Response (STATUS 200)</summary>
 
     ```json
-    {
-        "message": "Product successfully created!"
+    {   
+        "productId": "number",
+        "productName": "string",
+        "productDescription": "string",
+        "productPrice": "number",
+        "productCategory": "string",
+        "productLocation": "string",
+        "productDelivery": "boolean",
+        "uploadDate": "Date",
+        "sellDate": "Date",
+        "isApproved": "boolean",
+        "isService": "boolean",
+        "isRentable": "boolean",
+        "isAvailable": "boolean",
+        "userId": "number",
+        "userReview": "string"
     }
     ```
     </details>
@@ -563,12 +733,14 @@ The Response body delivers a list of products that match the keyword and the fil
     ```json
     {   
         "name": "string",
+        "location": "string",
+        "category": "string",
         "priceMin": "number",
         "priceMax": "number",
         "delivery": "boolean",
-        "location": "string",
-        "available": "string",
-        "category": "string"
+        "available": "boolean",
+        "isRentable": "boolean",
+        "isService": "boolean"
     }
     ```
     </details>
@@ -584,7 +756,6 @@ The Response body delivers a list of products that match the keyword and the fil
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "String",
             "productLocation": "string",
@@ -604,7 +775,6 @@ The Response body delivers a list of products that match the keyword and the fil
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "String",
             "productLocation": "string",
@@ -626,6 +796,47 @@ The Response body delivers a list of products that match the keyword and the fil
     ```
     
     </details>
+
+### POST on `"/products/images/upload/:id"`
+
+Adds a new Image to the Product with the given productId. 
+Requires the Authorization Header on the Request with a valid token from the User the product belongs to.
+Accepts Images in the format .png, .jpg and .jpeg, type should be "image/*". Images are sent as formdata (input tag -> name="image").
+
+- **Details**
+    
+    <details>
+     
+     <summary>Response (STATUS 200)</summary>
+
+    ```json
+    {
+        "message": "Successfully uploaded Image with id <imageId>!"
+    }
+    ```
+    </details>
+
+    <details>
+     
+     <summary>Response (STATUS 400) if Image has wrong format</summary>
+
+    ```json
+    {
+        "message": "Only .png, .jpg and .jpeg format allowed!"
+    }
+    ```
+    </details>
+
+    <details>
+     
+     <summary>Response (STATUS 403) if Product does not belong to User</summary>
+
+    ```json
+    {
+        "message": "Product does not belong to User"
+    }
+    ```
+    </details>
     
 ### PUT on `"/products/:id"`
 
@@ -642,7 +853,6 @@ Changes the product with the id set as parameter in the url. Product will be upd
         "productId": "number",
         "productName": "string",
         "productDescription": "string",
-        "productImage": "String",
         "productPrice": "number",
         "productCategory": "string",
         "productLocation": "string",
@@ -683,6 +893,23 @@ Deletes the product with the id indicated in the url.
     ```json
     {
         "message": "Product successfully deleted!"
+    }
+    ```
+    </details>
+
+### DELETE on `"/products/images/:imageId"`
+
+Deletes the image with the id indicated in the url.
+
+- **Details**
+
+     <details>
+     
+     <summary>Response (STATUS 200)</summary>
+
+    ```json
+    {
+        "message": "Image successfully deleted!"
     }
     ```
     </details>
@@ -731,7 +958,6 @@ Gets all products in the system.
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "string",
             "productLocation": "string",
@@ -749,7 +975,6 @@ Gets all products in the system.
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "string",
             "productLocation": "string",
@@ -784,7 +1009,6 @@ Gets all products, which have status approved.
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "string",
             "productLocation": "string",
@@ -802,7 +1026,6 @@ Gets all products, which have status approved.
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "string",
             "productLocation": "string",
@@ -837,7 +1060,6 @@ Gets all products, which have status not approved.
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "string",
             "productLocation": "string",
@@ -855,7 +1077,6 @@ Gets all products, which have status not approved.
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "string",
             "productLocation": "string",
@@ -921,7 +1142,6 @@ Gets all products belonging to a certain category, indicated with the parameter 
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "food",
             "productLocation": "string",
@@ -939,7 +1159,6 @@ Gets all products belonging to a certain category, indicated with the parameter 
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "food",
             "productLocation": "string",
@@ -974,7 +1193,6 @@ Gets all products belonging to the user with the id indicated in the url.
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "String",
             "productLocation": "string",
@@ -992,7 +1210,6 @@ Gets all products belonging to the user with the id indicated in the url.
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "String",
             "productLocation": "string",
@@ -1027,7 +1244,6 @@ Gets all bought products of the user with the id indicated in the url.
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "String",
             "productLocation": "string",
@@ -1045,7 +1261,6 @@ Gets all bought products of the user with the id indicated in the url.
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "String",
             "productLocation": "string",
@@ -1080,7 +1295,6 @@ Gets all sold products of the user with the id indicated in the url.
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "String",
             "productLocation": "string",
@@ -1098,7 +1312,6 @@ Gets all sold products of the user with the id indicated in the url.
             "productId": "number",
             "productName": "string",
             "productDescription": "string",
-            "productImage": "String",
             "productPrice": "number",
             "productCategory": "String",
             "productLocation": "string",
@@ -1132,7 +1345,6 @@ Gets a single product with the id indicated in the url.
         "productId": "5",
         "productName": "string",
         "productDescription": "string",
-        "productImage": "String",
         "productPrice": "number",
         "productCategory": "string",
         "productLocation": "string",
@@ -1149,6 +1361,34 @@ Gets a single product with the id indicated in the url.
     ```
     
     </details>
+
+### GET on `"/products/images/getIds/:id"` 
+
+Gets all imageIds of a a product with the product id indicated in the url.
+
+- **Details**
+
+     <details>
+     
+     <summary>Response (STATUS 200)</summary>
+     
+    ```json
+    [
+        {   
+            "imageId": "number"
+        }, 
+        {   
+            "imageId": "number"
+        },
+        ...
+    ]
+    ```
+    </details>
+
+### GET on `"/products/images/getById/:id"` 
+
+Gets the image with the id indicated in the url.
+Returns the Image in the format that it has been saved in (either .png, .jpg or .jpeg).
 
 ## Transaction API
 
@@ -1410,7 +1650,7 @@ Confirms a transactions with the id indicated in the url. This method executes t
 
     <summary>Response (STATUS 200)</summary>    
 
-        ```json
+    ```json
     {
         "message": "Transaction successfully confirmed!"
     }
@@ -1418,7 +1658,7 @@ Confirms a transactions with the id indicated in the url. This method executes t
 
      </details>
 
-     ###  PUT on `"/transaction/decline/:transactionId"`
+###  PUT on `"/transaction/decline/:transactionId"`
 
 Declines a transactions with the id indicated in the url. The method should be called when the seller declines a transaction. It sets the product boolean isAvailable back to true.
 

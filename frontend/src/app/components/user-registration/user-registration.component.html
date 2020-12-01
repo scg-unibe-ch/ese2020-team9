@@ -1,4 +1,4 @@
-
+<div class = "userRegistration">
 <!--registration only-->
 <div *ngIf="!edit">
 
@@ -20,7 +20,7 @@
       <mat-form-field>
         <input matInput placeholder="Email*" [(ngModel)]="userMail" name="userMail">
         <div *ngIf="!empty(userMail)">
-          <div *ngIf="!validateEmail(userMail)" class="invalid-feedback">Valid Email is required </div>
+          <div *ngIf="!validateEmail(userMail)" class="invalid-feedback">Valid email is required </div>
         </div>
       </mat-form-field>
 
@@ -42,7 +42,7 @@
       <mat-form-field *ngIf="!edit">
         <input matInput placeholder="Confirm Password*" [(ngModel)]="confPassword" name="confPassword" type="password">
         <ng-template [ngIf]="!empty(confPassword)">
-          <div *ngIf="!confirmPassword(confPassword)" class="invalid-feedback"> Passwords do not Match
+          <div *ngIf="!confirmPassword(confPassword)" class="invalid-feedback"> Passwords do not match
           </div>
         </ng-template>
       </mat-form-field>
@@ -182,10 +182,12 @@
 
       <mat-form-field>
         <input matInput placeholder="Telephone Number" [(ngModel)]="phoneNumber" name="phoneNumber" >
+        <div *ngIf="!empty(phoneNumber)" class="invalid-feedback">
+          <div *ngIf="!checkNumber(phoneNumber)" class="invalid-feedback">Has to be numbers!</div>
+        </div>
       </mat-form-field>
 
-      <button mat-button matStepperNext>Skip</button>
-      <button mat-button matStepperNext>Next</button>
+      <button mat-button matStepperNext [disabled]="!checkNumber(phoneNumber) && phoneNumber !== ''">Next</button>
 
     </mat-card>
   </mat-step>
@@ -208,7 +210,7 @@
 
       </div>
       <div *ngIf="edit">
-        <button mat-flat-button class="button_standard" [routerLink]="['/user']" routerLinkActive="active" (click)="saveUser()">Save Changes</button>
+        <button mat-flat-button class="button_standard" [routerLink]="['/user']" routerLinkActive="active" (click)="saveUser()">Save changes</button>
       </div>
 
 
@@ -230,7 +232,7 @@
 <!--edit user profile only-->
 
 <div *ngIf="edit">
-
+  <button mat-Button class="backIcon" (click)="goBack()" matSuffix mat-icon-button><mat-icon>arrow_back</mat-icon></button>
 <mat-card>
 
   <mat-form-field>
@@ -271,7 +273,7 @@
   <mat-form-field *ngIf="!edit">
     <input matInput placeholder="Confirm Password*" [(ngModel)]="confPassword" name="confPassword" type="password">
     <ng-template [ngIf]="!empty(confPassword)">
-      <div *ngIf="!confirmPassword(confPassword)" class="invalid-feedback"> Passwords do not Match
+      <div *ngIf="!confirmPassword(confPassword)" class="invalid-feedback"> Passwords do not match
       </div>
     </ng-template>
   </mat-form-field>
@@ -379,9 +381,11 @@
 
 </mat-card>
 
-<p>*Required Fields</p>
+<p>*Required fields</p>
 
 
 
-  <button mat-flat-button class="button_standard" [routerLink]="['/user']" routerLinkActive="active" (click)="saveUser()">Save Changes</button>
+  <button mat-flat-button class="button_standard" [routerLink]="['/user']" routerLinkActive="active" (click)="editUser()">Save changes</button>
+</div>
+
 </div>

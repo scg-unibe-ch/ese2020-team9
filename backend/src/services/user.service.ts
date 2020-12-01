@@ -130,4 +130,39 @@ export class UserService {
         }) .catch(err => Promise.reject({message: err}));
 
     }
+
+    public updateGameScore(userId: number, highscore: number): Promise<User> {
+        return User.findByPk(userId)
+        .then(user => {
+            const newOverallScore = user.activityScore * highscore;
+            return user.update({
+                gameScore: highscore,
+                overallScore: newOverallScore
+            });
+        }).catch(err => {
+            return Promise.reject({message: err});
+        });
+    }
+
+    public getGameHighScores(): Promise<User[]> {
+        return User.findAll({
+            order: [
+                ['gameScore', 'DESC']
+            ],
+            attributes: ['userId', 'userName', 'gameScore'],
+            limit: 10
+        }).catch(err => {
+            return Promise.reject({message: err});
+        });
+    }
+
+    public getOverallHighScores(): Promise<User[]> {
+        return User.findAll({
+            order: [
+                ['overallScore', 'DESC']
+            ],
+            attributes: ['userId', 'userName', 'overallScore'],
+            limit: 3
+        });
+    }
 }

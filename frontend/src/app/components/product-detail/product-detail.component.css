@@ -1,7 +1,12 @@
-
 .center-cropped {
   object-fit: cover; /* Do not scale the image */
   height: 350px;
   width: auto;
   opacity: 0.7;
+}
+
+.backIcon{
+  margin-top: 1%;
+  color: #F0F0F0;
+  margin-bottom: 0px;
 }

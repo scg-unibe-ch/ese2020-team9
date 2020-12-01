@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {Router} from "@angular/router";
-import {UserService} from "../../services/user.service";
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { Router } from "@angular/router";
+import { UserService } from "../../services/user.service";
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from "@angular/material/dialog";
+import { DialogBodyComponent } from "../dialog-body/dialog-body.component";
 
 
 @Component({
@@ -15,17 +17,28 @@ export class UserLoginComponent implements OnInit {
   userLogin = '';
   password = '';
   userWallet = '';
-  //userToken: string;
-  //loggedIn = false;
-
-  userAuth = '';
   isUserLoggedIn: boolean;
+  email: string;
 
-  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService) { }
+  name: string;
+
+  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.userService.isUserLoggedIn.subscribe(value => {
       this.isUserLoggedIn = value;
+    });
+  }
+
+  openDialog(): void {
+    let dialogRef = this.dialog.open(DialogBodyComponent, {
+      width: '250px'});
+
+      dialogRef.afterClosed().subscribe(result => {
+      this.email = result;
+      if(this.validate(this.email) && !this.empty(this.email)) {
+        this.passwordForgotten(this.email);
+      }
     });
   }
 
@@ -47,10 +60,9 @@ export class UserLoginComponent implements OnInit {
       //navigates to dashboard
       this.router.navigate(['/home']);
       }, (error: any) => {
-        //let message = "Your Username/Email and/or Password is wrong, try again!"
-        let action = "Retry"
-        this.openSnackBar(error.error.message, action);
-        //this.userAuth = 'Your Username/Email and/or Password is wrong, try again!';
+        let message = "An error occurred!";
+        let action = "Retry";
+        this.openSnackBar(message, action);
       });
   }
 
@@ -64,10 +76,29 @@ export class UserLoginComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  openSnackBar(message: string, action: string) {
-      this._snackBar.open(message, action, {
-        duration: 3000
-      });
-    }
+  passwordForgotten(email: string): void {
+    this.userService.passwordForgotten(email).subscribe((res: any) => {
+      let action = "X";
+      this.openSnackBar(res.message, action);
+    }, (error: any) => {
+      let message = "Could not find a user with this email address!";
+      let action = "X";
+      this.openSnackBar(message, action);
+    });
+  }
 
+  validate(email) {
+    const regularExpression = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return regularExpression.test(String(email).toLowerCase());
+  }
+
+  empty(email): boolean{
+    return (email === '');
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 3000
+    });
+  }
 }

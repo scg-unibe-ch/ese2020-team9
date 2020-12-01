@@ -25,7 +25,10 @@ describe('ProductService Tests', () => {
         addressStreet: 'Pinnacle Street',
         addressPin: '77889',
         addressCity: 'Hannington Town',
-        addressCountry: 'Saint Isles'
+        addressCountry: 'Saint Isles',
+        gameScore: 0,
+        activityScore: 0,
+        overallScore: 0
     };
 
     const product1: ProductAttributes = {

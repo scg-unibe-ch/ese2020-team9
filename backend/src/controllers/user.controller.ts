@@ -75,8 +75,38 @@ userController.post('/passwordForgotten',
 userController.post('/restorePassword', verifyPasswordToken,
     (req: Request, res: Response) => {
         userService.restorePassword(req.body.tokenPayload.userName, req.body.password)
-        .then(() => res.send({message: 'Successfully changed the password, you now may sign in!'}))
+        .then(() => res.send({message: 'Successfully changed the password, you may now sign in!'}))
         .catch(() => res.status(500).send({message: 'Failed to change the password, please try again!'}));
+    }
+);
+
+userController.put('/updateGameScore/:userId/:newScore' ,
+    (req: Request, res: Response) => {
+        const userId = Number.parseInt(req.params.userId, 10);
+        const newScore = Number.parseInt(req.params.newScore, 10);
+        userService.updateGameScore(userId, newScore).then(() => {
+            res.status(200).send({message: 'Game score successfully updated!'});
+        })
+        .catch(err => res.status(500).send(err));
+    }
+);
+
+
+userController.get('/highscores/game',
+    (req: Request, res: Response) => {
+        userService.getGameHighScores().then(users => {
+            res.status(200).send(users);
+        })
+        .catch(err => res.status(500).send(err));
+    }
+);
+
+userController.get('/highscores/overall',
+    (req: Request, res: Response) => {
+        userService.getOverallHighScores().then(users => {
+            res.status(200).send(users);
+        })
+        .catch(err => res.status(500).send(err));
     }
 );
 

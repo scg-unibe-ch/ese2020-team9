@@ -28,7 +28,9 @@
           <button mat-button class="button_fill" [routerLink]="['/productDetail', productItem.productId]" routerLinkActive="active" ><b>{{productItem.productName}}</b>
           </button>
         </mat-card-title>
-
+        <mat-card-content>
+          <img class="img" [src]="productItem.picture[0]" />
+        </mat-card-content>
         <mat-card-subtitle>{{productItem.uploadDate | date: "dd.MM.yy, HH:mm"}} Uhr</mat-card-subtitle>
       </mat-card-header>
 

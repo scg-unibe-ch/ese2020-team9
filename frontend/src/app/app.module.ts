@@ -46,6 +46,7 @@ import { SearchBarComponent } from "./components/dashboard/search-bar/search-bar
 import { MatDialogModule } from "@angular/material/dialog";
 import { DialogBodyComponent } from './components/dialog-body/dialog-body.component';
 import { PasswordForgottenComponent } from "./components/password-forgotten/password-forgotten.component";
+import { LeaderBoardComponent } from './components/leaderboard/leaderboard.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,8 @@ import { PasswordForgottenComponent } from "./components/password-forgotten/pass
     SearchComponent,
     DialogBodyComponent,
     PasswordForgottenComponent,
+    LeaderBoardComponent,
+
   ],
   imports: [
     BrowserModule,

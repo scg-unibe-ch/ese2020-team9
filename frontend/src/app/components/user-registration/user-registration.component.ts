@@ -161,7 +161,6 @@ export class UserRegistrationComponent implements OnInit {
 
 
   /** registration checks **/
-
   registrationComplete():boolean{
     return (this.userId !=='');
   }
@@ -211,6 +210,7 @@ export class UserRegistrationComponent implements OnInit {
   confirmPassword(cpw):boolean{
     if (this.password == cpw)
        return (this.password == cpw);
+
    }
 
   //make register button visible
@@ -229,6 +229,24 @@ export class UserRegistrationComponent implements OnInit {
   // check if field is number
   checkNumber(input):boolean{
     return (_isNumberValue(input));
+  }
+
+  requestCity(){
+    let params = {
+          codes: this.addressPin,
+          country: "CH",
+          apikey: '4bc7d070-229b-11eb-8bf2-6be81465cc4d'
+    };
+    if (this.addressPin.length == 4){this.httpClient.get('http://localhost:4200/api/v1/search', {params}).subscribe((res: any) => {
+        if (res != null) {
+            this.addressCity = res.results[this.addressPin][0].city;
+            //console.log(res.results[this.addressPin][0].city)
+        }
+
+      }, (error: any) => {
+            this.addressCity = "";
+      });
+    }
   }
 
   stepOneComplete(){
@@ -252,21 +270,5 @@ export class UserRegistrationComponent implements OnInit {
     return (fn && ln)
   }
 
-  requestCity(){
-    let params = {
-      codes: this.addressPin,
-      country: "CH",
-      apikey: '4bc7d070-229b-11eb-8bf2-6be81465cc4d'
-    };
-    if (this.addressPin.length >= 4){this.httpClient.get('https://app.zipcodebase.com/api/v1/search', {params}).subscribe((res: any) => {
-      console.log(this.addressPin);
-      const apiResponse = res;
-      console.log(apiResponse);
-      this.addressCity = res.results.city;
-      console.log(this.addressCity)
-    }, (error: any) => {
-      console.log(error);
-    });
-    }
-  }
+
  }

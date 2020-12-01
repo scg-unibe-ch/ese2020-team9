@@ -80,4 +80,18 @@ export class ProductService {
   getSoldProducts(userId: number) {
    return this.httpClient.get(environment.endpointURL + 'transaction/sell/' + userId);
  }
+
+
+  //
+  buyProduct(productId: number) {
+    return this.httpClient.get(environment.endpointURL + 'products/' + productId);
+  }
+
+  getPhotoIds(productId: number){
+      return this.httpClient.get(environment.endpointURL + 'products/images/getIds/' + productId);
+  }
+
+  getPhoto(photoId: number){
+      return this.httpClient.get(environment.endpointURL + 'products/images/getById/' + photoId,{responseType:"blob"});
+  }
 }

@@ -1,6 +1,7 @@
 import { UserService } from './../../services/user.service';
 import { User, UserAttributes } from './../../models/user.model';
 import { expect } from 'chai';
+import { userInfo } from 'os';
 
 describe('UserService Tests', () => {
 
@@ -20,7 +21,10 @@ describe('UserService Tests', () => {
         addressStreet: 'Pinnacle Street',
         addressPin: '77889',
         addressCity: 'Hannington Town',
-        addressCountry: 'Saint Isles'
+        addressCountry: 'Saint Isles',
+        gameScore: 1,
+        activityScore: 2,
+        overallScore: 2
     };
 
     describe('Test register', () => {
@@ -54,7 +58,10 @@ describe('UserService Tests', () => {
                 addressStreet: 'Kensington Road',
                 addressPin: '4404',
                 addressCity: 'Creed Town',
-                addressCountry: 'Mercy Islands'
+                addressCountry: 'Mercy Islands',
+                gameScore: 0,
+                activityScore: 0,
+                overallScore: 0
             };
             testedUserService.register(user2).catch(error => {
                 expect(error.message).to.be.eq('This username or email address is already being used!');
@@ -76,7 +83,10 @@ describe('UserService Tests', () => {
                 addressStreet: 'Kensington Road',
                 addressPin: '4404',
                 addressCity: 'Creed Town',
-                addressCountry: 'Mercy Islands'
+                addressCountry: 'Mercy Islands',
+                gameScore: 0,
+                activityScore: 0,
+                overallScore: 0
             };
             testedUserService.register(user2).catch(error => {
                 expect(error.message).to.be.eq('This username or email address is already being used!');
@@ -98,7 +108,10 @@ describe('UserService Tests', () => {
                 addressStreet: null,
                 addressPin: null,
                 addressCity: null,
-                addressCountry: null
+                addressCountry: null,
+                gameScore: 0,
+                activityScore: 0,
+                overallScore: 0
             };
             testedUserService.register(user2).catch(error => {
                 expect(error).not.to.be.eq(null);
@@ -329,6 +342,66 @@ describe('UserService Tests', () => {
             }).catch(err => {
                 expect(err).not.to.be.eq(null);
                 expect(err).to.have.property('message');
+                done();
+            });
+        });
+    });
+    describe('Test updateGameScore', () => {
+        it('should successfully update the game and overall score', function(done) {
+            testedUserService.updateGameScore(1, 5).then(() => {
+                User.findByPk(1).then((user) => {
+                    expect(user).not.to.be.eq(null);
+                    expect(user.gameScore).to.be.eq(5);
+                    expect(user.overallScore).to.be.eq(10);
+                    done();
+                });
+            });
+        });
+    });
+    describe('Test getGameHighScore', () => {
+        it('should add another user', function(done) {
+            const user2: UserAttributes = {
+                userId: 2,
+                admin: false,
+                wallet: 500,
+                userName: 'brent',
+                password: 'j1234',
+                userMail: 'brent@gmail.com',
+                firstName: 'Brent',
+                lastName: 'Eastwood',
+                gender: 'male',
+                phoneNumber: 7655555,
+                addressStreet: 'Kensington Road',
+                addressPin: '4404',
+                addressCity: 'Creed Town',
+                addressCountry: 'Mercy Islands',
+                gameScore: 6,
+                activityScore: 1,
+                overallScore: 6
+            };
+            testedUserService.register(user2).then(user => {
+                expect(user).not.to.be.eq(null);
+                done();
+            });
+        });
+        it('should successfully get game high scores', function(done) {
+            testedUserService.getGameHighScores().then((users) => {
+                expect(users[0].userId).to.be.eq(2);
+                expect(users[0].userName).to.be.eq('brent');
+                expect(users[0].gameScore).to.be.eq(6);
+                expect(users[1].userId).to.be.eq(1);
+                done();
+            });
+        });
+    });
+    describe('Test getOverallHighScore', () => {
+        it('should successfully get the three overall high scores', function(done) {
+            testedUserService.getOverallHighScores().then((users) => {
+                expect(users[1].userId).to.be.eq(2);
+                expect(users[1].userName).to.be.eq('brent');
+                expect(users[1].overallScore).to.be.eq(6);
+                expect(users[0].userId).to.be.eq(1);
+                expect(users[0].overallScore).to.be.eq(10);
                 done();
             });
         });

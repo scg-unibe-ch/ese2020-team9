@@ -5,6 +5,7 @@
 <div  fxLayout="row wrap" fxLayoutGap="2% grid" fxLayoutAlign="space-evenly stretch">
   <div fxFlex="10%" fxFlex.xl="15%" fxFlex.lg="20%" fxFlex.md="25%" fxFlex.sm="33%" fxFlex.xs="50%" *ngFor="let transaction of transactionList">
     <mat-card class="productItem_Card">
+      <button mat-flat-button class="button_fill"  [routerLink]="['/productDetail', transaction.productId]" routerLinkActive="active" ><b>{{transaction.product.productName}} </b></button>
 
       <div *ngIf="transaction.transactionStatus==1">
           <h1> Productname: {{productName}}</h1>
@@ -16,26 +17,32 @@
           <button mat-flat-button class="button_standard" (click)="declineProduct(transaction)">Decline</button>
         </div>
 
-        <div *ngIf="transaction.transactionStatus==2">
+
+
+
+
+      <div *ngIf="transaction.transactionStatus==2">
+          <br>
           <b>Status: Sold</b>
 
-        </div>
+      </div>
 
-        <div *ngIf="transaction.transactionStatus==3">
+      <div *ngIf="transaction.transactionStatus==3">
+          <br>
           <b>Status: Declined</b>
 
-        </div>
-        <div>
+      </div>
+      <div>
           <br>
           Buyer: <br>
-          <button mat-button class="button_fill" [routerLink]="['/user', transaction.buyerId]" routerLinkActive="active" ><mat-icon >account_circle</mat-icon>{{transaction.buyerId}}</button>
+          <button mat-button class="button_fill" [routerLink]="['/user', transaction.buyerId]" routerLinkActive="active" ><mat-icon >account_circle</mat-icon>{{transaction.buyer.userName}}</button>
 
           <br>
           {{transaction.deliveryFirstName}} {{transaction.deliveryLastName}}<br>
           {{transaction.deliveryStreet}}<br>
           {{transaction.deliveryPin}} {{transaction.deliveryCity}}<br>
           {{transaction.deliveryCountry}}<br>
-        </div>
+      </div>
 
 
     </mat-card>

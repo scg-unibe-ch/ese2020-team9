@@ -81,8 +81,9 @@ export class UserLoginComponent implements OnInit {
       let action = "X";
       this.openSnackBar(res.message, action);
     }, (error: any) => {
+      let message = "Could not find a user with this email address!";
       let action = "X";
-      this.openSnackBar(error.message, action);
+      this.openSnackBar(message, action);
     });
   }
 

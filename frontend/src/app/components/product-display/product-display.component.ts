@@ -125,7 +125,7 @@ export class ProductDisplayComponent implements OnInit {
       //this.location = res.results;
 
      for (let i = 0; i < res.results.length; i++) {
-       this.location[i] = res.results[i].code;
+       location[i] = res.results[i].code;
        /*console.log ("Result" + i + "   " + res.results[i].code + "   " + res.results[i].city + "   " + res.results[i].distance + " km  " );*/
      }
      this.location = location;

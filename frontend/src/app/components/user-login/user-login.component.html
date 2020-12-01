@@ -20,7 +20,7 @@
 </mat-card>
 
   <div *ngIf="!isUserLoggedIn" align="end">
-      <button mat-flat-button class="button_standard" routerLink="/registration">Registration</button>
+      <button mat-flat-button class="button_standard" [routerLink]="['/registration/0']">Registration</button>
       <button mat-flat-button class="button_standard" (click)="openDialog()">Password forgotten</button>
   </div>
 

@@ -33,10 +33,12 @@ export class UserLoginComponent implements OnInit {
   openDialog(): void {
     let dialogRef = this.dialog.open(DialogBodyComponent, {
       width: '250px'});
-    dialogRef.afterClosed().subscribe(result => {
+
+      dialogRef.afterClosed().subscribe(result => {
       this.email = result;
-      console.log(this.email);
-      this.passwordForgotten(this.email);
+      if(this.validate(this.email) && !this.empty(this.email)) {
+        this.passwordForgotten(this.email);
+      }
     });
   }
 
@@ -74,20 +76,7 @@ export class UserLoginComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  /*
-  openDialog(templateRef) : void {
-    const dialogRef = this.dialog.open(templateRef, {
-      width: '200px',
-      data: {email: this.email},
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.email = result;
-    });
-  }
-  */
-
-passwordForgotten(email: string): void {
+  passwordForgotten(email: string): void {
     this.userService.passwordForgotten(email).subscribe((res: any) => {
       let action = "X";
       this.openSnackBar(res.message, action);
@@ -95,6 +84,15 @@ passwordForgotten(email: string): void {
       let action = "X";
       this.openSnackBar(error.message, action);
     });
+  }
+
+  validate(email) {
+    const regularExpression = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return regularExpression.test(String(email).toLowerCase());
+  }
+
+  empty(email): boolean{
+    return (email === '');
   }
 
   openSnackBar(message: string, action: string) {

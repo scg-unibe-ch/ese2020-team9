@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../../services/user.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-password-forgotten',
@@ -11,14 +12,17 @@ export class PasswordForgottenComponent implements OnInit {
 
   password: string = '';
   confPassword: string = '';
+  code: any;
 
-  constructor(private userService: UserService, private _snackBar: MatSnackBar) { }
+  constructor(private userService: UserService, private _snackBar: MatSnackBar, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.code = this.route.snapshot.paramMap.get('id');
+    console.log(this.code);
   }
 
   resetPassword(password: string){
-    this.userService.resetPassword(password).subscribe((res: any) => {
+    this.userService.resetPassword(password, this.code).subscribe((res: any) => {
     let action = "X";
     this.openSnackBar(res.message, action);
     }, (error: any) => {

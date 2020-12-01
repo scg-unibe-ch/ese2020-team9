@@ -12,17 +12,13 @@ export class DialogBodyComponent implements OnInit {
 
   email: string = '';
 
-  constructor(private _snackBar: MatSnackBar,  public dialogRef: MatDialogRef<DialogBodyComponent>) { }
+  constructor(private _snackBar: MatSnackBar,  private dialogRef: MatDialogRef<DialogBodyComponent>) { }
 
   ngOnInit(): void {
   }
 
-  closeDialog(){
-    this.dialogRef.close(this.email);
-  }
-
-  submitDialog(){
-    this.dialogRef.close(this.email);
+  closeDialog(email){
+    this.dialogRef.close(email);
   }
 
   validateEmail(email) {

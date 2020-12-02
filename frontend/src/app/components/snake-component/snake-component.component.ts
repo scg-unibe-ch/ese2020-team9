@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { UserService } from './../../services/user.service';
 import { Board } from './objects/board';
 import { Component, OnInit, HostListener, ChangeDetectorRef, EventEmitter } from '@angular/core';
 import { Snake } from './objects/snake';
@@ -18,8 +20,8 @@ const KeyCodes = {
 })
 export class SnakeComponentComponent implements OnInit {
 
-  readonly size = 40;
-  readonly cellWidth = 13; // in px
+  readonly size = 26;
+  readonly cellWidth = 20; // in px
   readonly timestep = 100;
   readonly ngStyleCells = {
     width: `${this.size * this.cellWidth}px`
@@ -28,8 +30,12 @@ export class SnakeComponentComponent implements OnInit {
 
   dead = false;
   score = 0;
-  highscore = 0;
+  lastScore = 0;
+  sessionHighscore = 0;
+  userHighscore: number;
+  userLoggedIn: boolean;
   playing = false;
+  instructions = false;
 
   message: string;
 
@@ -37,12 +43,21 @@ export class SnakeComponentComponent implements OnInit {
   positions: Position[] = this.initializePositions();
   snake: Snake = new Snake();
 
-  public constructor() {
+  topThreeOverall: any[] = [];
+  topTenGame: any[] = [];
+
+  public constructor(private userService: UserService, private router: Router) {
     this.message = 'Welcome to Snake!';
+    this.userHighscore = this.userService.getUserHighscore();
   }
 
   public ngOnInit(): void {
     this.board.newGame();
+    this.getOverallScoreList();
+    this.getSnakeHighscoreList();
+    this.userService.isUserLoggedIn.subscribe(val => {
+      this.userLoggedIn = val;
+    });
   }
 
   public play(): void {
@@ -58,16 +73,53 @@ export class SnakeComponentComponent implements OnInit {
             setTimeout(() => {
               this.playing = true;
               this.run();
-            }, 700);
+            }, 1000);
           }, 1000);
         }, 1000);
       }, 1000);
     }, 1000);
   }
 
-  public saveHighscore(): void { }
+  public getOverallScoreList(): void {
+    this.userService.getOverallHighscoreTopList().subscribe((userList: any) => {
+      this.topThreeOverall = userList;
+    });
+  }
 
-  public quit(): void { }
+  public getSnakeHighscoreList(): void {
+    this.userService.getGameHighscoreTopList().subscribe((userList: any) => {
+      this.topTenGame = userList;
+    });
+  }
+
+  public saveHighscore(): void {
+    if (!this.userLoggedIn) {
+      this.message = 'Not logged in, cannot save the highscore...';
+    } else if (this.sessionHighscore <= this.userHighscore) {
+      this.message = 'You cannot save a lower score...';
+    } else {
+      this.userService.saveHighscore(this.sessionHighscore).subscribe((res) => {
+        this.message = 'Successfully saved new highscore!';
+        this.userHighscore = this.sessionHighscore;
+        this.getOverallScoreList();
+        this.getSnakeHighscoreList();
+      }, (err) => {
+        this.message = 'Could not update highscore...';
+      });
+    }
+  }
+
+  public quit(): void {
+    this.router.navigate(['/home']);
+  }
+
+  public toggleInstructions(): void {
+    this.instructions = !this.instructions;
+  }
+
+  public isValidUserHighscore(): boolean {
+    return this.userHighscore !== null && !Number.isNaN(this.userHighscore);
+  }
 
   public run(): void {
     if (this.dead) {
@@ -119,15 +171,16 @@ export class SnakeComponentComponent implements OnInit {
   private die(): void {
     this.message = 'You Died!';
     this.playing = false;
-    this.updateHighscore();
+    this.updateScores();
   }
 
-  private updateHighscore(): void {
-    this.highscore = this.score > this.highscore ? this.score : this.highscore;
+  private updateScores(): void {
+    this.lastScore = this.score;
+    this.sessionHighscore = this.score > this.sessionHighscore ? this.score : this.sessionHighscore;
   }
 
   private initializeNewGame(): void {
-    this.snake = new Snake()
+    this.snake = new Snake();
     this.board.newGame();
     this.score = 0;
     this.dead = false;

@@ -1,33 +1,62 @@
+
+<div class="console">
+  {{ playing ? 'Your score is ' + score : message }}
+</div>
+
 <div class="game">
+
+<div class="board">
+  <div class="spacer"></div>
+  <div class="score-list">
+    Snake Score ranking
+    <ol>
+      <li *ngFor="let user of topTenGame">{{ user.userName + ' : ' + user.gameScore}}</li>
+    </ol>
+  </div>
+  <div class="border"></div>
+  <div class="spacer"></div>
+  <div class="score-list">
+    Overall ranking
+    <ol>
+      <li *ngFor="let user of topThreeOverall">{{ user.userName + ' : ' + user.overallScore}}</li>
+    </ol>
+  </div>
+</div>
 
 <div class="cells" [ngStyle]="ngStyleCells">
   <div class="cell" [ngStyle]="ngStyleCell(pos)" *ngFor="let pos of positions"></div>
 </div>
 
 <div class="board">
-  <div class="console">
-    {{ playing ? 'Your score is ' + score : message }}
-  </div>
-  <div class="instructions">
-    <h3>Instructions</h3>
-    To start, press PLAY! <br>
-    Navigate with 'A', 'W', 'S' and 'D' to turn left, up, down or right.<br>
-    You are the red snake, pay attention not to head into your tail!<br>
-    To grow, collect the orange eggs.<br>
-    Have you ever tried to run through a wall? Then you know why it's not wise to head into grey squares.<br>
-    Blinking squares will help you: they shrink your tail and add score! <br>
-    Finally, if you have enough of snake, consider saving your highscore to show off ;) <br>
-    Have fun!
+  <div class="score">
+    Your highscore in this session: {{this.sessionHighscore}}
   </div>
   <div class="score">
-    Your highscore in this session: {{this.highscore}} <br>
-    {{ 'You scored ' + this.score + ' in the last run' }}
+    {{ 'You scored ' + this.lastScore + ' in the last run' }}
+  </div>
+  <div class="score">
+    {{ this.isValidUserHighscore() ? 'Your saved highscore is: ' + this.userHighscore
+        : 'No saved highscore, consider logging in to save highscores!' }}
   </div>
   <div class="buttons">
     <button (click)="play()">PLAY</button>
+    <button (click)="toggleInstructions()">Instructions</button>
     <button (click)="saveHighscore()">Save Highscore</button>
     <button (click)="quit()">quit</button>
   </div>
 </div>
 
+</div>
+
+<div class="instructions" *ngIf="instructions">
+  <h3>INSTRUCTIONS</h3>
+  To start, press PLAY! <br><br>
+  Navigate with 'A', 'W', 'S' and 'D' to turn left, up, down or right.<br><br>
+  You are the red snake, pay attention not to head into your tail!<br><br>
+  To grow, collect the orange eggs.<br><br>
+  Have you ever tried to run through a wall? Then you know why it's not wise to head into grey squares.<br><br>
+  Blinking squares will help you: they shrink your tail and add score! <br><br>
+  Finally, if you have enough of snake, consider saving your highscore to show off ;)
+  (You need to be signed in!)<br><br>
+  Have fun!
 </div>

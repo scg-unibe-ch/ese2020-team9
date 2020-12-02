@@ -395,7 +395,7 @@ Returns the ten users with the highest scores in the snake game.
 
     </details>
 
-### GET on `"/user/highscores/game"`
+### GET on `"/user/highscores/overall"`
 
 Returns the three users with the highest overall scores. 
 

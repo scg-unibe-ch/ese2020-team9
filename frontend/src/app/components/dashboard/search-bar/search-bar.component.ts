@@ -2,6 +2,11 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSelect} from "@angular/material/select";
 import {CategoryList} from "../../../category-list";
 import {Subscription} from "rxjs";
+import { HostListener } from '@angular/core';
+
+export enum KEY_CODE {
+  ENTER = 'Enter',
+}
 
 @Component({
   selector: 'app-search-bar',
@@ -36,4 +41,15 @@ export class SearchBarComponent implements OnInit {
   ngOnDestroy(){
     this.subscription.unsubscribe();
   }
+
+
+  @HostListener('window:keyup', ['$event'])
+    keyEvent(event: KeyboardEvent) {
+      //console.log(event);
+      if (event.key === KEY_CODE.ENTER) {
+        console.log("ENTEEERR");
+
+      }
+
+    }
 }

@@ -3,6 +3,7 @@ import {MatSelect} from "@angular/material/select";
 import {CategoryList} from "../../../category-list";
 import {Subscription} from "rxjs";
 import { HostListener } from '@angular/core';
+import { Router } from "@angular/router";
 
 export enum KEY_CODE {
   ENTER = 'Enter',
@@ -22,7 +23,7 @@ export class SearchBarComponent implements OnInit {
   name = '';
   subscription: Subscription;
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {
@@ -42,12 +43,17 @@ export class SearchBarComponent implements OnInit {
     this.subscription.unsubscribe();
   }
 
+  goToSearch(){
+    console.log(this.name);
+    this.router.navigate(['/s',{queryParams: {n: this.name}}]);
+  }
+
 
   @HostListener('window:keyup', ['$event'])
     keyEvent(event: KeyboardEvent) {
       //console.log(event);
       if (event.key === KEY_CODE.ENTER) {
-        console.log("ENTEEERR");
+        this.goToSearch();
 
       }
 

@@ -50,6 +50,7 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
     this.category = this.route.snapshot.queryParamMap.get('c');
     this.name = this.route.snapshot.queryParamMap.get('n');
+    console.log(this.name, "name")
     this.navigateTo();
   }
 

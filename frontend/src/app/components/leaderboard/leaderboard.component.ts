@@ -35,7 +35,7 @@ export class LeaderBoardComponent implements OnInit {
   }
 
    getLeaderBoardOverAll(){
-      this.httpClient.get(environment.endpointURL + 'user/highscores/game' ,{}).subscribe((data: LeaderBoardScore[]) => {
+      this.httpClient.get(environment.endpointURL + 'user/highscores/overall' ,{}).subscribe((data: LeaderBoardScore[]) => {
                   this.leaderBoardOverAll = data;
                });
     }

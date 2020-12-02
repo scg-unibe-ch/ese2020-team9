@@ -16,8 +16,8 @@ export class LeaderBoardComponent implements OnInit {
     userName: string;
     userScore: number;
 
-    leaderBoardSnake: LeaderBoardScoreSnake[];
-    leaderBoardOverAll: LeaderBoardScoreOverAll[];
+    leaderBoardSnake: LeaderBoardScore[];
+    leaderBoardOverAll: LeaderBoardScore[];
 
     displayedColumns: string[] = ['position', 'gameScore', 'userName'];
 
@@ -29,13 +29,13 @@ export class LeaderBoardComponent implements OnInit {
   }
 
   getLeaderBoardSnake(){
-    this.httpClient.get(environment.endpointURL + 'user/highscores/game' ,{}).subscribe((data: LeaderBoardScoreSnake[]) => {
+    this.httpClient.get(environment.endpointURL + 'user/highscores/game' ,{}).subscribe((data: LeaderBoardScore[]) => {
             this.leaderBoardSnake = data;
          });
   }
 
    getLeaderBoardOverAll(){
-      this.httpClient.get(environment.endpointURL + 'user/highscores/game' ,{}).subscribe((data: LeaderBoardScoreOverAll[]) => {
+      this.httpClient.get(environment.endpointURL + 'user/highscores/game' ,{}).subscribe((data: LeaderBoardScore[]) => {
                   this.leaderBoardOverAll = data;
                });
     }

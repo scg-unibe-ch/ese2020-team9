@@ -5,6 +5,11 @@ import { UserService } from "../../services/user.service";
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from "@angular/material/dialog";
 import { DialogBodyComponent } from "../dialog-body/dialog-body.component";
+import { HostListener } from '@angular/core';
+
+export enum KEY_CODE {
+  ENTER = 'Enter',
+}
 
 
 @Component({
@@ -100,5 +105,18 @@ export class UserLoginComponent implements OnInit {
     this._snackBar.open(message, action, {
       duration: 3000
     });
+
+
   }
+
+  @HostListener('window:keyup', ['$event'])
+    keyEvent(event: KeyboardEvent) {
+      //console.log(event);
+      if (event.key === KEY_CODE.ENTER) {
+        this.login();
+      }
+
+    }
+
+
 }

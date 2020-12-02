@@ -51,7 +51,7 @@ export class SearchBarComponent implements OnInit {
       //console.log(event);
       if (event.key === KEY_CODE.ENTER) {
 
-          this.router.navigate(['/s',{queryParams: {n: this.name}}]);
+          this.router.navigate(['/s'],{queryParams: {n: this.name}});
 
 
       }

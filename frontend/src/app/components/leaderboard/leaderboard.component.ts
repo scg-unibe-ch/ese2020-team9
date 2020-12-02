@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from "../../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { LeaderBoardScore } from "../../models/leaderboardscore.model";
-
+import {MatTableModule} from '@angular/material/table';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @Component({
   selector: 'app-leaderboard',
@@ -14,22 +15,29 @@ export class LeaderBoardComponent implements OnInit {
     userId: any;
     userName: string;
     userScore: number;
-    userFirstName: string;
-    userLastName: string;
-    leaderBoard: LeaderBoardScore[];
+
+    leaderBoardSnake: LeaderBoardScoreSnake[];
+    leaderBoardOverAll: LeaderBoardScoreOverAll[];
+
+    displayedColumns: string[] = ['position', 'gameScore', 'userName'];
 
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit(): void {
-    this.getLeaderBoard();
-
+    this.getLeaderBoardSnake();
+    this.getLeaderBoardOverAll();
   }
 
-  getLeaderBoard(){
-    this.httpClient.get(environment.endpointURL + 'leaderboard/' ,{}).subscribe((data: LeaderBoardScore[]) => {
-            this.leaderBoard = data;
+  getLeaderBoardSnake(){
+    this.httpClient.get(environment.endpointURL + 'user/highscores/game' ,{}).subscribe((data: LeaderBoardScoreSnake[]) => {
+            this.leaderBoardSnake = data;
          });
-
   }
+
+   getLeaderBoardOverAll(){
+      this.httpClient.get(environment.endpointURL + 'user/highscores/game' ,{}).subscribe((data: LeaderBoardScoreOverAll[]) => {
+                  this.leaderBoardOverAll = data;
+               });
+    }
 
 }

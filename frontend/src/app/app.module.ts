@@ -47,6 +47,7 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { DialogBodyComponent } from './components/dialog-body/dialog-body.component';
 import { PasswordForgottenComponent } from "./components/password-forgotten/password-forgotten.component";
 import { LeaderBoardComponent } from './components/leaderboard/leaderboard.component';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -101,6 +102,7 @@ import { LeaderBoardComponent } from './components/leaderboard/leaderboard.compo
     MatAutocompleteModule,
     MatSliderModule,
     MatDialogModule,
+    MatTableModule,
   ],
   providers: [
     {

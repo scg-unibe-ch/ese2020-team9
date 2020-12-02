@@ -43,17 +43,16 @@ export class SearchBarComponent implements OnInit {
     this.subscription.unsubscribe();
   }
 
-  goToSearch(){
-    console.log(this.name);
-    this.router.navigate(['/s',{queryParams: {n: this.name}}]);
-  }
+
 
 
   @HostListener('window:keyup', ['$event'])
     keyEvent(event: KeyboardEvent) {
       //console.log(event);
       if (event.key === KEY_CODE.ENTER) {
-        this.goToSearch();
+
+          this.router.navigate(['/s',{queryParams: {n: this.name}}]);
+
 
       }
 

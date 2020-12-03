@@ -11,8 +11,11 @@
     <div *ngIf="!isUserLoggedIn">
       <button mat-button class="storMainColor" [routerLink]="['/registration',0]" routerLinkActive="active">Registration</button>
       <button mat-button class="storMainColor" routerLink="/login" routerLinkActive="active">Login<mat-icon>login</mat-icon></button>
+      <button mat-button class="storMainColor" routerLink="/login" routerLinkActive="active">Add Product </button>
+
     </div>
     <div *ngIf="isUserLoggedIn">
+      <button mat-flat-button class="button_standard" [routerLink]="['/productForm/', 0]" routerLinkActive="active">Add Product </button>
       <button class="storMainColor" mat-button color="storMainColor" [matMenuTriggerFor]="menu"><img class ="center-cropped"src ="../assets/cd/hammer.gif"><br> {{isUserName}}</button>
     </div>
     <mat-menu #menu>

@@ -1,6 +1,6 @@
 export interface Search {
   name?: string;
-  location?: [];
+  location?: string[];
   category?: string;
   priceMin?: number;
   priceMax?: number;

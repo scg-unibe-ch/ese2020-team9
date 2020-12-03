@@ -15,41 +15,21 @@
         </mat-select>
       </mat-form-field>
       <mat-form-field>
-        <input matInput [(ngModel)]="location" (keyup)="navigateTo()" placeholder="Location" name="location">
-        <button class="clearIcon" mat-button *ngIf="location !== ''" matSuffix mat-icon-button (click)="location = ''; navigateTo()"><mat-icon>close</mat-icon></button>
+        <input matInput class="priceInput" [(ngModel)]="priceMin" (keyup)="checkPrice(priceMin)" placeholder="min Price">
+        <button class="clearIcon" mat-button *ngIf="priceMin !== ''" matSuffix mat-icon-button (click)="priceMin = null; navigateTo()"><mat-icon>close</mat-icon></button>
       </mat-form-field>
       <mat-form-field>
-        <input matInput class="priceInput" [(ngModel)]="priceMin" (keyup)="navigateTo()" placeholder="min Price">
-        <button class="clearIcon" mat-button *ngIf="priceMin !== ''" matSuffix mat-icon-button (click)="priceMin = ''; navigateTo()"><mat-icon>close</mat-icon></button>
+        <input matInput class="priceInput" [(ngModel)]="priceMax" (keyup)="checkPrice(priceMax)" placeholder="max Price">
+        <button class="clearIcon" mat-button *ngIf="priceMax !== ''" matSuffix mat-icon-button (click)="priceMax = null; navigateTo()"><mat-icon>close</mat-icon></button>
       </mat-form-field>
       <mat-form-field>
-        <input matInput class="priceInput" [(ngModel)]="priceMax" (keyup)="navigateTo()" placeholder="max Price">
-        <button class="clearIcon" mat-button *ngIf="priceMax !== ''" matSuffix mat-icon-button (click)="priceMax = ''; navigateTo()"><mat-icon>close</mat-icon></button>
+        <input matInput [(ngModel)]="zipCode" (ngModelChange)="checkZip(zipCode)" placeholder="Zip code" name="location">
+        <button class="clearIcon" mat-button *ngIf="zipCode !== ''" matSuffix mat-icon-button (click)="zipCode= ''; navigateTo()"><mat-icon>close</mat-icon></button>
       </mat-form-field>
-
-      <!-- other layout options for price input -->
-      <!--<mat-expansion-panel class="pricePanel">
-        <mat-expansion-panel-header role="button">Price</mat-expansion-panel-header>
-        <mat-form-field>
-        <input matInput [(ngModel)]="priceMin" placeholder="min Price">
-        </mat-form-field>
-        <mat-form-field>
-        <input matInput [(ngModel)]="priceMax" placeholder="max Price">
-        </mat-form-field>
-        <button class="priceButton" (click)="navigateTo()">save</button>
-        <button class="priceButton" (click)="navigateTo()">delete</button>
-        <!--<mat-slider min="priceMax" max="priceMax" step="10" value="priceMin, priceMax"></mat-slider>
-      </mat-expansion-panel>
-        <mat-form-field>
-          <mat-select class=productPrice placeholder="Price">
-            <input class="priceInput" [(ngModel)]="priceMin" (keyup)="navigateTo()" placeholder="min Price">
-            <input class="priceInput" [(ngModel)]="priceMax" (keyup)="navigateTo()" placeholder="max Price">
-            <mat-option class="priceContainer">
-            <button class="priceButton" (click)="navigateTo()">save</button>
-              <button class="priceButton" mat-button (click)="navigateTo()">delete</button>
-            </mat-option>
-          </mat-select>
-        </mat-form-field>-->
+      <div>
+        <span class="radius">Radius:</span>
+        <mat-slider class="slider" thumbLabel [displayWith]="formatLabel" tickInterval="1000" min="0" max="100" [(ngModel)]="radius" (ngModelChange)="radius">{{radius}} km away from you</mat-slider>
+      </div>
 
       <div class="filterButtonContainer">
         <button class="filterButton" mat-button (click)="clearFilter()">clear filter<!--<mat-icon>clear</mat-icon>--></button>
@@ -57,7 +37,7 @@
       </div>
     </div>
     <div class="moreFilter" *ngIf="clickFilter">
-      <mat-radio-group [(ngModel)]="delivery" color="#46FFFD" name="delivery">
+      <mat-radio-group [(ngModel)]="delivery" name="delivery">
         <a>Delivery:</a>
         <mat-radio-button *ngFor="let data of selection" [checked]="data.value" (click)="showDelivery(data.value)">{{data.name}}</mat-radio-button>
       </mat-radio-group>
@@ -87,17 +67,21 @@
         </mat-select>
       </mat-form-field>
       <mat-form-field>
-        <input matInput [(ngModel)]="location" (ngModelChange)="navigateTo()" placeholder="Location" name="location">
-        <button class="clearIcon" mat-button *ngIf="location !== ''" matSuffix mat-icon-button (click)="clear()">
+        <input matInput [(ngModel)]="priceMin" (keyup)="checkPrice(priceMin)" placeholder="min Price">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [(ngModel)]="priceMax" (keyup)="checkPrice(priceMax)" placeholder="max Price">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [(ngModel)]="zipCode" (ngModelChange)="checkZip(zipCode)" placeholder="Location" name="location">
+        <button class="clearIcon" mat-button *ngIf="zipCode !== ''" matSuffix mat-icon-button (click)="clear()">
           <mat-icon>close</mat-icon>
         </button>
       </mat-form-field>
-      <mat-form-field>
-        <input matInput [(ngModel)]="priceMin" (keyup)="navigateTo()" placeholder="min Price">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput [(ngModel)]="priceMax" (keyup)="navigateTo()" placeholder="max Price">
-      </mat-form-field>
+      <div>
+        <span class="radius">Radius:</span>
+        <mat-slider class="slider" thumbLabel [displayWith]="formatLabel" tickInterval="1000" min="0" max="100" [(ngModel)]="radius" (ngModelChange)="radius">{{radius}} km away from you</mat-slider>
+      </div>
       <mat-radio-group [(ngModel)]="delivery" class="smRadioGroup" color="#46FFFD" name="delivery">
         <a>Delivery:</a>
         <mat-radio-button *ngFor="let data of selection" [checked]="data.value" (click)="showDelivery(data.value)">{{data.name}}</mat-radio-button>
@@ -127,16 +111,19 @@
 <div class="filterChips">
   <mat-chip-list>
     <mat-chip *ngIf="category">{{category}}
-      <button class="clearIcon" matSuffix mat-icon-button (click)="category = ''; navigateTo()"><mat-icon>close</mat-icon></button>
+      <button class="clearIcon" matSuffix mat-icon-button (click)="category = null; navigateTo()"><mat-icon>close</mat-icon></button>
     </mat-chip>
-    <mat-chip *ngIf="location">{{location}}
-      <button class="clearIcon" matSuffix mat-icon-button (click)="location = ''; navigateTo()"><mat-icon>close</mat-icon></button>
+    <mat-chip *ngIf="zipCode && zipCode.length === 4 && checkNumber(zipCode)">{{zipCode}}
+      <button class="clearIcon" matSuffix mat-icon-button (click)="zipCode = ''; navigateTo()"><mat-icon>close</mat-icon></button>
     </mat-chip>
-    <mat-chip *ngIf="priceMin">min Price: {{priceMin}} CHF
-      <button class="clearIcon" matSuffix mat-icon-button (click)="priceMin = ''; navigateTo()"><mat-icon>close</mat-icon></button>
+    <mat-chip *ngIf="radius">{{radius}}
+      <button class="clearIcon" matSuffix mat-icon-button (click)="radius = 0; navigateTo()"><mat-icon>close</mat-icon></button>
     </mat-chip>
-    <mat-chip *ngIf="priceMax">max Price: {{priceMax}} CHF
-      <button class="clearIcon" matSuffix mat-icon-button (click)="priceMax = ''; navigateTo()"><mat-icon>close</mat-icon></button>
+    <mat-chip *ngIf="priceMin && checkNumber(priceMin)">min Price: {{priceMin}} CHF
+      <button class="clearIcon" matSuffix mat-icon-button (click)="priceMin = null; navigateTo()"><mat-icon>close</mat-icon></button>
+    </mat-chip>
+    <mat-chip *ngIf="priceMax && checkNumber(priceMax)">max Price: {{priceMax}} CHF
+      <button class="clearIcon" matSuffix mat-icon-button (click)="priceMax = null; navigateTo()"><mat-icon>close</mat-icon></button>
     </mat-chip>
 
     <!-- doesn't work yet
@@ -150,32 +137,4 @@
       <button class="clearIcon" matSuffix mat-icon-button (click)="isService = ''; navigateTo()"><mat-icon>close</mat-icon></button>
     </mat-chip>-->
   </mat-chip-list>
-</div>
-
-<!--Near you-->
-<div>
-  <mat-card>
-    <h2>Enter your zipcode and select a radius</h2>
-
-    <mat-form-field>
-      <input matInput placeholder="Zipcode" [(ngModel)]="addressPin" name="addressPin" >
-
-
-    </mat-form-field>
-    <button mat-button (click)="navigateTo()"><mat-icon>search</mat-icon>Go!</button>
-
-
-    <p>{{value}} km near you</p>
-
-    <mat-slider
-      thumbLabel
-      [displayWith]="formatLabel"
-      tickInterval="1000"
-      min="1"
-      max="100"
-      [(ngModel)]="value">
-    </mat-slider>
-
-
-  </mat-card>
 </div>

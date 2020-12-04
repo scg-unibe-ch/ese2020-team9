@@ -47,7 +47,10 @@ import { MatSliderModule } from "@angular/material/slider";
 import { SnakeComponentComponent } from './components/snake-component/snake-component.component';
 import { SearchBarComponent } from "./components/dashboard/search-bar/search-bar.component";
 import { MatDialogModule } from "@angular/material/dialog";
-import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { DialogBodyComponent } from './components/dialog-body/dialog-body.component';
+import { PasswordForgottenComponent } from "./components/password-forgotten/password-forgotten.component";
+import { LeaderBoardComponent } from './components/leaderboard/leaderboard.component';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -100,8 +103,8 @@ import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
     MatExpansionModule,
     MatAutocompleteModule,
     MatSliderModule,
-    MatDialogModule,
-    MatFormFieldModule
+    MatDialogModule
+    MatTableModule
   ],
   providers: [
     {

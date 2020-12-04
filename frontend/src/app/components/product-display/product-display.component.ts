@@ -105,11 +105,10 @@ export class ProductDisplayComponent implements OnInit {
       apikey: '4bc7d070-229b-11eb-8bf2-6be81465cc4d'
     };
     if (zipCode.length == 4){this.httpClient.get('http://localhost:4200/api/v1/radius', {params}).subscribe((res: any) => {
+      this.location = newArray(res.results.length);
       for (let i = 0; i < res.results.length; i++) {
-        this.location = newArray(res.results.length).fill(res.results[i].code);
-        console.log(this.location);
+        this.location[i] = res.results[i].code;
       }
-      console.log(this.location);
       this.searchProduct();
     }, (error: any) => {
       let message = "We could not find any cities in this radius";

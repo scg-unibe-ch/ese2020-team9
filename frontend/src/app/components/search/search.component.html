@@ -28,7 +28,7 @@
       </mat-form-field>
       <div>
         <span class="radius">Radius:</span>
-        <mat-slider class="slider" thumbLabel [displayWith]="formatLabel" tickInterval="1000" min="0" max="100" [(ngModel)]="radius" (ngModelChange)="radius">{{radius}} km away from you</mat-slider>
+        <mat-slider class="slider" thumbLabel [displayWith]="formatLabel" tickInterval="1000" min="0" max="100" [(ngModel)]="radius" (change)="checkZip(zipCode)">{{radius}} km away from you</mat-slider>
       </div>
 
       <div class="filterButtonContainer">
@@ -116,7 +116,7 @@
     <mat-chip *ngIf="zipCode && zipCode.length === 4 && checkNumber(zipCode)">{{zipCode}}
       <button class="clearIcon" matSuffix mat-icon-button (click)="zipCode = ''; navigateTo()"><mat-icon>close</mat-icon></button>
     </mat-chip>
-    <mat-chip *ngIf="radius">{{radius}}
+    <mat-chip *ngIf="radius && zipCode.length === 4">{{radius}}
       <button class="clearIcon" matSuffix mat-icon-button (click)="radius = 0; navigateTo()"><mat-icon>close</mat-icon></button>
     </mat-chip>
     <mat-chip *ngIf="priceMin && checkNumber(priceMin)">min Price: {{priceMin}} CHF

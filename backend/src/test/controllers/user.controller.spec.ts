@@ -511,7 +511,7 @@ describe('UserController Test', () => {
             });
         });
     });
-    
+
     describe('Test /passwordForgotten', function() {
         this.timeout(12000);
         before('init db', function(done) {
@@ -590,7 +590,6 @@ describe('UserController Test', () => {
             User.create(user1)
             .then(() => done())
             .catch(err => console.log(err));
-            
         });
         it('should update the game score of a user successfully', function(done) {
             chai.request(app).put('/user/updateGameScore/1/7').end(function(err, res) {
@@ -614,7 +613,7 @@ describe('UserController Test', () => {
                 done();
             });
         });
-    })
+    });
 
     describe('Test getting game highscores', () => {
         before('init users into db', function(done) {

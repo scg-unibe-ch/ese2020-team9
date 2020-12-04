@@ -14,6 +14,7 @@ export class UserService {
   userId: any;
   userWallet: any;
   users: User[] ;
+  userHighscore: number;
 
 
   public isUserLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -58,6 +59,19 @@ export class UserService {
     return this.httpClient.post(environment.endpointURL + 'user/restorePassword', {password}, { headers: headers });
   }
 
+  getGameHighscoreTopList(): Observable<any> {
+    return this.httpClient.get(environment.endpointURL + 'user/highscores/game');
+  }
+
+  getOverallHighscoreTopList(): Observable<any> {
+    return this.httpClient.get(environment.endpointURL + 'user/highscores/overall');
+  }
+
+  saveHighscore(highscore: number): Observable<any> {
+    return this.httpClient.put(environment.endpointURL + 'user/updateGameScore/' + this.getUserId()
+       +  '/' + highscore, {});
+  }
+
   /** delete request **/
   deleteUser(user: User): Observable<User> {
     return this.httpClient.delete<User>(environment.endpointURL + 'user/' + user.userId);
@@ -87,6 +101,11 @@ export class UserService {
   }
 
   getUserWallet(){
-    return this.userWallet = localStorage.getItem('userWallet')
+    return this.userWallet = localStorage.getItem('userWallet');
   }
+
+  getUserHighscore(): number {
+    return this.userHighscore = Number.parseInt(localStorage.getItem('userHighscore'), 10);
+  }
+
 }

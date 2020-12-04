@@ -11,23 +11,29 @@
 
     </div>
     <span class="spacer"></span>
+
     <div *ngIf="!isUserLoggedIn">
+      <button mat-button class="headerItem3" routerLink="/login" routerLinkActive="active"> Add Product </button>
       <button mat-button class="storMainColor" [routerLink]="['/registration',0]" routerLinkActive="active">Registration</button>
       <button mat-button class="storMainColor" routerLink="/login" routerLinkActive="active">Login<mat-icon>login</mat-icon></button>
-      <button mat-button class="storMainColor" routerLink="/login" routerLinkActive="active">Add Product </button>
 
     </div>
-    <div *ngIf="isUserLoggedIn">
-      <button mat-flat-button class="button_standard" [routerLink]="['/productForm/', 0]" routerLinkActive="active">Add Product </button>
-      <button class="storMainColor" mat-button color="storMainColor" [matMenuTriggerFor]="menu"><img class ="center-cropped"src ="../assets/cd/hammer.gif"><br> {{isUserName}}</button>
+
+    <div *ngIf="isUserLoggedIn" class="headerNav">
+      <button class="headerItem3" mat-button routerLink="/productForm/0" routerLinkActive="active"> Add product</button>
+      <button class="headerItem2" mat-button [matMenuTriggerFor]="menu">Menu</button>
+      <button mat-button color="storMainColor"><img class ="center-cropped"src ="../assets/cd/hammer.gif" routerLink="/user" routerLinkActive="active"><br>{{isUserName}}</button>
     </div>
+
     <mat-menu #menu>
-      <button mat-menu-item routerLink="/user" routerLinkActive="active">My Profile</button>
+      <button mat-menu-item routerLink="/home" routerLinkActive="active">Home</button>
+      <button mat-menu-item routerLink="/user" routerLinkActive="active">My profile</button>
+      <button mat-menu-item [routerLink]="['/registration/', userId]" routerLinkActive="active">Edit profile</button>
       <div *ngIf="isUserAdmin">
         <button mat-menu-item routerLink="/admin" routerLinkActive="active">Admin</button>
       </div>
-      <button mat-menu-item routerLink="/login" routerLinkActive="active">Logout</button>
+      <button mat-menu-item (click)="logout()"><mat-icon>logout</mat-icon>Logout</button>
     </mat-menu>
+
   </mat-toolbar-row>
 </mat-toolbar>
-

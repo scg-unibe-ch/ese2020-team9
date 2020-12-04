@@ -17,11 +17,23 @@ export class UserService {
   userHighscore: number;
 
 
-  public isUserLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public isUserAdmin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public isUserName: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  constructor(private httpClient: HttpClient) { }
+  public isUserLoggedIn: BehaviorSubject<boolean>;
+  public isUserAdmin: BehaviorSubject<boolean>;
+  public isUserName: BehaviorSubject<string>;
+
+  constructor(private httpClient: HttpClient) {
+
+      this.userToken = localStorage.getItem('userToken');
+      this.userId = localStorage.getItem('userId');
+      this.userName = localStorage.getItem('userName');
+      this.userWallet = localStorage.getItem('userWallet');
+
+      this.isUserLoggedIn= new BehaviorSubject<boolean>(this.userToken !== null );
+      this.isUserAdmin = new BehaviorSubject<boolean>(localStorage.getItem('admin') === 'true');
+      this.isUserName = new BehaviorSubject<string>(this.userName);
+
+      }
 
   /** get requests **/
   getUser(id: number){
@@ -89,19 +101,19 @@ export class UserService {
   }
 
   getToken(){
-    return this.userToken = localStorage.getItem('userToken');
+    return this.userToken;
   }
 
   getUserName(){
-    return this.userName = localStorage.getItem('userName');
+    return this.userName;
   }
 
   getUserId(){
-    return this.userId = localStorage.getItem('userId');
+    return this.userId;
   }
 
   getUserWallet(){
-    return this.userWallet = localStorage.getItem('userWallet');
+    return this.userWallet;
   }
 
   getUserHighscore(): number {

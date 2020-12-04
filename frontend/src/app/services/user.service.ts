@@ -14,6 +14,7 @@ export class UserService {
   userId: any;
   userWallet: any;
   users: User[] ;
+  userHighscore: number;
 
 
 
@@ -26,6 +27,7 @@ export class UserService {
       this.userToken = localStorage.getItem('userToken');
       this.userId = localStorage.getItem('userId');
       this.userName = localStorage.getItem('userName');
+      this.userWallet = localStorage.getItem('userWallet');
 
       this.isUserLoggedIn= new BehaviorSubject<boolean>(this.userToken !== null );
       this.isUserAdmin = new BehaviorSubject<boolean>(localStorage.getItem('admin') === 'true');
@@ -69,6 +71,19 @@ export class UserService {
     return this.httpClient.post(environment.endpointURL + 'user/restorePassword', {password}, { headers: headers });
   }
 
+  getGameHighscoreTopList(): Observable<any> {
+    return this.httpClient.get(environment.endpointURL + 'user/highscores/game');
+  }
+
+  getOverallHighscoreTopList(): Observable<any> {
+    return this.httpClient.get(environment.endpointURL + 'user/highscores/overall');
+  }
+
+  saveHighscore(highscore: number): Observable<any> {
+    return this.httpClient.put(environment.endpointURL + 'user/updateGameScore/' + this.getUserId()
+       +  '/' + highscore, {});
+  }
+
   /** delete request **/
   deleteUser(user: User): Observable<User> {
     return this.httpClient.delete<User>(environment.endpointURL + 'user/' + user.userId);
@@ -100,4 +115,9 @@ export class UserService {
   getUserWallet(){
     return this.userWallet;
   }
+
+  getUserHighscore(): number {
+    return this.userHighscore = Number.parseInt(localStorage.getItem('userHighscore'), 10);
+  }
+
 }

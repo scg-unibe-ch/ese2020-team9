@@ -42,9 +42,9 @@ export class ProductDisplayComponent implements OnInit {
       this.category = params['c'];
       this.priceMin = params['min'];
       this.priceMax = params['max'];
-      this.delivery = params['d'];
-      this.isRentable = params['r'];
-      this.isService = params['s'];
+      this.delivery = params['d'] === 'true';
+      this.isRentable = params['r'] === 'true';
+      this.isService = params['s'] === 'true';
       this.zipCode = params['z'];
       this.radius = params['v'];
       this.checkLocation();

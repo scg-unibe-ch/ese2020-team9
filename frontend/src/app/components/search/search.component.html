@@ -49,8 +49,6 @@
         <a>Product Type:</a>
         <mat-radio-button *ngFor="let data of selection2" [checked]="data.value" (click)="showService(data.value)">{{data.name}}</mat-radio-button>
       </mat-radio-group>
-      <!-- alternative option -->
-      <!--<mat-checkbox class="filterCheck" [(ngModel)]="delivery" (change)="navigateTo()" [checked]="delivery" color="#46FFFD">Delivery possible</mat-checkbox>-->
     </div>
   </div>
 
@@ -95,12 +93,18 @@
         <mat-radio-button *ngFor="let data of selection2" [checked]="data.value" (click)="showService(data.value)">{{data.name}}</mat-radio-button>
       </mat-radio-group>
 
-      <!-- alternative option -->
-      <!--<mat-list>
+
+      <mat-list>
         <mat-list-item>
           <mat-checkbox [(ngModel)]="delivery" (change)="navigateTo()" [checked]="delivery" color="#46FFFD">Delivery Possible</mat-checkbox>
         </mat-list-item>
-      </mat-list>-->
+      </mat-list>
+      <mat-form-field>
+        <mat-label>D</mat-label>
+        <mat-select [(ngModel)]="delivery" (selectionChange)="navigateTo()" value="category">
+          <mat-option *ngFor="let options of selection" [value]="options.value">{{options.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
       <div align="right">
         <button class="filterButton" mat-button (click)="clearFilter()">clear filter<!--<mat-icon>clear</mat-icon>--></button>
       </div>
@@ -113,10 +117,10 @@
     <mat-chip *ngIf="category">{{category}}
       <button class="clearIcon" matSuffix mat-icon-button (click)="category = null; navigateTo()"><mat-icon>close</mat-icon></button>
     </mat-chip>
-    <mat-chip *ngIf="zipCode && zipCode.length === 4 && checkNumber(zipCode)">{{zipCode}}
+    <mat-chip *ngIf="zipCode && zipCode.length === 4 && checkNumber(zipCode)">Zip Code: {{zipCode}}
       <button class="clearIcon" matSuffix mat-icon-button (click)="zipCode = ''; navigateTo()"><mat-icon>close</mat-icon></button>
     </mat-chip>
-    <mat-chip *ngIf="radius && zipCode.length === 4">{{radius}}
+    <mat-chip *ngIf="radius && zipCode.length === 4">Radius: {{radius}} km
       <button class="clearIcon" matSuffix mat-icon-button (click)="radius = 0; navigateTo()"><mat-icon>close</mat-icon></button>
     </mat-chip>
     <mat-chip *ngIf="priceMin && checkNumber(priceMin)">min Price: {{priceMin}} CHF

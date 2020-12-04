@@ -6,7 +6,8 @@ describe('EmailService Test', () => {
 
     const testedEmailService: EmailService = new EmailService();
 
-    describe('Test sendPasswordRestorationMail', () => {
+    describe('Test sendPasswordRestorationMail', function() {
+        this.timeout(10000);
         it('should successfully send an email', function(done) {
             testedEmailService.sendPasswordRestorationMail('Testuser', 'testuser@example.com', 'abcd').then(info => {
                 expect(info.messageId).not.to.be.eq(null);

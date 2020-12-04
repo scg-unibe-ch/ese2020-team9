@@ -68,20 +68,15 @@
         <mat-checkbox [(ngModel)]="isService">Is your product a service?</mat-checkbox>
         <mat-checkbox class="checkboxMargin" [(ngModel)]="isRentable">Is your product rentable?</mat-checkbox>
         <mat-checkbox class="checkboxMargin" [(ngModel)]="productDelivery">Product delivery possible?</mat-checkbox>
-
-
       </mat-card>
 
 
       <mat-card>
-
         <mat-form-field>
           <input matInput placeholder="Your zipcode*" [(ngModel)]="productLocation" name="productLocation">
           <div *ngIf="empty(productLocation)" class="invalid-feedback">e.g. 3012</div>
         </mat-form-field>
-
         <button mat-button matStepperNext [disabled]="!stepTwoComplete()" (click)="addProduct()">Next</button>
-
       </mat-card>
 
 
@@ -91,18 +86,25 @@
       <mat-step label="Add a picture">
         <mat-card>
 
+          <div *ngIf="!imageSelected">
     <p>Please add a Photo(.png, .jpg, .jpeg):</p>
     <input
       style="display: none"
       type="file" (change)="onFileChanged($event)"
       #fileInput>
+
+     
     <button mat-flat-button class="button_standard" (click)="fileInput.click()">Select file </button>
-    <button mat-flat-button class="button_standard" (click)="onUpload()">Upload Image</button>
+          </div>
 
     <div *ngIf="imageSelected">
-      {{imageName}}
-    </div>
+      Do you want to upload this file? :  {{imageName}}
+   
 
+   
+    <button mat-flat-button class="button_standard" (click)="onUpload()">Yes</button>
+  </div>
+  
           <div *ngIf="add">
             <br>
             <button mat-flat-button class="button_standard" (click)="editProduct()" [disabled]="allFilled(productName, productPrice, productLocation)">Add product</button>

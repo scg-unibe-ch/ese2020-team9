@@ -4,7 +4,6 @@
     <div class="nav">
       <a routerLink="/home">
         <!--<img src="assets/cd/loader.gif"  class="logo" alt="gif of diskette" />-->
-          <<<<< HOME <<<<
       </a>
     </div>
     <span class="spacer"></span>
@@ -20,8 +19,7 @@
       <div *ngIf="isUserAdmin">
         <button mat-menu-item routerLink="/admin" routerLinkActive="active">Admin</button>
       </div>
-      <button mat-menu-item routerLink="/login" routerLinkActive="active">Logout</button>
+      <button mat-menu-item (click)="logout()">Logout</button>
     </mat-menu>
   </mat-toolbar-row>
 </mat-toolbar>
-

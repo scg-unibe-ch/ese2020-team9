@@ -71,16 +71,6 @@ export class UserLoginComponent implements OnInit {
       });
   }
 
-  logout(): void {
-    this.userService.logout();
-    //updates isUserLoggedIn value
-    this.userService.isUserLoggedIn.next(false);
-    //update isUserAdmin value
-    this.userService.isUserAdmin.next(false);
-    //navigates to dashboard
-    this.router.navigate(['/home']);
-  }
-
   passwordForgotten(email: string): void {
     this.userService.passwordForgotten(email).subscribe((res: any) => {
       let action = "X";

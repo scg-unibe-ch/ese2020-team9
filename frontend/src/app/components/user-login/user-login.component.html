@@ -12,11 +12,6 @@
     <button mat-flat-button class="button_standard" (click)="login()" >Login</button>
     <br>
   </div>
-
-  <div *ngIf="isUserLoggedIn" align="end">
-    You are currently logged in!
-    <button mat-flat-button class="button_standard" (click)="logout()">Logout</button>
-  </div>
 </mat-card>
 
   <div *ngIf="!isUserLoggedIn" align="end">

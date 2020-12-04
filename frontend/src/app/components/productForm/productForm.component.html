@@ -1,8 +1,6 @@
 <div >
   <button mat-Button class="backIcon" (click)="goBack()" matSuffix mat-icon-button><mat-icon>arrow_back</mat-icon></button>
 
-  <h2>My Product</h2>
-
 <!--add product only-->
 <div *ngIf="add">
   <mat-horizontal-stepper [linear]="true" #stepper>
@@ -66,7 +64,7 @@
     <mat-step label="Product details">
 
 
-    <mat-card>
+    <mat-card class="checkboxes">
         <mat-checkbox [(ngModel)]="isService">Is your product a service?</mat-checkbox>
         <mat-checkbox class="checkboxMargin" [(ngModel)]="isRentable">Is your product rentable?</mat-checkbox>
         <mat-checkbox class="checkboxMargin" [(ngModel)]="productDelivery">Product delivery possible?</mat-checkbox>

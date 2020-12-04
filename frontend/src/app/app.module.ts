@@ -47,8 +47,6 @@ import { MatSliderModule } from "@angular/material/slider";
 import { SnakeComponentComponent } from './components/snake-component/snake-component.component';
 import { SearchBarComponent } from "./components/dashboard/search-bar/search-bar.component";
 import { MatDialogModule } from "@angular/material/dialog";
-import { DialogBodyComponent } from './components/dialog-body/dialog-body.component';
-import { PasswordForgottenComponent } from "./components/password-forgotten/password-forgotten.component";
 import { LeaderBoardComponent } from './components/leaderboard/leaderboard.component';
 import {MatTableModule} from '@angular/material/table';
 
@@ -74,7 +72,8 @@ import {MatTableModule} from '@angular/material/table';
     SnakeComponentComponent,
     SearchComponent,
     PasswordForgottenComponent,
-    DialogBodyComponent
+    DialogBodyComponent,
+    LeaderBoardComponent
   ],
   imports: [
     BrowserModule,
@@ -103,7 +102,7 @@ import {MatTableModule} from '@angular/material/table';
     MatExpansionModule,
     MatAutocompleteModule,
     MatSliderModule,
-    MatDialogModule
+    MatDialogModule,
     MatTableModule
   ],
   providers: [

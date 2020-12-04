@@ -65,7 +65,7 @@ export class SearchComponent implements OnInit {
     this.priceMax = null;
     this.delivery = null;
     this.isRentable = null;
-    this.isService = null;
+    this.isService= null;
     this.radius = 0;
     this.navigateTo();
   }
@@ -87,14 +87,14 @@ export class SearchComponent implements OnInit {
   }
 
   selection = [
-    {value: true, name: 'possible'},
-    {value: false, name: 'not possible'},
-    {value: null, name: 'clear'},
+    {value: true, name: 'true'},
+    {value: false, name: 'false'},
+    {value: null, name: 'all'},
   ];
   selection2 = [
     {value: true, name: 'Service'},
     {value: false, name: 'Product'},
-    {value: null, name: 'clear'},
+    {value: null, name: 'Service & Products'},
   ];
 
   showDelivery(value){
@@ -104,7 +104,7 @@ export class SearchComponent implements OnInit {
     } else if(value == false) {
       this.delivery = false;
       this.navigateTo();
-    } else  if (value == '')
+    } else  if (value == null)
       this.delivery = null;
     this.navigateTo();
   }
@@ -116,7 +116,7 @@ export class SearchComponent implements OnInit {
     } else if(value == false) {
       this.isRentable = false;
       this.navigateTo();
-    } else  if (value == '')
+    } else  if (value == null)
       this.isRentable = null;
     this.navigateTo();
   }
@@ -128,7 +128,7 @@ export class SearchComponent implements OnInit {
     } else if(value == false) {
       this.isService = false;
       this.navigateTo();
-    } else  if (value == '')
+    } else  if (value == null)
       this.isService = null;
     this.navigateTo();
   }

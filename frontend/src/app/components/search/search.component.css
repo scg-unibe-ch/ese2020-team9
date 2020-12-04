@@ -93,15 +93,24 @@ input[type=text]{
   flex-direction: row;
 }
 
+.moreFilter mat-radio-group{
+  padding: 10px;
+  margin: 30px;
+}
+
 .moreFilter mat-radio-button{
   /* style for <705px display */
   color: #F0F0F0;
-  margin-right: 7px;
-  margin-left: 10px;
+  margin-right: 25px;
+  margin-left: 25px;
+  display: flex;
+  margin-top: 7px;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .slider{
-  width: 175px;
+  width: 190px;
   margin-top: 5px;
   margin-right: 5px;
 }
@@ -134,6 +143,7 @@ mat-expansion-panel{
   background-color: #082A5D;
   border: 1px solid #46FFFD;
   padding: 0px;
+  color: #F0F0F0;
 }
 
 mat-expansion-panel-header{
@@ -145,15 +155,27 @@ mat-divider{
   padding-bottom: 10px;
 }
 
+.smRadio{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
 .smRadioGroup{
   color: #F0F0F0;
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
 }
 
 .smRadioGroup mat-radio-button{
   /* style for >705px display */
   margin-top: 3px;
+}
+
+.smSlider{
+  width: 190px;
+  margin-top: 25px;
 }
 
 /* filter Chips */
@@ -165,27 +187,4 @@ mat-divider{
   color: #46FFFD;
 }
 
-/* other layout option for price input style */
-/*
-.pricePanel{
-  width: 170px;
-  background-color: transparent;
-  border: transparent;
-}
-
-.priceButton{
-  background-color: #46FFFD;
-  border-radius: 4px;
-  border: #082A5D;
-}
-
-.priceContainer{
-  background-color: #F0F0F0;
-  color: #F0F0F0;
-}
-*/
-
-mat-slider {
-  width: 300px;
-}
 

@@ -4,8 +4,11 @@
     <div class="nav">
       <a routerLink="/home">
         <!--<img src="assets/cd/loader.gif"  class="logo" alt="gif of diskette" />-->
-          <<<<< HOME <<<<
+        <!--<img src="assets/cd/retro-home.png"  class="logo" alt="Home Button" />-->
+        <img src="assets/cd/pixel-home.png"  class="logo" alt="Home Button"  matTooltip="Go Home" />
       </a>
+      <span class="only-show-on-hover">Go to Home</span>
+      
     </div>
     <span class="spacer"></span>
     <div *ngIf="!isUserLoggedIn">

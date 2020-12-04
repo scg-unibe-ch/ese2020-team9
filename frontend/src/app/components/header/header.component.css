@@ -42,3 +42,15 @@ mat-toolbar{
   opacity: 0.8;
 
 }
+
+div span.only-show-on-hover {
+  visibility: hidden;
+}
+div:hover span.only-show-on-hover  {
+  visibility: visible;
+  display: inline-block;
+  color: #F7CC18;
+  font-size: 8px;
+  
+
+}

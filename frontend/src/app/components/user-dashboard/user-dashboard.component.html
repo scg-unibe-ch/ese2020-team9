@@ -30,6 +30,10 @@
 <mat-tab label = "Your current Products">
 <h2>Your products</h2>
   <div  fxLayout="row wrap" fxLayoutGap="2% grid" fxLayoutAlign="space-evenly stretch">
+    <mat-card class="productItem_Card">
+    <mat-card-actions><button mat-flat-button class="button_standard" [routerLink]="['/productForm/', 0]" routerLinkActive="active">Add Product </button>
+    </mat-card-actions>
+    </mat-card>
     <div fxFlex="10%" fxFlex.xl="15%" fxFlex.lg="20%" fxFlex.md="25%" fxFlex.sm="33%" fxFlex.xs="50%" *ngFor="let productItem of productList">
       <mat-card class="productItem_Card">
         <mat-card-header>

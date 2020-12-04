@@ -16,7 +16,7 @@ import { environment } from "../../../../environments/environment";
 @Component({
   selector: 'app-shipping',
   templateUrl: './shipping.component.html',
-  styleUrls: ['./shipping.component.css']
+  styleUrls: ['./../product-detail.component.css']
 })
 export class ShippingComponent implements OnInit {
 

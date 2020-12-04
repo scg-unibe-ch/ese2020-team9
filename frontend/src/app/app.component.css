@@ -1,16 +1,16 @@
 ::ng-deep .mat-focused .mat-form-field-label {
   /*change color of label*/
-  color: black !important;
+  color: black;
 }
 
 ::ng-deep.mat-form-field-underline {
   /*change color of underline*/
-  background-color: #46FFFD !important;
+  background-color: #D3D9EF !important;
 }
 
 ::ng-deep.mat-form-field-ripple {
   /*change color of underline when focused*/
-  background-color: #46FFFD !important;;
+  background-color: #D3D9EF !important;
 }
 ::ng-deep .mat-select .mat-select-arrow {
   /* change color of arrow */
@@ -31,6 +31,31 @@
   color: #46FFFD;
 }
 
+::ng-deep .mat-tab-list .mat-tab-label-active {
+  color: #F72871;
+  background-color: #46FFFD;
+  box-shadow:0px 0px 10px #46FFFD;
+  font-family:'Press Start 2P', cursive !important;
+
+}
+::ng-deep .mat-typography .mat-tab-group{
+  font-family:'Press Start 2P', cursive;
+}
+
+::ng-deep .mat-tab-label{
+  color: white !important;
+  background-color: #F72871;
+  margin: 10px;
+  font-family:'Press Start 2P', cursive !important;
+  box-shadow:0px 0px 10px #46FFFD;
+
+}
+
+::ng-deep .mat-flat-button {
+  box-shadow:0px 0px 10px #46FFFD;
+  
+}
+
 .app {
     /* the .app div needs to be AT LEAST 100% of the height of the window */
     min-height: 100%;
@@ -40,6 +65,7 @@
 }
 
 .footer{
-    /* .set the height of the footer */
+    /* set the height of the footer */
     height: 271px;
 }
+

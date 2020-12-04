@@ -1,0 +1,66 @@
+<mat-tab-group >
+  <mat-tab label="Snake Scores">
+    <br>
+    <table mat-table [dataSource]="leaderBoardSnake" class="mat-elevation-z8" class="center">
+
+      <!-- position Column -->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> Position </th>
+        <td mat-cell *matCellDef="let snake; let i = index;">{{i+1}}</td>
+      </ng-container>
+
+      <!-- gameScore Column -->
+      <ng-container matColumnDef="gameScore">
+        <th mat-header-cell *matHeaderCellDef> Snake score </th>
+        <td mat-cell *matCellDef="let snake"> {{snake.gameScore}} </td>
+      </ng-container>
+
+
+      <!-- userName Column -->
+      <ng-container matColumnDef="userName">
+        <th mat-header-cell *matHeaderCellDef> Username </th>
+        <td mat-cell *matCellDef="let snake">
+          <button mat-button class="button_fill" [routerLink]="['/user', snake.userId]" routerLinkActive="active" >{{snake.userName}}</button>
+        </td>
+      </ng-container>
+
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-tab>
+
+  <mat-tab label="Overall scores">
+
+    <br>
+    <table mat-table [dataSource]="leaderBoardOverAll" class="mat-elevation-z8" class="center">
+
+      <!-- position Column -->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> Position. </th>
+        <td mat-cell *matCellDef="let snake; let i = index;">{{i+1}}</td>
+      </ng-container>
+
+      <!-- gameScore Column -->
+      <ng-container matColumnDef="gameScore">
+        <th mat-header-cell *matHeaderCellDef> Overall score </th>
+        <td mat-cell *matCellDef="let snake"> {{snake.gameScore}} </td>
+      </ng-container>
+
+
+      <!-- userName Column -->
+      <ng-container matColumnDef="userName">
+        <th mat-header-cell *matHeaderCellDef> Username </th>
+        <td mat-cell *matCellDef="let snake">
+          <button mat-button class="button_fill" [routerLink]="['/user', snake.userId]" routerLinkActive="active" >{{snake.userName}}</button>
+        </td>
+      </ng-container>
+
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-tab>
+</mat-tab-group>

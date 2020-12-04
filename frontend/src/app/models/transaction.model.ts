@@ -1,18 +1,33 @@
-export class Transaction {
+export interface Transaction {
 
-  constructor(
-      public transactionId: number,
-      public productId: number,
-      public userId: number,
-      public buyerId: number,
-      public transactionStatus: number,
-      public deliveryFirstName: string,
-      public deliveryLastName: string,
-      public deliveryStreet: string,
-      public deliveryPin: number,
-      public deliveryCity: string,
-      public deliveryCountry: string,
 
-    ) {}
+      transactionId: number,
+      productId: number,
+      userId: number,
+      buyerId: number,
+      transactionStatus: number,
+      deliveryFirstName: string,
+      deliveryLastName: string,
+      deliveryStreet: string,
+      deliveryPin: number,
+      deliveryCity: string,
+      deliveryCountry: string,
+      product: string,
+      seller: string,
+      buyer: string,
+       picture?: any,
+}
+
+export interface NewTransaction {
+
+  productId: number;
+  userId: number;
+  buyerId: number;
+  deliveryFirstName: string;
+  deliveryLastName: string;
+  deliveryStreet: string;
+  deliveryPin: string;
+  deliveryCity: string;
+  deliveryCountry: string;
 
 }

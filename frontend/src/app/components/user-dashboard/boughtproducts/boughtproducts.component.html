@@ -1,4 +1,3 @@
-<hr>
 <h2>Bought products:</h2>
 
 
@@ -8,43 +7,31 @@
 
     <mat-card class="productItem_Card">
 
-      <div *ngIf="transaction" >
-        <br>
-        <h1> Productname: {{productName}}</h1>
-        <button mat-flat-button class="button_fill"  [routerLink]="['/productDetail', transaction.productId]" routerLinkActive="active" ><b>{{productName}} {{transaction.productId}}</b></button>
-
-
-      </div>
-      <br>
-      <h2>Sold by: </h2>
 
 
       <div *ngIf="transaction" >
-        <button mat-button class="button_fill" [routerLink]="['/user', transaction.userId]" routerLinkActive="active" ><mat-icon >account_circle</mat-icon>{{transaction.userId}}{{sellerName}}</button>
-
         <br>
+
+        <button mat-flat-button class="button_fill"  [routerLink]="['/productDetail', transaction.productId]" routerLinkActive="active" ><b>{{transaction.product.productName}}</b></button>
+
+
       </div>
-
-      <p>
-
-        <br>
-        <button mat-flat-button class="button_fill"  [routerLink]="['/productDetail', transaction.productId]" routerLinkActive="active" ><b>{{productName}}</b></button>
-        <br>
-
-
-      </p>
       <div *ngIf="transaction.transactionStatus==1">
+        <br>
         <b>Awaiting confirmation of seller</b>
         <br>
 
       </div>
 
+
       <div *ngIf="transaction.transactionStatus==2">
+        <br>
         <b>Status: Sold</b>
 
         <br>
         <b>Bought by:</b>
         <br>
+        {{transaction.buyer.userName}}<br>
         {{transaction.deliveryFirstName}} {{transaction.deliveryLastName}}<br>
         {{transaction.deliveryStreet}}<br>
         {{transaction.deliveryPin}} {{transaction.deliveryCity}}<br>
@@ -52,9 +39,28 @@
       </div>
 
       <div *ngIf="transaction.transactionStatus==3">
+        <br>
         <b>Status: Declined</b>
 
       </div>
+
+
+      <br>
+      <h2>Sold by: </h2>
+
+
+      <div *ngIf="transaction" >
+        <button mat-button class="button_fill" [routerLink]="['/user', transaction.userId]" routerLinkActive="active" ><mat-icon >account_circle</mat-icon>{{transaction.seller.userName}}{{sellerName}}</button>
+
+        <br>
+      </div>
+
+      <p>
+
+
+      </p>
+
+
 
 
 

@@ -1,12 +1,12 @@
 import { User } from './user.model';
 import { Optional, Model, Sequelize, DataTypes } from 'sequelize';
 import { Transaction} from './transaction.model';
+import { ProductImage } from './productimage.model';
 
 export interface ProductAttributes {
     productId: number;
     productName: string;
     productDescription: string;
-    productImage: String;
     productPrice: number;
     productCategory: string;
     productLocation: string;
@@ -19,7 +19,6 @@ export interface ProductAttributes {
     isAvailable: boolean;
     userId: number;
     buyerId: number;
-    userReview: string;
 }
 
 export interface ProductCreationAttributes extends Optional<ProductAttributes, 'productId'> { }
@@ -28,7 +27,6 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
     productId!: number;
     productName!: string;
     productDescription!: string;
-    productImage!: String;
     productPrice!: number;
     productCategory!: string;
     productLocation!: string;
@@ -41,7 +39,6 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
     isAvailable!: boolean;
     userId!: number;
     buyerId!: number;
-    userReview!: string;
 
     public static initialize(sequelize: Sequelize) {
         Product.init({
@@ -57,9 +54,6 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
             productDescription: {
                 type: DataTypes.TEXT
             },
-            productImage: {
-                type: DataTypes.STRING
-            },
             productPrice: {
                 type: DataTypes.NUMBER,
                 allowNull: false
@@ -72,7 +66,9 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
                 type: DataTypes.STRING
             },
             productDelivery: {
-                type: DataTypes.BOOLEAN
+                type: DataTypes.BOOLEAN,
+                defaultValue: false,
+                allowNull: false
             },
             uploadDate: {
                 type: DataTypes.DATE,
@@ -83,17 +79,22 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
             },
             isApproved: {
                 type: DataTypes.BOOLEAN,
+                defaultValue: false,
                 allowNull: false
             },
             isService: {
                 type: DataTypes.BOOLEAN,
+                defaultValue: false,
                 allowNull: false
             },
             isRentable: {
-                type: DataTypes.BOOLEAN
+                type: DataTypes.BOOLEAN,
+                defaultValue: false,
+                allowNull: false
             },
             isAvailable: {
                 type: DataTypes.BOOLEAN,
+                defaultValue: true,
                 allowNull: false
             },
             userId: {
@@ -102,9 +103,6 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
             },
             buyerId: {
                 type: DataTypes.INTEGER
-            },
-            userReview: {
-                type: DataTypes.TEXT
             }
         },
         { sequelize, tableName: 'productTable' }
@@ -121,6 +119,10 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
         });
         Product.hasMany(Transaction, {
             as: 'transactions',
+            foreignKey: 'productId'
+        });
+        Product.hasMany(ProductImage, {
+            as: 'productImages',
             foreignKey: 'productId'
         });
     }

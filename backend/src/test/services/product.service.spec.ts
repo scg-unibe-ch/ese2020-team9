@@ -3,6 +3,9 @@ import { Product, ProductAttributes   } from './../../models/product.model';
 import { expect } from 'chai';
 import { User, UserAttributes } from '../../models/user.model';
 import {SearchRequest} from '../../models/search.model';
+import {ImageGetAttributes, ProductImage} from '../../models/productimage.model';
+import path from 'path';
+
 
 describe('ProductService Tests', () => {
     const testedProductService: ProductService = new ProductService();
@@ -22,26 +25,27 @@ describe('ProductService Tests', () => {
         addressStreet: 'Pinnacle Street',
         addressPin: '77889',
         addressCity: 'Hannington Town',
-        addressCountry: 'Saint Isles'
+        addressCountry: 'Saint Isles',
+        gameScore: 0,
+        activityScore: 0,
+        overallScore: 0
     };
 
     const product1: ProductAttributes = {
         productId : 1,
         productName: 'Schoggi',
         productDescription: 'E feini Schoggi us Guetemala.',
-        productImage: null,
         productPrice: 10,
         productCategory: 'food',
         productLocation: null,
-        productDelivery: null,
+        productDelivery: true,
         uploadDate: new Date(Date.now()),
         sellDate: null,
         isApproved: false,
         isService: false,
-        isRentable: null,
+        isRentable: false,
         isAvailable: true,
         userId: 1,
-        userReview: null,
         buyerId: null
     };
 
@@ -49,19 +53,17 @@ describe('ProductService Tests', () => {
         productId : 1,
         productName: 'Schoggi',
         productDescription: 'E sehr feini Schoggi us Guetemala.',
-        productImage: null,
         productPrice: 20,
         productCategory: 'food',
         productLocation: null,
-        productDelivery: null,
+        productDelivery: true,
         uploadDate: new Date(Date.now()),
         sellDate: null,
         isApproved: false,
         isService: false,
-        isRentable: null,
+        isRentable: false,
         isAvailable: true,
         userId: 1,
-        userReview: null,
         buyerId: null
     };
 
@@ -69,19 +71,17 @@ describe('ProductService Tests', () => {
         productId : 2,
         productName: 'Formaggio',
         productDescription: 'Un buono formaggio di Ticino.',
-        productImage: null,
         productPrice: 30,
         productCategory: 'food',
         productLocation: null,
-        productDelivery: null,
+        productDelivery: true,
         uploadDate: new Date(Date.now()),
         sellDate: null,
         isApproved: false,
         isService: false,
-        isRentable: null,
+        isRentable: false,
         isAvailable: true,
         userId: 1,
-        userReview: null,
         buyerId: null
     };
 
@@ -89,7 +89,6 @@ describe('ProductService Tests', () => {
         productId : 3,
         productName: 'Drone',
         productDescription: 'Endlessly flying drone with autonomous electricity due to solar power.',
-        productImage: null,
         productPrice: 850,
         productCategory: 'ComputerAndComputerAccessories',
         productLocation: 'Bern',
@@ -98,10 +97,9 @@ describe('ProductService Tests', () => {
         sellDate: null,
         isApproved: true,
         isService: false,
-        isRentable: null,
+        isRentable: true,
         isAvailable: true,
         userId: 1,
-        userReview: null,
         buyerId: null
 
     };
@@ -109,7 +107,6 @@ describe('ProductService Tests', () => {
         productId : 4,
         productName: 'Shovel',
         productDescription: 'A strong shovel made from steel, useful for various tasks around the house in winter and summer.',
-        productImage: null,
         productPrice: 15,
         productCategory: 'Miscellaneous',
         productLocation: 'Bern',
@@ -118,10 +115,9 @@ describe('ProductService Tests', () => {
         sellDate: null,
         isApproved: true,
         isService: false,
-        isRentable: null,
+        isRentable: true,
         isAvailable: false,
         userId: 1,
-        userReview: null,
         buyerId: null
 
     };
@@ -129,7 +125,6 @@ describe('ProductService Tests', () => {
         productId : 5,
         productName: 'Massage',
         productDescription: 'One hour of thai massage.',
-        productImage: null,
         productPrice: 120,
         productCategory: 'Miscellaneous',
         productLocation: 'Zürich',
@@ -138,10 +133,9 @@ describe('ProductService Tests', () => {
         sellDate: null,
         isApproved: true,
         isService: true,
-        isRentable: null,
+        isRentable: false,
         isAvailable: true,
         userId: 1,
-        userReview: null,
         buyerId: null
 
     };
@@ -150,19 +144,17 @@ describe('ProductService Tests', () => {
         productId : 7,
         productName: 'Formaggio',
         productDescription: 'Un molto buono formaggio di Ticino.',
-        productImage: null,
         productPrice: 30,
         productCategory: 'food',
         productLocation: null,
-        productDelivery: null,
+        productDelivery: true,
         uploadDate: new Date(Date.now()),
         sellDate: null,
         isApproved: false,
         isService: false,
-        isRentable: null,
+        isRentable: false,
         isAvailable: true,
         userId: 1,
-        userReview: null,
         buyerId: 2
     };
 
@@ -476,8 +468,9 @@ describe('ProductService Tests', () => {
                 delivery: true
             };
             testedProductService.searchProduct(request).then(product => {
-                expect(product[0].productId).to.be.eq(3);
-                expect(product.length).to.be.eq(1);
+                expect(product[0].productId).to.be.eq(1);
+                expect(product[1].productId).to.be.eq(3);
+                expect(product.length).to.be.eq(2);
                 done();
                 });
             });
@@ -514,6 +507,51 @@ describe('ProductService Tests', () => {
                 done();
                 });
             });
+        it('should successfully search products that are rentable', function(done){
+            const request: SearchRequest = {
+                isRentable: true
+            };
+            testedProductService.searchProduct(request).then(product => {
+                expect(product[0].productId).to.be.eq(3);
+                expect(product[1].productId).to.be.eq(4);
+                expect(product.length).to.be.eq(2);
+                done();
+                });
+            });
+        it('should successfully search products that are not rentable', function(done){
+            const request: SearchRequest = {
+                isRentable: false
+            };
+            testedProductService.searchProduct(request).then(product => {
+                expect(product[0].productId).to.be.eq(1);
+                expect(product[1].productId).to.be.eq(5);
+                expect(product.length).to.be.eq(2);
+                done();
+                });
+            });    
+        it('should successfully search products that are services', function(done){
+            const request: SearchRequest = {
+                 isService: true
+            };
+            testedProductService.searchProduct(request).then(product => {
+                expect(product[0].productId).to.be.eq(5);
+                expect(product.length).to.be.eq(1);
+                done();
+                });
+            });  
+        it('should successfully search products that are not services', function(done){
+            const request: SearchRequest = {
+                 isService: false
+            };
+            testedProductService.searchProduct(request).then(product => {
+                expect(product[0].productId).to.be.eq(1);
+                expect(product[1].productId).to.be.eq(3);
+                expect(product[2].productId).to.be.eq(4);
+                expect(product.length).to.be.eq(3);
+                done();
+                });
+            });                             
+                              
         it('should successfully search products that are in the category \"Miscellaneous\"', function(done){
             const request: SearchRequest = {
                 category: 'Miscellaneous'
@@ -544,8 +582,9 @@ describe('ProductService Tests', () => {
                 available: true
             };
             testedProductService.searchProduct(request).then(product => {
-                expect(product[0].productId).to.be.eq(3);
-                expect(product.length).to.be.eq(1);
+                expect(product[0].productId).to.be.eq(1);
+                expect(product[1].productId).to.be.eq(3);
+                expect(product.length).to.be.eq(2);
                 done();
                 });
             });    
@@ -561,7 +600,59 @@ describe('ProductService Tests', () => {
                 });
             });    
         });
+
+    describe('Test uploadImage()', () => {
+        it('should successfully upload an image to a product', function(done) {
+            const imagePath = path.join(__dirname, '../../test/test.jpeg');
+            const fs = require('fs');
+            const request: ImageGetAttributes = {
+                filename: "test.jpeg",
+                path: imagePath
+            }
+            testedProductService.uploadImage(request, 1).then((image) => {
+                fs.writeFileSync(request.path, image.data);
+                expect(image.imageId).to.be.eq(3);
+                expect(image.imageType).to.be.eq('jpeg');
+                expect(image.productId).to.be.eq(1);
+                done();
+            });
+        });
+    });        
     
+    describe('Test getImageIds()', () => {
+        it('should successfully get the imageIds from a product', function(done) {
+            testedProductService.getImageIds(1).then(ids => {
+                expect(ids[0].imageId).to.be.eq(3);
+                expect(ids.length).to.be.eq(1);
+                done();
+            });
+        });
+    });        
+
+    describe('Test getImageById()', () => {
+        const fs = require('fs');
+        it('should successfully get the image with the given id', function(done) {
+            testedProductService.getImageById(3).then(image => {
+                const imagePath = path.join(__dirname, '../../../temp/' + image);
+                expect(image).to.be.eq(path.basename(imagePath));
+                fs.unlinkSync(imagePath);
+                done();
+            });
+        });
+    });            
+
+    describe('Test deleteImage()', () => {
+        it('should delete an image by id', function(done) {
+            testedProductService.deleteImage(3).then(() => {
+                ProductImage.findByPk(3)
+                .then(foundImage => {
+                    expect(foundImage).to.be.eq(null);
+                    done();
+                });
+            });
+        });
+    });
+
     describe('Test deleteProduct()', () => {
         it('should delete a product by id', function(done) {
             testedProductService.deleteProduct(1).then(() => {

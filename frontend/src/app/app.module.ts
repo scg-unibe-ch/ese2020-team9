@@ -18,7 +18,6 @@ import { AdminPanelComponent } from './components/admin-panel/admin-panel.compon
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { MatIconModule } from '@angular/material/icon';
-import { ProductItemComponent } from './components/product-item/product-item.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
@@ -37,16 +36,18 @@ import { BoughtproductsComponent } from './components/user-dashboard/boughtprodu
 import { MatStepperModule } from '@angular/material/stepper';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from "@angular/material/select";
-import { SearchCategoryComponent } from './components/dashboard/search-category/search-category.component';
 import { MatChipsModule} from "@angular/material/chips";
-import { ProductViewComponent } from './components/product-view/product-view.component';
 import { ProductDisplayComponent } from './components/product-display/product-display.component';
-import { FilterComponent } from './components/product-display/filter/filter.component';
-import { SearchBarComponent } from "./components/search-bar/search-bar.component";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatSliderModule } from "@angular/material/slider";
-import { UserComponent } from "./components/user/user.component";
+import { SearchComponent } from './components/search/search.component';
+import { SearchBarComponent } from "./components/dashboard/search-bar/search-bar.component";
+import { MatDialogModule } from "@angular/material/dialog";
+import { DialogBodyComponent } from './components/dialog-body/dialog-body.component';
+import { PasswordForgottenComponent } from "./components/password-forgotten/password-forgotten.component";
+import { LeaderBoardComponent } from './components/leaderboard/leaderboard.component';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,6 @@ import { UserComponent } from "./components/user/user.component";
     AdminPanelComponent,
     HeaderComponent,
     FooterComponent,
-    ProductItemComponent,
     UserDashboardComponent,
     DashboardComponent,
     PageNotFoundComponent,
@@ -66,12 +66,13 @@ import { UserComponent } from "./components/user/user.component";
     OtherUserDashboardComponent,
     SoldproductsComponent,
     BoughtproductsComponent,
-    SearchCategoryComponent,
-    ProductViewComponent,
     ProductDisplayComponent,
-    FilterComponent,
     SearchBarComponent,
-    UserComponent,
+    SearchComponent,
+    DialogBodyComponent,
+    PasswordForgottenComponent,
+    LeaderBoardComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -100,6 +101,8 @@ import { UserComponent } from "./components/user/user.component";
     MatExpansionModule,
     MatAutocompleteModule,
     MatSliderModule,
+    MatDialogModule,
+    MatTableModule,
   ],
   providers: [
     {

@@ -63,7 +63,11 @@ export class UserLoginComponent implements OnInit {
       //update isUserAdmin value
       this.userService.isUserAdmin.next(res.user.admin);
       //navigates to dashboard
-      this.router.navigate(['/home']);
+      if (this.userService.isUserAdmin.value == true){
+        this.router.navigate(['/admin']);
+      } else {
+        this.router.navigate(['/home']);
+        }
       }, (error: any) => {
         let message = "An error occurred!";
         let action = "Retry";

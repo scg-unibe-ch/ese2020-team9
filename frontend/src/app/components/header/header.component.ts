@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
   isUserLoggedIn: boolean;
   isUserAdmin: boolean;
   isUserName: string;
+  userId: any;
 
   constructor(private userService: UserService, private router: Router) { }
 
@@ -25,8 +26,8 @@ export class HeaderComponent implements OnInit {
 
     this.userService.isUserName.subscribe(value => {
       this.isUserName = value;
-    })
-
+    });
+    this.userId = this.userService.getUserId();
   }
 
   logout(): void {

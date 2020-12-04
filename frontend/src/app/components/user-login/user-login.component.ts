@@ -48,6 +48,7 @@ export class UserLoginComponent implements OnInit {
   }
 
   login(): void {
+    console.log(this.userLogin, this.password, "comp");
     this.userService.login(this.userLogin, this.password).subscribe((res: any) => {
       // Set user data in local storage
       localStorage.setItem('userToken', res.token);
@@ -56,7 +57,7 @@ export class UserLoginComponent implements OnInit {
       localStorage.setItem('userId', res.user.userId);
       localStorage.setItem('userWallet', res.user.wallet);
       localStorage.setItem('userHighscore', res.user.gameScore);
-
+      console.log("hm");
       //updates isUserLoggedIn value
       this.userService.isUserLoggedIn.next(true);
       //get User Name
@@ -66,6 +67,7 @@ export class UserLoginComponent implements OnInit {
       //navigates to dashboard
       this.router.navigate(['/home']);
       }, (error: any) => {
+        console.log(error)
         let message = "An error occurred!";
         let action = "Retry";
         this.openSnackBar(message, action);

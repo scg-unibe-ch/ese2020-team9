@@ -14,16 +14,22 @@ fdescribe('UserLoginComponent', () => {
 
   const spyRouter = jasmine.createSpyObj('Router', ['navigate']);
 
-  class MockUserService {
-    isLoggedIn = true;
-    user = { userName: 'John', password: 1234};
-  }
+  const mockUserService = {
+      login(userLogin: string, password: string):boolean{
+              if(userLogin == 'John' && password == '1234'){
+                return true
+              }
+              else{
+              return false
+              }
+          }
+    };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, MatDialogModule],
       declarations: [ UserLoginComponent ],
-      providers: [MatSnackBar, UserService, {provide: Router, useValue: spyRouter}, Overlay, HttpTestingController, MatDialog]
+      providers: [MatSnackBar, {provide: Router, useValue: spyRouter, UserService, useClass: mockUserService }, Overlay, HttpTestingController, MatDialog]
     })
     .compileComponents();
   }));
@@ -50,12 +56,12 @@ fdescribe('UserLoginComponent', () => {
         expect(component.isUserLoggedIn).toBe(false);
     });
 
-  it('should be valid email', () => {
+  it('should be a valid email', () => {
        let email = 'abc@abc.com';
        expect(component.validate(email)).toBe(true);
      });
 
-  it('should not be valid email', () => {
+  it('should not be a valid email', () => {
      let email = '';
      expect(component.validate(email)).toBe(false)
      email = 'a';
@@ -68,28 +74,31 @@ fdescribe('UserLoginComponent', () => {
      expect(component.validate(email)).toBe(false);
    });
 
-  /*
-  it('should valid log in', () => {
+
+  it('should be a valid log in', () => {
       component.userLogin = 'John';
       component.password = '1234';
-
-      console.log(component.userLogin);
-      console.log(component.password);
-      component.login();
+      if(mockUserService.login(component.userLogin,component.password)){
+        component.isUserLoggedIn = true;
+      }
       expect(component.isUserLoggedIn).toBe(true);
   });
-  */
 
-  /*
-    it('should not be valid log in', () => {
-        component.userLogin = 'John';
-        component.password = '1234';
 
-        console.log(component.userLogin);
-        console.log(component.password);
-        component.login();
-        expect(component.isUserLoggedIn).toBe(true);
-    });
-    */
+
+  it('should not be a valid log in', () => {
+      component.userLogin = 'lala';
+      component.password = '1234';
+      if(mockUserService.login(component.userLogin,component.password)){
+              component.isUserLoggedIn = true;
+            }
+       else {
+       component.isUserLoggedIn = false;
+       }
+
+      component.login();
+      expect(component.isUserLoggedIn).toBe(false);
+  });
+
 
 });

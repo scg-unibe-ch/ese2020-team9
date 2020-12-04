@@ -14,16 +14,15 @@
     </div>
 
     <div *ngIf="isUserLoggedIn" class="headerNav">
-      <button mat-menu-item routerLink="/productForm/0" routerLinkActive="active" class="headerItem">Add product</button>
-      <button class="headerItem" mat-button color="storMainColor"><img class ="center-cropped"src ="../assets/cd/hammer.gif" routerLink="/user" routerLinkActive="active"><br>{{isUserName}}</button>
-      <button class="headerItem" mat-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
+      <button class="headerItem" mat-menu-item routerLink="/productForm/0" routerLinkActive="active">Add product</button>
+      <button class="headerItem" mat-button [matMenuTriggerFor]="menu">Menu</button>
+      <button mat-button color="storMainColor"><img class ="center-cropped"src ="../assets/cd/hammer.gif" routerLink="/user" routerLinkActive="active"><br>{{isUserName}}</button>
     </div>
 
     <mat-menu #menu>
       <button mat-menu-item routerLink="/home" routerLinkActive="active">Home</button>
       <button mat-menu-item routerLink="/user" routerLinkActive="active">My profile</button>
       <button mat-menu-item [routerLink]="['/registration/', userId]" routerLinkActive="active">Edit profile</button>
-      <button mat-menu-item routerLink="/productForm/0" routerLinkActive="active">Add product</button>
       <div *ngIf="isUserAdmin">
         <button mat-menu-item routerLink="/admin" routerLinkActive="active">Admin</button>
       </div>

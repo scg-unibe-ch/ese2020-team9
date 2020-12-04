@@ -28,7 +28,7 @@ export class UserService {
       this.userName = localStorage.getItem('userName');
 
       this.isUserLoggedIn= new BehaviorSubject<boolean>(this.userToken !== null );
-      this.isUserAdmin = new BehaviorSubject<boolean>(false);
+      this.isUserAdmin = new BehaviorSubject<boolean>(localStorage.getItem('admin') === 'true');
       this.isUserName = new BehaviorSubject<string>(this.userName);
 
       }
@@ -86,18 +86,18 @@ export class UserService {
   }
 
   getToken(){
-    return this.userToken = localStorage.getItem('userToken');
+    return this.userToken;
   }
 
   getUserName(){
-    return this.userName = localStorage.getItem('userName');
+    return this.userName;
   }
 
   getUserId(){
-    return this.userId = localStorage.getItem('userId');
+    return this.userId;
   }
 
   getUserWallet(){
-    return this.userWallet = localStorage.getItem('userWallet')
+    return this.userWallet;
   }
 }

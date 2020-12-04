@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {BehaviorSubject, Observable} from "rxjs";
 import { environment} from "../../environments/environment";
 import {EditUser, RegisterUser, User} from "../models/user.model";
@@ -14,6 +14,7 @@ export class UserService {
   userId: any;
   userWallet: any;
   users: User[] ;
+  userHighscore: number;
 
 
   public isUserLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -46,6 +47,31 @@ export class UserService {
     return this.httpClient.post(environment.endpointURL + 'user/edit/', user);
   }
 
+  passwordForgotten(userEmail: string): Observable<any> {
+    return this.httpClient.post(environment.endpointURL + 'user/passwordForgotten', {userEmail});
+  }
+
+  resetPassword(password: string, token): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    return this.httpClient.post(environment.endpointURL + 'user/restorePassword', {password}, { headers: headers });
+  }
+
+  getGameHighscoreTopList(): Observable<any> {
+    return this.httpClient.get(environment.endpointURL + 'user/highscores/game');
+  }
+
+  getOverallHighscoreTopList(): Observable<any> {
+    return this.httpClient.get(environment.endpointURL + 'user/highscores/overall');
+  }
+
+  saveHighscore(highscore: number): Observable<any> {
+    return this.httpClient.put(environment.endpointURL + 'user/updateGameScore/' + this.getUserId()
+       +  '/' + highscore, {});
+  }
+
   /** delete request **/
   deleteUser(user: User): Observable<User> {
     return this.httpClient.delete<User>(environment.endpointURL + 'user/' + user.userId);
@@ -75,6 +101,11 @@ export class UserService {
   }
 
   getUserWallet(){
-    return this.userWallet = localStorage.getItem('userWallet')
+    return this.userWallet = localStorage.getItem('userWallet');
   }
+
+  getUserHighscore(): number {
+    return this.userHighscore = Number.parseInt(localStorage.getItem('userHighscore'), 10);
+  }
+
 }

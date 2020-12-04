@@ -9,21 +9,21 @@
       <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
     </mat-form-field>
 
-    <button mat-flat-button class="button_standard" (click)="login()">Login</button>
-    <br>
-    {{userAuth}}
-    <br>
+    <button mat-flat-button class="button_standard" (click)="login()" >Login</button>
     <br>
   </div>
 
-  <div *ngIf="userAuth">
-    <a routerLink="/registration">
-      <button mat-flat-button class="button_standard">Registration</button>
-    </a>
-  </div>
-
-  <div *ngIf="isUserLoggedIn">
+  <div *ngIf="isUserLoggedIn" align="end">
     You are currently logged in!
     <button mat-flat-button class="button_standard" (click)="logout()">Logout</button>
   </div>
 </mat-card>
+
+  <div *ngIf="!isUserLoggedIn" align="end">
+      <button mat-flat-button class="button_standard" [routerLink]="['/registration/0']">Registration</button>
+      <button mat-flat-button class="button_standard" (click)="openDialog()">Password forgotten</button>
+  </div>
+
+
+
+

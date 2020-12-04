@@ -5,8 +5,12 @@ import {CategoryList} from "../../category-list";
 import {Subscription} from "rxjs";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {HttpClient} from "@angular/common/http";
-import {MatSliderModule} from '@angular/material/slider';
 import {_isNumberValue} from "@angular/cdk/coercion";
+import { HostListener } from '@angular/core';
+
+export enum KEY_CODE {
+  ENTER = 'Enter',
+}
 
 @Component({
   selector: 'app-search',
@@ -41,6 +45,7 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
     this.category = this.route.snapshot.queryParamMap.get('c');
     this.name = this.route.snapshot.queryParamMap.get('n');
+    console.log(this.name, "name")
     this.navigateTo();
   }
 
@@ -162,6 +167,15 @@ export class SearchComponent implements OnInit {
       this.navigateTo();
     }
   }
+
+  @HostListener('window:keyup', ['$event'])
+    keyEvent(event: KeyboardEvent) {
+      //console.log(event);
+      if (event.key === KEY_CODE.ENTER) {
+        this.navigateTo();
+      }
+
+    }
 }
 
 

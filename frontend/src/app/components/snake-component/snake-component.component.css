@@ -1,0 +1,114 @@
+h3 {
+  font-family: 'Press Start 2P';
+  font-weight: bolder;
+  margin-bottom: 8px;
+}
+
+br {
+  margin-bottom: 2px;
+}
+
+.game {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cells {
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: black solid 10px;
+}
+
+.board {
+  width: 260px;
+  height: 520px;
+  background-color: rgb(49, 47, 47);
+  border-left:  black solid 10px;
+  border-right:  black solid 10px;
+  border-bottom: black solid 10px;
+  display: table;
+}
+
+.console {
+  text-align: center;
+  font-size: x-large;
+  top: 0;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  border: black solid 10px;
+  animation: console 1.3s infinite;
+  background-color: rgb(49, 47, 47);
+  width: 1060px;
+  margin: auto;
+}
+
+.instructions {
+  text-align: center;
+  border-bottom: black solid 10px;
+  margin: auto;
+  background-color: rgb(49, 47, 47);
+  border-right: black solid 10px;
+  border-left: black solid 10px;
+  border-bottom: black solid 10px;
+  width: 1060px;
+}
+
+.score {
+  text-align: center;
+  border-bottom: black solid 10px;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.spacer {
+  display: table-row;
+  height: 1em;
+}
+
+.border {
+  height: 10px;
+  background-color: black;
+}
+
+.score-list {
+  display: table-row;
+  text-align: center;
+  padding-top: 1em;
+}
+
+.score-list ol {
+  text-align: left;
+  margin-left: 2em;
+}
+
+.score-list li {
+  margin-bottom: 8px;
+}
+
+.buttons {
+  display: table-row table;
+  height: 100%;
+}
+
+.buttons button {
+  display: table-row;
+  width: 230px;
+  height: 25%;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+@keyframes console {
+  0% { color: rgb(49, 47, 47); }
+  33% { color:  rgb(119, 114, 114);}
+  66% { color: rgb(192, 186, 186);}
+  100% { color: rgb(255, 255, 255);}
+}
+
+@keyframes specialEgg {
+  from {background-color: fuchsia;}
+  to {background-color: yellowgreen;}
+}

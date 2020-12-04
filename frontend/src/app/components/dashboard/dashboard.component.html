@@ -2,10 +2,11 @@
 
 <div class="productList_dashboard" fxLayout="row wrap" fxLayoutGap="2% grid" fxLayoutAlign="space-evenly stretch">
   <div fxFlex="10%" fxFlex.xl="10%" fxFlex.lg="15%" fxFlex.md="20%" fxFlex.sm="33%" fxFlex.xs="50%" *ngFor="let productItem of productList">
-    <mat-card>
+    <img class = "center-cropped" src="{{productItem.productImage}}" alt="{{productItem.productName}}" >
+   
+    <!--<mat-card>
 
       <mat-card-header>
-        <!--<img mat-card-avatar src="" alt="Profile Picture">-->
         <mat-card-title>
           <button mat-flat-button [routerLink]="['/productDetail', productItem.productId]" routerLinkActive="active" ><b>{{productItem.productName}}</b>
           </button>
@@ -29,6 +30,6 @@
         </p>
       </mat-card-content>
 
-    </mat-card>
+    </mat-card>-->
   </div>
 </div>

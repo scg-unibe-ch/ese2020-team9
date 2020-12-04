@@ -1,3 +1,4 @@
+import { SnakeComponentComponent } from './components/snake-component/snake-component.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from "@angular/router";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
@@ -12,7 +13,8 @@ import { ShippingComponent } from './components/product-detail/shipping/shipping
 import { OtherUserDashboardComponent } from './components/other-user-dashboard/other-user-dashboard.component';
 import { ProductDisplayComponent } from "./components/product-display/product-display.component";
 import { SearchComponent } from "./components/search/search.component";
-import { LeaderBoardComponent } from './components/leaderboard/leaderboard.component';
+import { PasswordForgottenComponent } from "./components/password-forgotten/password-forgotten.component";
+import { LeaderBoardComponent } from "./components/leaderboard/leaderboard.component";
 
 const routes: Routes = [
   { path: 'home', component: DashboardComponent},
@@ -24,13 +26,14 @@ const routes: Routes = [
   { path: 'productDetail/:id', component: ProductDetailComponent},
   { path: 'shipping/:id', component: ShippingComponent},
   { path: 'user/:id', component: OtherUserDashboardComponent},
-  { path: 'search', component: ProductDisplayComponent},
+  { path: 'search', component: ProductDisplayComponent },
+  { path: 'game', component: SnakeComponentComponent},
   { path: 's', component: SearchComponent},
   { path: 'leaderboard', component: LeaderBoardComponent},
-
-  //default route
+  { path: 'resetPassword/:id', component: PasswordForgottenComponent},
+  // default route
   { path: '', redirectTo: '/home', pathMatch: 'full'},
-  //wildcard route for 404 page
+  // wildcard route for 404 page
   { path: '**', component: PageNotFoundComponent}
 ];
 

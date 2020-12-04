@@ -267,10 +267,7 @@ export class UserRegistrationComponent implements OnInit {
   stepTwoComplete(){
     let fn = this.evaluate(this.firstName);
     let ln = this.evaluate(this.lastName);
-    if (fn && ln){ return true}
-    else {
-      return false
-    }
+    return (fn && ln)
   }
 
 

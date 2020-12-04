@@ -92,12 +92,6 @@ export class Snake {
       throw new Error('Unknown direction');
     }
     this.setNextPos(next);
-
-    // if (this.dir === Direction.LEFT || this.dir === Direction.RIGHT) {
-    //   this.setNewColPos(this.dir, size);
-    // } else if (this.dir === Direction.DOWN || this.dir === Direction.UP) {
-    //   this.setNewRowPos(this.dir, size);
-    // }
   }
 
 }

@@ -37,7 +37,7 @@ br {
   padding-top: 1em;
   padding-bottom: 1em;
   border: black solid 10px;
-  animation: console 1s infinite;
+  animation: console 1.3s infinite;
   background-color: rgb(49, 47, 47);
   width: 1060px;
   margin: auto;
@@ -103,7 +103,7 @@ br {
 
 @keyframes console {
   0% { color: rgb(49, 47, 47); }
-  33% { color:  rgb(119, 114, 114)}
+  33% { color:  rgb(119, 114, 114);}
   66% { color: rgb(192, 186, 186);}
   100% { color: rgb(255, 255, 255);}
 }

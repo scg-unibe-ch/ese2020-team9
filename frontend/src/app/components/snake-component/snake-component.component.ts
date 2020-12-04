@@ -61,23 +61,25 @@ export class SnakeComponentComponent implements OnInit {
   }
 
   public play(): void {
-    this.message = 'Enjoy playing!';
-    setTimeout(() => {
-      this.message = 'Snake begins in 3';
+      this.message = '3';
       setTimeout(() => {
-        this.message = 'Snake begins in 2';
+        this.message = '2';
         setTimeout(() => {
-          this.message = 'Snake begins in 1';
+          this.message = '1';
           setTimeout(() => {
             this.message = 'START';
             setTimeout(() => {
               this.playing = true;
               this.run();
-            }, 1000);
+            }, 500);
           }, 1000);
         }, 1000);
       }, 1000);
-    }, 1000);
+  }
+
+  public pause(): void {
+    this.playing = false;
+    this.message = 'PAUSE';
   }
 
   public getOverallScoreList(): void {
@@ -129,9 +131,9 @@ export class SnakeComponentComponent implements OnInit {
       setTimeout(() => {
         this.goStep();
         this.dead = this.dead || this.snake.checkSelfDead();
-        if (!this.dead) {
+        if (!this.dead && this.playing) {
           runTime();
-        } else {
+        } else if (this.dead) {
           this.die();
         }
       }, this.timestep);
@@ -147,7 +149,6 @@ export class SnakeComponentComponent implements OnInit {
   public eatEggOrDie(): void {
     const pos: Position = this.snake.head.pos;
     if (this.board.isStone(pos)) {
-      console.log('on a stone');
       this.dead = true;
     } else if (this.board.isEgg(pos)) {
       this.board.eatEgg(pos);
@@ -176,7 +177,10 @@ export class SnakeComponentComponent implements OnInit {
 
   private updateScores(): void {
     this.lastScore = this.score;
-    this.sessionHighscore = this.score > this.sessionHighscore ? this.score : this.sessionHighscore;
+    if (this.score > this.sessionHighscore) {
+      this.sessionHighscore = this.score;
+      this.message = 'Congrats, new Highscore!';
+    }
   }
 
   private initializeNewGame(): void {

@@ -39,7 +39,8 @@
         : 'No saved highscore, consider logging in to save highscores!' }}
   </div>
   <div class="buttons">
-    <button (click)="play()">PLAY</button>
+    <button *ngIf="!playing" (click)="play()">PLAY</button>
+    <button *ngIf="playing" (click)="pause()">PAUSE</button>
     <button (click)="toggleInstructions()">Instructions</button>
     <button (click)="saveHighscore()">Save Highscore</button>
     <button (click)="quit()">quit</button>

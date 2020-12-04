@@ -6,7 +6,7 @@ import { SnakeComponentComponent } from './snake-component.component';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 
-fdescribe('SnakeComponentComponent', () => {
+describe('SnakeComponentComponent', () => {
   let component: SnakeComponentComponent;
   let fixture: ComponentFixture<SnakeComponentComponent>;
 
@@ -65,14 +65,14 @@ fdescribe('SnakeComponentComponent', () => {
 
   it('should render welcome message in console', () => {
     const nat = fixture.nativeElement;
-    const console = nat.querySelector('console');
-    expect(console.textContent).toEqual('Welcome to Snake!');
+    const console = nat.querySelector('div');
+    expect(console.textContent).toMatch('Welcome to Snake!');
   });
 
-  it('should get leader and put them into board at beginning', () => {
-    const nat = fixture.nativeElement;
-    const leaderBoardElt = nat.querySelector('score-list ol li');
-    expect(leaderBoardElt.textContent).toMatch('Billy');
+  it('should toggle instructions successfully', () => {
+    expect(component.instructions).toEqual(false);
+    component.toggleInstructions();
+    expect(component.instructions).toEqual(true);
   });
 
 });

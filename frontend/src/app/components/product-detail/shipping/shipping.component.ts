@@ -68,7 +68,7 @@ export class ShippingComponent implements OnInit {
   transaction: NewTransaction;
 
 
-  picture: any;
+  picture: any = [];
   image: any;
 
   constructor(private location: Location,

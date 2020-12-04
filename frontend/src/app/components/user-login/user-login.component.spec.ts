@@ -6,6 +6,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserLoginComponent } from './user-login.component';
 import { Overlay } from '@angular/cdk/overlay';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 describe('UserLoginComponent', () => {
   let component: UserLoginComponent;
@@ -15,9 +16,9 @@ describe('UserLoginComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, MatDialogModule],
       declarations: [ UserLoginComponent ],
-      providers: [MatSnackBar, UserService, {provide: Router, useValue: spyRouter}, Overlay, HttpTestingController]
+      providers: [MatSnackBar, UserService, {provide: Router, useValue: spyRouter}, Overlay, HttpTestingController, MatDialog]
     })
     .compileComponents();
   }));

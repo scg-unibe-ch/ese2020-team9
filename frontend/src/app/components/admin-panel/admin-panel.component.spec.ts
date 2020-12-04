@@ -15,6 +15,14 @@ describe('AdminPanelComponent', () => {
   const stubUserService = {
     getToken(): string {
       return 'oo7';
+    },
+    getUserList(): Observable<any> {
+      return of([{
+        userName: 'Billy'
+      },
+      {
+        userName: 'Bobby'
+      }]);
     }
   };
 

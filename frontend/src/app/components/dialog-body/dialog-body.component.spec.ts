@@ -1,32 +1,21 @@
-import { MatInputModule } from '@angular/material/input';
-import { MatSelect, MatSelectModule } from '@angular/material/select';
-import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
+import { MatDialogModule, MatDialogRef  } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogBodyComponent } from './dialog-body.component';
+import { Overlay } from '@angular/cdk/overlay';
+import { BrowserModule } from '@angular/platform-browser';
 
 describe('DialogBodyComponent', () => {
   let component: DialogBodyComponent;
   let fixture: ComponentFixture<DialogBodyComponent>;
 
-  const stubActivatedRoute = {
-    snapshot: {
-      queryParamMap: {
-        get(): string {
-          return 'name';
-        }
-      }
-    }
-  };
-
-  const spyRouter = jasmine.createSpyObj('Router', ['navigate', 'navigateByUrl']);
+  const spyDialogRef = jasmine.createSpyObj('MatDialogRef', ['close']);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ MatSelectModule, BrowserAnimationsModule, MatInputModule ],
-      declarations: [ DialogBodyComponent, MatSelect ],
-      providers: [ {provide: Router, useValue: spyRouter}, {provide: ActivatedRoute, useValue: stubActivatedRoute}]
+      imports: [ BrowserModule, MatDialogModule],
+      declarations: [ DialogBodyComponent ],
+      providers: [ MatSnackBar, Overlay, {provide: MatDialogRef, useValue: spyDialogRef} ]
     })
     .compileComponents();
   }));

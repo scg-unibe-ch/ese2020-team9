@@ -24,7 +24,7 @@ export class UserService {
   constructor(private httpClient: HttpClient) { }
 
   /** get requests **/
-  getUser(id: number){
+  getUser(id: number) {
     return this.httpClient.get(environment.endpointURL + 'user/' + id);
   }
 

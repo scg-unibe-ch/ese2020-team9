@@ -7,21 +7,21 @@
 
 <div class="catContainer" >
   <div class="bigDisplay" *ngFor="let category of categories">
-   
+
       <img class= "categoryIcon" src="{{category.image}}" [routerLink]="['/s']" [queryParams]="{c: category.value}">
-      {{category.value}} 
+      {{category.value}}
    <!--<button class="categoryButton" [routerLink]="['/s']" [queryParams]="{c: category.value}">
-      {{category.value}} 
+      {{category.value}}
     </button>-->
   </div>
 
-   
+
 
   <div class="smallDisplay">
     <mat-form-field>
       <mat-label>Search Product Category</mat-label>
       <mat-select>
-        <mat-option *ngFor="let category of categories" [value]="category.value" [routerLink]="['/s']" [queryParams]="{c: category.value}">{{category.viewValue}}</mat-option>
+        <mat-option *ngFor="let category of categories" [value]="category.value" [routerLink]="['/s']" [queryParams]="{c: category.value}">{{category.value}}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>

@@ -29,7 +29,7 @@ export class UserService {
       this.userName = localStorage.getItem('userName');
       this.userWallet = localStorage.getItem('userWallet');
 
-      this.isUserLoggedIn= new BehaviorSubject<boolean>(this.userToken !== null );
+      this.isUserLoggedIn = new BehaviorSubject<boolean>(this.userToken !== null );
       this.isUserAdmin = new BehaviorSubject<boolean>(localStorage.getItem('admin') === 'true');
       this.isUserName = new BehaviorSubject<string>(this.userName);
 
@@ -98,6 +98,7 @@ export class UserService {
 
   logout(){
     localStorage.clear();
+    this.clearAttributes();
   }
 
   getToken(){
@@ -109,7 +110,7 @@ export class UserService {
   }
 
   getUserId(){
-    return this.userId;
+    return localStorage.userId;
   }
 
   getUserWallet(){
@@ -118,6 +119,15 @@ export class UserService {
 
   getUserHighscore(): number {
     return this.userHighscore = Number.parseInt(localStorage.getItem('userHighscore'), 10);
+  }
+
+  private clearAttributes(): void {
+    this.userHighscore = null;
+    this.userId = null;
+    this.userName = null;
+    this.userToken = null;
+    this.userWallet = null;
+    this.isUserName.next(null);
   }
 
 }

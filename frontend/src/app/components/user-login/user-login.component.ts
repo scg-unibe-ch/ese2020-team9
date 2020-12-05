@@ -56,7 +56,6 @@ export class UserLoginComponent implements OnInit {
       localStorage.setItem('userId', res.user.userId);
       localStorage.setItem('userWallet', res.user.wallet);
       localStorage.setItem('userHighscore', res.user.gameScore);
-
       //updates isUserLoggedIn value
       this.userService.isUserLoggedIn.next(true);
       //get User Name

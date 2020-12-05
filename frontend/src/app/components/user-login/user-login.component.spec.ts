@@ -49,13 +49,6 @@ describe('UserLoginComponent', () => {
     expect(component.isUserLoggedIn).toBe(false);
   });
 
-  it('should log out', () => {
-        component.isUserLoggedIn = true;
-        expect(component.isUserLoggedIn).toBe(true);
-        component.logout();
-        expect(component.isUserLoggedIn).toBe(false);
-    });
-
   it('should be a valid email', () => {
        let email = 'abc@abc.com';
        expect(component.validate(email)).toBe(true);

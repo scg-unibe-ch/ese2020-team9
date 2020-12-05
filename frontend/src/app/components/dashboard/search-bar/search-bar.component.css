@@ -61,13 +61,23 @@ input[type=text]{
 
 }
 
+
+
 .categoryButton{
-  color: #F0F0F0;
-  border: 1px solid #46FFFD;
+  color: #F7CC18;
+  border: none;
   border-radius: 4px;
   background-color: transparent;
-  
+ 
 }
+
+.categoryButton:hover {
+  color: #F7CC18;
+  border-radius: 8px;
+  background-color: #F72871;
+  box-shadow: 0px 0px 8px #F72871 ;
+}
+
 
 @media (min-width: 611px){
   .smallDisplay {

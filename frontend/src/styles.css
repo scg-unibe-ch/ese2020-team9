@@ -36,3 +36,10 @@ button, input {
   color: white;
   font-family:'Press Start 2P', cursive !important;
 }
+
+::ng-deep .mat-snackbar{
+  font-family:'Press Start 2P', cursive !important;
+  color: white;
+
+
+}

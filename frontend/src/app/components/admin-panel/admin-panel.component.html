@@ -12,6 +12,11 @@
 
   <mat-tab label="Products To Approve">
 
+    <mat-list *ngFor="let productItem of productList">
+      <mat-product-item [productItem] = "productItem"   ></mat-product-item>
+
+    </mat-list>
+
   <div  fxLayout="row" fxLayoutGap="2% grid" fxLayoutAlign="space-evenly stretch">
     <div fxFlex="10%" fxFlex.xl="15%" fxFlex.lg="20%" fxFlex.md="25%" fxFlex.sm="33%" fxFlex.xs="50%" *ngFor="let productItem of productList">
       <mat-card class="productItem_Card">

@@ -70,3 +70,21 @@
     height: 271px;
 }
 
+.find-snake{
+
+object-fit: cover; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+ width:50px;
+ height:auto;
+  opacity: 0.8;
+}
+
+ div b.code{
+  visibility: hidden;
+}
+
+ div:hover b.code {
+  visibility: visible;
+  font-size: 8px;
+}
+

@@ -31,6 +31,7 @@ export class UserDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = this.userService.getUserId();
+    console.log(this.userId, "user")
     this.getUser();
     this.getProductUser();
   }

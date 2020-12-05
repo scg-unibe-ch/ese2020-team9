@@ -110,7 +110,7 @@ export class UserService {
   }
 
   getUserId(){
-    return this.userId;
+    return localStorage.userId;
   }
 
   getUserWallet(){

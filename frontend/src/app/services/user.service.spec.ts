@@ -2,7 +2,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { TestBed } from '@angular/core/testing';
 import { UserService } from './user.service';
 
-fdescribe('UserService', () => {
+describe('UserService', () => {
   let service: UserService;
   let httpTestingController: HttpTestingController;
 
@@ -63,6 +63,7 @@ fdescribe('UserService', () => {
     expect(userService.userId).toEqual('1');
     expect(userService.userWallet).toEqual('500');
     }, 200);
+    localStorage.clear();
   });
 
   it('should correctly empty attributes in userService when logout', () => {
@@ -82,6 +83,7 @@ fdescribe('UserService', () => {
       expect(userService.userId).toEqual(null);
       expect(userService.userWallet).toEqual(null);
     }, 200);
+    localStorage.clear();
   });
 
   it('should set isUserLoggedIn correctly when instantiating', (done: DoneFn) => {
@@ -94,6 +96,7 @@ fdescribe('UserService', () => {
     setTimeout(() => {
     userService.isUserLoggedIn.subscribe((val: any) => {
       expect(val).toEqual(true);
+      localStorage.clear();
       done();
     });
     }, 200);
@@ -109,6 +112,7 @@ fdescribe('UserService', () => {
     setTimeout(() => {
     userService.isUserAdmin.subscribe((val: any) => {
       expect(val).toEqual(true);
+      localStorage.clear();
       done();
     });
     }, 200);
@@ -124,6 +128,7 @@ fdescribe('UserService', () => {
     setTimeout(() => {
     userService.isUserName.subscribe((val: any) => {
       expect(val).toEqual('Billy');
+      localStorage.clear();
       done();
     });
     }, 200);

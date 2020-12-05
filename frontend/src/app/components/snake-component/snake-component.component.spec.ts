@@ -145,7 +145,7 @@ describe('SnakeComponentComponent', () => {
     component.saveHighscore();
     setTimeout(() => {
       expect(component.message).toEqual('Successfully saved new highscore!');
-    }, 500);
+    }, 2000);
   });
 
 });

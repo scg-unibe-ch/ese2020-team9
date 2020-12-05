@@ -1,3 +1,4 @@
+import { BehaviorSubject } from 'rxjs';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { Router } from '@angular/router';
 import { UserService } from './../../services/user.service';
@@ -22,7 +23,8 @@ describe('UserLoginComponent', () => {
               else{
                 return false
               }
-          }
+          },
+      isUserLoggedIn: new BehaviorSubject<boolean>(false)
     };
 
   beforeEach(async(() => {

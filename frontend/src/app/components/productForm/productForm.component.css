@@ -7,3 +7,45 @@
   color: #F0F0F0;
   margin-bottom: 0px;
 }
+
+
+.mat-stepper-horizontal{
+  background-color: #082A5D!important;
+  color: white;
+  font-family: 'Press Start 2P', cursive;
+
+}
+
+::ng-deep .mat-horizontal-stepper-content{
+  background-color: #082A5D!important;
+  color: white;
+  font-family: 'Press Start 2P', cursive;
+
+}
+::ng-deep .mat-card{
+  background-color: #082A5D!important;
+  color: white;
+  font-family: 'Press Start 2P', cursive;
+}
+
+::ng-deep .mat-typography{
+  color: white;
+  font-family: 'Press Start 2P', cursive !important;
+}
+
+
+
+::ng-deep .mat-step-label .mat-step-label-active .mat-step-label-selected {
+  color: white;
+  font-family: 'Press Start 2P', cursive;
+
+}
+::ng-deep .mat-step-header .mat-step-label{
+  color: white;
+}
+
+.mat-checkbox{
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  margin-right: 20px;
+}

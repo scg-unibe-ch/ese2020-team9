@@ -1,5 +1,5 @@
 <div class="searchBar">
-  <input type="text" [(ngModel)]="name" placeholder="Search" name="name" class="bar">
+  <input class="bar" type="text" [(ngModel)]="name" placeholder="Search" name="name" >
 
   <button mat-button class="searchButton" [routerLink]="['/s']" [queryParams]="{n: name}"><mat-icon>search</mat-icon>Search</button>
   <button mat-button class="clearIcon" *ngIf="name !== ''" matSuffix mat-icon-button (click)="name = ''"><mat-icon>clear</mat-icon></button>
@@ -8,8 +8,10 @@
 <div class="catContainer" >
   <div class="bigDisplay" *ngFor="let category of categories">
 
-      <img class= "categoryIcon" src="{{category.image}}" [routerLink]="['/s']" [queryParams]="{c: category.value}">
+    <div class="categoryButton"  [routerLink]="['/s']" [queryParams]="{c: category.value}">
+      <img class= "categoryIcon" src="{{category.image}}" >
       {{category.value}}
+    </div>
    <!--<button class="categoryButton" [routerLink]="['/s']" [queryParams]="{c: category.value}">
       {{category.value}}
     </button>-->

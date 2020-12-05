@@ -1,21 +1,16 @@
-<mat-card>
-<h2>{{userName}}'s Profile</h2>
-<br>
-{{addressPin}}
-{{addressCity}}
-{{addressCountry}}
-<br>
+<mat-card class="otherProfile">
+<h2 class= "otherProfile">{{userName}}'s Profile</h2>
 
-<button mat-button class="button_fill" [routerLink]="['/', addressPin]" routerLinkActive="active" ><mat-icon >place</mat-icon>{{addressPin}}</button>
+<button mat-button class="clickable" [routerLink]="['/', addressPin]" routerLinkActive="active" ><mat-icon >place</mat-icon>{{addressPin}}</button>
 <br>
-<button mat-button class="button_fill" [routerLink]="['/', addressCity]" routerLinkActive="active"><mat-icon >place</mat-icon>{{addressCity}}</button>
-<br>
-<button mat-button class="button_fill" [routerLink]="['/', addressCountry]" routerLinkActive="active"><mat-icon >place</mat-icon>{{addressCountry}}</button>
+<button mat-button class="clickable" [routerLink]="['/', addressCity]" routerLinkActive="active"><mat-icon >place</mat-icon>{{addressCity}}</button>
+<!--<br>
+<button mat-button class="button_fill" [routerLink]="['/', addressCountry]" routerLinkActive="active"><mat-icon >place</mat-icon>{{addressCountry}}</button>-->
 
 </mat-card>
 
 <br>
-<h2>{{userName}} is currently offering:</h2>
+<h2 class = "otherProfile">{{userName}} is currently offering:</h2>
 
 <div class="productList_dashboard" fxLayout="row wrap" fxLayoutGap="2% grid" fxLayoutAlign="space-evenly stretch">
   <div fxFlex="10%" fxFlex.xl="10%" fxFlex.lg="15%" fxFlex.md="20%" fxFlex.sm="33%" fxFlex.xs="50%" *ngFor="let productItem of productList; trackBy: trackByFn">

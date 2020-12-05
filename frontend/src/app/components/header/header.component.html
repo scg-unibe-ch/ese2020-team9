@@ -1,21 +1,27 @@
-<mat-toolbar role="heading">
+<mat-toolbar role="heading" class="header">
   <mat-toolbar-row>
 
     <div class="nav">
       <a routerLink="/home">
         <!--<img src="assets/cd/loader.gif"  class="logo" alt="gif of diskette" />-->
+        <!--<img src="assets/cd/retro-home.png"  class="logo" alt="Home Button" />-->
+        <img src="assets/cd/pixel-home.png"  class="logo" alt="Home Button"  matTooltip="Go Home" />
       </a>
+      <span class="only-show-on-hover">Go to Home</span>
+
     </div>
     <span class="spacer"></span>
 
     <div *ngIf="!isUserLoggedIn">
+      <button mat-button class="headerItem3" routerLink="/login" routerLinkActive="active"> Add Product </button>
       <button mat-button class="storMainColor" [routerLink]="['/registration',0]" routerLinkActive="active">Registration</button>
       <button mat-button class="storMainColor" routerLink="/login" routerLinkActive="active">Login<mat-icon>login</mat-icon></button>
+
     </div>
 
     <div *ngIf="isUserLoggedIn" class="headerNav">
-      <button class="headerItem" mat-menu-item routerLink="/productForm/0" routerLinkActive="active">Add product</button>
-      <button class="headerItem" mat-button [matMenuTriggerFor]="menu">Menu</button>
+      <button class="headerItem3" mat-button routerLink="/productForm/0" routerLinkActive="active"> Add product</button>
+      <button class="headerItem2" mat-button [matMenuTriggerFor]="menu">Menu</button>
       <button mat-button color="storMainColor"><img class ="center-cropped"src ="../assets/cd/hammer.gif" routerLink="/user" routerLinkActive="active"><br>{{isUserName}}</button>
     </div>
 

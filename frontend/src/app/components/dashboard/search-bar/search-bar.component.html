@@ -7,17 +7,17 @@
 
 <div class="catContainer" >
   <div class="bigDisplay" *ngFor="let category of categories">
-      
+
     <div class="categoryButton"  [routerLink]="['/s']" [queryParams]="{c: category.value}">
       <img class= "categoryIcon" src="{{category.image}}" >
-      {{category.value}} 
+      {{category.value}}
     </div>
    <!--<button class="categoryButton" [routerLink]="['/s']" [queryParams]="{c: category.value}">
-      {{category.value}} 
+      {{category.value}}
     </button>-->
   </div>
 
-   
+
 
   <div class="smallDisplay">
     <mat-form-field>

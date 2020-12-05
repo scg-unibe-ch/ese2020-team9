@@ -30,6 +30,10 @@
         <mat-card>
           <mat-form-field appearance="fill">
             <mat-label>Select Product Category</mat-label>
+            <mat-select matNativeControl [(ngModel)]="productCategory" value="productCategory">
+              <mat-option style="font-family:'Press Start 2P', cursive !important; font-size: x-small;" [value]="">None</mat-option>
+              <mat-option style="font-family:'Press Start 2P', cursive !important; font-size: x-small;" *ngFor="let category of categories" [value]="category.value">{{category.value}}</mat-option>
+            </mat-select>
             <select matNativeControl [(ngModel)]="productCategory" value="productCategory">
               <option [value]="">None</option>
               <option *ngFor="let category of categories" [value]="category.value">{{category.value}}<option>
@@ -93,18 +97,18 @@
       type="file" (change)="onFileChanged($event)"
       #fileInput>
 
-     
+
     <button mat-flat-button class="button_standard" (click)="fileInput.click()">Select file </button>
           </div>
 
     <div *ngIf="imageSelected">
       Do you want to upload this file? :  {{imageName}}
-   
 
-   
+
+
     <button mat-flat-button class="button_standard" (click)="onUpload()">Yes</button>
   </div>
-  
+
           <div *ngIf="add">
             <br>
             <button mat-flat-button class="button_standard" (click)="editProduct()" [disabled]="allFilled(productName, productPrice, productLocation)">Add product</button>

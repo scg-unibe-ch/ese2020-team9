@@ -11,7 +11,7 @@ import { Overlay } from '@angular/cdk/overlay';
 import { Router } from '@angular/router';
 import { TextFieldModule } from '@angular/cdk/text-field';
 
-fdescribe('ProductFormComponent', () => {
+describe('ProductFormComponent', () => {
   let component: ProductFormComponent;
   let fixture: ComponentFixture<ProductFormComponent>;
 

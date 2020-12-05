@@ -32,7 +32,7 @@
             <mat-label>Select Product Category</mat-label>
             <select matNativeControl [(ngModel)]="productCategory" value="productCategory">
               <option [value]="">None</option>
-              <option *ngFor="let category of categories" [value]="category.value">{{category.viewValue}}<option>
+              <option *ngFor="let category of categories" [value]="category.value">{{category.value}}<option>
             </select>
           </mat-form-field>
       </mat-card>

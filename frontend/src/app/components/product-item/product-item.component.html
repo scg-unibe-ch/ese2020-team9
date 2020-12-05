@@ -14,8 +14,8 @@
     <hr>
     <br>
           <mat-card-footer>
-        <span [routerLink]="['/', productItem.productCategory]" routerLinkActive="active" ><mat-icon >chevron_right</mat-icon>{{productItem.productCategory}} </span> <br>
-        <span [routerLink]="['/', productItem.productLocation]" routerLinkActive="active"><mat-icon >place</mat-icon>{{productItem.productLocation}} </span>
+        <span [routerLink]="['/s']" [queryParams]="{c: productItem.productCategory}" routerLinkActive="active" ><mat-icon >chevron_right</mat-icon>{{productItem.productCategory}} </span> <br>
+        <span [routerLink]="['/s']" [queryParams]="{z: productItem.productLocation}" routerLinkActive="active"><mat-icon >place</mat-icon>{{productItem.productLocation}} </span>
         <span *ngIf="productItem.isService">Service </span> <br>
         <span *ngIf="productItem.isRentable">rentable </span> <br>
         <span *ngIf="productItem.isAvailable">available</span>

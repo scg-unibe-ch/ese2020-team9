@@ -212,7 +212,7 @@ export class ProductFormComponent implements OnInit {
 
  onUpload() {
    const uploadData = new FormData();
-   //console.log(this.editId)
+
    uploadData.append('image', this.selectedFile, this.selectedFile.name);
    this.httpClient.post(environment.endpointURL + 'products/images/upload/'+ this.editId, uploadData, {
      reportProgress: true,
@@ -224,7 +224,7 @@ export class ProductFormComponent implements OnInit {
        let action = "X";
        this.openSnackBar(message, action);
      }, (error: any) => {
-            let message = "Something went wrwong!";
+            let message = "Something went wrong!";
             let action = "X";
             this.openSnackBar(message, action);
           });

@@ -21,10 +21,10 @@ export class ProductDisplayComponent implements OnInit {
   location: string[];
   priceMin: number;
   priceMax: number;
-  delivery: boolean;
+  delivery: any;
   available = true;
-  isService: boolean;
-  isRentable: boolean;
+  isService: any;
+  isRentable: any;
   zipCode: string;
   radius: string;
 
@@ -42,11 +42,28 @@ export class ProductDisplayComponent implements OnInit {
       this.category = params['c'];
       this.priceMin = params['min'];
       this.priceMax = params['max'];
-      this.delivery = params['d'] === 'true';
-      this.isRentable = params['r'] === 'true';
-      this.isService = params['s'] === 'true';
       this.zipCode = params['z'];
       this.radius = params['v'];
+
+      if(params['d'] === 'true') {
+        this.delivery = true;
+      } else if(params['d'] === 'false'){
+        this.delivery = false;
+      } else { this.delivery = '';
+      }
+      if(params['r'] === 'true') {
+        this.isRentable = true;
+      } else if(params['r'] === 'false'){
+        this.isRentable = false;
+      } else { this.isRentable = '';
+      }
+      if(params['s'] === 'true') {
+        this.isService = true;
+      } else if(params['s'] === 'false'){
+        this.isService = false;
+      } else { this.isService = '';
+      }
+
       this.checkLocation();
     });
   }

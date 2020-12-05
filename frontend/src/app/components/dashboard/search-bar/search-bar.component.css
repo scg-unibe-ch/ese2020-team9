@@ -31,12 +31,14 @@ input[type=text]{
   color:black;
   box-shadow: 2px 2px 20px #46FFFD;
 
+
 }
 
 .searchBar .clearIcon {
   position: absolute;
   right: 160px;
   color: #46FFFD;
+
 }
 
 .categoryIcon{
@@ -68,6 +70,8 @@ input[type=text]{
   border: none;
   border-radius: 4px;
   background-color: transparent;
+  font-size: 12px;
+
  
 }
 
@@ -76,6 +80,8 @@ input[type=text]{
   border-radius: 8px;
   background-color: #F72871;
   box-shadow: 0px 0px 8px #F72871 ;
+  font-size: 11px;
+
 }
 
 

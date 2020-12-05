@@ -12,12 +12,14 @@ br {
   display: flex;
   justify-content: center;
   align-items: center;
+  min-width: 1060px;
 }
 
 .cells {
   display: flex;
   flex-wrap: wrap;
   border-bottom: black solid 10px;
+  min-width: 520px;
 }
 
 .board {

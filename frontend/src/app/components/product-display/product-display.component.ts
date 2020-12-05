@@ -64,7 +64,12 @@ export class ProductDisplayComponent implements OnInit {
       } else { this.isService = '';
       }
 
-      this.checkLocation();
+      if(this.zipCode == ''){
+        this.location = [];
+        this.searchProduct();
+      } else {
+       this.checkLocation();
+      }
     });
   }
 

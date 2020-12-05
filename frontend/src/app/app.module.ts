@@ -49,6 +49,8 @@ import { SearchBarComponent } from "./components/dashboard/search-bar/search-bar
 import { MatDialogModule } from "@angular/material/dialog";
 import { LeaderBoardComponent } from './components/leaderboard/leaderboard.component';
 import {MatTableModule} from '@angular/material/table';
+import { ProductItemComponent } from './components/product-item/product-item.component';
+import { LottieAnimationComponent } from './components/lottie-animation/lottie-animation.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +75,9 @@ import {MatTableModule} from '@angular/material/table';
     SearchComponent,
     PasswordForgottenComponent,
     DialogBodyComponent,
-    LeaderBoardComponent
+    LeaderBoardComponent,
+    ProductItemComponent,
+    LottieAnimationComponent
   ],
   imports: [
     BrowserModule,

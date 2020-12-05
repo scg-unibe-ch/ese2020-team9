@@ -3,19 +3,18 @@
 <div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start" >
 
 <mat-card>
- <mat-card-title>
+  <mat-card-header>
+    <mat-card-title>
       {{productName}}
-    </mat-card-title> <br>
-    {{uploadDate | date: "dd.MM.yy, HH:mm"}}<br>
-    <br>
- 
-     
+    </mat-card-title>
+    <mat-card-title>
+      {{productPrice}} CHF
+    </mat-card-title>
+    <mat-card-subtitle>
+      {{uploadDate | date: "dd.MM.yy, HH:mm"}}
+    </mat-card-subtitle>
 
-      {{productDescription}}
-      <br>
-  
-      {{productPrice}} CHF <br>
-
+  </mat-card-header>
 
   <mat-card-content>
 
@@ -25,45 +24,54 @@
     <button mat-button class="button_fill" [routerLink]="['/', productCategory]" routerLinkActive="active" ><mat-icon >chevron_right</mat-icon>{{productCategory}}</button>
     <button mat-button class="button_fill" [routerLink]="['/', productLocation]" routerLinkActive="active"><mat-icon >place</mat-icon>{{productLocation}}</button>
     <br>
-    <br> <br>
-    <p *ngIf="isService">
-      Service
-    </p>
-    <br> 
-    <p *ngIf="isRentable">
-      Can be rented
-    </p>
-    <p *ngIf="productDelivery">
-      Delivery is possible
-    </p>
-
-    <mat-card-content *ngIf="!productDelivery && !isService">
-      <p>
-        Product has to be picked up at {{productLocation}}
-      </p>
-    </mat-card-content>
-   
   </mat-card-content>
-
 </mat-card>
 
-<mat-card-actions>
-<button mat-flat-button class="button_standard"  [routerLink]="['/shipping', productId]" routerLinkActive="active" [disabled]="checkCash() || !isAvailable || !isUserLoggedIn || checkUser()">Buy</button>
-</mat-card-actions>
-
   <mat-card>
-    Sellerinfo:
+    <h2>Sellerinfo:</h2>
     <br><br>
-    <button mat-button class="clickable" [routerLink]="['/user', sellerId]" routerLinkActive="active" ><mat-icon >account_circle</mat-icon>{{sellerName}}</button>
+    <button mat-button class="button_fill" [routerLink]="['/user', sellerId]" routerLinkActive="active" ><mat-icon >account_circle</mat-icon>{{sellerName}}</button>
 
     <br>
     {{addressPin}}<br>
     {{addressCity}}<br>
     {{addressCountry}}<br>
 
+    <button mat-flat-button color="warn"  [routerLink]="['/shipping', productId]" routerLinkActive="active" [disabled]="checkCash() || !isAvailable || !isUserLoggedIn || checkUser()">Buy</button>
 
   </mat-card>
+</div>
 
+<div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start"  >
+<mat-card>
+  <mat-card-content>
+    {{productDescription}}
+  </mat-card-content>
+
+  <mat-card-content *ngIf="isService">
+    <p>
+      Service
+    </p>
+  </mat-card-content>
+
+  <mat-card-content *ngIf="isRentable">
+    <p>
+      Can be rented
+    </p>
+  </mat-card-content>
+
+  <mat-card-content *ngIf="productDelivery">
+    <p>
+      Delivery is possible
+    </p>
+  </mat-card-content>
+  <mat-card-content *ngIf="!productDelivery && !isService">
+    <p>
+      Product has to be picked up at {{productLocation}}
+    </p>
+  </mat-card-content>
+
+</mat-card>
 
 
 </div>

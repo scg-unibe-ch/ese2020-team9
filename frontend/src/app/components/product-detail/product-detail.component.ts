@@ -138,7 +138,7 @@ export class ProductDetailComponent implements OnInit {
 
   openSnackBar(message: string, action: string) {
         this._snackBar.open(message, action, {
-          duration: 3000
+          duration: 6000
         });
       }
 

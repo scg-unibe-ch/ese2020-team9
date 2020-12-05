@@ -11,7 +11,7 @@
         <mat-label>Select Product Category</mat-label>
         <mat-select [(ngModel)]="category" (selectionChange)="navigateTo()" value="category">
           <mat-option [value]="">None</mat-option>
-          <mat-option *ngFor="let category of categories" [value]="category.value">{{category.viewValue}}</mat-option>
+          <mat-option *ngFor="let category of categories" [value]="category.value">{{category.value}}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field>

@@ -23,7 +23,7 @@
     <mat-form-field>
       <mat-label>Search Product Category</mat-label>
       <mat-select>
-        <mat-option *ngFor="let category of categories" [value]="category.value" [routerLink]="['/s']" [queryParams]="{c: category.value}">{{category.viewValue}}</mat-option>
+        <mat-option *ngFor="let category of categories" [value]="category.value" [routerLink]="['/s']" [queryParams]="{c: category.value}">{{category.value}}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>

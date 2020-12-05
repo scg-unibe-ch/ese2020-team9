@@ -25,7 +25,9 @@
   font-size: 15px;
 }
 
-
+.center{
+text-align: center;
+}
 
 .img {
   object-fit: cover; /* Do not scale the image */
@@ -33,3 +35,10 @@
   width: auto;
   opacity: 0.7;
 }
+
+.button_standard{
+  font-size: 8px!important;
+  color: white!important;
+  align-self: center;
+}
+

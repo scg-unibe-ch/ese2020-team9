@@ -11,7 +11,7 @@ import { Overlay } from '@angular/cdk/overlay';
 import { Router } from '@angular/router';
 import { TextFieldModule } from '@angular/cdk/text-field';
 
-describe('ProductFormComponent', () => {
+fdescribe('ProductFormComponent', () => {
   let component: ProductFormComponent;
   let fixture: ComponentFixture<ProductFormComponent>;
 
@@ -19,7 +19,7 @@ describe('ProductFormComponent', () => {
     snapshot: {
       paramMap: {
         get(): string {
-          return '1';
+          return '0';
         }
       }
     }
@@ -47,4 +47,49 @@ describe('ProductFormComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should check if add or edit mode', () => {
+      expect(component.add).toBe(true);
+  });
+
+  it('should recognise if required fields are filled', () => {
+    let a = "";
+    expect(component.allFilled(a,a,a)).toBe(true);
+    a = "a";
+    expect(component.allFilled(a,a,a)).toBe(false);
+
+  });
+
+  it('should recognise empty fields', () => {
+      let a = "";
+      expect(component.empty(a)).toBe(true);
+      a = "a";
+      expect(component.empty(a)).toBe(false);
+
+  });
+
+ it('should recognise if step one is complete', () => {
+     component.productName = "";
+     component.productDescription = "";
+     component.productPrice = undefined;
+     component.productCategory = "";
+     expect(component.stepOneComplete(component.productName, component.productDescription, component.productPrice, component.productCategory)).toBe(false);
+     component.productName = "a";
+     component.productDescription = "a";
+     component.productPrice = 1;
+     component.productCategory = "a";
+     expect(component.stepOneComplete(component.productName, component.productDescription, component.productPrice, component.productCategory)).toBe(true);
+ });
+
+ it('should recognise if step two is complete', () => {
+       component.productLocation = "";
+       expect(component.stepTwoComplete(component.productLocation)).toBe(false);
+
+       component.productLocation = "a";
+       expect(component.stepTwoComplete(component.productLocation)).toBe(true);
+
+
+   });
+
+
 });

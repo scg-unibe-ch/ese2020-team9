@@ -8,7 +8,7 @@ import { UserLoginComponent } from './user-login.component';
 import { Overlay } from '@angular/cdk/overlay';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
-fdescribe('UserLoginComponent', () => {
+describe('UserLoginComponent', () => {
   let component: UserLoginComponent;
   let fixture: ComponentFixture<UserLoginComponent>;
 
@@ -20,7 +20,7 @@ fdescribe('UserLoginComponent', () => {
                 return true
               }
               else{
-              return false
+                return false
               }
           }
     };

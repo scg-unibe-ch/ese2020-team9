@@ -67,6 +67,7 @@ export class ProductFormComponent implements OnInit {
     this.userId = this.userService.getUserId();
     this.id = this.route.snapshot.paramMap.get('id');
 
+
     if(this.id==='0'){
       this.add = true;
     } else{

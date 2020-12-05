@@ -91,7 +91,7 @@ describe('ProductService Tests', () => {
         productDescription: 'Endlessly flying drone with autonomous electricity due to solar power.',
         productPrice: 850,
         productCategory: 'ComputerAndComputerAccessories',
-        productLocation: 'Bern',
+        productLocation: '3000',
         productDelivery: true,
         uploadDate: new Date(Date.now()),
         sellDate: null,
@@ -109,7 +109,7 @@ describe('ProductService Tests', () => {
         productDescription: 'A strong shovel made from steel, useful for various tasks around the house in winter and summer.',
         productPrice: 15,
         productCategory: 'Miscellaneous',
-        productLocation: 'Bern',
+        productLocation: '3000',
         productDelivery: false,
         uploadDate: new Date(Date.now()),
         sellDate: null,
@@ -127,7 +127,7 @@ describe('ProductService Tests', () => {
         productDescription: 'One hour of thai massage.',
         productPrice: 120,
         productCategory: 'Miscellaneous',
-        productLocation: 'Zürich',
+        productLocation: '8000',
         productDelivery: false,
         uploadDate: new Date(Date.now()),
         sellDate: null,
@@ -454,7 +454,7 @@ describe('ProductService Tests', () => {
             });    
         it('should successfully search products that are located in Bern', function(done){
             const request: SearchRequest = {
-                location: 'Bern'
+                location: ['3000']
             };
             testedProductService.searchProduct(request).then(product => {
                 expect(product[0].productId).to.be.eq(3);

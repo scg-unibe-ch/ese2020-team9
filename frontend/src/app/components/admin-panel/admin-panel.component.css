@@ -17,6 +17,7 @@ mat-radio-button{
 .mat-ink-bar {
   background-color: green;
 }
+  
 .productItem_Card{
   margin: 5px;
   box-shadow: 2px 2px 30px  #F72871;
@@ -27,13 +28,10 @@ mat-radio-button{
   color: whitesmoke;
   font-family:'Press Start 2P', cursive !important;
   font-size: 7px;
+  height: 500px;
+  width: 250px;
 }
-.mat-card-content{
-  font-size: 9px;
-}
-.mat-card-title{
-  font-size: 15px;
-}
+
 
 ::ng-deep .mat-list-item{
   font-family:'Press Start 2P', cursive !important;

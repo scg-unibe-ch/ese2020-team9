@@ -5,7 +5,7 @@
     <br>
 
     <mat-card-content>
-      <img class="center-cropped" [src]="productItem.picture[0]" />
+      <img class="center-cropped" [src]="productItem.picture[0]" [routerLink]="['/productDetail', productItem.productId]" routerLinkActive="active"/>
     </mat-card-content>
 
     <mat-card-subtitle>posted on {{productItem.uploadDate | date: "dd.MM.yy, HH:mm"}}</mat-card-subtitle>

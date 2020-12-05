@@ -74,17 +74,27 @@
 
 object-fit: cover; /* Do not scale the image */
   object-position: center; /* Center the image within the element */
- width:50px;
+ width:40px;
  height:auto;
   opacity: 0.8;
+  
 }
 
  div b.code{
   visibility: hidden;
+  vertical-align: middle;
 }
 
  div:hover b.code {
   visibility: visible;
   font-size: 8px;
+  vertical-align: middle !important;
+  color: #F7CC18 ;
+}
+
+.secret_code{
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 

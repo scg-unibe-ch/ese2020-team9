@@ -7,6 +7,7 @@
 
 
 
+  
 .productItem_Card{
   margin: 5px;
   box-shadow: 2px 2px 30px  #F72871;
@@ -17,6 +18,8 @@
   color: whitesmoke;
   font-family:'Press Start 2P', cursive !important;
   font-size: 7px;
+  height: 500px;
+  width: 250px;
 }
 .mat-card-content{
   font-size: 9px;
@@ -25,9 +28,13 @@
   font-size: 15px;
 }
 
-.center{
-text-align: center;
-}
+.add_button{
+  height:20px; 
+  width:100px; 
+  margin: -20px -50px; 
+  position:relative;
+  top:50%; 
+  left:50%;}
 
 .img {
   object-fit: cover; /* Do not scale the image */

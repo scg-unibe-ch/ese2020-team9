@@ -16,13 +16,13 @@
    
 <div class="productList_dashboard" fxLayout="row wrap" fxLayoutGap="2% grid" fxLayoutAlign="space-evenly stretch">
  
-  <div fxFlex="10%" fxFlex.xl="10%" fxFlex.lg="15%" fxFlex.md="20%" fxFlex.sm="33%" fxFlex.xs="50%" *ngFor="let productItem of productList">
+  <div  *ngFor="let productItem of productList">
     <app-product-item 
 [productItem]="productItem" >
 </app-product-item>
 <mat-card class="add_on">
 <mat-radio-group  [(ngModel)]="productItem.isApproved">
-  <mat-radio-button value="true" (click)="approveProduct(productItem)" >Approve</mat-radio-button>
+  <mat-radio-button value="true" (click)="approveProduct(productItem)" >Approve</mat-radio-button><br>
   <mat-radio-button value="false" (click)="deleteProduct(productItem)" >Delete</mat-radio-button>
 </mat-radio-group>
 </mat-card>

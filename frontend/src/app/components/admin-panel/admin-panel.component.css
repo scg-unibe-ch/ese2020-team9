@@ -18,7 +18,7 @@ mat-radio-button{
 
   
 .productItem_Card{
-  margin: 50px;
+  margin: 100px;
   box-shadow: 2px 2px 30px  #F72871;
   background-color: #082A5D;
  /* border-color: teal;
@@ -34,19 +34,24 @@ mat-radio-button{
 
 .add_on{
   margin: 50px;
-  margin-top: -100px;
-  margin-left: 180px;
+  margin-top: -150px;
+  margin-left: 160px;
   border-top: none;
   box-shadow: 2px 2px 30px  #F72871;
-  background-color: #082A5D;
+  background-color: #F78B1E;
  /* border-color: teal;
   border-width: 2px;*/
   border-radius: 30px;
   color: whitesmoke;
   font-family:'Press Start 2P', cursive !important;
-  font-size: 7px;
+  font-size: 10px;
   height: 30px;
   width: 120px;
+  padding-bottom: 19px;
+}
+.mat-radio-group .mat-radio-button{
+  font-family:'Press Start 2P', cursive !important;
+  font-size: 10px;
 }
 
 ::ng-deep .mat-list-item{

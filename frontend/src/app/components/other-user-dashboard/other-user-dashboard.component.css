@@ -23,3 +23,14 @@
 .mat-card{
   box-shadow:none;
 }
+
+.trophy_name{
+  display: flex;
+  text-align: center;
+}
+
+.trophy{
+  height:50px;
+  margin-right: 10px;
+
+}

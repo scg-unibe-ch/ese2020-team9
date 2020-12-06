@@ -38,9 +38,15 @@
   font-family:'Press Start 2P', cursive !important;
 
 }
+
 ::ng-deep .mat-typography .mat-tab-group{
   font-family:'Press Start 2P', cursive;
 }
+
+::ng-deep  .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar{
+  background-color: #F7CC18;
+
+  }
 
 ::ng-deep .mat-tab-label{
   color: white !important;
@@ -57,6 +63,13 @@
   
 }
 
+::ng-deep .mat-step-header .mat-step-icon {
+  background-color: #881DF7;  color:#EA21F7;
+}
+::ng-deep .mat-step-header .mat-step-icon-selected {
+  background-color: #F78B1E; 
+  color:#EA21F7;
+}
 .app {
     /* the .app div needs to be AT LEAST 100% of the height of the window */
     min-height: 100%;
@@ -74,17 +87,28 @@
 
 object-fit: cover; /* Do not scale the image */
   object-position: center; /* Center the image within the element */
- width:50px;
+ width:40px;
  height:auto;
   opacity: 0.8;
+  
 }
 
  div b.code{
   visibility: hidden;
+  vertical-align: middle;
 }
 
  div:hover b.code {
   visibility: visible;
   font-size: 8px;
+  vertical-align: middle !important;
+  color: #F7CC18 ;
 }
+
+.secret_code{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
 

@@ -4,7 +4,7 @@
     <p>You are buying:</p>
     <b> {{productName}}</b>
     <br>
-    <img class="small" [src]="picture[0]" />
+    <img class="center-cropped" [src]="picture[0]" />
 
     <br><br>
     <p>for <b>{{productPrice}}</b> CHF</p>
@@ -63,7 +63,7 @@
           <input matInput placeholder="City*" [(ngModel)]="otherAddressCity" name="otherAddressCity">
         </mat-form-field>
 
-        <button mat-flat-button color="warn"  [routerLink]="['/user']" routerLinkActive="active" [disabled]="checkCash() || !isUserLoggedIn || empty(otherAddressCountry, otherAddressPin, otherAddressStreet, otherAddressCity)" (click)="otherAddressBuyProduct()">Buy</button>
+        <button  class="orange"  [routerLink]="['/user']" routerLinkActive="active" [disabled]="checkCash() || !isUserLoggedIn || empty(otherAddressCountry, otherAddressPin, otherAddressStreet, otherAddressCity)" (click)="otherAddressBuyProduct()">Buy</button>
 
 
       </mat-tab>

@@ -1,6 +1,6 @@
 
 <div  fxLayout="row wrap" fxLayoutGap="2% grid" fxLayoutAlign="space-evenly stretch">
-  <div fxFlex="10%" fxFlex.xl="15%" fxFlex.lg="20%" fxFlex.md="25%" fxFlex.sm="33%" fxFlex.xs="50%" *ngFor="let transaction of transactionList">
+  <div *ngFor="let transaction of transactionList">
 
     <mat-card class="productItem_Card">
 
@@ -9,7 +9,7 @@
       <div *ngIf="transaction" >
         <br>
 
-        <button mat-flat-button class="button_fill"  [routerLink]="['/productDetail', transaction.productId]" routerLinkActive="active" ><b>{{transaction.product.productName}}</b></button>
+        <mat-card-header class="clickable"  [routerLink]="['/productDetail', transaction.productId]" routerLinkActive="active" ><b>{{transaction.product.productName}}</b></mat-card-header>
 
 
       </div>

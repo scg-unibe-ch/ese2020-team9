@@ -185,6 +185,29 @@ describe('ProductService Tests', () => {
                 });
             });
         });
+        it('should not create a faulty product', function(done) {
+            const productFaulty: ProductAttributes = {
+                productId : null,
+                productName: null,
+                productDescription: null,
+                productPrice: null,
+                productCategory: null,
+                productLocation: null,
+                productDelivery: true,
+                uploadDate: null,
+                sellDate: null,
+                isApproved: false,
+                isService: false,
+                isRentable: false,
+                isAvailable: true,
+                userId: null,
+                buyerId: null,
+            };
+            testedProductService.create(productFaulty).catch(error => {
+                expect(error).not.to.be.eq(null);
+                done();
+            });
+        });
     });
     describe('Test Updating Products', () => {
         it('should successfully update a product', function(done){
@@ -206,6 +229,12 @@ describe('ProductService Tests', () => {
                     expect(foundProduct).not.to.be.eq(null);
                     done();
                 });
+            });
+        });
+        it('should not update a product that does not exist', function(done){
+            testedProductService.update(13, product2).catch(error => {
+                expect(error.message).to.be.eq('Product with id 13 not found!')
+                done();
             });
         });
     });
@@ -664,6 +693,12 @@ describe('ProductService Tests', () => {
                     expect(foundProduct).to.be.eq(null);
                     done();
                 });
+            });
+        });
+        it('should not delete a product if id is not found', function(done) {
+            testedProductService.deleteProduct(14).catch((err) => {
+                expect(err.message).to.be.eq('Product with id 14 not found!');
+                done();
             });
         });
     });

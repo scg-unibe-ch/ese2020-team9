@@ -3,7 +3,7 @@
   <mat-tab label ="my Profile" >
 <mat-card class= "myProfile">
   <mat-card-header>
-  
+
     <mat-card-title class = "myProfile">{{userName}}'s Profile: </mat-card-title>
   </mat-card-header>
   <mat-card-content class="content">
@@ -12,10 +12,15 @@
     {{userAddressStreet}}<br>
     {{userAddressPin}} {{userAddressCity}} <br>
     {{userAddressCountry}}     <br>
+     <br> <b>
+     Your current Score:
+     {{userScore}}
+     </b>
     <br>
     <br> <b>
     Your current balance:
     {{userWallet}} CHF
+
   </b>
   <br>
     <br>
@@ -34,22 +39,22 @@
 </mat-tab>
 
 <mat-tab label = "Your current Products">
-  
+
     <div  fxLayout="line wrap"  >
       <mat-card class="productItem_Card">
       <div class="add_button"><button mat-flat-button class="button_standard" [routerLink]="['/productForm/', 0]" routerLinkActive="active">Add Product </button>
       </div>
-      </mat-card> 
+      </mat-card>
 <div class="productList_dashboard" fxLayout="row wrap" fxLayoutGap="2% grid" fxLayoutAlign="space-evenly stretch">
   <div fxFlex="10%" fxFlex.xl="10%" fxFlex.lg="15%" fxFlex.md="20%" fxFlex.sm="33%" fxFlex.xs="50%" *ngFor="let productItem of productList">
-<app-product-item  
-[productItem]="productItem" 
+<app-product-item
+[productItem]="productItem"
 ></app-product-item>
   </div>
     </div>
     </div>
 
-  
+
 </mat-tab>
 
 <mat-tab label="sold Products">

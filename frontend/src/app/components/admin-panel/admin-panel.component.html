@@ -3,7 +3,7 @@
 <mat-tab label="Users">
   <mat-list *ngFor="let user of userList">
     <mat-list-item>
-    Name:       <button mat-flat-button class="clickable" [routerLink]="['/user', user.userId]" routerLinkActive="active" >{{user.userName}}</button>
+    Name <b class="yellow" [routerLink]="['/user', user.userId]" routerLinkActive="active" > :  {{user.userName}}</b>
       , ID:  {{user.userId}} , is Admin&nbsp;
 
       <mat-checkbox [(ngModel)]="user.admin" (change)="upgradeUser(user)" [disabled]="user.admin" [checked]="user.admin"></mat-checkbox>

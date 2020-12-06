@@ -33,7 +33,7 @@
 
 .button_standard{
   font-size: 8px!important;
-  color: white!important;
+
   align-self: center;
 }
 
@@ -43,7 +43,7 @@
   margin-left: 180px;
   border-top: none;
   box-shadow: 2px 2px 30px  #F72871;
-  background-color: #F78B1E;
+  background-color: #F78B1E!important;
  /* border-color: teal;
   border-width: 2px;*/
   border-radius: 30px;

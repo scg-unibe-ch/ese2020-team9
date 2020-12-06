@@ -36,6 +36,7 @@
   background-color: #46FFFD;
   box-shadow:0px 0px 10px #46FFFD;
   font-family:'Press Start 2P', cursive !important;
+  opacity: 1;
 
 }
 
@@ -49,7 +50,7 @@
   }
 
 ::ng-deep .mat-tab-label{
-  color: white !important;
+  color:  #F7CC18;
   background-color: #F72871;
   margin: 10px;
   font-family:'Press Start 2P', cursive !important;

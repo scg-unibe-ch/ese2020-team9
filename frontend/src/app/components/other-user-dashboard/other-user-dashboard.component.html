@@ -1,5 +1,5 @@
 <mat-card class="otherProfile">
-  <div class="trophy_name"><img class="trophy" src="assets/cd/trophy2.gif"><h2 class= "otherProfile">{{userName}}'s Profile  </h2> <img class="trophy" src="assets/cd/trophy2.gif"></div>
+  <div class="trophy_name"><img *ngIf="numberOne"class="trophy" src="assets/cd/trophy2.gif"><h2 class= "otherProfile">{{userName}}'s Profile  </h2> <img *ngIf="numberOne" class="trophy" src="assets/cd/trophy2.gif"></div>
 
 
   <button mat-button class="clickable" [routerLink]="['/', addressPin]" routerLinkActive="active" ><mat-icon >place</mat-icon>{{addressPin}}</button>

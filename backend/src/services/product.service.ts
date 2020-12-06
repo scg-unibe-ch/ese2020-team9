@@ -9,14 +9,20 @@ export class ProductService {
 
     public create(product: ProductAttributes): Promise<ProductAttributes> {
         return(Product.create(product))
-            .then(inserted => Promise.resolve(inserted).catch(err => Promise.reject(err)));
+            .then(inserted => Promise.resolve(inserted).catch(err => Promise.reject({message: err})));
     }
 
     public update(productId: number, product: ProductAttributes): Promise<ProductAttributes> {
-        return Product.findByPk(productId).then(isFound => isFound.update(product)
-        .then(() => {
-            return Promise.resolve(isFound);
-        }).catch(err => Promise.reject(err)));
+        return Product.findByPk(productId).then(isFound => {
+            if (isFound === null) {
+                return Promise.reject(`Product with id ${productId} not found!`);
+            }
+            return isFound.update(product);
+        })
+        .then((updated) => {
+                return Promise.resolve(updated);
+        })
+        .catch(err => Promise.reject({message: err}));
     }
 
 
@@ -42,7 +48,7 @@ export class ProductService {
               ]
             }
         })
-        .catch(err => Promise.reject(err));
+        .catch(err => Promise.reject({message: err}));
     }
 
     public getProductsOfUser(userId: number): Promise<Product[]> {
@@ -54,12 +60,12 @@ export class ProductService {
               ]
             }
         })
-        .catch(err => Promise.reject(err));
+        .catch(err => Promise.reject({message: err}));
     }
 
     public getAll(): Promise<Product[]> {
         return Product.findAll()
-        .catch(err => Promise.reject(err));
+        .catch(err => Promise.reject({message: err}));
     }
 
     public approve(id: number): Promise<number> {
@@ -83,7 +89,7 @@ export class ProductService {
                 isApproved: true,
                 isAvailable: true
             },
-        }).catch(err => Promise.reject(err));
+        }).catch(err => Promise.reject({message: err}));
     }
 
     public getAllUnapproved(): Promise<Product[]> {
@@ -91,7 +97,7 @@ export class ProductService {
             where: {
                 isApproved: false
             }
-        }).catch(err => Promise.reject(err));
+        }).catch(err => Promise.reject({message: err}));
     }
 
     public getBoughtProducts(buyerId: number): Promise<Product[]> {
@@ -103,7 +109,7 @@ export class ProductService {
               ]
             }
         })
-        .catch(err => Promise.reject(err));
+        .catch(err => Promise.reject({message: err}));
     }
 
     public getSoldProducts(userId: number): Promise<Product[]> {
@@ -118,14 +124,19 @@ export class ProductService {
               ]
             }
         })
-        .catch(err => Promise.reject(err));
+        .catch(err => Promise.reject({message: err}));
     }
 
-    public deleteProduct(id: number): Promise<Product> {
-        return Product.findByPk(id)
-        .then(isFound =>  isFound.destroy()
-            .then(() => Promise.resolve(isFound))
-            .catch(err => Promise.reject(err)));
+    public deleteProduct(productId: number): Promise<Product> {
+        return Product.findByPk(productId)
+        .then(isFound =>  {
+            if (isFound === null) {
+                return Promise.reject(`Product with id ${productId} not found!`);
+            }
+            return isFound.destroy()
+            .then(() => Promise.resolve(isFound));
+        })
+        .catch(err => Promise.reject({message: err}));
     }
 
     public searchProduct(searchParameters: SearchRequest): Promise<Product[]> {
@@ -214,7 +225,7 @@ export class ProductService {
             fs.writeFileSync(imageParameters.path, image.data);
             fs.unlinkSync(imageParameters.path);
             return image;
-        }).catch(err => Promise.reject(err));
+        }).catch(err => Promise.reject({message: err}));
     }
 
     public getImageIds(productId: number): Promise<Array<any>> {
@@ -236,7 +247,7 @@ export class ProductService {
         return ProductImage.findByPk(id)
         .then(isFound =>  isFound.destroy()
             .then(() => Promise.resolve(isFound))
-            .catch(err => Promise.reject(err)));
+            .catch(err => Promise.reject({message: err})));
     }
 }
 

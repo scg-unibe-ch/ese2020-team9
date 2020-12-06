@@ -3,7 +3,7 @@
   <mat-tab label ="my Profile" >
 <mat-card class= "myProfile">
   <mat-card-header>
-  
+
     <mat-card-title class = "myProfile">{{userName}}'s Profile: </mat-card-title>
   </mat-card-header>
   <mat-card-content class="content">
@@ -12,10 +12,15 @@
     {{userAddressStreet}}<br>
     {{userAddressPin}} {{userAddressCity}} <br>
     {{userAddressCountry}}     <br>
+     <br> <b>
+     Your current Score:
+     {{userScore}}
+     </b>
     <br>
     <br> <b>
     Your current balance:
     {{userWallet}} CHF
+
   </b>
   <br>
     <br>

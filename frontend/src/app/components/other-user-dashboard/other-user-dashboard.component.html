@@ -1,11 +1,12 @@
 <mat-card class="otherProfile">
 <h2 class= "otherProfile">{{userName}}'s Profile</h2>
 
-<button mat-button class="clickable" [routerLink]="['/', addressPin]" routerLinkActive="active" ><mat-icon >place</mat-icon>{{addressPin}}</button>
-<br>
-<button mat-button class="clickable" [routerLink]="['/', addressCity]" routerLinkActive="active"><mat-icon >place</mat-icon>{{addressCity}}</button>
-<!--<br>
-<button mat-button class="button_fill" [routerLink]="['/', addressCountry]" routerLinkActive="active"><mat-icon >place</mat-icon>{{addressCountry}}</button>-->
+  <button mat-button class="clickable" [routerLink]="['/', addressPin]" routerLinkActive="active" ><mat-icon >place</mat-icon>{{addressPin}}</button>
+  <br>
+  <button mat-button class="clickable" [routerLink]="['/', addressCity]" routerLinkActive="active"><mat-icon >place</mat-icon>{{addressCity}}</button>
+  <br>
+  <button mat-button class="clickable" [routerLink]="['/game']" routerLinkActive="active">Score: {{userScore}}</button>
+
 
 </mat-card>
 

@@ -3,9 +3,11 @@
 <mat-tab label="Users">
   <mat-list *ngFor="let user of userList">
     <mat-list-item>
-    Name: {{user.userName}}, ID:  {{user.userId}} , is Admin&nbsp;
-    <mat-checkbox [(ngModel)]="user.admin" (change)="upgradeUser(user)" [disabled]="user.admin" [checked]="user.admin"></mat-checkbox>
-   
+    Name:       <button mat-flat-button class="clickable" [routerLink]="['/user', user.userId]" routerLinkActive="active" >{{user.userName}}</button>
+      , ID:  {{user.userId}} , is Admin&nbsp;
+
+      <mat-checkbox [(ngModel)]="user.admin" (change)="upgradeUser(user)" [disabled]="user.admin" [checked]="user.admin"></mat-checkbox>
+
     <div *ngIf="!user.admin"><button mat-flat-button color="warn" (click)="deleteUser(user)">Remove</button>
     </div> </mat-list-item>
   </mat-list>
@@ -13,11 +15,11 @@
 
   <mat-tab label="Products To Approve">
 
-   
+
 <div class="productList_dashboard" fxLayout="row wrap" fxLayoutGap="2% grid" fxLayoutAlign="space-evenly stretch">
- 
+
   <div  *ngFor="let productItem of productList">
-    <app-product-item 
+    <app-product-item
 [productItem]="productItem" >
 </app-product-item>
 <mat-card class="add_on">

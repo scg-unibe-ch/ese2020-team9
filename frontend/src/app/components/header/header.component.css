@@ -18,9 +18,10 @@ mat-toolbar{
   max-height:64px;
   height: 64px;
   color:#B82D70;
-  text-shadow: 0px 0px 3px white;
+  text-shadow: 0px 0px 2px white;
   font-family: 'Press Start 2P', cursive; 
   font-size: smaller;
+  opacity: 0.8;
 
 }
 .header{
@@ -54,7 +55,7 @@ div:hover span.only-show-on-hover  {
   visibility: visible;
   display: inline-block;
   color: #F7CC18;
-  font-size: 8px;
+  font-size: 9px;
   
 
 }

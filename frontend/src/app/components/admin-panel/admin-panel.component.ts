@@ -66,7 +66,7 @@ export class AdminPanelComponent implements OnInit {
 
   // products - get all Unapproved ProductItems
   getProductList(){
-    this.productService.getAllApproved().subscribe((data: ProductItem []) => {
+    this.productService.getAllUnapproved().subscribe((data: ProductItem []) => {
       this.productList = data;
       for (let productItem of this.productList){
         productItem.picture = [];

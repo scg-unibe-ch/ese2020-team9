@@ -14,12 +14,11 @@ mat-radio-button{
   opacity: 0.7;
 }
 
-.mat-ink-bar {
-  background-color: green;
-}
+
+
   
 .productItem_Card{
-  margin: 5px;
+  margin: 50px;
   box-shadow: 2px 2px 30px  #F72871;
   background-color: #082A5D;
  /* border-color: teal;
@@ -28,16 +27,34 @@ mat-radio-button{
   color: whitesmoke;
   font-family:'Press Start 2P', cursive !important;
   font-size: 7px;
-  height: 500px;
+  height: 700px;
   width: 250px;
 }
 
 
+.add_on{
+  margin: 50px;
+  margin-top: -100px;
+  margin-left: 180px;
+  border-top: none;
+  box-shadow: 2px 2px 30px  #F72871;
+  background-color: #082A5D;
+ /* border-color: teal;
+  border-width: 2px;*/
+  border-radius: 30px;
+  color: whitesmoke;
+  font-family:'Press Start 2P', cursive !important;
+  font-size: 7px;
+  height: 30px;
+  width: 120px;
+}
+
 ::ng-deep .mat-list-item{
   font-family:'Press Start 2P', cursive !important;
+  color:whitesmoke!important;
 }
  .mat-flat-button {
-  background-color: violet !important;
+  background-color:#F78B1E !important;
   font-size: small;
 }
 ::ng-deep .mat-checkbox-layout{

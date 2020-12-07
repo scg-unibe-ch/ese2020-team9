@@ -32,7 +32,7 @@
     <button mat-flat-button class="button_standard" routerLink="/login">Buy</button>
   </div>
   <div *ngIf="isUserLoggedIn">
-  <button mat-flat-button class="button_standard"  [routerLink]="['/shipping', productId]" routerLinkActive="active" [disabled]="checkCash() || !isAvailable || !isUserLoggedIn || checkUser()">Buy</button>
+  <button mat-flat-button class="button_standard"  [routerLink]="['/shipping', productId]" routerLinkActive="active" [disabled]="checkCash() || !isAvailable || !isUserLoggedIn">Buy</button>
   </div>
 </mat-card-actions>
 

@@ -15,7 +15,7 @@
   color: whitesmoke;
   font-family:'Press Start 2P', cursive !important;
   font-size: 7px;
-  height: 200px;
+  height: 300px;
   width: 250px;
 }
 
@@ -26,4 +26,8 @@
 
 .clickable:hover{
   color:#F7CC18;
+}
+
+.fontreal{
+  font-family: 'Press Start 2P', cursive;
 }

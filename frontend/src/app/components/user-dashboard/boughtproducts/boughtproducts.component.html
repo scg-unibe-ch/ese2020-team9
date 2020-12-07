@@ -1,5 +1,5 @@
 
-<div  fxLayout="row wrap" fxLayoutGap="2% grid" fxLayoutAlign="space-evenly stretch">
+<div  class ="fontreal" fxLayout="row wrap" fxLayoutGap="2% grid" fxLayoutAlign="space-evenly stretch">
   <div *ngFor="let transaction of transactionList">
 
     <mat-card class="productItem_Card">
@@ -15,18 +15,18 @@
       </div>
       <div *ngIf="transaction.transactionStatus==1">
         <br>
-        <b>Awaiting confirmation of seller</b>
+        <mat-card-content>Awaiting confirmation of seller</mat-card-content>
         <br>
 
       </div>
 
 
-      <div *ngIf="transaction.transactionStatus==2">
+      <div class="fontreal" *ngIf="transaction.transactionStatus==2">
         <br>
         <b>Status: Sold</b>
 
         <br>
-        <b>Bought by:</b>
+        <b class="fontreal">Bought by:</b>
         <br>
         {{transaction.buyer.userName}}<br>
         {{transaction.deliveryFirstName}} {{transaction.deliveryLastName}}<br>
@@ -43,7 +43,7 @@
 
 
       <br>
-      <h2>Sold by: </h2>
+      <h2 class="fontreal">Sold by: </h2>
 
 
       <div *ngIf="transaction" >

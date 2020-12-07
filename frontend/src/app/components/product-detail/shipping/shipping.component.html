@@ -40,9 +40,8 @@
         <mat-form-field>
           <input matInput placeholder="City*" [(ngModel)]="buyerAddressCity" name="buyerAddressCity">
         </mat-form-field>
-
+        <br>
         <button mat-flat-button color="warn"  [routerLink]="['/user']" routerLinkActive="active" [disabled]="checkCash() || !isUserLoggedIn || empty(buyerAddressCountry, buyerAddressPin, buyerAddressStreet, buyerAddressCity)" (click)="buyProduct()">Buy</button>
-
       </mat-tab>
 
       <mat-tab label="Use other Address">

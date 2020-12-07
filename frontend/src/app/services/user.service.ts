@@ -14,13 +14,26 @@ export class UserService {
   userId: any;
   userWallet: any;
   users: User[] ;
+  userHighscore: number;
 
 
-  public isUserLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public isUserAdmin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public isUserName: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  constructor(private httpClient: HttpClient) { }
+  public isUserLoggedIn: BehaviorSubject<boolean>;
+  public isUserAdmin: BehaviorSubject<boolean>;
+  public isUserName: BehaviorSubject<string>;
+
+  constructor(private httpClient: HttpClient) {
+
+      this.userToken = localStorage.getItem('userToken');
+      this.userId = localStorage.getItem('userId');
+      this.userName = localStorage.getItem('userName');
+      this.userWallet = localStorage.getItem('userWallet');
+
+      this.isUserLoggedIn = new BehaviorSubject<boolean>(this.userToken !== null );
+      this.isUserAdmin = new BehaviorSubject<boolean>(localStorage.getItem('admin') === 'true');
+      this.isUserName = new BehaviorSubject<string>(this.userName);
+
+      }
 
   /** get requests **/
   getUser(id: number){
@@ -58,6 +71,19 @@ export class UserService {
     return this.httpClient.post(environment.endpointURL + 'user/restorePassword', {password}, { headers: headers });
   }
 
+  getGameHighscoreTopList(): Observable<any> {
+    return this.httpClient.get(environment.endpointURL + 'user/highscores/game');
+  }
+
+  getOverallHighscoreTopList(): Observable<any> {
+    return this.httpClient.get(environment.endpointURL + 'user/highscores/overall');
+  }
+
+  saveHighscore(highscore: number): Observable<any> {
+    return this.httpClient.put(environment.endpointURL + 'user/updateGameScore/' + this.getUserId()
+       +  '/' + highscore, {});
+  }
+
   /** delete request **/
   deleteUser(user: User): Observable<User> {
     return this.httpClient.delete<User>(environment.endpointURL + 'user/' + user.userId);
@@ -72,21 +98,36 @@ export class UserService {
 
   logout(){
     localStorage.clear();
+    this.clearAttributes();
   }
 
   getToken(){
-    return this.userToken = localStorage.getItem('userToken');
+    return this.userToken;
   }
 
   getUserName(){
-    return this.userName = localStorage.getItem('userName');
+    return this.userName;
   }
 
   getUserId(){
-    return this.userId = localStorage.getItem('userId');
+    return localStorage.userId;
   }
 
   getUserWallet(){
-    return this.userWallet = localStorage.getItem('userWallet')
+    return this.userWallet;
   }
+
+  getUserHighscore(): number {
+    return this.userHighscore = Number.parseInt(localStorage.getItem('userHighscore'), 10);
+  }
+
+  private clearAttributes(): void {
+    this.userHighscore = null;
+    this.userId = null;
+    this.userName = null;
+    this.userToken = null;
+    this.userWallet = null;
+    this.isUserName.next(null);
+  }
+
 }

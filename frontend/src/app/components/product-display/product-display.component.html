@@ -2,46 +2,10 @@
 
 <div class="productList_dashboard" fxLayout="row wrap" fxLayoutGap="2% grid" fxLayoutAlign="space-evenly stretch">
   <div fxFlex="10%" fxFlex.xl="10%" fxFlex.lg="15%" fxFlex.md="20%" fxFlex.sm="33%" fxFlex.xs="50%" *ngFor="let productItem of productList">
-
-    <mat-card>
-
-      <mat-card-header>
-        <mat-card-content>
-          <img class="img" [src]="productItem.picture[0]" />
-        </mat-card-content>
-        <mat-card-title>
-          <button mat-button class="button_fill" [routerLink]="['/productDetail', productItem.productId]" routerLinkActive="active" ><b>{{productItem.productName}}</b>
-          </button>
-        </mat-card-title>
-        <mat-card-subtitle>{{productItem.uploadDate | date: "dd.MM.yy, HH:mm"}} Uhr</mat-card-subtitle>
-      </mat-card-header>
-
-
-      <mat-card-content>
-        <a [routerLink]="['/productDetail', productItem.productId]">
-          <img mat-card-image class="center-cropped”" src="{{productItem.productImage}}" alt="{{productItem.productName}}" >
-        </a>
-      </mat-card-content>
-
-      <mat-card-content>
-        <p class="text">
-          Price: <b>{{productItem.productPrice}} CHF</b>
-        </p>
-      </mat-card-content>
-
-
-      <mat-card-actions align="end">
-        <button mat-flat-button class="button_standard"  [routerLink]="['/productDetail', productItem.productId]" routerLinkActive="active" ><b>Check Details</b></button>
-      </mat-card-actions>
-
-      <mat-card-footer>
-        <mat-chip-list>
-          <mat-chip *ngIf="productItem.productCategory" [routerLink]="['/s']" [queryParams]="{c: productItem.productCategory}">{{productItem.productCategory}}</mat-chip>
-          <mat-chip *ngIf="productItem.productLocation" [routerLink]="['/s']" [queryParams]="{l: productItem.productLocation}">{{productItem.productLocation}}</mat-chip>
-          <mat-chip *ngIf="productItem.isService">Service </mat-chip>
-          <mat-chip *ngIf="productItem.isRentable">rentable</mat-chip>
-        </mat-chip-list>
-      </mat-card-footer>
-    </mat-card>
+<app-product-item  
+[productItem]="productItem" 
+></app-product-item>
   </div>
 </div>
+
+    

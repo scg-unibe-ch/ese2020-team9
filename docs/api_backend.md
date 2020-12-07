@@ -733,7 +733,7 @@ The Response body delivers a list of products that match the keyword and the fil
     ```json
     {   
         "name": "string",
-        "location": "string",
+        "location": ["string", "string", ...],
         "category": "string",
         "priceMin": "number",
         "priceMax": "number",

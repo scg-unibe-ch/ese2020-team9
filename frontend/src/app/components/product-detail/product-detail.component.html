@@ -27,6 +27,15 @@
   </mat-card-content>
 </mat-card>
 
+<mat-card-actions>
+  <div *ngIf="!isUserLoggedIn">
+    <button mat-flat-button class="button_standard" routerLink="/login">Buy</button>
+  </div>
+  <div *ngIf="isUserLoggedIn">
+  <button mat-flat-button class="button_standard"  [routerLink]="['/shipping', productId]" routerLinkActive="active" [disabled]="checkCash() || !isAvailable || !isUserLoggedIn || checkUser()">Buy</button>
+  </div>
+</mat-card-actions>
+
   <mat-card>
     <h2>Sellerinfo:</h2>
     <br><br>

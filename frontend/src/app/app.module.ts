@@ -1,3 +1,6 @@
+import { DialogBodyComponent } from './components/dialog-body/dialog-body.component';
+import { PasswordForgottenComponent } from './components/password-forgotten/password-forgotten.component';
+import { SearchComponent } from './components/search/search.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
@@ -41,13 +44,13 @@ import { ProductDisplayComponent } from './components/product-display/product-di
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatSliderModule } from "@angular/material/slider";
-import { SearchComponent } from './components/search/search.component';
+import { SnakeComponentComponent } from './components/snake-component/snake-component.component';
 import { SearchBarComponent } from "./components/dashboard/search-bar/search-bar.component";
 import { MatDialogModule } from "@angular/material/dialog";
-import { DialogBodyComponent } from './components/dialog-body/dialog-body.component';
-import { PasswordForgottenComponent } from "./components/password-forgotten/password-forgotten.component";
 import { LeaderBoardComponent } from './components/leaderboard/leaderboard.component';
 import {MatTableModule} from '@angular/material/table';
+import { ProductItemComponent } from './components/product-item/product-item.component';
+import { LottieAnimationComponent } from './components/lottie-animation/lottie-animation.component';
 
 @NgModule({
   declarations: [
@@ -68,11 +71,13 @@ import {MatTableModule} from '@angular/material/table';
     BoughtproductsComponent,
     ProductDisplayComponent,
     SearchBarComponent,
+    SnakeComponentComponent,
     SearchComponent,
-    DialogBodyComponent,
     PasswordForgottenComponent,
+    DialogBodyComponent,
     LeaderBoardComponent,
-
+    ProductItemComponent,
+    LottieAnimationComponent
   ],
   imports: [
     BrowserModule,
@@ -102,7 +107,7 @@ import {MatTableModule} from '@angular/material/table';
     MatAutocompleteModule,
     MatSliderModule,
     MatDialogModule,
-    MatTableModule,
+    MatTableModule
   ],
   providers: [
     {

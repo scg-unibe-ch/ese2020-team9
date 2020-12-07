@@ -176,9 +176,9 @@ export class ProductService {
             };
         }
 
-        if (searchParameters.location ) {
+        if (searchParameters.location && searchParameters.location.length > 0) {
             where.productLocation = {
-                [Op.like]:  '%' + searchParameters.location + '%'
+                [Op.in]:  searchParameters.location
             };
         }
 

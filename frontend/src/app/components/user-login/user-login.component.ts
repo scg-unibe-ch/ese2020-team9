@@ -55,7 +55,7 @@ export class UserLoginComponent implements OnInit {
       localStorage.setItem('admin', res.user.admin);
       localStorage.setItem('userId', res.user.userId);
       localStorage.setItem('userWallet', res.user.wallet);
-
+      localStorage.setItem('userHighscore', res.user.gameScore);
       //updates isUserLoggedIn value
       this.userService.isUserLoggedIn.next(true);
       //get User Name
@@ -63,22 +63,16 @@ export class UserLoginComponent implements OnInit {
       //update isUserAdmin value
       this.userService.isUserAdmin.next(res.user.admin);
       //navigates to dashboard
-      this.router.navigate(['/home']);
+      if (this.userService.isUserAdmin.value == true){
+        this.router.navigate(['/admin']);
+      } else {
+        this.router.navigate(['/home']);
+        }
       }, (error: any) => {
         let message = "An error occurred!";
         let action = "Retry";
         this.openSnackBar(message, action);
       });
-  }
-
-  logout(): void {
-    this.userService.logout();
-    //updates isUserLoggedIn value
-    this.userService.isUserLoggedIn.next(false);
-    //update isUserAdmin value
-    this.userService.isUserAdmin.next(false);
-    //navigates to dashboard
-    this.router.navigate(['/home']);
   }
 
   passwordForgotten(email: string): void {
@@ -103,7 +97,7 @@ export class UserLoginComponent implements OnInit {
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
-      duration: 3000
+      duration: 6000,
     });
 
 

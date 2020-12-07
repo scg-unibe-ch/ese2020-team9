@@ -7,17 +7,8 @@
 
 
 
-.productItem_Card{
-  margin: 5px;
-  box-shadow: 2px 2px 30px  #F72871;
-  background-color: #082A5D;
- /* border-color: teal;
-  border-width: 2px;*/
-  border-radius: 30px;
-  color: whitesmoke;
-  font-family:'Press Start 2P', cursive !important;
-  font-size: 7px;
-}
+  
+
 .mat-card-content{
   font-size: 9px;
 }
@@ -25,11 +16,46 @@
   font-size: 15px;
 }
 
-
+.add_button{
+  height:20px; 
+  width:100px; 
+  margin: -20px -50px; 
+  position:relative;
+  top:50%; 
+  left:50%;}
 
 .img {
   object-fit: cover; /* Do not scale the image */
   height: 200px;
   width: auto;
   opacity: 0.7;
+}
+
+.button_standard{
+  font-size: 8px!important;
+  color: white!important;
+  align-self: center;
+}
+
+.add_on{
+  margin: 50px;
+  margin-top: -150px;
+  margin-left: 180px;
+  border-top: none;
+  box-shadow: 2px 2px 30px  #F72871;
+  background-color: #F78B1E;
+ /* border-color: teal;
+  border-width: 2px;*/
+  border-radius: 30px;
+  color: whitesmoke;
+  font-family:'Press Start 2P', cursive !important;
+  text-align: center;
+  font-size: 10px;
+  height: 20px;
+  width: 100px;
+ padding: 9px;
+}
+.mat-radio-group .mat-radio-button{
+  font-family:'Press Start 2P', cursive !important;
+  font-size: 10px;
 }

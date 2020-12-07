@@ -1,9 +1,9 @@
 
-<p align="center">
+<div align="center">
   ![alt text][logo]
 
 [logo]: https://github.com/scg-unibe-ch/ese2020-team9/blob/master/frontend/src/assets/cd/stor.png "STOR"
-</p>
+</div>
 
 
 # ESE2020 - Team 09

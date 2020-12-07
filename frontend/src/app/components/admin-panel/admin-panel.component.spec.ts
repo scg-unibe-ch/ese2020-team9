@@ -1,3 +1,4 @@
+import { HttpClient, HttpHandler } from '@angular/common/http';
 import { UserService } from './../../services/user.service';
 import { ProductService } from './../../services/product.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -26,18 +27,12 @@ describe('AdminPanelComponent', () => {
     }
   };
 
-  const stubProductService = {
-    getAllUnapproved(): Observable<any> {
-      return of([{productId: '1', productName: 'product one'}, {productId: '2', productName: 'product two'}]);
-    }
-  };
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ HttpClientTestingModule ],
       declarations: [ AdminPanelComponent ],
-      providers: [ MatSnackBar, HttpTestingController, { provide: ProductService, useValue: stubProductService},
-        {provide: UserService, useValue: stubUserService}, Overlay ]
+      providers: [ MatSnackBar, HttpTestingController, ProductService,
+        UserService, Overlay ]
     })
     .compileComponents();
   }));

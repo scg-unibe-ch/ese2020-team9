@@ -201,12 +201,14 @@ describe('Test checkAuth middlewares', () => {
             done();
         });
     });
-    before('add user and product to db', function(done) {
-        User.create(user).then(() => {
-            done();
-        });
-   });
     describe('Test productBelongsToUser function', () => {
+        before('add user and product to db', function(done) {
+            User.create(user).then(() => {
+                Product.create(product)
+                }).then(() => {
+                    done();
+            });
+       });
 
         afterEach('reset the spies', function(done) {
             resetStubs();
@@ -237,7 +239,7 @@ describe('Test checkAuth middlewares', () => {
 
         it('should call next when token is valid', function(done) {
             
-            User.findByPk(1).then(product => console.log(product))
+            User.findByPk(1).then(user => console.log(user));
             const token: string = jwt.sign({ userName: 'test', userId: 1, admin: false }, process.env.JWT_SECRET, { expiresIn: '2h' });
             const req = mockRequest({
                 headers: {
@@ -246,15 +248,15 @@ describe('Test checkAuth middlewares', () => {
                 params: {
                     productId: 1
                 }
-            });
-            Product.findByPk(1).then(product => {
-                console.log(product);
             })
-            productBelongsToUser(req, res, nextSpy);
-            expect(statusStub.called).to.be.eq(false);
-            expect(sendSpy.called).to.be.eq(false);
-            expect(nextSpy.called).to.be.eq(true);
-            done();
+            Product.findByPk(1).then(product => console.log(product)).then(() => {
+                console.log('#########################')
+                productBelongsToUser(req, res, nextSpy);
+                expect(statusStub.called).to.be.eq(false);
+                expect(sendSpy.called).to.be.eq(false);
+                expect(nextSpy.called).to.be.eq(true);
+                done();
+            });
         });
     });
     after('clean up', function(done) {

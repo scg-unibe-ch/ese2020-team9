@@ -46,8 +46,8 @@ describe('TransactionService Test', () => {
         addressCity: null,
         addressCountry: 'England',
         gameScore: 3,
-        activityScore: 0,
-        overallScore: 0
+        activityScore: 2,
+        overallScore: 6
     };
 
     const product1: ProductAttributes = {
@@ -277,7 +277,7 @@ describe('TransactionService Test', () => {
             User.findOne({
                 where: {
                     userId: 2,
-                    activityScore: 1 
+                    activityScore: 3 
                 }
             }).then(foundUser => {
                 expect(foundUser).not.to.be.eq(null);
@@ -288,7 +288,7 @@ describe('TransactionService Test', () => {
             User.findOne({
                 where: {
                     userId: 2,
-                    overallScore: 4 
+                    overallScore: 9 
                 }
             }).then(foundUser => {
                 expect(foundUser).not.to.be.eq(null);
@@ -321,7 +321,7 @@ describe('TransactionService Test', () => {
             User.findOne({
                 where: {
                     userId: 1,
-                    overallScore: 5
+                    overallScore: 6
                 }
             }).then(foundUser => {
                 expect(foundUser).not.to.be.eq(null);

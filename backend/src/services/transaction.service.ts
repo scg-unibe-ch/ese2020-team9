@@ -36,42 +36,44 @@ export class TransactionService {
                             }).then(() => {
                                 this.updateUser(foundBuyer, foundProduct, true);
                             }).then(() => {
-                                return User.increment('wallet', {
-                                    by: foundProduct.productPrice,
-                                    where: {
-                                        userId: foundTransaction.userId
-                                    }
-                                }).then(() => {
-                                    const activityScoreIncrement = 2 * foundProduct.productPrice * 0.1;
-                                    this.incrementActivityScore(foundTransaction.userId, activityScoreIncrement)
-                                    .then(() => {
-                                        return User.findByPk(foundTransaction.userId);
-                                    }).then((foundSeller) => {
-                                        const gameScore = foundSeller.gameScore;
-                                        const newOverallScore = gameScore + activityScoreIncrement;
-                                        foundSeller.overallScore = newOverallScore;
-                                        return foundSeller.save();
-                                    });
+                                return User.findByPk(foundTransaction.userId);
+                            }).then((foundSeller) => {
+                                this.updateUser(foundSeller, foundProduct, false);
+                            }).then(() => {
+                                foundTransaction.update({
+                                    transactionStatus: 2
                                 });
+                            })
+                            .then(() => {
+                                return Promise.resolve(foundTransaction);
                             });
                         } else {
                             Promise.reject('Not enough money available to buy the product!');
                         }
                     });
-                })
-                .then(() => {
-                    foundTransaction.update({
-                        transactionStatus: 2
-                    });
-                })
-                .then(() => {
-                    return Promise.resolve(foundTransaction);
                 });
             } else {
                 return Promise.reject('Transaction not found!');
             }
         })
         .catch(err => Promise.reject({message: err}));
+    }
+
+    private updateUser(user: User, product: Product, isBuyer: boolean) {
+        let activityScoreIncrement = product.productPrice * 0.1;
+        let walletIncrement = product.productPrice;
+        if (isBuyer) { walletIncrement = walletIncrement * -1; }
+        if (!isBuyer) { activityScoreIncrement = activityScoreIncrement * 2; }
+        return User.increment('wallet', {
+            by: walletIncrement,
+            where: {
+                userId: user.userId
+            }
+        }).then(() => {
+            this.incrementActivityScore(user.userId, activityScoreIncrement);
+        }).then(() => {
+            this.updateOverallScore(user, activityScoreIncrement);
+        });
     }
 
     private incrementActivityScore(userId: number, activityScoreIncrement: number) {
@@ -83,24 +85,12 @@ export class TransactionService {
         });
     }
 
-    private updateUser(user: User, product: Product, isBuyer: boolean) {
-            const activityScoreIncrement = product.productPrice * 0.1;
-            let walletIncrement = product.productPrice;
-            if (isBuyer) { walletIncrement = walletIncrement * -1; }
-
-            return User.increment('wallet', {
-                by: walletIncrement,
-                where: {
-                    userId: user.userId
-                }
-            }).then(() => {
-                this.incrementActivityScore(user.userId, activityScoreIncrement);
-            }).then(() => {
-                const gameScore = user.gameScore;
-                const newOverallScore = gameScore + activityScoreIncrement;
-                user.overallScore = newOverallScore;
-                return user.save();
-            });
+    private updateOverallScore(user: User, activityScoreIncrement: number) {
+        const gameScore = user.gameScore;
+        const activityScore = user.activityScore + activityScoreIncrement;
+        const newOverallScore = gameScore * activityScore;
+        user.overallScore = newOverallScore;
+        return user.save();
     }
 
     public declineTransaction(transactionId: number): Promise<TransactionAttributes> {

@@ -1,7 +1,7 @@
 
 
 <p align="center">
-  <img src="https://github.com/scg-unibe-ch/ese2020-team9/blob/master/frontend/src/assets/cd/stor.png">
+  <img src="https://github.com/scg-unibe-ch/ese2020-team9/blob/master/frontend/src/assets/cd/other2anim.gif">
 </p>
 
 

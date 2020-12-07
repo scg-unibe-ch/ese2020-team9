@@ -28,7 +28,7 @@
     <mat-menu #menu>
       <button mat-menu-item routerLink="/home" routerLinkActive="active">Home</button>
       <button mat-menu-item routerLink="/user" routerLinkActive="active">My profile</button>
-      <button mat-menu-item [routerLink]="['/registration/', userId]" routerLinkActive="active">Edit profile</button>
+      <button mat-menu-item [routerLink]="['/registration/', getUserId()]" routerLinkActive="active">Edit profile</button>
       <div *ngIf="isUserAdmin">
         <button mat-menu-item routerLink="/admin" routerLinkActive="active">Admin</button>
       </div>

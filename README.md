@@ -66,3 +66,6 @@ Userprofile
 - Displays sold products of user
 - Displays bought products of user
 
+Hints
+- The creature on the bottom right hints at a secret code that can be entred via keyboard to go play snake
+

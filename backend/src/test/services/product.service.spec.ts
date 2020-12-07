@@ -452,7 +452,7 @@ describe('ProductService Tests', () => {
                 done();
                 });
             });    
-        it('should successfully search products that are located in Bern', function(done){
+        it('should successfully search products that are located in 3000 (Bern)', function(done){
             const request: SearchRequest = {
                 location: ['3000']
             };

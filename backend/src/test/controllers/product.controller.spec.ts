@@ -6,7 +6,6 @@ import { User, UserAttributes } from '../../models/user.model';
 import { Product, ProductAttributes } from '../../models/product.model';
 import fs from 'fs';
 import path from 'path';
-import { ProductImage } from '../../models/productimage.model';
 
 // to run the tests, use the command 'npm run test' in the terminal
 

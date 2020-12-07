@@ -20,7 +20,7 @@ export class TransactionService {
                 return Promise.reject('Transaction not created!');
             }
         })
-        .catch(err => Promise.reject(err));
+        .catch(err => Promise.reject({message: err}));
     }
 
     public confirmTransaction(transactionId: number): Promise<TransactionAttributes> {
@@ -120,7 +120,7 @@ export class TransactionService {
                 return Promise.reject('Transaction not found!');
             }
         })
-        .catch(err => Promise.reject(err));
+        .catch(err => Promise.reject({message: err}));
     }
 
     public getAllTransactionsOfSeller(sellerId: number): Promise<Transaction[]> {

@@ -16,6 +16,10 @@
 
 }
 .clickable{
+  color:whitesmoke;
+
+}
+.clickable:hover{
   color:#F7CC18;
   text-shadow: 0px 0px 8px #F7CC18;
 }

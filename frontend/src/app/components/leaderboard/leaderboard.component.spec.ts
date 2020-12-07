@@ -1,20 +1,35 @@
+import { ActivatedRoute } from '@angular/router';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { ProductService } from './../../services/product.service';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LeaderboardComponent } from './leaderboard.component';
+import { LeaderBoardComponent } from './leaderboard.component';
 
-describe('LeaderboardComponent', () => {
-  let component: LeaderboardComponent;
-  let fixture: ComponentFixture<LeaderboardComponent>;
+describe('LeaderBoardComponent', () => {
+  let component: LeaderBoardComponent;
+  let fixture: ComponentFixture<LeaderBoardComponent>;
+
+  const stubActivatedRoute = {
+    snapshot: {
+      paramMap: {
+        get(): string {
+          return '2';
+        }
+      }
+    }
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LeaderboardComponent ]
+      imports: [ HttpClientTestingModule ],
+      declarations: [ LeaderBoardComponent ],
+      providers: [ { provide: ActivatedRoute, useValue: stubActivatedRoute }, ProductService, HttpTestingController ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LeaderboardComponent);
+    fixture = TestBed.createComponent(LeaderBoardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

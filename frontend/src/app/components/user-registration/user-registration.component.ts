@@ -72,24 +72,34 @@ export class UserRegistrationComponent implements OnInit {
       addressCountry: this.addressCountry,
     };
       this.userService.registration(this.registerUser).subscribe((res: any) => {
-        // Set user data in local storage
-        localStorage.setItem('userToken', res.token);
-        localStorage.setItem('userId', res.userId);
-        localStorage.setItem('userName', res.userName);
-        localStorage.setItem('admin', res.admin);
-        localStorage.setItem('userWallet', res.wallet);
-        //updates isUserLoggedIn value
-        this.userService.isUserLoggedIn.next(true);
-        //get User Name
-        this.userService.isUserName.next(res.userName);
-        //update isUserAdmin value
-        this.userService.isUserAdmin.next(res.admin);
-        //navigates to dashboard
-        this.router.navigate(['/home']);
-
         let message = "Registration was successful!";
         let action = "Welcome";
         this.openSnackBar(message, action);
+
+        this.userService.login(res.userName, this.password).subscribe((response: any) => {
+          // Set user data in local storage
+          localStorage.setItem('userToken', response.token);
+          localStorage.setItem('userId', response.user.userId);
+          localStorage.setItem('userName', response.user.userName);
+          localStorage.setItem('admin', response.user.admin);
+          localStorage.setItem('userWallet', response.user.wallet);
+          localStorage.setItem('userHighscore', response.user.gameScore);
+          //updates isUserLoggedIn value
+          this.userService.isUserLoggedIn.next(true);
+          //get User Name
+          this.userService.isUserName.next(response.user.userName);
+          //update isUserAdmin value
+          this.userService.isUserAdmin.next(response.user.admin);
+          //navigates to dashboard
+          this.router.navigate(['/home']);
+        }, (error: any) => {
+          let message = "Failed to log in!";
+          let action = "X";
+          this.openSnackBar(message, action);
+        });
+
+
+
         }, (error: any) => {
 
         // can't access backend message
@@ -162,6 +172,7 @@ export class UserRegistrationComponent implements OnInit {
 
   /** registration checks **/
   registrationComplete():boolean{
+    console.log(this.userId);
     return (this.userId !=='');
   }
 
@@ -208,9 +219,13 @@ export class UserRegistrationComponent implements OnInit {
   }
 
   confirmPassword(cpw):boolean{
+    console.log(cpw);
+    console.log(this.password);
     if (this.password == cpw)
        return (this.password == cpw);
-
+    else {
+       return false;
+    }
    }
 
   //make register button visible
@@ -240,7 +255,6 @@ export class UserRegistrationComponent implements OnInit {
     if (this.addressPin.length == 4){this.httpClient.get('http://localhost:4200/api/v1/search', {params}).subscribe((res: any) => {
         if (res != null) {
             this.addressCity = res.results[this.addressPin][0].city;
-            //console.log(res.results[this.addressPin][0].city)
         }
 
       }, (error: any) => {

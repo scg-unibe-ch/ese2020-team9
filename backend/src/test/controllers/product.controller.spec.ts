@@ -190,6 +190,17 @@ describe('ProductController Test', () => { // bundles the tests related to the P
                 done();
             });
         });
+        it('should not successfully update a product if wrong body is sent', function(done) {
+            chai.request(app).put('/products/11').send({
+                null: null
+            })
+            .end(function(err, res){
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(400);
+                expect(res.body.message).to.be.eq('Product with id 11 not found!')
+                done();
+            });
+        });
     });
     describe('Test Delete', () => {
         it('should successfully delete an image', function(done) {
@@ -207,6 +218,15 @@ describe('ProductController Test', () => { // bundles the tests related to the P
                 expect(err).to.be.eq(null);
                 expect(res).to.have.status(200);
                 expect(res.body.message).to.be.eq('Product successfully deleted!');
+                done();
+            });
+        });
+        it('should not delete a product that does not exist', function(done) {
+            chai.request(app).delete('/products/18')
+            .end(function(err, res){
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(400);
+                expect(res.body.message).to.be.eq('Product with id 18 not found!')
                 done();
             });
         });

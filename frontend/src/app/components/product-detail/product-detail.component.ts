@@ -49,7 +49,12 @@ export class ProductDetailComponent implements OnInit {
   picture: any = [];
   image: any;
 
-  constructor(private location: Location, private sanitizer : DomSanitizer, private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService,private productService: ProductService, private route: ActivatedRoute) { }
+  constructor(private location: Location,
+              private sanitizer: DomSanitizer,
+              private _snackBar: MatSnackBar,
+              private userService: UserService,
+              private productService: ProductService,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -78,21 +83,17 @@ export class ProductDetailComponent implements OnInit {
           this.isAvailable = instances.isAvailable;
           this.sellerId = instances.userId;
 
-          //this.userReview = instances.userReview;
-          //this.changeDetection.detectChanges();
+
           this.picture = [];
           this.productService.getPhotoIds(this.productId).subscribe((photoId: any[]) => {
 
             for(let id of photoId){
                this.productService.getPhoto(id.imageId).subscribe((blob: any) => {
 
-                     //console.log(blob)
 
                      let objectURL = URL.createObjectURL(blob);
                      this.image = this.sanitizer.bypassSecurityTrustResourceUrl(objectURL);
-                     //console.log(this.image,"img")
                      this.picture.push(this.image);
-                     //console.log(this.picture, "objectURL");
 
 
               });
@@ -104,7 +105,7 @@ export class ProductDetailComponent implements OnInit {
           this.getSeller(this.sellerId);
 
       },(error: any) => {
-        let message = "There is no corresponding Product!";
+        let message = "There is no corresponding product!";
         let action = "X";
         this.openSnackBar(message, action);
     });
@@ -122,7 +123,7 @@ export class ProductDetailComponent implements OnInit {
 
       },(error: any) => {
       let action = "X";
-      let message = "There is no corresponding Seller!";
+      let message = "There is no corresponding seller!";
       this.openSnackBar(message, action);
     });
   }
@@ -133,7 +134,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   checkUser(){
-    return (this.sellerName == this.userName);
+    return (this.sellerName === this.userName);
   }
 
   openSnackBar(message: string, action: string) {

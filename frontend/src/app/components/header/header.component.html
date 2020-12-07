@@ -7,13 +7,13 @@
         <!--<img src="assets/cd/retro-home.png"  class="logo" alt="Home Button" />-->
         <img src="assets/cd/pixel-home.png"  class="logo" alt="Home Button"  matTooltip="Go Home" />
       </a>
-      <span class="only-show-on-hover">Go to Home</span>
+      <span class="only-show-on-hover">Go to home</span>
 
     </div>
     <span class="spacer"></span>
 
     <div *ngIf="!isUserLoggedIn">
-      <button mat-button class="headerItem3" routerLink="/login" routerLinkActive="active"> Add Product </button>
+      <button mat-button class="headerItem3" routerLink="/login" routerLinkActive="active"> Add product </button>
       <button mat-button class="storMainColor" [routerLink]="['/registration',0]" routerLinkActive="active">Registration</button>
       <button mat-button class="storMainColor" routerLink="/login" routerLinkActive="active">Login<mat-icon>login</mat-icon></button>
 
@@ -28,7 +28,7 @@
     <mat-menu #menu>
       <button mat-menu-item routerLink="/home" routerLinkActive="active">Home</button>
       <button mat-menu-item routerLink="/user" routerLinkActive="active">My profile</button>
-      <button mat-menu-item [routerLink]="['/registration/', userId]" routerLinkActive="active">Edit profile</button>
+      <button mat-menu-item [routerLink]="['/registration/', getUserId()]" routerLinkActive="active">Edit profile</button>
       <div *ngIf="isUserAdmin">
         <button mat-menu-item routerLink="/admin" routerLinkActive="active">Admin</button>
       </div>

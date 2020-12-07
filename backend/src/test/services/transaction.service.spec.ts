@@ -164,6 +164,12 @@ describe('TransactionService Test', () => {
                 done();
             });
         });
+        it('should not initialize a faulty transaction', function(done) { 
+            testedTransactionService.startTransaction(null).catch(err => {
+                expect(err).not.to.be.eq(null);
+                done();  
+            });
+        });
     });
     describe('Test getting Transactions', () => {
         before('add additional transaction to db', function(done) {
@@ -334,6 +340,13 @@ describe('TransactionService Test', () => {
                 });
             });
         });
+        it('should not confirm a non-existent transaction', function(done) { 
+            testedTransactionService.confirmTransaction(11).catch(err => {
+                expect(err).not.to.be.eq(null);
+                expect(err.message).to.be.eq('Transaction not found!');
+                done();  
+            });
+        });
     });
     describe('Test declineTransaction()', () => { 
         before('add additional transaction to db', function(done) {
@@ -366,6 +379,13 @@ describe('TransactionService Test', () => {
             }).then(foundProduct => {
                 expect(foundProduct).not.to.be.eq(null);
                 done();
+            });
+        });
+        it('should not decline a non-existent transaction', function(done) { 
+            testedTransactionService.declineTransaction(11).catch(err => {
+                expect(err).not.to.be.eq(null);
+                expect(err.message).to.be.eq('Transaction not found!');
+                done();  
             });
         });
     });

@@ -1,4 +1,10 @@
-# ESE2020 Scaffolding Backend
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/scg-unibe-ch/ese2020-team9/readme/frontend/src/assets/cd/other2anim.gif">
+</p>
+
+
+# ESE2020 - Team 09
 
 ## Prerequisite
 You should have installed [NodeJS and npm](https://nodejs.org/en/download/) (they come as one) in order to start the backend server.
@@ -10,41 +16,6 @@ You should have installed [NodeJS and npm](https://nodejs.org/en/download/) (the
 - run `npm run dev`
 - open your browser with the url [http://localhost:3000](http://localhost:3000/)
 
-## About
-This part of the repository serves as a template for common problems you will face as a backend developer during your project. It is by no means complete but should give you a broad overview over the frameworks, libraries and technologies used. Please refer to the [reading list](https://github.com/scg-unibe-ch/ese2020/wiki/Reading-list) for links and tutorials.
-
-We tried to show you different approaches how your backend may be structured, however you are free to follow your own principles.
-Notice the differences between the [UserController](./src/controllers/user.controller.ts) and e.g. [TodoItemController](./src/controllers/todoitem.controller.ts). 
-
-1. The logic is split up:
-	- authorizing a request is done via middleware
-	- logic e.g. creating/authentication is done via [UserService](./src/services/user.service.ts)
-2. The controller itself is structured as a class.
-
-Note that the `UserController`-approach is more suited for bigger architectures and for typescript applications. You may choose any aproach you wish, but make sure your code is well structured.
-
-Here are more resources you can read: 
-
-- [tsconfig](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)
-- [alternative example repo](https://github.com/maximegris/typescript-express-sequelize)
-- [alternative example repo](https://developer.okta.com/blog/2018/11/15/node-express-typescript)
-
-## Quick Links
-These are links to some of the files that we have implemented/modified when developing the backend:
-
-- Middleware
-	- [the function](./src/middlewares/checkAuth.ts)
-	- [how to use in express](./src/controllers/secured.controller.ts)
-- Login: 
-	- [service](./src/services/user.service.ts)
-	- [controller](./src/controllers/user.controller.ts)
-- Registration:
-	- [service](./src/services/user.service.ts)
-	- [controller](./src/controllers/user.controller.ts)
-- [crud](./src/controllers/todolist.controller.ts)
-- [typescript config](./src/tsconfig.json)
-- [routing](./src/controllers)
-- [API construction](./src/server.ts)
 
 ## Endpoints
 Some endpoints can be called in a [browser](http://localhost:3000), others have to be called by a REST Client. [Here](./postman_collection) you can find a collection that contains all requests, which you can import into Postman. [Postman](https://www.postman.com/) is a REST Client.

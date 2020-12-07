@@ -1,12 +1,7 @@
 
-<div align="center">
-  ![alt text][logo]
-
-[logo]: https://github.com/scg-unibe-ch/ese2020-team9/blob/master/frontend/src/assets/cd/stor.png "STOR"
-</div>
 
 <p align="center">
-  <img width="600" height="200" src="https://github.com/scg-unibe-ch/ese2020-team9/blob/master/frontend/src/assets/cd/stor.png">
+  <img src="https://github.com/scg-unibe-ch/ese2020-team9/blob/master/frontend/src/assets/cd/stor.png">
 </p>
 
 

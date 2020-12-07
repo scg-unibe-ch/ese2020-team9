@@ -12,41 +12,6 @@ import path from 'path';
 chai.use(chaiHttp); // add chai-http to chai
 let app: Application;
 
-const product1: ProductAttributes = {
-    productId : 1,
-    productName: 'Schoggi',
-    productDescription: 'E feini Schoggi us Guetemala.',
-    productPrice: 10,
-    productCategory: 'food',
-    productLocation: null,
-    productDelivery: true,
-    uploadDate: new Date(Date.now()),
-    sellDate: null,
-    isApproved: false,
-    isService: false,
-    isRentable: false,
-    isAvailable: true,
-    userId: 1,
-    buyerId: null,
-};
-const product2: ProductAttributes = {
-    productId : 2,
-    productName: 'Massage',
-    productDescription: 'One hour of thai massage.',
-    productPrice: 120,
-    productCategory: 'service',
-    productLocation: null,
-    productDelivery: false,
-    uploadDate: new Date(Date.now()),
-    sellDate: null,
-    isApproved: true,
-    isService: true,
-    isRentable: false,
-    isAvailable: true,
-    userId: 1,
-    buyerId: null,
-};
-
 const user1: UserAttributes = {
     userId: 1,
     admin: true,
@@ -67,22 +32,94 @@ const user1: UserAttributes = {
     overallScore: 0
 };
 
-const product3: ProductAttributes = {
-    productId : 3,
-    productName: 'Formaggio',
-    productDescription: 'Un molto buono formaggio di Ticino.',
-    productPrice: 30,
+const product1: ProductAttributes = {
+    productId : 1,
+    productName: 'Schoggi',
+    productDescription: 'E feini Schoggi us Guetemala.',
+    productPrice: 10,
     productCategory: 'food',
-    productLocation: null,
+    productLocation: "4500",
     productDelivery: true,
     uploadDate: new Date(Date.now()),
     sellDate: null,
     isApproved: false,
     isService: false,
     isRentable: false,
+    isAvailable: true,
+    userId: 1,
+    buyerId: null,
+};
+const product2: ProductAttributes = {
+    productId : 2,
+    productName: 'Massage',
+    productDescription: 'One hour of thai massage.',
+    productPrice: 120,
+    productCategory: 'service',
+    productLocation: "3000",
+    productDelivery: false,
+    uploadDate: new Date(Date.now()),
+    sellDate: null,
+    isApproved: true,
+    isService: true,
+    isRentable: false,
+    isAvailable: true,
+    userId: 1,
+    buyerId: null,
+};
+
+const product3: ProductAttributes = {
+    productId : 3,
+    productName: 'Formaggio',
+    productDescription: 'Un molto buono formaggio di Ticino.',
+    productPrice: 30,
+    productCategory: 'food',
+    productLocation: "8000",
+    productDelivery: true,
+    uploadDate: new Date(Date.now()),
+    sellDate: null,
+    isApproved: true,
+    isService: false,
+    isRentable: false,
     isAvailable: false,
     userId: 1,
     buyerId: 2
+};
+
+const product4: ProductAttributes = {
+    productId : 4,
+    productName: 'Drone',
+    productDescription: 'Endlessly flying drone with autonomous electricity due to solar power.',
+    productPrice: 850,
+    productCategory: 'ComputerAndComputerAccessories',
+    productLocation: '3000',
+    productDelivery: true,
+    uploadDate: new Date(Date.now()),
+    sellDate: null,
+    isApproved: true,
+    isService: false,
+    isRentable: true,
+    isAvailable: true,
+    userId: 1,
+    buyerId: null
+
+};
+const product5: ProductAttributes = {
+    productId : 5,
+    productName: 'Shovel',
+    productDescription: 'A strong shovel made from steel, useful for various tasks around the house in winter and summer.',
+    productPrice: 15,
+    productCategory: 'Miscellaneous',
+    productLocation: '3000',
+    productDelivery: false,
+    uploadDate: new Date(Date.now()),
+    sellDate: null,
+    isApproved: true,
+    isService: false,
+    isRentable: true,
+    isAvailable: false,
+    userId: 1,
+    buyerId: null
+
 };
 
 describe('ProductController Test', () => { // bundles the tests related to the ProductController
@@ -190,6 +227,7 @@ describe('ProductController Test', () => { // bundles the tests related to the P
                 done();
             });
         });
+
         it('should not successfully update a product if wrong body is sent', function(done) {
             chai.request(app).put('/products/11').send({
                 null: null
@@ -198,6 +236,17 @@ describe('ProductController Test', () => { // bundles the tests related to the P
                 expect(err).to.be.eq(null);
                 expect(res).to.have.status(400);
                 expect(res.body.message).to.be.eq('Product with id 11 not found!')
+                done();
+            });
+        });
+
+        it('should successfully approve a product', function(done) {
+            chai.request(app).put('/products/approve/1')
+            .set({'Authorization': 'Bearer ' + token})
+            .end(function(err, res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body.message).to.be.eq('Successfully approved product 1!');
                 done();
             });
         });
@@ -336,6 +385,194 @@ describe('ProductController Test', () => { // bundles the tests related to the P
                 expect(res.body.message).to.be.eq('This image does not exist');
                 done();
             });
+        });
+    });
+    describe('Test POST search', () => {
+        before('add more products', function(done) {
+            Product.create(product4).then(() => {
+                Product.create(product5).then(() => done())
+            });
+        });
+
+        it('should sucessfully search products containing the letter \"s\"', function(done){
+            chai.request(app).post('/products/search').send({
+                name: "s"
+            }).end(function(err,res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body[0].productId).to.be.eq(2);
+                expect(res.body[1].productId).to.be.eq(5);
+                expect(res.body.length).to.be.eq(2);
+                done();
+            })
+        });
+        it('should successfully search products that have a price range of 20 to 500', function(done){
+            chai.request(app).post('/products/search').send({
+                priceMin: 20,
+                priceMax: 500
+            }).end(function(err,res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body[0].productId).to.be.eq(2);
+                expect(res.body[1].productId).to.be.eq(3);
+                expect(res.body.length).to.be.eq(2);
+                done();
+            })
+        });
+        it('should successfully search products that are located in Bern', function(done){
+            chai.request(app).post('/products/search').send({
+                location: ['3000']
+            }).end(function(err,res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body[0].productId).to.be.eq(2);
+                expect(res.body[1].productId).to.be.eq(4);
+                expect(res.body[2].productId).to.be.eq(5);
+                expect(res.body.length).to.be.eq(3);
+                done();
+            })
+        });
+        it('should successfully search products that are deliverable', function(done){
+            chai.request(app).post('/products/search').send({
+                delivery: true
+            }).end(function(err,res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body[0].productId).to.be.eq(3);
+                expect(res.body[1].productId).to.be.eq(4);
+                expect(res.body.length).to.be.eq(2);
+                done();
+            })
+        });
+        it('should successfully search products that are not deliverable', function(done){
+            chai.request(app).post('/products/search').send({
+                delivery: false
+            }).end(function(err,res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body[0].productId).to.be.eq(2);
+                expect(res.body[1].productId).to.be.eq(5);
+                expect(res.body.length).to.be.eq(2);
+                done();
+            })
+        });
+        it('should successfully search products that are available', function(done){
+            chai.request(app).post('/products/search').send({
+                available: true
+            }).end(function(err,res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body[0].productId).to.be.eq(2);
+                expect(res.body[1].productId).to.be.eq(4);
+                expect(res.body.length).to.be.eq(2);
+                done();
+            })
+        });
+        it('should successfully search products that are not available', function(done){
+            chai.request(app).post('/products/search').send({
+                available: false
+            }).end(function(err,res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body[0].productId).to.be.eq(3);
+                expect(res.body[1].productId).to.be.eq(5);
+                expect(res.body.length).to.be.eq(2);
+                done();
+            })
+        });
+        it('should successfully search products that are rentable', function(done){
+            chai.request(app).post('/products/search').send({
+                isRentable: true
+            }).end(function(err,res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body[0].productId).to.be.eq(4);
+                expect(res.body[1].productId).to.be.eq(5);
+                expect(res.body.length).to.be.eq(2);
+                done();
+            })
+        });
+        it('should successfully search products that are not rentable', function(done){
+            chai.request(app).post('/products/search').send({
+                isRentable: false
+            }).end(function(err,res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body[0].productId).to.be.eq(2);
+                expect(res.body[1].productId).to.be.eq(3);
+                expect(res.body.length).to.be.eq(2);
+                done();
+            })
+        });
+        it('should successfully search products that are services', function(done){
+            chai.request(app).post('/products/search').send({
+                isService: true
+            }).end(function(err,res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body[0].productId).to.be.eq(2);
+                expect(res.body.length).to.be.eq(1);
+                done();
+            })
+        });
+        it('should successfully search products that are services', function(done){
+            chai.request(app).post('/products/search').send({
+                isService: false
+            }).end(function(err,res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body[0].productId).to.be.eq(3);
+                expect(res.body[1].productId).to.be.eq(4);
+                expect(res.body[2].productId).to.be.eq(5);
+                expect(res.body.length).to.be.eq(3);
+                done();
+            })
+        });
+        it('should successfully search products that are in the category \"Miscellaneous\"', function(done){
+            chai.request(app).post('/products/search').send({
+                category: 'Miscellaneous'
+            }).end(function(err,res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body[0].productId).to.be.eq(5);
+                expect(res.body.length).to.be.eq(1);
+                done();
+            })
+        });
+        it('should successfully search products that contain the letter \"e\" and are available', function(done){
+            chai.request(app).post('/products/search').send({
+                name: 'e',
+                available: true
+            }).end(function(err,res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body[0].productId).to.be.eq(2);
+                expect(res.body[1].productId).to.be.eq(4);
+                expect(res.body.length).to.be.eq(2);
+                done();
+            })
+        });
+        it('should successfully search products that are deliverable and available', function(done){
+            chai.request(app).post('/products/search').send({
+                delivery: true,
+                available: true
+            }).end(function(err,res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body[0].productId).to.be.eq(4);
+                expect(res.body.length).to.be.eq(1);
+                done();
+            })
+        });
+        it('should successfully search products that contain \"abcdefg\" and return an empty array', function(done){
+            chai.request(app).post('/products/search').send({
+                name: 'abcdefg'
+            }).end(function(err,res) {
+                expect(err).to.be.eq(null);
+                expect(res).to.have.status(200);
+                expect(res.body.length).to.be.eq(0);
+                done();
+            })
         });
     });
     after('clean up', function(done) {

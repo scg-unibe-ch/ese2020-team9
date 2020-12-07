@@ -69,3 +69,5 @@ Userprofile
 Hints
 - The creature on the bottom right hints at a secret code that can be entred via keyboard to go play snake
 
+#We know about the following bugs
+- 

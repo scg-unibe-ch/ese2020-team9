@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProductFormComponent } from './productform.component';
+import { ProductFormComponent } from './productForm.component';
 import { Overlay } from '@angular/cdk/overlay';
 import { Router } from '@angular/router';
 import { TextFieldModule } from '@angular/cdk/text-field';

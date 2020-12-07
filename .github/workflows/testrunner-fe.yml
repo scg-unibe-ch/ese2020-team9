@@ -2,7 +2,7 @@ name: Testrunner - FE
 
 on:
   push:
-    branches: [ master, 'frontend-**' ]
+    branches: [ master, 'frontend-**', 'frontend_**' ]
     paths-ignore: [ 'docs/**', 'backend/**', 'deliverables/**', '.github/**' ]
   pull_request:
     branches: [ master ]

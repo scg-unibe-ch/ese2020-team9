@@ -1,36 +1,9 @@
 <app-search-bar></app-search-bar>
 <br><br><br><br>
-<!--<img src="assets/cd/rocketFast.gif">-->
 <div class="productList_dashboard" fxLayout="row wrap" fxLayoutGap="2% grid" fxLayoutAlign="space-evenly stretch">
   <div fxFlex="10%" fxFlex.xl="10%" fxFlex.lg="15%" fxFlex.md="20%" fxFlex.sm="33%" fxFlex.xs="50%" *ngFor="let productItem of productList">
     <img class="center-cropped" [src]="productItem.picture[0]" [routerLink]="['/productDetail', productItem.productId]" routerLinkActive="active" />
    
-    <!--<mat-card>
-
-      <mat-card-header>
-        <mat-card-title>
-          <button mat-flat-button [routerLink]="['/productDetail', productItem.productId]" routerLinkActive="active" ><b>{{productItem.productName}}</b>
-          </button>
-        </mat-card-title>
-
-        <mat-card-subtitle>{{productItem.uploadDate | date: "dd.MM.yy, HH:mm"}} Uhr</mat-card-subtitle>
-      </mat-card-header>
-
-
-      <mat-card-content>
-        <br><br>
-        <img class="imgMid" [src]="productItem.picture[0]" />
-        <a [routerLink]="['/productDetail', productItem.productId]">
-          <img mat-card-image class="center-cropped”" src="{{productItem.picture}}" alt="{{productItem.productName}}" >
-        </a>
-      </mat-card-content>
-
-      <mat-card-content>
-        <p class="text">
-          Price: <b>{{productItem.productPrice}} CHF</b>
-        </p>
-      </mat-card-content>
-
-    </mat-card>-->
+    
   </div>
 </div>

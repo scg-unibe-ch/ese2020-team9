@@ -104,9 +104,7 @@ export class ProductDisplayComponent implements OnInit {
             this.productService.getPhoto(id.imageId).subscribe((blob: any) => {
               let objectURL = URL.createObjectURL(blob);
               this.image = this.sanitizer.bypassSecurityTrustResourceUrl(objectURL);
-              //console.log(this.image,"img")
               productItem.picture.push(this.image);
-              //console.log(productItem.picture, "objectURL");
             });
           }
         });
@@ -136,7 +134,6 @@ export class ProductDisplayComponent implements OnInit {
       let message = "We could not find any cities in this radius";
       let action = "X";
       this.openSnackBar(message, action);
-      console.log(this.location);
       this.searchProduct();
     });
     }

@@ -59,13 +59,10 @@ export class OtherUserDashboardComponent implements OnInit {
                         for(let id of photoId){
                            this.productService.getPhoto(id.imageId).subscribe((blob: any) => {
 
-                                 //console.log(blob)
 
                                  let objectURL = URL.createObjectURL(blob);
                                  this.image = this.sanitizer.bypassSecurityTrustResourceUrl(objectURL);
-                                 //console.log(this.image,"img")
                                  productItem.picture.push(this.image);
-                                 //console.log(productItem.picture, "objectURL");
 
 
                           });
@@ -94,21 +91,16 @@ export class OtherUserDashboardComponent implements OnInit {
   }
 
   compareScore(){
-      console.log(this.userScore, "userScore");
-      console.log(this.userId, "this.id")
+     
       this.httpClient.get(environment.endpointURL + 'user/highscores/overall' ,{}).subscribe((data: LeaderBoardScore[]) => {
         this.leaderBoardOverAll = data;
         if(this.leaderBoardOverAll[0].userId == this.userId){
-          console.log("number 1")
           this.numberOne = true;
         } else if(this.leaderBoardOverAll[1].userId == this.userId){
-         console.log("number 2")
          this.numberTwo = true;
        } else if(this.leaderBoardOverAll[2].userId == this.userId){
-         console.log("number 3")
          this.numberThree = true;
        } else{
-         console.log("not top 3")
         }
        });
     }

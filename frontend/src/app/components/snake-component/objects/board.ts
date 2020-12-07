@@ -19,7 +19,7 @@ export class Board {
   public newGame(): void {
     this.initBoard();
 
-    const numberOfStones = this.getRandomNumber(30);
+    const numberOfStones = this.getRandomNumber(18) + 2;
     const numberOfEggs = this.getRandomNumber(5) + 1;
 
     this.initializeObjects(numberOfStones, 2);
@@ -40,7 +40,7 @@ export class Board {
 
   public eatEgg(pos: Position): void {
     this.board[pos.x][pos.y] = 0;
-    const eggOrSpecialEgg = this.getRandomNumber(10) === 3 ? 3 : 1;
+    const eggOrSpecialEgg = this.getRandomNumber(20) === 3 ? 3 : 1;
     this.initializeObjects(1, eggOrSpecialEgg);
   }
 

@@ -40,19 +40,19 @@
 
 <mat-tab label = "Your current Products">
   <div class="productList_dashboard" fxLayout="row wrap" fxLayoutGap="2% grid" fxLayoutAlign="space-evenly stretch">
- 
+
     <div  *ngFor="let productItem of productList">
-      <app-product-item 
+      <app-product-item
   [productItem]="productItem" >
   </app-product-item>
   <mat-card class="add_on">
     <mat-flat-button button (click)="deleteProduct(productItem)" >Delete</mat-flat-button>
- 
+
   </mat-card>
-  
+
     </div>
   </div>
-  
+
 </mat-tab>
 
 <mat-tab label="sold Products">

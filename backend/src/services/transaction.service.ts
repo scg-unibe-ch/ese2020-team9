@@ -25,48 +25,48 @@ export class TransactionService {
 
 
     public confirmTransaction(transactionId: number): Promise<TransactionAttributes> {
-        return Transaction.findByPk(transactionId)
-        .then((foundTransaction) => {
+        return Transaction.findByPk(transactionId).then((foundTransaction) => {
             if (foundTransaction != null) {
                 return Product.findByPk(foundTransaction.productId).then(foundProduct => {
-                    return foundProduct.update({
-                        sellDate: new Date(Date.now()),
-                        buyerId: foundTransaction.buyerId
-                    })
-                    .then(() => {
-                        return User.findByPk(foundTransaction.buyerId);
-                    })
-                    .then((foundBuyer) => {
-                        this.updateUser(foundBuyer, foundProduct, true);
-                    })
-                    .then(() => {
-                        return User.increment('wallet', {
-                            by: foundProduct.productPrice,
-                            where: {
-                                userId: foundTransaction.userId
-                            }
-                        }).then(() => {
-                            const activityScoreIncrement = 2 * foundProduct.productPrice * 0.1;
-                            this.incrementActivityScore(foundTransaction.userId, activityScoreIncrement)
-                            .then(() => {
-                                return User.findByPk(foundTransaction.userId);
-                            }).then((foundSeller) => {
-                                const gameScore = foundSeller.gameScore;
-                                const newOverallScore = gameScore + activityScoreIncrement;
-                                foundSeller.overallScore = newOverallScore;
-                                return foundSeller.save();
+                    return User.findByPk(foundTransaction.buyerId).then(foundBuyer => {
+                        if (foundBuyer.wallet >= foundProduct.productPrice) {
+                            return foundProduct.update({
+                                sellDate: new Date(Date.now()),
+                                buyerId: foundTransaction.buyerId
+                            }).then(() => {
+                                this.updateUser(foundBuyer, foundProduct, true);
+                            }).then(() => {
+                                return User.increment('wallet', {
+                                    by: foundProduct.productPrice,
+                                    where: {
+                                        userId: foundTransaction.userId
+                                    }
+                                }).then(() => {
+                                    const activityScoreIncrement = 2 * foundProduct.productPrice * 0.1;
+                                    this.incrementActivityScore(foundTransaction.userId, activityScoreIncrement)
+                                    .then(() => {
+                                        return User.findByPk(foundTransaction.userId);
+                                    }).then((foundSeller) => {
+                                        const gameScore = foundSeller.gameScore;
+                                        const newOverallScore = gameScore + activityScoreIncrement;
+                                        foundSeller.overallScore = newOverallScore;
+                                        return foundSeller.save();
+                                    });
+                                });
                             });
-                        });
+                        } else {
+                            Promise.reject('Not enough money available to buy the product!');
+                        }
                     });
                 })
-        .then(() => {
-            foundTransaction.update({
-                transactionStatus: 2
-            });
-        })
-        .then(() => {
-            return Promise.resolve(foundTransaction);
-        });
+                .then(() => {
+                    foundTransaction.update({
+                        transactionStatus: 2
+                    });
+                })
+                .then(() => {
+                    return Promise.resolve(foundTransaction);
+                });
             } else {
                 return Promise.reject('Transaction not found!');
             }
@@ -84,9 +84,6 @@ export class TransactionService {
     }
 
     private updateUser(user: User, product: Product, isBuyer: boolean) {
-        if (isBuyer && product.productPrice > user.wallet) {
-            return Promise.reject('Not enough money available to buy the product!');
-        } else {
             const activityScoreIncrement = product.productPrice * 0.1;
             let walletIncrement = product.productPrice;
             if (isBuyer) { walletIncrement = walletIncrement * -1; }
@@ -104,7 +101,6 @@ export class TransactionService {
                 user.overallScore = newOverallScore;
                 return user.save();
             });
-        }
     }
 
     public declineTransaction(transactionId: number): Promise<TransactionAttributes> {

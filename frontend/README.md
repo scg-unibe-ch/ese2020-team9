@@ -13,17 +13,30 @@ Make sure the backend is running according to its [README](https://github.com/sc
 **If you encounter CORS errors within your browser, add the [Allow CORS](https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=en) extension (version for Google Chrome) to your browser.**
 
 ## About
-The frontend of the project scaffolding shows you a simple Angular application with some basic features.
+The frontend of the project scaffolding shows you a Angular webshop application with the following features:
+- Authentication feature that enables registration of new users and lets them log in.
+- Feature that allows users to post an advertisement to sell/or lend a product.
+Users are able to update the existing advertisement or delete it.
+- Feature that allows users to search for an advertisement to buy/or rent a product 
+- 
 
-We have included a simple **todo checklist** to demonstrate how you can implement CRUD-operations (Create, Read, Update, Delete).
-The todo example allows you to create todo-lists whereas each list can have multiple todo-items assigned to it.
-Each list and item has a name and each item has a checkbox to keep track whether that task has been completed or not.
 
-The second main feature is a small **user login** component where you can try to access a secure endpoint.
-Since we have not included the option to register (this will be up to you), we will provide you a test user:
+We will provide you the following test users:
+
+Administrator:
 ````
 Username: Nora
 Password: notSecure12
+````
+User 1
+````
+Username: ttt
+Password: Test123!
+````
+User 2
+````
+Username: John
+Password: 1234
 ````
 Once you are logged in, there should be a message displaying that you are signed in as 'Nora'.
 With the button 'Access Secure Endpoint', you can try to access a secure endpoint in the backend that can only be accessed by logged in users.

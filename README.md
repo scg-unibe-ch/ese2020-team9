@@ -1,4 +1,9 @@
-# ESE2020 Scaffolding Frontend
+![alt text][logo]
+
+[logo]: https://github.com/scg-unibe-ch/ese2020-team9/blob/master/frontend/src/assets/cd/other2.png "STOR"
+
+
+# ESE2020 - Team 09
 
 ## Prerequisite
 You should have installed [NodeJS and npm](https://nodejs.org/en/download/) (they come as one) in order to run the application.  

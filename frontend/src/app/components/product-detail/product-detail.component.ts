@@ -83,21 +83,17 @@ export class ProductDetailComponent implements OnInit {
           this.isAvailable = instances.isAvailable;
           this.sellerId = instances.userId;
 
-          //this.userReview = instances.userReview;
-          //this.changeDetection.detectChanges();
+          
           this.picture = [];
           this.productService.getPhotoIds(this.productId).subscribe((photoId: any[]) => {
 
             for(let id of photoId){
                this.productService.getPhoto(id.imageId).subscribe((blob: any) => {
 
-                     //console.log(blob)
 
                      let objectURL = URL.createObjectURL(blob);
                      this.image = this.sanitizer.bypassSecurityTrustResourceUrl(objectURL);
-                     //console.log(this.image,"img")
                      this.picture.push(this.image);
-                     //console.log(this.picture, "objectURL");
 
 
               });
@@ -138,7 +134,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   checkUser(){
-    return (this.sellerName == this.userName);
+    return (this.sellerName === this.userName);
   }
 
   openSnackBar(message: string, action: string) {

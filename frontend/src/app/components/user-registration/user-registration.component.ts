@@ -255,7 +255,6 @@ export class UserRegistrationComponent implements OnInit {
     if (this.addressPin.length == 4){this.httpClient.get('http://localhost:4200/api/v1/search', {params}).subscribe((res: any) => {
         if (res != null) {
             this.addressCity = res.results[this.addressPin][0].city;
-            //console.log(res.results[this.addressPin][0].city)
         }
 
       }, (error: any) => {

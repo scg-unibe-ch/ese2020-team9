@@ -24,16 +24,13 @@
   </b>
   <br>
     <br>
-</div>
-<button mat-flat-button class="button_standard" [routerLink]="['/registration/', userId]" routerLinkActive="active">Edit Profile</button>
-<div>
+  </div>
+  <button mat-flat-button class="button_standard" [routerLink]="['/registration/', userId]" routerLinkActive="active">Edit Profile</button>
+  <div>
 
 </div>
   </mat-card-content>
 
-  <mat-card-actions>
-    <!--<button mat-flat-button class="button_standard" [routerLink]="['/productForm/', 0]" routerLinkActive="active">Add Product </button>-->
-  </mat-card-actions>
 </mat-card>
 
 </mat-tab>
@@ -45,8 +42,9 @@
       <app-product-item
   [productItem]="productItem" >
   </app-product-item>
-  <mat-card class="add_on">
-    <mat-flat-button button (click)="deleteProduct(productItem)" >Delete</mat-flat-button>
+  <mat-card class="actions">
+    <button mat-flat-button class="actionsub" (click)="deleteProduct(productItem)" >Delete</button>
+    <button mat-flat-button  class="actionsub"  [routerLink]="['/productForm/', productItem.productId]" routerLinkActive="active">Edit</button>
 
   </mat-card>
 

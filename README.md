@@ -75,6 +75,7 @@ Userprofile
 
 Hints
 - The creature on the bottom right hints at a secret code that can be entred via keyboard to go play snake
+- Each user has 500 credits to spend on products
 
 ###We know about the following bugs
-- 
+- Pictures of products can not be edited

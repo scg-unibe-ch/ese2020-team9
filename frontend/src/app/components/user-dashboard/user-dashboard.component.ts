@@ -42,14 +42,12 @@ export class UserDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = this.userService.getUserId();
-    console.log(this.userId, "user")
     this.getUser();
     this.getProductUser();
   }
 
   getUser(){
       this.userService.getUser(this.userId).subscribe((instances: any) => {
-         // this.sellerId = instances.userId;
          this.userName = instances.userName;
          this.userFirstName = instances.firstName;
          this.userLastName = instances.lastName;
@@ -77,13 +75,10 @@ export class UserDashboardComponent implements OnInit {
                   for(let id of photoId){
                      this.productService.getPhoto(id.imageId).subscribe((blob: any) => {
 
-                           //console.log(blob)
 
                            let objectURL = URL.createObjectURL(blob);
                            this.image = this.sanitizer.bypassSecurityTrustResourceUrl(objectURL);
-                           //console.log(this.image,"img")
                            productItem.picture.push(this.image);
-                           //console.log(productItem.picture, "objectURL");
 
 
                     });
@@ -109,21 +104,16 @@ export class UserDashboardComponent implements OnInit {
   }
 
   compareScore(){
-    console.log(this.userScore, "userScore");
-    console.log(this.userId, "myId")
+
     this.httpClient.get(environment.endpointURL + 'user/highscores/overall' ,{}).subscribe((data: LeaderBoardScore[]) => {
       this.leaderBoardOverAll = data;
       if(this.leaderBoardOverAll[0].userId == this.userId){
-        console.log("number 1")
         this.numberOne = true;
       } else if(this.leaderBoardOverAll[1].userId == this.userId){
-       console.log("number 2")
        this.numberTwo = true;
      } else if(this.leaderBoardOverAll[2].userId == this.userId){
-       console.log("number 3")
        this.numberThree = true;
      } else{
-       console.log("not top 3")
       }
      });
   }

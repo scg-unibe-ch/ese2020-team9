@@ -78,13 +78,10 @@ export class AdminPanelComponent implements OnInit {
           for(let id of photoId){
              this.productService.getPhoto(id.imageId).subscribe((blob: any) => {
 
-                   //console.log(blob)
 
                    let objectURL = URL.createObjectURL(blob);
                    this.image = this.sanitizer.bypassSecurityTrustResourceUrl(objectURL);
-                   //console.log(this.image,"img")
                    productItem.picture.push(this.image);
-                   //console.log(productItem.picture, "objectURL");
 
 
             });

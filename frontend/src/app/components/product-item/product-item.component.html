@@ -19,7 +19,8 @@
         <span [routerLink]="['/s']" [queryParams]="{z: productItem.productLocation}" routerLinkActive="active"><mat-icon >place</mat-icon>{{productItem.productLocation}} </span>
         <span *ngIf="productItem.isService">Service </span> <br>
         <span *ngIf="productItem.isRentable">rentable </span> <br>
-        <span *ngIf="productItem.isAvailable">available</span>
+        <span class="available" *ngIf="productItem.isAvailable">available</span>
+        <span class="sold" *ngIf="!productItem.isAvailable">available</span>
       </mat-card-footer>
 
   </mat-card>

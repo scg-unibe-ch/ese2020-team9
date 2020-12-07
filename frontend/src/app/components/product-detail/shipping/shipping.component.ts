@@ -134,13 +134,10 @@ export class ShippingComponent implements OnInit {
                       for(let id of photoId){
                          this.productService.getPhoto(id.imageId).subscribe((blob: any) => {
 
-                               console.log(blob)
 
                                let objectURL = URL.createObjectURL(blob);
                                this.image = this.sanitizer.bypassSecurityTrustResourceUrl(objectURL);
-                               console.log(this.image,"img");
                                this.picture.push(this.image);
-                               console.log(this.picture, "objectURL");
 
 
                         });
@@ -284,7 +281,6 @@ export class ShippingComponent implements OnInit {
       if (this.otherAddressPin.length == 4){this.httpClient.get('http://localhost:4200/api/v1/search', {params}).subscribe((res: any) => {
           if (res != null) {
               this.otherAddressCity = res.results[this.otherAddressPin][0].city;
-              console.log(res.results[this.otherAddressPin][0].city)
           }
 
         }, (error: any) => {

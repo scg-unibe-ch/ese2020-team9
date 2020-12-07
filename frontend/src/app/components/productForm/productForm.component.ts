@@ -93,13 +93,10 @@ export class ProductFormComponent implements OnInit {
               for(let id of photoId){
                  this.productService.getPhoto(id.imageId).subscribe((blob: any) => {
 
-                       //console.log(blob)
 
                        let objectURL = URL.createObjectURL(blob);
                        this.image = this.sanitizer.bypassSecurityTrustResourceUrl(objectURL);
-                       //console.log(this.image,"img")
                        this.picture.push(this.image);
-                       //console.log(this.picture, "objectURL");
 
 
                      });
@@ -133,7 +130,6 @@ export class ProductFormComponent implements OnInit {
 
     this.productService.addProduct(this.product).subscribe((res: any) => {
       this.editId = res.productId
-      console.log(this.editId)
 
     }, (error: any) => {
       let message = "Can not add this product!";
@@ -219,7 +215,6 @@ export class ProductFormComponent implements OnInit {
      observe: 'events'
    })
      .subscribe(event => {
-       console.log(event); // handle event here
        let message = "Upload done!";
        let action = "X";
        this.openSnackBar(message, action);

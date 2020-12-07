@@ -105,7 +105,6 @@ export class UserLoginComponent implements OnInit {
 
   @HostListener('window:keyup', ['$event'])
     keyEvent(event: KeyboardEvent) {
-      //console.log(event);
       if (event.key === KEY_CODE.ENTER) {
         this.login();
       }

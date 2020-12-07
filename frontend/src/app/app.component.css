@@ -71,6 +71,11 @@
   background-color: #F78B1E; 
   color:#EA21F7;
 }
+::ng-deep .mat-step-label{
+  color:#881DF7!important;
+}
+
+
 .app {
     /* the .app div needs to be AT LEAST 100% of the height of the window */
     min-height: 100%;

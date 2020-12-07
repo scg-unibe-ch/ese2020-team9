@@ -35,7 +35,10 @@ export class UserDashboardComponent implements OnInit {
 
   image: any;
 
-  constructor(private sanitizer : DomSanitizer, private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute) { }
+  constructor(private sanitizer : DomSanitizer,
+              private _snackBar: MatSnackBar,
+              private userService: UserService,
+              private productService: ProductService, private httpClient: HttpClient) { }
 
   ngOnInit(): void {
     this.userId = this.userService.getUserId();
@@ -101,7 +104,7 @@ export class UserDashboardComponent implements OnInit {
   }
 
   compareScore(){
-    
+
     this.httpClient.get(environment.endpointURL + 'user/highscores/overall' ,{}).subscribe((data: LeaderBoardScore[]) => {
       this.leaderBoardOverAll = data;
       if(this.leaderBoardOverAll[0].userId == this.userId){

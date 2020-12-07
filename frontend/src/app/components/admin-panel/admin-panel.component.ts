@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ProductItem } from '../../models/product-item.model';
-import { User} from "../../models/user.model";
-import { ProductService } from "../../services/product.service";
-import { UserService } from "../../services/user.service";
+import { User } from '../../models/user.model';
+import { ProductService } from '../../services/product.service';
+import { UserService } from '../../services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -16,7 +16,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class AdminPanelComponent implements OnInit {
 
  admin: any;
- userName :any;
+ userName: any;
  userId: any;
  userToken: string;
  productId: any;
@@ -25,14 +25,17 @@ export class AdminPanelComponent implements OnInit {
  image: any;
 
 
-  constructor(private sanitizer : DomSanitizer, private _snackBar: MatSnackBar, private httpClient: HttpClient, private productService: ProductService, private userService: UserService) {}
+  constructor(private sanitizer: DomSanitizer,
+              private _snackBar: MatSnackBar,
+              private productService: ProductService,
+              private userService: UserService) {}
 
   ngOnInit(): void {
     this.getProductList();
     this.getUserList();
     this.userToken = this.userService.getToken();
-
   }
+
   getUserList(){
     this.userService.getUserList().subscribe((data: User [] ) => {
       this.userList = data;

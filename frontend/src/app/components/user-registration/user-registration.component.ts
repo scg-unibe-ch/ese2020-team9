@@ -172,6 +172,7 @@ export class UserRegistrationComponent implements OnInit {
 
   /** registration checks **/
   registrationComplete():boolean{
+    console.log(this.userId);
     return (this.userId !=='');
   }
 
@@ -218,9 +219,13 @@ export class UserRegistrationComponent implements OnInit {
   }
 
   confirmPassword(cpw):boolean{
+    console.log(cpw);
+    console.log(this.password);
     if (this.password == cpw)
        return (this.password == cpw);
-
+    else {
+       return false;
+    }
    }
 
   //make register button visible

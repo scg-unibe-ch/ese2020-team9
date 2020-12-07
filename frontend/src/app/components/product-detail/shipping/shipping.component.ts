@@ -68,10 +68,18 @@ export class ShippingComponent implements OnInit {
   transaction: NewTransaction;
 
 
-  picture: any;
+  picture: any = [];
   image: any;
 
-  constructor(private location: Location, private transactionService: TransactionService, private sanitizer : DomSanitizer, private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute) { }
+  constructor(private location: Location,
+              private transactionService: TransactionService,
+              private sanitizer: DomSanitizer,
+              private _snackBar: MatSnackBar,
+              private httpClient: HttpClient,
+              private router: Router,
+              private userService: UserService,
+              private productService: ProductService,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.buyerId = this.userService.getUserId();

@@ -52,12 +52,21 @@ export class ProductFormComponent implements OnInit {
   picture: any = [];
   image: any;
 
-  constructor(private sanitizer : DomSanitizer, private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private _ngZone: NgZone, private productService: ProductService, private route: ActivatedRoute, private location: Location) { }
+  constructor(private sanitizer: DomSanitizer,
+              private _snackBar: MatSnackBar,
+              private httpClient: HttpClient,
+              private router: Router,
+              private userService: UserService,
+              private _ngZone: NgZone,
+              private productService: ProductService,
+              private route: ActivatedRoute,
+              private location: Location) { }
 
   ngOnInit(): void {
 
     this.userId = this.userService.getUserId();
     this.id = this.route.snapshot.paramMap.get('id');
+
 
     if(this.id==='0'){
       this.add = true;

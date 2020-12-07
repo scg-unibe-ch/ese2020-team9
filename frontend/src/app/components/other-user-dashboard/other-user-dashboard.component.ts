@@ -33,7 +33,13 @@ export class OtherUserDashboardComponent implements OnInit {
   id: any;
   image: any;
 
-  constructor(private httpClient: HttpClient, private sanitizer : DomSanitizer, private userService: UserService, private productService: ProductService, private changeDetection: ChangeDetectorRef, private router: Router, private route: ActivatedRoute) { }
+  constructor(private httpClient: HttpClient,
+              private sanitizer : DomSanitizer,
+              private userService: UserService,
+              private productService: ProductService,
+              private changeDetection: ChangeDetectorRef,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
 
   ngOnInit(): void {

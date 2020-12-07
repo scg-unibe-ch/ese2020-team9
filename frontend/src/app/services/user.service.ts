@@ -16,8 +16,6 @@ export class UserService {
   users: User[] ;
   userHighscore: number;
 
-
-
   public isUserLoggedIn: BehaviorSubject<boolean>;
   public isUserAdmin: BehaviorSubject<boolean>;
   public isUserName: BehaviorSubject<string>;
@@ -29,14 +27,16 @@ export class UserService {
       this.userName = localStorage.getItem('userName');
       this.userWallet = localStorage.getItem('userWallet');
 
+      const admin = localStorage.getItem('admin');
+
       this.isUserLoggedIn = new BehaviorSubject<boolean>(this.userToken !== null );
-      this.isUserAdmin = new BehaviorSubject<boolean>(localStorage.getItem('admin') === 'true');
+      this.isUserAdmin = new BehaviorSubject<boolean>(admin === 'true');
       this.isUserName = new BehaviorSubject<string>(this.userName);
 
       }
 
   /** get requests **/
-  getUser(id: number){
+  getUser(id: number) {
     return this.httpClient.get(environment.endpointURL + 'user/' + id);
   }
 

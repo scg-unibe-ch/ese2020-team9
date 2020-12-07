@@ -194,7 +194,7 @@
           type="file" (change)="onFileChanged($event)"
           #fileInput>
         <button mat-flat-button class="button_standard" (click)="fileInput.click()">Select file </button>
-        <button mat-flat-button class="button_standard" (click)="onUpload()">Upload</button>
+        <button mat-flat-button class="button_standard" (click)="onUpload()">Upload Selected</button>
 
         <div *ngIf="imageSelected">
           {{imageName}}

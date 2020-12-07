@@ -4,6 +4,7 @@ import { Product } from './../models/product.model';
 
 
 export class TransactionService {
+
     public startTransaction(transaction: TransactionAttributes): Promise<TransactionAttributes> {
         return Transaction.create(transaction)
         .then((foundTransaction) => {
@@ -86,8 +87,8 @@ export class TransactionService {
 
     private updateOverallScore(user: User, activityScoreIncrement: number) {
         const gameScore = user.gameScore;
-        const activityScore = user.activityScore + activityScoreIncrement;
-        const newOverallScore = gameScore * activityScore;
+        const newActivityScore = user.activityScore + activityScoreIncrement;
+        const newOverallScore = gameScore * newActivityScore;
         user.overallScore = newOverallScore;
         return user.save();
     }

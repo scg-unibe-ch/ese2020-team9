@@ -142,6 +142,23 @@ describe('TransactionController Test', () => { // bundles the tests related to t
                 done();
             });
         });
+        it('should not initialize a faulty transaction', function(done) {
+            chai.request(app).post('/transaction').send({
+                productId: null,
+                userId: null,
+                buyerId: null,   
+                deliveryFirstName: null, 
+                deliveryLastName: null,
+                deliveryStreet: null, 
+                deliveryPin: null,
+                deliveryCity: null,
+                deliveryCountry: null
+            }).end(function(err, res) {
+                expect(res).not.to.be.eq(null);
+                expect(res).to.have.status(400);
+                done();
+            });
+        });
     });
     describe('Test get', () => { // bundles the tests related to the post method
         it('should successfully get products of a seller', function(done) {
@@ -186,11 +203,27 @@ describe('TransactionController Test', () => { // bundles the tests related to t
                 done();
             });
         });
+        it('should not confirm a non-existent transaction', function(done) {
+            chai.request(app).put('/transaction/confirm/11').end(function(err, res) {
+                expect(res).not.to.be.eq(null);
+                expect(res).to.have.status(404);
+                expect(res.body.message).to.be.eq('Transaction not found!');
+                done();
+            });
+        });
         it('should decline the transaction', function(done) {
             chai.request(app).put('/transaction/decline/1').end(function(err, res) {
                 expect(err).to.be.eq(null);
                 expect(res).to.have.status(200);
                 expect(res.body.message).to.be.eq('Transaction successfully declined!');
+                done();
+            });
+        });
+        it('should not decline a non-existent transaction', function(done) {
+            chai.request(app).put('/transaction/decline/11').end(function(err, res) {
+                expect(res).not.to.be.eq(null);
+                expect(res).to.have.status(404);
+                expect(res.body.message).to.be.eq('Transaction not found!');
                 done();
             });
         });

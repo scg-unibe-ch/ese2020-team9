@@ -1,7 +1,6 @@
 import { UserService } from './../../services/user.service';
 import { User, UserAttributes } from './../../models/user.model';
 import { expect } from 'chai';
-import { userInfo } from 'os';
 
 describe('UserService Tests', () => {
 

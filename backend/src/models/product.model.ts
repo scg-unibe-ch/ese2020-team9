@@ -119,11 +119,13 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
         });
         Product.hasMany(Transaction, {
             as: 'transactions',
-            foreignKey: 'productId'
+            foreignKey: 'productId',
+            onDelete: 'cascade'
         });
         Product.hasMany(ProductImage, {
             as: 'productImages',
-            foreignKey: 'productId'
+            foreignKey: 'productId',
+            onDelete: 'cascade'
         });
     }
 }

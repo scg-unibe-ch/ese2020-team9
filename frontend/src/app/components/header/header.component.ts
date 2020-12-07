@@ -12,7 +12,6 @@ export class HeaderComponent implements OnInit {
   isUserLoggedIn: boolean;
   isUserAdmin: boolean;
   isUserName: string;
-  userId: any;
 
   constructor(private userService: UserService, private router: Router) { }
 
@@ -27,7 +26,6 @@ export class HeaderComponent implements OnInit {
     this.userService.isUserName.subscribe(value => {
       this.isUserName = value;
     });
-    this.userId = this.userService.getUserId();
   }
 
   logout(): void {
@@ -38,5 +36,9 @@ export class HeaderComponent implements OnInit {
     this.userService.isUserAdmin.next(false);
     //navigates to dashboard
     this.router.navigate(['/login']);
+  }
+
+  public getUserId(): any {
+    return localStorage.getItem('userId');
   }
 }

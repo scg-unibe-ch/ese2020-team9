@@ -133,7 +133,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   checkUser(){
-    return (this.sellerName == this.userName);
+    return (this.sellerName === this.userName);
   }
 
   openSnackBar(message: string, action: string) {

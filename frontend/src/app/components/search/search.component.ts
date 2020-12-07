@@ -99,7 +99,7 @@ export class SearchComponent implements OnInit {
   selection2 = [
     {value: true, name: 'Service'},
     {value: false, name: 'Product'},
-    {value: null, name: 'Service & Products'},
+    {value: null, name: 'Services & Products'},
   ];
 
   showDelivery(value){

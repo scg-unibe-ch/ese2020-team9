@@ -97,7 +97,7 @@ export class ShippingComponent implements OnInit {
 
        },(error: any) => {
          let action = "X";
-         let message = "There is no corresponding Seller!";
+         let message = "There is no corresponding seller!";
          this.openSnackBar(message, action);
      });
    }
@@ -142,7 +142,7 @@ export class ShippingComponent implements OnInit {
 
       },(error: any) => {
       let action = "X";
-      let message = "There is no corresponding Product!";
+      let message = "There is no corresponding product!";
       this.openSnackBar(message, action);
     });
   }
@@ -157,7 +157,7 @@ export class ShippingComponent implements OnInit {
 
       },(error: any) => {
       let action = "X";
-      let message = "There is no corresponding Seller!";
+      let message = "There is no corresponding seller!";
       this.openSnackBar(message, action);
     });
   }
@@ -253,12 +253,12 @@ export class ShippingComponent implements OnInit {
       //navigates to productItem
       this.router.navigate(['/user']);
       let message = "Seller has been contacted, please await approval of buy request"
-      let action = "OK";
+      let action = "X";
       this.openSnackBar(message, action);
 
     }, (error: any) => {
-      let message = "An Error occurred!";
-      let action = "OK";
+      let message = "An error occurred!";
+      let action = "X";
       this.openSnackBar(message, action);
     });
 

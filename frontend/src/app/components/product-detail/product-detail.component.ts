@@ -78,7 +78,7 @@ export class ProductDetailComponent implements OnInit {
           this.isAvailable = instances.isAvailable;
           this.sellerId = instances.userId;
 
-          
+
           this.picture = [];
           this.productService.getPhotoIds(this.productId).subscribe((photoId: any[]) => {
 
@@ -100,7 +100,7 @@ export class ProductDetailComponent implements OnInit {
           this.getSeller(this.sellerId);
 
       },(error: any) => {
-        let message = "There is no corresponding Product!";
+        let message = "There is no corresponding product!";
         let action = "X";
         this.openSnackBar(message, action);
     });
@@ -118,7 +118,7 @@ export class ProductDetailComponent implements OnInit {
 
       },(error: any) => {
       let action = "X";
-      let message = "There is no corresponding Seller!";
+      let message = "There is no corresponding seller!";
       this.openSnackBar(message, action);
     });
   }

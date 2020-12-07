@@ -37,24 +37,7 @@ export class TransactionService {
                         return User.findByPk(foundTransaction.buyerId);
                     })
                     .then((foundBuyer) => {
-                        if (foundProduct.productPrice <= foundBuyer.wallet) {
-                            const activityScoreIncrement = foundProduct.productPrice * 0.1;
-                            return User.increment('wallet', {
-                                by: -foundProduct.productPrice,
-                                where: {
-                                    userId: foundTransaction.buyerId
-                                }
-                            }).then(() => {
-                                this.incrementActivityScore(foundBuyer.userId, activityScoreIncrement);
-                            }).then(() => {
-                                const gameScore = foundBuyer.gameScore;
-                                const newOverallScore = gameScore + activityScoreIncrement;
-                                foundBuyer.overallScore = newOverallScore;
-                                return foundBuyer.save();
-                            });
-                        } else {
-                            return Promise.reject('Not enough money available to buy the product!');
-                        }
+                        this.updateUser(foundBuyer, foundProduct, true);
                     })
                     .then(() => {
                         return User.increment('wallet', {
@@ -100,9 +83,29 @@ export class TransactionService {
         });
     }
 
+    private updateUser(user: User, product: Product, isBuyer: boolean) {
+        if (isBuyer && product.productPrice > user.wallet) {
+            return Promise.reject('Not enough money available to buy the product!');
+        } else {
+            const activityScoreIncrement = product.productPrice * 0.1;
+            let walletIncrement = product.productPrice;
+            if (isBuyer) { walletIncrement = walletIncrement * -1; }
 
-
-
+            return User.increment('wallet', {
+                by: walletIncrement,
+                where: {
+                    userId: user.userId
+                }
+            }).then(() => {
+                this.incrementActivityScore(user.userId, activityScoreIncrement);
+            }).then(() => {
+                const gameScore = user.gameScore;
+                const newOverallScore = gameScore + activityScoreIncrement;
+                user.overallScore = newOverallScore;
+                return user.save();
+            });
+        }
+    }
 
     public declineTransaction(transactionId: number): Promise<TransactionAttributes> {
         return Transaction.findByPk(transactionId)

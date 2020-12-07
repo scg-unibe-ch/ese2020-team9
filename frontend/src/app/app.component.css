@@ -19,6 +19,8 @@
 ::ng-deep .mat-select .mat-focused {
   /* change color of arrow */
   color: #46FFFD;
+  box-shadow:0px 0px 5px #46FFFD;
+
 }
 
 ::ng-deep .mat-checkbox .mat-checkbox-frame {
@@ -36,14 +38,21 @@
   background-color: #46FFFD;
   box-shadow:0px 0px 10px #46FFFD;
   font-family:'Press Start 2P', cursive !important;
+  opacity: 1;
 
 }
+
 ::ng-deep .mat-typography .mat-tab-group{
   font-family:'Press Start 2P', cursive;
 }
 
+::ng-deep  .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar{
+  background-color: #F7CC18;
+
+  }
+
 ::ng-deep .mat-tab-label{
-  color: white !important;
+  color:  #F7CC18;
   background-color: #F72871;
   margin: 10px;
   font-family:'Press Start 2P', cursive !important;
@@ -52,8 +61,24 @@
 }
 
 ::ng-deep .mat-flat-button {
+  background-color: #46FFFD;
   box-shadow:0px 0px 10px #46FFFD;
   
+}
+
+::ng-deep .mat-step-header .mat-step-icon {
+  background-color: #881DF7;  color:#EA21F7;
+}
+::ng-deep .mat-step-header .mat-step-icon-selected {
+  background-color: #F78B1E; 
+  color:#EA21F7;
+}
+::ng-deep .mat-step-label{
+  color:#881DF7!important;
+}
+
+::ng-deep .mat-card-content{
+  font-size: 15px;
 }
 
 .app {
@@ -68,4 +93,33 @@
     /* set the height of the footer */
     height: 271px;
 }
+
+.find-snake{
+
+object-fit: cover; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+ width:40px;
+ height:auto;
+  opacity: 0.8;
+  
+}
+
+ div b.code{
+  visibility: hidden;
+  vertical-align: middle;
+}
+
+ div:hover b.code {
+  visibility: visible;
+  font-size: 8px;
+  vertical-align: middle !important;
+  color: #F7CC18 ;
+}
+
+.secret_code{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
 

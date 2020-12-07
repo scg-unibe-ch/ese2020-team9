@@ -1,38 +1,36 @@
 <div class="admin-view">
   <mat-tab-group>
-<mat-tab label="Products To Approve">
+<mat-tab label="Users">
   <mat-list *ngFor="let user of userList">
     <mat-list-item>
-    Name: {{user.userName}}, ID:  {{user.userId}} , is Admin
-    <mat-checkbox [(ngModel)]="user.admin" (change)="upgradeUser(user)" [disabled]="user.admin" [checked]="user.admin">Admin User</mat-checkbox>
-    <button mat-flat-button color="warn" (click)="deleteUser(user)">Delete User</button>
-    </mat-list-item>
+    Name <b class="yellow" [routerLink]="['/user', user.userId]" routerLinkActive="active" > :  {{user.userName}}</b>
+      , ID:  {{user.userId}} , is Admin&nbsp;
+
+      <mat-checkbox [(ngModel)]="user.admin" (change)="upgradeUser(user)" [disabled]="user.admin" [checked]="user.admin"></mat-checkbox>
+
+    <div *ngIf="!user.admin"><button mat-flat-button color="warn" (click)="deleteUser(user)">Remove</button>
+    </div> </mat-list-item>
   </mat-list>
 </mat-tab>
 
   <mat-tab label="Products To Approve">
 
-  <div  fxLayout="row" fxLayoutGap="2% grid" fxLayoutAlign="space-evenly stretch">
-    <div fxFlex="10%" fxFlex.xl="15%" fxFlex.lg="20%" fxFlex.md="25%" fxFlex.sm="33%" fxFlex.xs="50%" *ngFor="let productItem of productList">
-      <mat-card class="productItem_Card">
-        <mat-card-title>{{productItem.productName}} </mat-card-title>
-        <img class = "center-cropped" src="{{productItem.productImage}}" alt="{{productItem.productName}}" >
-       <mat-card-content >
-       <br>
-     {{productItem.productDescription}}
-    <br><br>
-    Posted on {{productItem.uploadDate | date: "dd.MM.yy, HH:mm"}}
-  </mat-card-content> 
-  <mat-card-footer>
-        <mat-radio-group [(ngModel)]="productItem.isApproved">
-          <mat-radio-button value="true" (click)="approveProduct(productItem)" >Approve</mat-radio-button>
-          <mat-radio-button value="false" (click)="deleteProduct(productItem)" >Delete</mat-radio-button>
-        </mat-radio-group>
-      </mat-card-footer>
-      </mat-card>
-    
-      </div>
-    </div>
+
+<div class="productList_dashboard" fxLayout="row wrap" fxLayoutGap="2% grid" fxLayoutAlign="space-evenly stretch">
+
+  <div  *ngFor="let productItem of productList">
+    <app-product-item
+[productItem]="productItem" >
+</app-product-item>
+<mat-card class="add_on">
+<mat-radio-group  [(ngModel)]="productItem.isApproved">
+  <mat-radio-button value="true" (click)="approveProduct(productItem)" >Approve</mat-radio-button><br>
+  <mat-radio-button value="false" (click)="deleteProduct(productItem)" >Delete</mat-radio-button>
+</mat-radio-group>
+</mat-card>
+
+  </div>
+</div>
 
 </mat-tab>
 </mat-tab-group>

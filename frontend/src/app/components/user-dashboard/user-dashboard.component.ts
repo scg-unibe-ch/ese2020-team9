@@ -1,10 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../services/user.service";
 import {ProductItem} from "../../models/product-item.model";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ProductService} from "../../services/product.service";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { DomSanitizer } from '@angular/platform-browser';
+import { environment } from "../../../environments/environment";
+import { HttpClient } from "@angular/common/http";
+import { LeaderBoardScore } from "../../models/leaderboardscore.model";
 
 @Component({
   selector: 'app-user-dashboard',
@@ -23,13 +26,23 @@ export class UserDashboardComponent implements OnInit {
   userAddressCity: string;
   userAddressCountry: string;
   userWallet: number;
+  userScore: number;
+  numberOne: boolean;
+  numberTwo: boolean;
+  numberThree: boolean;
+
+  leaderBoardOverAll: LeaderBoardScore[];
 
   image: any;
 
-  constructor(private sanitizer : DomSanitizer, private _snackBar: MatSnackBar, private userService: UserService, private productService: ProductService, private route: ActivatedRoute) { }
+  constructor(private sanitizer : DomSanitizer,
+              private _snackBar: MatSnackBar,
+              private userService: UserService,
+              private productService: ProductService, private httpClient: HttpClient) { }
 
   ngOnInit(): void {
     this.userId = this.userService.getUserId();
+    console.log(this.userId, "user")
     this.getUser();
     this.getProductUser();
   }
@@ -45,7 +58,8 @@ export class UserDashboardComponent implements OnInit {
          this.userAddressCity = instances.addressCity;
          this.userAddressCountry = instances.addressCountry;
          this.userWallet = instances.wallet;
-
+         this.userScore = instances.gameScore;
+         this.compareScore();
        },(error: any) => {
          let action = "X";
          this.openSnackBar(error.message, action);
@@ -94,9 +108,29 @@ export class UserDashboardComponent implements OnInit {
     });
   }
 
+  compareScore(){
+    console.log(this.userScore, "userScore");
+    console.log(this.userId, "myId")
+    this.httpClient.get(environment.endpointURL + 'user/highscores/overall' ,{}).subscribe((data: LeaderBoardScore[]) => {
+      this.leaderBoardOverAll = data;
+      if(this.leaderBoardOverAll[0].userId == this.userId){
+        console.log("number 1")
+        this.numberOne = true;
+      } else if(this.leaderBoardOverAll[1].userId == this.userId){
+       console.log("number 2")
+       this.numberTwo = true;
+     } else if(this.leaderBoardOverAll[2].userId == this.userId){
+       console.log("number 3")
+       this.numberThree = true;
+     } else{
+       console.log("not top 3")
+      }
+     });
+  }
+
   openSnackBar(message: string, action: string) {
         this._snackBar.open(message, action, {
-          duration: 3000
+          duration: 6000
         });
   }
 }

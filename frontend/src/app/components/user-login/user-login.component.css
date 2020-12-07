@@ -1,0 +1,20 @@
+.mat-card{
+    background-color: #082A5D;
+    color: white;
+    
+}
+
+.rocket{
+    height: 80px;
+    margin-left: 50px;
+}
+
+.mat-form-field{
+    color: #F78B1E;
+    font-family: "Press Start 2P", cursive !important;
+}
+
+.mat-form-field-type-mat-input{
+        color: #F78B1E;
+    font-family: "Press Start 2P", cursive !important;
+}

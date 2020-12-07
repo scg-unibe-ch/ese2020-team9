@@ -5,7 +5,7 @@ import {CategoryList} from "../../category-list";
 import {Subscription} from "rxjs";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {HttpClient} from "@angular/common/http";
-import {MatSliderModule} from '@angular/material/slider';
+import {_isNumberValue} from "@angular/cdk/coercion";
 import { HostListener } from '@angular/core';
 
 export enum KEY_CODE {
@@ -22,14 +22,15 @@ export class SearchComponent implements OnInit {
   @ViewChild(MatSelect)
   matSelect: MatSelect;
 
-  name = '';
-  location = '';
-  category = '';
-  priceMin = '';
-  priceMax = '';
-  delivery: any = '';
-  isRentable: any = '';
-  isService: any = '';
+  name: string = '';
+  category: string = null;
+  priceMin: string = null;
+  priceMax: string = null;
+  delivery: boolean = null;
+  isRentable: boolean = null;
+  isService: boolean = null;
+  zipCode: string = '';
+  radius: number = 0;
 
   // mock category list
   categories = CategoryList;
@@ -39,18 +40,12 @@ export class SearchComponent implements OnInit {
 
   subscription: Subscription;
 
-  distance: string;
-  addressPin: any;
-  value: string;
-  addressCity: string;
-  pinList: any;
-
   constructor(private httpClient: HttpClient, private _snackBar: MatSnackBar, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.category = this.route.snapshot.queryParamMap.get('c');
     this.name = this.route.snapshot.queryParamMap.get('n');
-    console.log(this.name, "name")
+    this.zipCode = this.route.snapshot.queryParamMap.get('z');
     this.navigateTo();
   }
 
@@ -69,13 +64,14 @@ export class SearchComponent implements OnInit {
   }
 
   clearFilter(){
-    this.category = '';
-    this.location = '';
-    this.priceMin = '';
-    this.priceMax = '';
-    this.delivery = '';
-    this.isRentable = '';
-    this.isService = '';
+    this.category = null;
+    this.zipCode = '';
+    this.priceMin = null;
+    this.priceMax = null;
+    this.delivery = null;
+    this.isRentable = null;
+    this.isService= null;
+    this.radius = 0;
     this.navigateTo();
   }
 
@@ -84,59 +80,60 @@ export class SearchComponent implements OnInit {
       queryParams: {
         n: this.name,
         c: this.category,
-        l: this.location,
         min: this.priceMin,
         max: this.priceMax,
         d: this.delivery,
         r: this.isRentable,
         s: this.isService,
+        z: this.zipCode,
+        v: this.radius,
       }
     })
   }
 
   selection = [
-    {value: 'true', name: 'possible'},
-    {value: 'false', name: 'not possible'},
-    {value: '', name: 'does not matter'},
+    {value: true, name: 'true'},
+    {value: false, name: 'false'},
+    {value: null, name: 'all'},
   ];
   selection2 = [
-    {value: 'true', name: 'Service'},
-    {value: 'false', name: 'Product'},
-    {value: '', name: 'does not matter'},
+    {value: true, name: 'Service'},
+    {value: false, name: 'Product'},
+    {value: null, name: 'Service & Products'},
   ];
 
   showDelivery(value){
-    if(value == 'true'){
+    if(value == true){
       this.delivery = true;
       this.navigateTo();
-    } else if(value == 'false') {
+    } else if(value == false) {
       this.delivery = false;
       this.navigateTo();
-    } else  if (value == '')
+    } else  if (value == null)
       this.delivery = null;
     this.navigateTo();
   }
 
   showRenatble(value){
-    if(value == 'true'){
+    if(value == true){
       this.isRentable = true;
       this.navigateTo();
-    } else if(value == 'false') {
+    } else if(value == false) {
       this.isRentable = false;
       this.navigateTo();
-    } else  if (value == '')
+    } else  if (value == null)
       this.isRentable = null;
     this.navigateTo();
   }
 
   showService(value){
-    if(value == 'true'){
+    if(value == true){
       this.isService = true;
       this.navigateTo();
-    } else if(value == 'false') {
+    } else if(value == false) {
       this.isService = false;
       this.navigateTo();
-    } else  if (value == '')
+    } else  if (value == null)
       this.isService = null;
     this.navigateTo();
   }
@@ -149,44 +146,27 @@ export class SearchComponent implements OnInit {
 
  formatLabel(value: number) {
         return value  + 'km';
-      }
+  }
 
-  //gets Pins within a certain radius
-    getPinsInRadius(addressPin: string){
-          if (this.addressPin == null){
-              let message = "Please enter a zipcode";
-              let action = "Ok";
-              this.openSnackBar(message, action);
-              return;
-          }
-          if (this.value == "0"){
-              let message = "Radius can not be Zero.";
-              let action = "";
-              this.openSnackBar(message, action);
-              return;
-          }
-          let params = {
-                code: this.addressPin,
-                radius: this.value,
-                country: "CH",
-                apikey: '4bc7d070-229b-11eb-8bf2-6be81465cc4d'
-          };
-          if (this.addressPin.length == 4){this.httpClient.get('http://localhost:4200/api/v1/radius', {params}).subscribe((res: any) => {
-                console.log(res.results, "getPinsInRadius");
-                this.pinList = res.results;
-                let queryParam = []
-                for (let i = 0; i < res.results.length; i++) {
+  checkNumber(input):boolean{
+    return (_isNumberValue(input));
+  }
 
-                  console.log ("Result" + i + "   " + res.results[i].code + "   " + res.results[i].city + "   " + res.results[i].distance + " km  " );
-                }
-                console.log(this.pinList, "pinList");
+  empty(input): boolean{
+    return (input === '');
+  }
 
-            }, (error: any) => {
-            });
-          }
+  checkPrice(input){
+    if(_isNumberValue(input)) {
+      this.navigateTo();
     }
+  }
 
-
+  checkZip(input){
+    if (input.length === 4 && _isNumberValue(input)){
+      this.navigateTo();
+    }
+  }
 
   @HostListener('window:keyup', ['$event'])
     keyEvent(event: KeyboardEvent) {

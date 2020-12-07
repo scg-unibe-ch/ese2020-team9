@@ -1,0 +1,29 @@
+<mat-card class="productItem_Card">
+    <mat-card-header>
+      <mat-card-title class= "clickable" [routerLink]="['/productDetail', productItem.productId]" routerLinkActive="active">{{productItem.productName}}</mat-card-title>   <br> 
+   </mat-card-header>
+    <br>
+
+    <mat-card-content>
+      <img class="center-cropped" [src]="productItem.picture[0]" [routerLink]="['/productDetail', productItem.productId]" routerLinkActive="active"/>
+    </mat-card-content>
+
+    <mat-card-subtitle>posted on {{productItem.uploadDate | date: "dd.MM.yy, HH:mm"}}</mat-card-subtitle>
+    <br>
+    <mat-card-content> Price {{productItem.productPrice}}.- CHF </mat-card-content>
+    <br>
+    <hr>
+    <br>
+          <mat-card-footer>
+        <span [routerLink]="['/s']" [queryParams]="{c: productItem.productCategory}" routerLinkActive="active" ><mat-icon >chevron_right</mat-icon>{{productItem.productCategory}} </span> <br>
+        <span [routerLink]="['/s']" [queryParams]="{z: productItem.productLocation}" routerLinkActive="active"><mat-icon >place</mat-icon>{{productItem.productLocation}} </span>
+        <span *ngIf="productItem.isService">Service </span> <br>
+        <span *ngIf="productItem.isRentable">rentable </span> <br>
+        <span *ngIf="productItem.isAvailable">available</span>
+      </mat-card-footer>
+
+  </mat-card>
+
+
+
+

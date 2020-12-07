@@ -18,9 +18,14 @@ mat-toolbar{
   max-height:64px;
   height: 64px;
   color:#B82D70;
-  text-shadow: 0px 0px 3px white;
+  text-shadow: 0px 0px 2px white;
   font-family: 'Press Start 2P', cursive; 
   font-size: smaller;
+  opacity: 0.8;
+
+}
+.header{
+  margin-bottom: 50px;
 }
 
 .storMainColor {
@@ -43,13 +48,24 @@ mat-toolbar{
 
 }
 
+div span.only-show-on-hover {
+  visibility: hidden;
+}
+div:hover span.only-show-on-hover  {
+  visibility: visible;
+  display: inline-block;
+  color: #F7CC18;
+  font-size: 9px;
+  
+
+}
 .headerNav{
   display: flex;
   flex-direction: row;
   justify-content: right;
   align-items: center;
   margin-bottom: 40px;
-  margin-top: 20px;
+  margin-top: 50px;
   color:  #B82D70;
   text-shadow: 0px 0px 8px #B82D70;
 }
@@ -57,8 +73,23 @@ mat-toolbar{
 .headerItem{
   padding: 0px;
   margin-right: 20px;
-  color:  #B82D70;
-  text-shadow: 0px 0px 8px #B82D70;
+
 }
 
 
+.headerItem2{
+  padding: 0px;
+  margin-right: 20px;
+  color:  #F7CC18;
+  text-shadow: 0px 0px 8px #F7CC18;
+}
+
+
+.headerItem3{
+  border: 1px solid #46FFFD;
+  background: #46FFFD;
+  color: black;
+  box-shadow: 2px 2px 20px #46FFFD;
+  margin-right: 70px!important;
+
+}

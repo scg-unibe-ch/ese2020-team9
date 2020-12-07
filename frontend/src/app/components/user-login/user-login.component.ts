@@ -57,7 +57,6 @@ export class UserLoginComponent implements OnInit {
       localStorage.setItem('userId', res.user.userId);
       localStorage.setItem('userWallet', res.user.wallet);
       localStorage.setItem('userHighscore', res.user.gameScore);
-      console.log("hm");
       //updates isUserLoggedIn value
       this.userService.isUserLoggedIn.next(true);
       //get User Name
@@ -71,7 +70,7 @@ export class UserLoginComponent implements OnInit {
         this.router.navigate(['/home']);
         }
       }, (error: any) => {
-        console.log(error)
+        console.log(error);
         let message = "An error occurred!";
         let action = "Retry";
         this.openSnackBar(message, action);
@@ -100,7 +99,7 @@ export class UserLoginComponent implements OnInit {
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
-      duration: 3000
+      duration: 6000,
     });
 
 

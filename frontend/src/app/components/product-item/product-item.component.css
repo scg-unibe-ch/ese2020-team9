@@ -1,0 +1,72 @@
+.myProfile{
+    background-color: #082A5D;
+    font-family:'Press Start 2P', cursive !important;
+    color: white;
+    
+  }
+  
+  
+  
+  .productItem_Card{
+    margin: 50px;
+    box-shadow: 2px 2px 30px  #F72871;
+    background-color: #082A5D;
+   /* border-color: teal;
+    border-width: 2px;*/
+    border-radius: 30px;
+    color: whitesmoke;
+    font-family:'Press Start 2P', cursive !important;
+    font-size: 7px;
+    height: 700px;
+    width: 250px;
+  }
+ 
+  .mat-card-title{
+    font-size: 18px;
+  }
+  
+  .mat-card-subtitle{
+      font-size: 8px;
+      color: whitesmoke;
+  }
+  
+  .img {
+    object-fit: cover; /* Do not scale the image */
+    height: 200px;
+    width: auto;
+    opacity: 0.7;
+  }
+  
+  .center-cropped {
+    object-fit: cover; /* Do not scale the image */
+    object-position: center; /* Center the image within the element */
+    height: 220px;
+    width: 220px;
+    opacity: 0.7;
+    border-radius: 7px;
+
+  }
+
+  .center-cropped:hover  {
+    
+    box-shadow: 0px 0px 10px #F7CC18;
+  }
+
+  .clickable{
+     color: white; 
+  }
+
+  .clickable:hover{
+   color: #F7CC18;
+   border-radius: 7px;
+   text-shadow: 0px 0px 4px #F7CC18;
+
+  }
+.mat-card-content{
+    padding: 0px 20px 0px 20px;
+
+}
+
+  .mat-card-footer{
+      margin-left: 5px;
+  }

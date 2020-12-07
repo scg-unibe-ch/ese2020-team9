@@ -2,7 +2,7 @@
 
 export interface SearchRequest {
     name?: string;
-    location?: string;
+    location?: string[];
     category?: string;
     priceMin?: number;
     priceMax?: number;

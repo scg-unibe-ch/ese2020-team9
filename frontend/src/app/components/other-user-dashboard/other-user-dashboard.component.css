@@ -6,3 +6,31 @@
   width: auto;
   opacity: 0.7;
 }
+
+.otherProfile{
+  background-color: #082A5D;
+  font-family:'Press Start 2P', cursive !important;
+  color: white; 
+  text-shadow: 0px 0px 2px white;
+  font-size: 14px;
+
+}
+.clickable{
+  color:#F7CC18;
+  text-shadow: 0px 0px 8px #F7CC18;
+}
+
+.mat-card{
+  box-shadow:none;
+}
+
+.trophy_name{
+  display: flex;
+  text-align: center;
+}
+
+.trophy{
+  height:50px;
+  margin-right: 10px;
+
+}

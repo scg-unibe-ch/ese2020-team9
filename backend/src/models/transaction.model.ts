@@ -105,13 +105,15 @@ export class Transaction extends Model<TransactionAttributes, TransactionCreatio
         Transaction.belongsTo(User, {
             as: 'seller',
             foreignKey: 'userId',
-            targetKey: 'userId'
+            targetKey: 'userId',
+            onDelete: 'cascade'
         });
 
         Transaction.belongsTo(User, {
             as: 'buyer',
             foreignKey: 'buyerId',
-            targetKey: 'userId'
+            targetKey: 'userId',
+            onDelete: 'cascade'
         });
 
     }

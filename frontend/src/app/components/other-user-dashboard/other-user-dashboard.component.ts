@@ -5,6 +5,9 @@ import { ProductService } from "../../services/product.service";
 import { Router } from "@angular/router";
 import { ActivatedRoute} from "@angular/router";
 import { DomSanitizer } from '@angular/platform-browser';
+import { HttpClient } from "@angular/common/http";
+import { environment } from "../../../environments/environment";
+import { LeaderBoardScore } from "../../models/leaderboardscore.model";
 
 
 @Component({
@@ -18,18 +21,25 @@ export class OtherUserDashboardComponent implements OnInit {
   addressPin = '';
   addressCity = '';
   addressCountry = '';
+  userScore: number;
+  numberOne: boolean;
+  numberTwo: boolean;
+  numberThree: boolean;
+
+  leaderBoardOverAll: LeaderBoardScore[];
 
   productList: ProductItem [];
   isUserLoggedIn: boolean;
   id: any;
   image: any;
 
-  constructor(private userService: UserService,
+  constructor(private httpClient: HttpClient,
+              private sanitizer : DomSanitizer,
+              private userService: UserService,
               private productService: ProductService,
               private changeDetection: ChangeDetectorRef,
               private router: Router,
-              private route: ActivatedRoute,
-              private sanitizer: DomSanitizer) { }
+              private route: ActivatedRoute) { }
 
 
   ngOnInit(): void {
@@ -82,11 +92,32 @@ export class OtherUserDashboardComponent implements OnInit {
           this.addressPin = instances.addressPin;
           this.addressCity = instances.addressCity;
           this.addressCountry = instances.addressCountry;
-
+          this.userScore = instances.gameScore;
+          this.compareScore();
       },(error: any) => {
 
     });
   }
+
+  compareScore(){
+      console.log(this.userScore, "userScore");
+      console.log(this.userId, "this.id")
+      this.httpClient.get(environment.endpointURL + 'user/highscores/overall' ,{}).subscribe((data: LeaderBoardScore[]) => {
+        this.leaderBoardOverAll = data;
+        if(this.leaderBoardOverAll[0].userId == this.userId){
+          console.log("number 1")
+          this.numberOne = true;
+        } else if(this.leaderBoardOverAll[1].userId == this.userId){
+         console.log("number 2")
+         this.numberTwo = true;
+       } else if(this.leaderBoardOverAll[2].userId == this.userId){
+         console.log("number 3")
+         this.numberThree = true;
+       } else{
+         console.log("not top 3")
+        }
+       });
+    }
 
   trackByFn(index, item){
     return item.id;

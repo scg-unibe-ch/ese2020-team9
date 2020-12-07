@@ -23,7 +23,6 @@ export class TransactionService {
         .catch(err => Promise.reject({message: err}));
     }
 
-
     public confirmTransaction(transactionId: number): Promise<TransactionAttributes> {
         return Transaction.findByPk(transactionId).then((foundTransaction) => {
             if (foundTransaction != null) {
@@ -48,7 +47,7 @@ export class TransactionService {
                                 return Promise.resolve(foundTransaction);
                             });
                         } else {
-                            Promise.reject('Not enough money available to buy the product!');
+                            return Promise.reject('Not enough money available to buy the product!');
                         }
                     });
                 });

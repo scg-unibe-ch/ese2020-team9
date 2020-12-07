@@ -335,6 +335,7 @@ describe('TransactionService Test', () => {
                 })
             }).then(() => {
                 testedTransactionService.confirmTransaction(1).catch(error => {
+                    expect(error).not.to.be.eq(null);
                     expect(error.message).to.be.eq('Not enough money available to buy the product!');
                     done();
                 });

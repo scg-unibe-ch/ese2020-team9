@@ -19,6 +19,8 @@
 ::ng-deep .mat-select .mat-focused {
   /* change color of arrow */
   color: #46FFFD;
+  box-shadow:0px 0px 5px #46FFFD;
+
 }
 
 ::ng-deep .mat-checkbox .mat-checkbox-frame {
@@ -36,6 +38,7 @@
   background-color: #46FFFD;
   box-shadow:0px 0px 10px #46FFFD;
   font-family:'Press Start 2P', cursive !important;
+  opacity: 1;
 
 }
 
@@ -49,7 +52,7 @@
   }
 
 ::ng-deep .mat-tab-label{
-  color: white !important;
+  color:  #F7CC18;
   background-color: #F72871;
   margin: 10px;
   font-family:'Press Start 2P', cursive !important;
@@ -70,6 +73,14 @@
   background-color: #F78B1E; 
   color:#EA21F7;
 }
+::ng-deep .mat-step-label{
+  color:#881DF7!important;
+}
+
+::ng-deep .mat-card-content{
+  font-size: 15px;
+}
+
 .app {
     /* the .app div needs to be AT LEAST 100% of the height of the window */
     min-height: 100%;

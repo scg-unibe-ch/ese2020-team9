@@ -1,6 +1,6 @@
 ![alt text][logo]
 
-[logo]: https://github.com/scg-unibe-ch/ese2020-team9/blob/master/frontend/src/assets/cd/other2.png "STOR"
+[logo]: https://github.com/scg-unibe-ch/ese2020-team9/blob/master/frontend/src/assets/cd/stor.png "STOR"
 
 
 # ESE2020 - Team 09
@@ -74,5 +74,5 @@ Userprofile
 Hints
 - The creature on the bottom right hints at a secret code that can be entred via keyboard to go play snake
 
-#We know about the following bugs
+###We know about the following bugs
 - 

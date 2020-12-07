@@ -23,6 +23,7 @@ export class TransactionService {
         .catch(err => Promise.reject({message: err}));
     }
 
+
     public confirmTransaction(transactionId: number): Promise<TransactionAttributes> {
         return Transaction.findByPk(transactionId)
         .then((foundTransaction) => {
@@ -44,12 +45,7 @@ export class TransactionService {
                                     userId: foundTransaction.buyerId
                                 }
                             }).then(() => {
-                                return User.increment('activityScore', {
-                                    by: activityScoreIncrement,
-                                    where: {
-                                        userId: foundTransaction.buyerId
-                                    }
-                                });
+                                this.incrementActivityScore(foundBuyer.userId, activityScoreIncrement);
                             }).then(() => {
                                 const gameScore = foundBuyer.gameScore;
                                 const newOverallScore = gameScore + activityScoreIncrement;
@@ -68,12 +64,8 @@ export class TransactionService {
                             }
                         }).then(() => {
                             const activityScoreIncrement = 2 * foundProduct.productPrice * 0.1;
-                            return User.increment('activityScore', {
-                                by: activityScoreIncrement,
-                                where: {
-                                    userId: foundTransaction.userId
-                                }
-                            }).then(() => {
+                            this.incrementActivityScore(foundTransaction.userId, activityScoreIncrement)
+                            .then(() => {
                                 return User.findByPk(foundTransaction.userId);
                             }).then((foundSeller) => {
                                 const gameScore = foundSeller.gameScore;
@@ -98,6 +90,19 @@ export class TransactionService {
         })
         .catch(err => Promise.reject({message: err}));
     }
+
+    private incrementActivityScore(userId: number, activityScoreIncrement: number) {
+        return User.increment('activityScore', {
+            by: activityScoreIncrement,
+            where: {
+                userId: userId
+            }
+        });
+    }
+
+
+
+
 
     public declineTransaction(transactionId: number): Promise<TransactionAttributes> {
         return Transaction.findByPk(transactionId)

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80.72% </span>
+                <span class="strong">83.91% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>67/83</span>
+                <span class='fraction'>73/87</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.89% </span>
+                <span class="strong">90% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>32/36</span>
+                <span class='fraction'>36/40</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">68.89% </span>
+                <span class="strong">73.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>31/45</span>
+                <span class='fraction'>33/45</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">81.48% </span>
+                <span class="strong">84.88% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>66/81</span>
+                <span class='fraction'>73/86</span>
             </div>
         
             
@@ -299,7 +299,18 @@
 <a name='L240'></a><a href='#L240'>240</a>
 <a name='L241'></a><a href='#L241'>241</a>
 <a name='L242'></a><a href='#L242'>242</a>
-<a name='L243'></a><a href='#L243'>243</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L243'></a><a href='#L243'>243</a>
+<a name='L244'></a><a href='#L244'>244</a>
+<a name='L245'></a><a href='#L245'>245</a>
+<a name='L246'></a><a href='#L246'>246</a>
+<a name='L247'></a><a href='#L247'>247</a>
+<a name='L248'></a><a href='#L248'>248</a>
+<a name='L249'></a><a href='#L249'>249</a>
+<a name='L250'></a><a href='#L250'>250</a>
+<a name='L251'></a><a href='#L251'>251</a>
+<a name='L252'></a><a href='#L252'>252</a>
+<a name='L253'></a><a href='#L253'>253</a>
+<a name='L254'></a><a href='#L254'>254</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -309,15 +320,21 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -423,10 +440,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -552,14 +574,20 @@ export class ProductService {
 &nbsp;
     public create(product: ProductAttributes): Promise&lt;ProductAttributes&gt; {
         return(Product.create(product))
-            .then(inserted =&gt; Promise.resolve(inserted).catch(<span class="fstat-no" title="function not covered" >err </span>=&gt; <span class="cstat-no" title="statement not covered" >Promise.reject(err))</span>);
+            .then(inserted =&gt; Promise.resolve(inserted).catch(<span class="fstat-no" title="function not covered" >err </span>=&gt; <span class="cstat-no" title="statement not covered" >Promise.reject({message: err}))</span>);
     }
 &nbsp;
     public update(productId: number, product: ProductAttributes): Promise&lt;ProductAttributes&gt; {
-        return Product.findByPk(productId).then(isFound =&gt; isFound.update(product)
-        .then(() =&gt; {
-            return Promise.resolve(isFound);
-        }).catch(<span class="fstat-no" title="function not covered" >err </span>=&gt; <span class="cstat-no" title="statement not covered" >Promise.reject(err))</span>);
+        return Product.findByPk(productId).then(isFound =&gt; {
+            if (isFound === null) {
+                return Promise.reject(`Product with id ${productId} not found!`);
+            }
+            return isFound.update(product);
+        })
+        .then((updated) =&gt; {
+                return Promise.resolve(updated);
+        })
+        .catch(err =&gt; Promise.reject({message: err}));
     }
 &nbsp;
 &nbsp;
@@ -585,7 +613,7 @@ export class ProductService {
               ]
             }
         })
-        .catch(<span class="fstat-no" title="function not covered" >err </span>=&gt; <span class="cstat-no" title="statement not covered" >Promise.reject(err))</span>;
+        .catch(<span class="fstat-no" title="function not covered" >err </span>=&gt; <span class="cstat-no" title="statement not covered" >Promise.reject({message: err}))</span>;
     }
 &nbsp;
     public getProductsOfUser(userId: number): Promise&lt;Product[]&gt; {
@@ -597,12 +625,12 @@ export class ProductService {
               ]
             }
         })
-        .catch(<span class="fstat-no" title="function not covered" >err </span>=&gt; <span class="cstat-no" title="statement not covered" >Promise.reject(err))</span>;
+        .catch(<span class="fstat-no" title="function not covered" >err </span>=&gt; <span class="cstat-no" title="statement not covered" >Promise.reject({message: err}))</span>;
     }
 &nbsp;
     public getAll(): Promise&lt;Product[]&gt; {
         return Product.findAll()
-        .catch(<span class="fstat-no" title="function not covered" >err </span>=&gt; <span class="cstat-no" title="statement not covered" >Promise.reject(err))</span>;
+        .catch(<span class="fstat-no" title="function not covered" >err </span>=&gt; <span class="cstat-no" title="statement not covered" >Promise.reject({message: err}))</span>;
     }
 &nbsp;
     public approve(id: number): Promise&lt;number&gt; {
@@ -626,7 +654,7 @@ export class ProductService {
                 isApproved: true,
                 isAvailable: true
             },
-        }).catch(<span class="fstat-no" title="function not covered" >err </span>=&gt; <span class="cstat-no" title="statement not covered" >Promise.reject(err))</span>;
+        }).catch(<span class="fstat-no" title="function not covered" >err </span>=&gt; <span class="cstat-no" title="statement not covered" >Promise.reject({message: err}))</span>;
     }
 &nbsp;
     public getAllUnapproved(): Promise&lt;Product[]&gt; {
@@ -634,7 +662,7 @@ export class ProductService {
             where: {
                 isApproved: false
             }
-        }).catch(<span class="fstat-no" title="function not covered" >err </span>=&gt; <span class="cstat-no" title="statement not covered" >Promise.reject(err))</span>;
+        }).catch(<span class="fstat-no" title="function not covered" >err </span>=&gt; <span class="cstat-no" title="statement not covered" >Promise.reject({message: err}))</span>;
     }
 &nbsp;
     public getBoughtProducts(buyerId: number): Promise&lt;Product[]&gt; {
@@ -646,7 +674,7 @@ export class ProductService {
               ]
             }
         })
-        .catch(<span class="fstat-no" title="function not covered" >err </span>=&gt; <span class="cstat-no" title="statement not covered" >Promise.reject(err))</span>;
+        .catch(<span class="fstat-no" title="function not covered" >err </span>=&gt; <span class="cstat-no" title="statement not covered" >Promise.reject({message: err}))</span>;
     }
 &nbsp;
     public getSoldProducts(userId: number): Promise&lt;Product[]&gt; {
@@ -661,14 +689,19 @@ export class ProductService {
               ]
             }
         })
-        .catch(<span class="fstat-no" title="function not covered" >err </span>=&gt; <span class="cstat-no" title="statement not covered" >Promise.reject(err))</span>;
+        .catch(<span class="fstat-no" title="function not covered" >err </span>=&gt; <span class="cstat-no" title="statement not covered" >Promise.reject({message: err}))</span>;
     }
 &nbsp;
-    public deleteProduct(id: number): Promise&lt;Product&gt; {
-        return Product.findByPk(id)
-        .then(isFound =&gt;  isFound.destroy()
-            .then(() =&gt; Promise.resolve(isFound))
-            .catch(<span class="fstat-no" title="function not covered" >err </span>=&gt; <span class="cstat-no" title="statement not covered" >Promise.reject(err))</span>);
+    public deleteProduct(productId: number): Promise&lt;Product&gt; {
+        return Product.findByPk(productId)
+        .then(isFound =&gt;  {
+            if (isFound === null) {
+                return Promise.reject(`Product with id ${productId} not found!`);
+            }
+            return isFound.destroy()
+            .then(() =&gt; Promise.resolve(isFound));
+        })
+        .catch(err =&gt; Promise.reject({message: err}));
     }
 &nbsp;
     public searchProduct(searchParameters: SearchRequest): Promise&lt;Product[]&gt; {
@@ -757,7 +790,7 @@ export class ProductService {
             fs.writeFileSync(imageParameters.path, image.data);
             fs.unlinkSync(imageParameters.path);
             return image;
-        }).catch(<span class="fstat-no" title="function not covered" >err </span>=&gt; <span class="cstat-no" title="statement not covered" >Promise.reject(err))</span>;
+        }).catch(<span class="fstat-no" title="function not covered" >err </span>=&gt; <span class="cstat-no" title="statement not covered" >Promise.reject({message: err}))</span>;
     }
 &nbsp;
     public getImageIds(productId: number): Promise&lt;Array&lt;any&gt;&gt; {
@@ -779,7 +812,7 @@ export class ProductService {
         return ProductImage.findByPk(id)
         .then(isFound =&gt;  isFound.destroy()
             .then(() =&gt; Promise.resolve(isFound))
-            .catch(<span class="fstat-no" title="function not covered" >err </span>=&gt; <span class="cstat-no" title="statement not covered" >Promise.reject(err))</span>);
+            .catch(<span class="fstat-no" title="function not covered" >err </span>=&gt; <span class="cstat-no" title="statement not covered" >Promise.reject({message: err}))</span>);
     }
 }
 &nbsp;
@@ -790,7 +823,7 @@ export class ProductService {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Dec 03 2020 17:43:53 GMT+0100 (Central European Standard Time)
+                at Mon Dec 07 2020 09:37:18 GMT+0100 (Central European Standard Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

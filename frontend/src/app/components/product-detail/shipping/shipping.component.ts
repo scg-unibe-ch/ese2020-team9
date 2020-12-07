@@ -68,10 +68,18 @@ export class ShippingComponent implements OnInit {
   transaction: NewTransaction;
 
 
-  picture: any;
+  picture: any = [];
   image: any;
 
-  constructor(private location: Location, private transactionService: TransactionService, private sanitizer : DomSanitizer, private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute) { }
+  constructor(private location: Location,
+              private transactionService: TransactionService,
+              private sanitizer: DomSanitizer,
+              private _snackBar: MatSnackBar,
+              private httpClient: HttpClient,
+              private router: Router,
+              private userService: UserService,
+              private productService: ProductService,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.buyerId = this.userService.getUserId();
@@ -97,7 +105,7 @@ export class ShippingComponent implements OnInit {
 
        },(error: any) => {
          let action = "X";
-         let message = "There is no corresponding Seller!";
+         let message = "There is no corresponding seller!";
          this.openSnackBar(message, action);
      });
    }
@@ -126,13 +134,10 @@ export class ShippingComponent implements OnInit {
                       for(let id of photoId){
                          this.productService.getPhoto(id.imageId).subscribe((blob: any) => {
 
-                               console.log(blob)
 
                                let objectURL = URL.createObjectURL(blob);
                                this.image = this.sanitizer.bypassSecurityTrustResourceUrl(objectURL);
-                               console.log(this.image,"img")
                                this.picture.push(this.image);
-                               console.log(this.picture, "objectURL");
 
 
                         });
@@ -145,7 +150,7 @@ export class ShippingComponent implements OnInit {
 
       },(error: any) => {
       let action = "X";
-      let message = "There is no corresponding Product!";
+      let message = "There is no corresponding product!";
       this.openSnackBar(message, action);
     });
   }
@@ -160,7 +165,7 @@ export class ShippingComponent implements OnInit {
 
       },(error: any) => {
       let action = "X";
-      let message = "There is no corresponding Seller!";
+      let message = "There is no corresponding seller!";
       this.openSnackBar(message, action);
     });
   }
@@ -256,12 +261,12 @@ export class ShippingComponent implements OnInit {
       //navigates to productItem
       this.router.navigate(['/user']);
       let message = "Seller has been contacted, please await approval of buy request"
-      let action = "OK";
+      let action = "X";
       this.openSnackBar(message, action);
 
     }, (error: any) => {
-      let message = "An Error occurred!";
-      let action = "OK";
+      let message = "An error occurred!";
+      let action = "X";
       this.openSnackBar(message, action);
     });
 
@@ -276,7 +281,6 @@ export class ShippingComponent implements OnInit {
       if (this.otherAddressPin.length == 4){this.httpClient.get('http://localhost:4200/api/v1/search', {params}).subscribe((res: any) => {
           if (res != null) {
               this.otherAddressCity = res.results[this.otherAddressPin][0].city;
-              console.log(res.results[this.otherAddressPin][0].city)
           }
 
         }, (error: any) => {

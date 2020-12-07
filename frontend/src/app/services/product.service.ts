@@ -92,6 +92,6 @@ export class ProductService {
   }
 
   getPhoto(photoId: number){
-      return this.httpClient.get(environment.endpointURL + 'products/images/getById/' + photoId,{responseType:"blob"});
+      return this.httpClient.get(environment.endpointURL + 'products/images/getById/' + photoId, {responseType:"blob"});
   }
 }

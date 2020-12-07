@@ -3,7 +3,7 @@
 <mat-tab label="Users">
   <mat-list *ngFor="let user of userList">
     <mat-list-item>
-    Name:       <button mat-flat-button class="clickable" [routerLink]="['/user', user.userId]" routerLinkActive="active" >{{user.userName}}</button>
+    Name <b class="yellow" [routerLink]="['/user', user.userId]" routerLinkActive="active" > :  {{user.userName}}</b>
       , ID:  {{user.userId}} , is Admin&nbsp;
 
       <mat-checkbox [(ngModel)]="user.admin" (change)="upgradeUser(user)" [disabled]="user.admin" [checked]="user.admin"></mat-checkbox>
@@ -35,34 +35,3 @@
 </mat-tab>
 </mat-tab-group>
 </div>
-<!--
-
-  <mat-grid-list cols="4" [gutterSize]="'5px'" rowHeight="450px">
-    <mat-grid-tile *ngFor="let productItem of productList" style="backgroundColor: white">
-
-      <mat-grid-tile-header style="color: black">
-        <h2>{{productItem.productName}}</h2>
-        <br>
-      </mat-grid-tile-header>
-
-      <br>
-      <mat-grid-tile-content>
-
-        <img mat-card-image class="center-cropped”" src="{{productItem.productImage}}" alt="{{productItem.productName}}" >
-
-        <br>
-        <br>
-        {{productItem.productDescription}}
-        <br><br>
-        Posted on {{productItem.uploadDate | date: "dd.MM.yy, HH:mm"}}
-        <br>
-      </mat-grid-tile-content>
-      <mat-grid-tile-footer style="backgroundColor: white; color: black">
-        <mat-radio-group [(ngModel)]="productItem.isApproved">
-          <mat-radio-button value="true" (click)="approveProduct(productItem)" >Approve</mat-radio-button>
-          <mat-radio-button value="false" (click)="deleteProduct(productItem)" >Delete</mat-radio-button>
-        </mat-radio-group>
-      </mat-grid-tile-footer>
-    </mat-grid-tile>
-  </mat-grid-list>
-  -->

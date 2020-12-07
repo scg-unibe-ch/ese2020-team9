@@ -1,8 +1,12 @@
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/scg-unibe-ch/ese2020-team9/readme/frontend/src/assets/cd/other2anim.gif">
+</p>
+
 # STOR
 
-STOR is an online market place that allows users to sell and buy products and services online but extends the classic functionalities of web-based markets with a ground-breaking new feature.
-
-<br/><br/>
+STOR is an online market place specialised for vintage electronics, that allows users to sell and buy products and services online but extends the classic functionalities of web-based markets with a ground-breaking new features.
+<br/>
 
 ## Introduction
 

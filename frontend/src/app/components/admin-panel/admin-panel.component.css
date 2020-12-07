@@ -21,8 +21,7 @@ mat-radio-button{
   margin: 100px;
   box-shadow: 2px 2px 30px  #F72871;
   background-color: #082A5D;
- /* border-color: teal;
-  border-width: 2px;*/
+
   border-radius: 30px;
   color: whitesmoke;
   font-family:'Press Start 2P', cursive !important;
@@ -65,4 +64,8 @@ mat-radio-button{
 ::ng-deep .mat-checkbox-layout{
   font-family:'Press Start 2P', cursive !important;
 
+}
+
+.yellow{
+  color:#F7CC18;  
 }

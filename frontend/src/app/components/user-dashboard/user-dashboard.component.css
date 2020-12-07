@@ -33,7 +33,7 @@
 
 .button_standard{
   font-size: 8px!important;
-  color: white!important;
+
   align-self: center;
 }
 
@@ -43,7 +43,7 @@
   margin-left: 180px;
   border-top: none;
   box-shadow: 2px 2px 30px  #F72871;
-  background-color: #F78B1E;
+  background-color: #F78B1E!important;
  /* border-color: teal;
   border-width: 2px;*/
   border-radius: 30px;
@@ -58,4 +58,36 @@
 .mat-radio-group .mat-radio-button{
   font-family:'Press Start 2P', cursive !important;
   font-size: 10px;
+}
+
+
+.actions{
+  margin: 30px;
+  padding:0;
+  margin-top: -170px;
+  margin-left:50px;
+  border-top: none;
+background-color:#082A5D;
+  box-shadow: none;
+  color: whitesmoke;
+  font-family:'Press Start 2P', cursive !important;
+  text-align: center;
+  height: 80px;
+  width:  250px;
+ padding: 9px;
+ display: flex;
+ flex-direction: row;
+ justify-content: right;
+}
+
+.actionsub{
+  color: whitesmoke;
+  box-shadow: 2px 2px 30px  #F72871!important;
+  background-color: #F78B1E!important;
+  font-size: 10px;
+  height: 50px;
+ font-family:'Press Start 2P', cursive !important;
+  text-align: center;
+  border-radius: 30px;
+  box-shadow: none;
 }

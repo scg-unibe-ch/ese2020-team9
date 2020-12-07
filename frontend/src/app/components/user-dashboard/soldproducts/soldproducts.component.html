@@ -1,18 +1,21 @@
 
 <div  fxLayout="row wrap" fxLayoutGap="2% grid" fxLayoutAlign="space-evenly stretch">
-  <div fxFlex="10%" fxFlex.xl="15%" fxFlex.lg="20%" fxFlex.md="25%" fxFlex.sm="33%" fxFlex.xs="50%" *ngFor="let transaction of transactionList">
+  <div *ngFor="let transaction of transactionList">
     <mat-card class="productItem_Card">
-      <button mat-flat-button class="button_fill"  [routerLink]="['/productDetail', transaction.productId]" routerLinkActive="active" ><b>{{transaction.product.productName}} </b></button>
 
-      <div *ngIf="transaction.transactionStatus==1">
-          <h1> Productname: {{productName}}</h1>
-          <button mat-flat-button class="button_fill"  [routerLink]="['/productDetail', transaction.productId]" routerLinkActive="active" ><b>{{productName}} {{transaction.productId}}</b></button>
-          <br><br>
-          <h3>Status: Please confirm transaction</h3>
-          <br>
-          <button mat-flat-button class="button_standard" (click)="sellProduct(transaction)">Sell</button>
-          <button mat-flat-button class="button_standard" (click)="declineProduct(transaction)">Decline</button>
-        </div>
+
+        <mat-card-header>
+          <mat-card-title class= "clickable" [routerLink]="['/productDetail', transaction.productId]" routerLinkActive="active">{{transaction.product.productName}}</mat-card-title>   <br>
+       </mat-card-header>
+                <br><br>
+                <div *ngIf="transaction.transactionStatus==1">
+                <mat-card-content>
+          Status: <br> Please confirm transaction <br><br>
+          <mat-flat-button class="add_on" button (click)="sellProduct(transaction)">Sell</mat-flat-button> <br><br>
+          <mat-flat-button class="add_on" button (click)="declineProduct(transaction)">Decline</mat-flat-button>
+                </mat-card-content>
+      </div>
+
 
 
 
@@ -20,13 +23,13 @@
 
       <div *ngIf="transaction.transactionStatus==2">
           <br>
-          <b>Status: Sold</b>
+          <mat-card-content>Status: sold</mat-card-content>
 
       </div>
 
       <div *ngIf="transaction.transactionStatus==3">
           <br>
-          <b>Status: Declined</b>
+          <mat-card-content>Status: declined</mat-card-content>
 
       </div>
       <div>
@@ -45,3 +48,4 @@
     </mat-card>
   </div>
 </div>
+

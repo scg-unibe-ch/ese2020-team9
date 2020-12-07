@@ -20,10 +20,7 @@
     height: 700px;
     width: 250px;
   }
-  .mat-card-content{
-    font-size: 9px;
-
-  }
+ 
   .mat-card-title{
     font-size: 18px;
   }
@@ -72,4 +69,16 @@
 
   .mat-card-footer{
       margin-left: 5px;
+  }
+
+  .available{
+font-size: 12px;
+color:#F72871;
+text-shadow: 0px 0px 4px #F72871;
+  }
+
+  .sold{
+font-size:12px;
+color: #46FFFD ;
+text-shadow: 0px 0px 4px#46FFFD;
   }

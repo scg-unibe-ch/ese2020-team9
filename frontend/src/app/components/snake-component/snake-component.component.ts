@@ -141,12 +141,12 @@ export class SnakeComponentComponent implements OnInit {
     runTime();
   }
 
-  public goStep(): void {
+  private goStep(): void {
     this.snake.goStep(this.size);
     this.eatEggOrDie();
   }
 
-  public eatEggOrDie(): void {
+  private eatEggOrDie(): void {
     const pos: Position = this.snake.head.pos;
     if (this.board.isStone(pos)) {
       this.dead = true;

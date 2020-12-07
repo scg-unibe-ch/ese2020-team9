@@ -4,7 +4,7 @@
 <mat-card class= "myProfile">
   <mat-card-header>
 
-    <mat-card-title class = "myProfile">{{userName}}'s Profile: </mat-card-title>
+    <mat-card-title class = "myProfile">{{userName}}'s profile: </mat-card-title>
   </mat-card-header>
   <mat-card-content class="content">
    <div> Address: <br>
@@ -13,7 +13,7 @@
     {{userAddressPin}} {{userAddressCity}} <br>
     {{userAddressCountry}}     <br>
      <br> <b>
-     Your current Score:
+     Your current score:
      {{userScore}}
      </b>
     <br>
@@ -24,35 +24,33 @@
   </b>
   <br>
     <br>
-</div>
-<button mat-flat-button class="button_standard" [routerLink]="['/registration/', userId]" routerLinkActive="active">Edit Profile</button>
-<div>
+  </div>
+  <button mat-flat-button class="button_standard" [routerLink]="['/registration/', userId]" routerLinkActive="active">Edit profile</button>
+  <div>
 
 </div>
   </mat-card-content>
 
-  <mat-card-actions>
-    <!--<button mat-flat-button class="button_standard" [routerLink]="['/productForm/', 0]" routerLinkActive="active">Add Product </button>-->
-  </mat-card-actions>
 </mat-card>
 
 </mat-tab>
 
-<mat-tab label = "Your current Products">
+<mat-tab label = "Your current products">
   <div class="productList_dashboard" fxLayout="row wrap" fxLayoutGap="2% grid" fxLayoutAlign="space-evenly stretch">
- 
+
     <div  *ngFor="let productItem of productList">
-      <app-product-item 
+      <app-product-item
   [productItem]="productItem" >
   </app-product-item>
-  <mat-card class="add_on">
-    <mat-flat-button button (click)="deleteProduct(productItem)" >Delete</mat-flat-button>
- 
+  <mat-card class="actions">
+    <button mat-flat-button class="actionsub" (click)="deleteProduct(productItem)" >Delete</button>
+    <button mat-flat-button  class="actionsub"  [routerLink]="['/productForm/', productItem.productId]" routerLinkActive="active">Edit</button>
+
   </mat-card>
-  
+
     </div>
   </div>
-  
+
 </mat-tab>
 
 <mat-tab label="sold Products">

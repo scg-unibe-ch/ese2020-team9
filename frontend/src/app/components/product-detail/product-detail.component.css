@@ -1,7 +1,7 @@
 .center-cropped {
   object-fit: cover; /* Do not scale the image */
   height: 350px;
-  width: auto;
+  width: 450px;
   opacity: 0.7;
 }
 
@@ -22,10 +22,13 @@
   color: #F7CC18;
 
 }
+.orange{
+  background-color: #F78B1E!important;
+}
 
 .button_standard{
   height: 30px;
   text-align:bottom;
   margin-top: 289px;
-color:white;
+color:#881DF7;
 }

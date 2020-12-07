@@ -18,7 +18,6 @@ export class PasswordForgottenComponent implements OnInit {
 
   ngOnInit(): void {
     this.code = this.route.snapshot.paramMap.get('id');
-    console.log(this.code);
   }
 
   resetPassword(password: string){

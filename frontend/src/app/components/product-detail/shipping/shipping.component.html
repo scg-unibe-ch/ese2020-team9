@@ -4,7 +4,7 @@
     <p>You are buying:</p>
     <b> {{productName}}</b>
     <br>
-    <img class="small" [src]="picture[0]" />
+    <img class="center-cropped" [src]="picture[0]" />
 
     <br><br>
     <p>for <b>{{productPrice}}</b> CHF</p>
@@ -21,12 +21,12 @@
   </mat-card>
 
   <mat-card>
-    <h2>Please enter your Shipping Address:</h2>
+    <h2>Please enter your shipping address:</h2>
     <mat-tab-group>
       <mat-tab label="Use my Address"> <p> </p>
 
         <mat-form-field>
-          <input matInput placeholder="Country Code*" [(ngModel)]="buyerAddressCountry" name="buyerAddressCountry">
+          <input matInput placeholder="Country code*" [(ngModel)]="buyerAddressCountry" name="buyerAddressCountry">
         </mat-form-field>
 
         <mat-form-field>
@@ -44,10 +44,10 @@
         <button mat-flat-button color="warn"  [routerLink]="['/user']" routerLinkActive="active" [disabled]="checkCash() || !isUserLoggedIn || empty(buyerAddressCountry, buyerAddressPin, buyerAddressStreet, buyerAddressCity)" (click)="buyProduct()">Buy</button>
       </mat-tab>
 
-      <mat-tab label="Use other Address">
+      <mat-tab label="Use other address">
 
         <mat-form-field>
-          <input matInput placeholder="Country Code*" [(ngModel)]="otherAddressCountry" name="otherAddressCountry">
+          <input matInput placeholder="Country code*" [(ngModel)]="otherAddressCountry" name="otherAddressCountry">
         </mat-form-field>
 
         <mat-form-field>
@@ -63,11 +63,11 @@
           <input matInput placeholder="City*" [(ngModel)]="otherAddressCity" name="otherAddressCity">
         </mat-form-field>
 
-        <button mat-flat-button color="warn"  [routerLink]="['/user']" routerLinkActive="active" [disabled]="checkCash() || !isUserLoggedIn || empty(otherAddressCountry, otherAddressPin, otherAddressStreet, otherAddressCity)" (click)="otherAddressBuyProduct()">Buy</button>
+        <button  class="orange"  [routerLink]="['/user']" routerLinkActive="active" [disabled]="checkCash() || !isUserLoggedIn || empty(otherAddressCountry, otherAddressPin, otherAddressStreet, otherAddressCity)" (click)="otherAddressBuyProduct()">Buy</button>
 
 
       </mat-tab>
     </mat-tab-group>
   </mat-card>
-  <p>*Required Fields</p>
+  <p>*Required fields</p>
 </div>

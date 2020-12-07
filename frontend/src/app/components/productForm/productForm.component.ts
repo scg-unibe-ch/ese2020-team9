@@ -52,12 +52,21 @@ export class ProductFormComponent implements OnInit {
   picture: any = [];
   image: any;
 
-  constructor(private sanitizer : DomSanitizer, private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private _ngZone: NgZone, private productService: ProductService, private route: ActivatedRoute, private location: Location) { }
+  constructor(private sanitizer: DomSanitizer,
+              private _snackBar: MatSnackBar,
+              private httpClient: HttpClient,
+              private router: Router,
+              private userService: UserService,
+              private _ngZone: NgZone,
+              private productService: ProductService,
+              private route: ActivatedRoute,
+              private location: Location) { }
 
   ngOnInit(): void {
 
     this.userId = this.userService.getUserId();
     this.id = this.route.snapshot.paramMap.get('id');
+
 
     if(this.id==='0'){
       this.add = true;
@@ -93,13 +102,10 @@ export class ProductFormComponent implements OnInit {
               for(let id of photoId){
                  this.productService.getPhoto(id.imageId).subscribe((blob: any) => {
 
-                       //console.log(blob)
 
                        let objectURL = URL.createObjectURL(blob);
                        this.image = this.sanitizer.bypassSecurityTrustResourceUrl(objectURL);
-                       //console.log(this.image,"img")
                        this.picture.push(this.image);
-                       //console.log(this.picture, "objectURL");
 
 
                      });
@@ -133,7 +139,6 @@ export class ProductFormComponent implements OnInit {
 
     this.productService.addProduct(this.product).subscribe((res: any) => {
       this.editId = res.productId
-      console.log(this.editId)
 
     }, (error: any) => {
       let message = "Can not add this product!";
@@ -166,12 +171,12 @@ export class ProductFormComponent implements OnInit {
 
 
       this.router.navigate(['/user']);
-      let action = "Ok";
+      let action = "X";
       let message = "Success";
       this.openSnackBar(message, action);
 
     }, (error: any) => {
-      let message = "Your Product Information is invalid!";
+      let message = "Your product information is invalid!";
       let action = "X";
       this.openSnackBar(message, action);
     });
@@ -219,7 +224,6 @@ export class ProductFormComponent implements OnInit {
      observe: 'events'
    })
      .subscribe(event => {
-       console.log(event); // handle event here
        let message = "Upload done!";
        let action = "X";
        this.openSnackBar(message, action);

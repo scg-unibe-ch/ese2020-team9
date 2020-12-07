@@ -13,52 +13,55 @@ Make sure the backend is running according to its [README](https://github.com/sc
 **If you encounter CORS errors within your browser, add the [Allow CORS](https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=en) extension (version for Google Chrome) to your browser.**
 
 ## About
-The frontend of the project scaffolding shows you a simple Angular application with some basic features.
+The frontend of the project scaffolding shows you a Angular webshop application named STOR. with the following features:
+STOR specialises in vintage electronics. 
 
-We have included a simple **todo checklist** to demonstrate how you can implement CRUD-operations (Create, Read, Update, Delete).
-The todo example allows you to create todo-lists whereas each list can have multiple todo-items assigned to it.
-Each list and item has a name and each item has a checkbox to keep track whether that task has been completed or not.
+Our webshop has the following features:
+- Authentication feature that enables registration of new users and lets them log in.
+- Feature that allows users to post an advertisement to sell/or lend a product.
+Users are able to update the existing advertisement or delete it.
+- Feature that allows users to search for an advertisement to buy/or rent a product.
+- Feature that allows administrators of STOR to approve advertisement posted by other users. 
+This feature allows administrators to delete products or users as well. 
+- Feature that allows buying and selling of products. User will be notified if a product
+is bought or sold. 
+- Feature that lets users pass the time by playing snake.
+This feautre influences the overall score of each user. 
+User can get a higher score by selling / buying products or by playing snake.
+Buying / Selling has a bigger influence on the score than snake.
 
-The second main feature is a small **user login** component where you can try to access a secure endpoint.
-Since we have not included the option to register (this will be up to you), we will provide you a test user:
+
+
+We will provide you the following test users:
+
+Administrator:
 ````
 Username: Nora
 Password: notSecure12
 ````
-Once you are logged in, there should be a message displaying that you are signed in as 'Nora'.
-With the button 'Access Secure Endpoint', you can try to access a secure endpoint in the backend that can only be accessed by logged in users.
-It will display a message whether you were able to access it or not.
+User 1
+````
+Username: ttt
+Password: Test123!
+````
+User 2
+````
+Username: John
+Password: 1234
+````
+Once you are logged in, the top right corner should display your current username.
+It depends on the user which landing page is displayed. 
+Nora as an administrator will see the "adminpanel" whereas user will see the "dashboard" where products
+which are currently offered are displayed.
 
-## Podcast
-For a more detailed explanation of the frontend, watch the [podcast](https://tube.switch.ch/switchcast/unibe.ch/series/9a3d9eb3-d0cc-4993-9ac9-3e4c975b63bb) from the exercise hour.
+####Adminpanel
+- Display all users
+- Displays products to be approved
 
-## Quick Links
-These are links to some of the files that we have implemented/modified when developing the frontend:
+Clicking on the icon in the top right corner will lead you to your userprofile.
+####Userprofile
+- Displays address of user
+- Displays products of user
+- Displays sold products of user
+- Displays bought products of user
 
-- **[package.json](./package.json)**  
-  Includes all required dependencies of the project
-- **[styles.css](./src/styles.css)**  
-  Few global style changes
-- **[environment](./src/environments/environment.ts)**  
-  Specified backend endpoint URL to use it throughout the frontend
-- **[models](./src/app/models)**  
-  Defined models for TodoList and TodoItem
-- **[AppModule](./src/app/app.module.ts)**  
-  Includes all the necessary modules and components
-- **AppComponent** | [TS](./src/app/app.component.ts), [HTML](./src/app/app.component.html)  
-  Main component of the frontend application
-- **TodoListComponent** | [TS](./src/app/todo-list/todo-list.component.ts), [HTML](./src/app/todo-list/todo-list.component.html)  
-  Represents a todo-list
-- **TodoItemComponent** | [TS](./src/app/todo-list/todo-item.component.ts), [HTML](./src/app/todo-list/todo-item.component.html)  
-  Represents a todo-item
-- **UserLoginComponent** | [TS](src/app/components/user-login/user-login.component.ts), [HTML](src/app/components/user-login/user-login.component.html)  
-  Represents the user login section
-- **[AuthInterceptor](./src/app/auth/auth.interceptor.ts)**  
-  Intercepts all HTTP requests to add the user token if a user is logged in.
-  Some backend requests can only be fulfilled if user is signed in and provides his user token for authentication.
-
-## Resources
-- [Angular](https://angular.io/)  
-  Frontend Framework 
-- [Angular Material](https://material.angular.io/)  
-  Material Design Components

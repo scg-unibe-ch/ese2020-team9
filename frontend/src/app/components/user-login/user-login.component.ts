@@ -27,7 +27,7 @@ export class UserLoginComponent implements OnInit {
 
   name: string;
 
-  constructor(private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private dialog: MatDialog) { }
+  constructor(private _snackBar: MatSnackBar, private router: Router, private userService: UserService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.userService.isUserLoggedIn.subscribe(value => {
@@ -48,6 +48,7 @@ export class UserLoginComponent implements OnInit {
   }
 
   login(): void {
+    console.log(this.userLogin, this.password, "comp");
     this.userService.login(this.userLogin, this.password).subscribe((res: any) => {
       // Set user data in local storage
       localStorage.setItem('userToken', res.token);
@@ -69,6 +70,7 @@ export class UserLoginComponent implements OnInit {
         this.router.navigate(['/home']);
         }
       }, (error: any) => {
+        console.log(error);
         let message = "An error occurred!";
         let action = "Retry";
         this.openSnackBar(message, action);
@@ -105,7 +107,6 @@ export class UserLoginComponent implements OnInit {
 
   @HostListener('window:keyup', ['$event'])
     keyEvent(event: KeyboardEvent) {
-      //console.log(event);
       if (event.key === KEY_CODE.ENTER) {
         this.login();
       }

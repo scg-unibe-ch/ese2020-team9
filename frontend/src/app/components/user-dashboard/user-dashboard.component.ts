@@ -97,7 +97,7 @@ export class UserDashboardComponent implements OnInit {
       let action = "X";
       this.openSnackBar(res.message, action);
     }, (error: any) => {
-      let message = "Can not delete this Product!";
+      let message = "Can not delete this product!";
       let action = "X";
       this.openSnackBar(message, action);
     });

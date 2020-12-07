@@ -2,10 +2,10 @@
 <div  fxLayout="row wrap" fxLayoutGap="2% grid" fxLayoutAlign="space-evenly stretch">
   <div *ngFor="let transaction of transactionList">
     <mat-card class="productItem_Card">
-     
-      
+
+
         <mat-card-header>
-          <mat-card-title class= "clickable" [routerLink]="['/productDetail', transaction.productId]" routerLinkActive="active">{{transaction.product.productName}}</mat-card-title>   <br> 
+          <mat-card-title class= "clickable" [routerLink]="['/productDetail', transaction.productId]" routerLinkActive="active">{{transaction.product.productName}}</mat-card-title>   <br>
        </mat-card-header>
                 <br><br>
                 <div *ngIf="transaction.transactionStatus==1">
@@ -16,20 +16,20 @@
                 </mat-card-content>
       </div>
 
-        
+
 
 
 
 
       <div *ngIf="transaction.transactionStatus==2">
           <br>
-          <mat-card-content>Status: Sold</mat-card-content>
+          <mat-card-content>Status: sold</mat-card-content>
 
       </div>
 
       <div *ngIf="transaction.transactionStatus==3">
           <br>
-          <mat-card-content>Status: Declined</mat-card-content>
+          <mat-card-content>Status: declined</mat-card-content>
 
       </div>
       <div>

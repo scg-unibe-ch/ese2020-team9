@@ -171,12 +171,12 @@ export class ProductFormComponent implements OnInit {
 
 
       this.router.navigate(['/user']);
-      let action = "Ok";
+      let action = "X";
       let message = "Success";
       this.openSnackBar(message, action);
 
     }, (error: any) => {
-      let message = "Your Product Information is invalid!";
+      let message = "Your product information is invalid!";
       let action = "X";
       this.openSnackBar(message, action);
     });

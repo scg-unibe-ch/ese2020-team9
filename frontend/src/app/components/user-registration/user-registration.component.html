@@ -14,7 +14,7 @@
       <br>
       <br>
       <mat-form-field>
-        <input matInput placeholder="User Name*" [(ngModel)]="userName" name="userName" (change)="evaluate(userName)">
+        <input matInput placeholder="User name*" [(ngModel)]="userName" name="userName" (change)="evaluate(userName)">
       </mat-form-field>
 
       <mat-form-field>
@@ -71,16 +71,16 @@
       <br>
 
       <mat-form-field>
-        <input matInput placeholder="First Name*" [(ngModel)]="firstName" name="firstName">
+        <input matInput placeholder="First name*" [(ngModel)]="firstName" name="firstName">
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="Last Name*" [(ngModel)]="lastName" name="lastName">
+        <input matInput placeholder="Last name*" [(ngModel)]="lastName" name="lastName">
       </mat-form-field>
       <br>
 
       <mat-form-field>
-        <input matInput placeholder="Country Code" [(ngModel)]="addressCountry" name="addressCountry">
+        <input matInput placeholder="Country code" [(ngModel)]="addressCountry" name="addressCountry">
         <div *ngIf="!empty(addressCountry)" class="invalid-feedback">
           <div *ngIf="!checkCountryCode(addressCountry)" class="invalid-feedback">e.g. CH</div>
         </div>
@@ -181,7 +181,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="Telephone Number" [(ngModel)]="phoneNumber" name="phoneNumber" >
+        <input matInput placeholder="Telephone number" [(ngModel)]="phoneNumber" name="phoneNumber" >
         <div *ngIf="!empty(phoneNumber)" class="invalid-feedback">
           <div *ngIf="!checkNumber(phoneNumber)" class="invalid-feedback">Has to be numbers!</div>
         </div>
@@ -206,7 +206,7 @@
 
       <div *ngIf="!edit">
 
-        <button mat-flat-button class="button_standard" (click)="registration()" [disabled]="!allFieldsAreFilled()">Registration</button>
+        <button mat-flat-button class="button_standard" (click)="registration()" [disabled]="!allFieldsAreFilled()">Yes</button>
 
       </div>
       <div *ngIf="edit">
@@ -219,7 +219,7 @@
 
 </mat-horizontal-stepper>
 
-<p>*Required Fields</p>
+<p>*Required fields</p>
 
 </div>
 
@@ -236,21 +236,21 @@
 <mat-card>
 
   <mat-form-field>
-    <input matInput placeholder="User Name*" [(ngModel)]="userName" name="userName" (change)="evaluate(userName)">
+    <input matInput placeholder="User name*" [(ngModel)]="userName" name="userName" (change)="evaluate(userName)">
   </mat-form-field>
 
   <mat-form-field>
     <input matInput placeholder="Email*" [(ngModel)]="userMail" name="userMail">
     <div *ngIf="!empty(userMail)">
-      <div *ngIf="!validateEmail(userMail)" class="invalid-feedback">Valid Email is required </div>
+      <div *ngIf="!validateEmail(userMail)" class="invalid-feedback">Valid email is required </div>
     </div>
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="First Name*" [(ngModel)]="firstName" name="firstName">
+    <input matInput placeholder="First name*" [(ngModel)]="firstName" name="firstName">
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput placeholder="Last Name*" [(ngModel)]="lastName" name="lastName">
+    <input matInput placeholder="Last name*" [(ngModel)]="lastName" name="lastName">
   </mat-form-field>
   <br>
 
@@ -271,7 +271,7 @@
   </mat-form-field>
 
   <mat-form-field *ngIf="!edit">
-    <input matInput placeholder="Confirm Password*" [(ngModel)]="confPassword" name="confPassword" type="password">
+    <input matInput placeholder="Confirm password*" [(ngModel)]="confPassword" name="confPassword" type="password">
     <ng-template [ngIf]="!empty(confPassword)">
       <div *ngIf="!confirmPassword(confPassword)" class="invalid-feedback"> Passwords do not match
       </div>
@@ -288,7 +288,7 @@
 <mat-card>
   <mat-form-field appearance="fill">
     <mat-label>Select Gender</mat-label>
-    <mat-select matNativeControl [(ngModel)]="gender" value="gender">
+    <mat-select style="font-family:'Press Start 2P', cursive !important; font-size: x-small;" matNativeControl [(ngModel)]="gender" value="gender">
       <mat-option style="font-family:'Press Start 2P', cursive !important; font-size: x-small;" value="Agender">Agender</mat-option>
           <mat-option style="font-family:'Press Start 2P', cursive !important; font-size: x-small;" value="Androgyne">Androgyne</mat-option>
           <mat-option style="font-family:'Press Start 2P', cursive !important; font-size: x-small;" value="Androgynous">Androgynous</mat-option>
@@ -351,13 +351,13 @@
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput placeholder="Telephone Number" [(ngModel)]="phoneNumber" name="phoneNumber">
+    <input matInput placeholder="Telephone number" [(ngModel)]="phoneNumber" name="phoneNumber">
   </mat-form-field>
 </mat-card>
 
 <mat-card>
   <mat-form-field>
-    <input matInput placeholder="Country Code" [(ngModel)]="addressCountry" name="addressCountry">
+    <input matInput placeholder="Country code" [(ngModel)]="addressCountry" name="addressCountry">
     <div *ngIf="!empty(addressCountry)" class="invalid-feedback">
       <div *ngIf="!checkCountryCode(addressCountry)" class="invalid-feedback">e.g. CH</div>
     </div>

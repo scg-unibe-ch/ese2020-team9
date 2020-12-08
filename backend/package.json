@@ -9,7 +9,8 @@
     "prestart": "npm run build",
     "dev": "nodemon",
     "start": "node .",
-    "test": "cross-env NODE_ENV=test cross-env JWT_SECRET=not_secure JWT_PW_SECRET=password_securator mocha -r ts-node/register src/test/**/*.spec.ts"
+    "test": "cross-env NODE_ENV=test cross-env JWT_SECRET=not_secure JWT_PW_SECRET=password_securator mocha -r ts-node/register src/test/**/*.spec.ts",
+    "test-with-coverage": "nyc --reporter=html cross-env NODE_ENV=test cross-env JWT_SECRET=not_secure JWT_PW_SECRET=password_securator mocha -r ts-node/register src/test/**/*.spec.ts"
   },
   "dependencies": {
     "@types/cors": "^2.8.7",
@@ -25,6 +26,7 @@
     "morgan": "~1.9.1",
     "multer": "^1.4.2",
     "nodemailer": "^6.4.16",
+    "nyc": "^15.1.0",
     "sequelize": "^6.3.5",
     "sinon": "^9.2.0",
     "sqlite3": "^5.0.0",

@@ -21,7 +21,7 @@ export class SoldproductsComponent implements OnInit {
 
     transactionList: Transaction[];
 
-  constructor(private httpClient: HttpClient, private _snackBar: MatSnackBar, private userService: UserService, private productService: ProductService, private transactionService: TransactionService) { }
+  constructor(private _snackBar: MatSnackBar, private userService: UserService, private productService: ProductService, private transactionService: TransactionService) { }
 
   ngOnInit(): void {
       this.userId = this.userService.getUserId();

@@ -35,7 +35,10 @@ export class UserDashboardComponent implements OnInit {
 
   image: any;
 
-  constructor(private sanitizer : DomSanitizer, private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private productService: ProductService, private route: ActivatedRoute) { }
+  constructor(private sanitizer : DomSanitizer,
+              private _snackBar: MatSnackBar,
+              private userService: UserService,
+              private productService: ProductService, private httpClient: HttpClient) { }
 
   ngOnInit(): void {
     this.userId = this.userService.getUserId();
@@ -94,14 +97,14 @@ export class UserDashboardComponent implements OnInit {
       let action = "X";
       this.openSnackBar(res.message, action);
     }, (error: any) => {
-      let message = "Can not delete this Product!";
+      let message = "Can not delete this product!";
       let action = "X";
       this.openSnackBar(message, action);
     });
   }
 
   compareScore(){
-    
+
     this.httpClient.get(environment.endpointURL + 'user/highscores/overall' ,{}).subscribe((data: LeaderBoardScore[]) => {
       this.leaderBoardOverAll = data;
       if(this.leaderBoardOverAll[0].userId == this.userId){

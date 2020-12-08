@@ -8,18 +8,18 @@
   <div class="bigFilter">
     <div class="filterOptions">
       <mat-form-field>
-        <mat-label>Select Product Category</mat-label>
+        <mat-label>Select product category</mat-label>
         <mat-select [(ngModel)]="category" (selectionChange)="navigateTo()" value="category">
           <mat-option style="font-family:'Press Start 2P', cursive !important; font-size: x-small;" class="option" [value]="">None</mat-option>
           <mat-option style="font-family:'Press Start 2P', cursive !important; font-size: x-small;" class="option" *ngFor="let category of categories" [value]="category.value">{{category.value}}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field>
-        <input matInput class="priceInput" [(ngModel)]="priceMin" (keyup)="checkPrice(priceMin)" placeholder="min Price">
+        <input matInput class="priceInput" [(ngModel)]="priceMin" (keyup)="checkPrice(priceMin)" placeholder="min price">
         <button class="clearIcon" mat-button *ngIf="priceMin !== null && priceMin !== ''" matSuffix mat-icon-button (click)="priceMin = null; navigateTo()"><mat-icon>close</mat-icon></button>
       </mat-form-field>
       <mat-form-field>
-        <input matInput class="priceInput" [(ngModel)]="priceMax" (keyup)="checkPrice(priceMax)" placeholder="max Price">
+        <input matInput class="priceInput" [(ngModel)]="priceMax" (keyup)="checkPrice(priceMax)" placeholder="max price">
         <button class="clearIcon" mat-button *ngIf="priceMax !== null && priceMin !== ''" matSuffix mat-icon-button (click)="priceMax = null; navigateTo()"><mat-icon>close</mat-icon></button>
       </mat-form-field>
       <mat-form-field>
@@ -58,7 +58,7 @@
       <mat-expansion-panel-header>Filter</mat-expansion-panel-header>
       <mat-divider></mat-divider>
       <mat-form-field>
-        <mat-label>Select Product Category</mat-label>
+        <mat-label>Select product category</mat-label>
         <mat-select [(ngModel)]="category" (selectionChange)="navigateTo()" value="category">
           <mat-option style="font-family:'Press Start 2P', cursive !important; font-size: x-small;" class="selectPanel" [value]="">None</mat-option>
           <mat-option style="font-family:'Press Start 2P', cursive !important; font-size: x-small;" class="selectPanel" *ngFor="let category of categories" [value]="category.value">{{category.value}}</mat-option>
@@ -66,11 +66,11 @@
       </mat-form-field>
       <br>
       <mat-form-field>
-        <input matInput class="priceInput" [(ngModel)]="priceMin" (keyup)="checkPrice(priceMin)" placeholder="min Price">
+        <input matInput class="priceInput" [(ngModel)]="priceMin" (keyup)="checkPrice(priceMin)" placeholder="min price">
         <button class="clearIcon" mat-button *ngIf="priceMin !== null && priceMin !== ''" matSuffix mat-icon-button (click)="priceMin = null; navigateTo()"><mat-icon>close</mat-icon></button>
       </mat-form-field>
       <mat-form-field>
-        <input matInput class="priceInput" [(ngModel)]="priceMax" (keyup)="checkPrice(priceMax)" placeholder="max Price">
+        <input matInput class="priceInput" [(ngModel)]="priceMax" (keyup)="checkPrice(priceMax)" placeholder="max price">
         <button class="clearIcon" mat-button *ngIf="priceMax !== null && priceMin !== ''" matSuffix mat-icon-button (click)="priceMax = null; navigateTo()"><mat-icon>close</mat-icon></button>
       </mat-form-field>
       <div>
@@ -106,16 +106,16 @@
     <mat-chip *ngIf="category">{{category}}
       <button class="clearIcon" matSuffix mat-icon-button (click)="category = null; navigateTo()"><mat-icon>close</mat-icon></button>
     </mat-chip>
-    <mat-chip *ngIf="zipCode && zipCode.length === 4 && checkNumber(zipCode)">Zip Code: {{zipCode}}
+    <mat-chip *ngIf="zipCode && zipCode.length === 4 && checkNumber(zipCode)">Zip code: {{zipCode}}
       <button class="clearIcon" matSuffix mat-icon-button (click)="zipCode = ''; navigateTo()"><mat-icon>close</mat-icon></button>
     </mat-chip>
     <mat-chip *ngIf="radius && zipCode.length === 4 && checkNumber(zipCode)">Radius: {{radius}} km
       <button class="clearIcon" matSuffix mat-icon-button (click)="radius = 0; navigateTo()"><mat-icon>close</mat-icon></button>
     </mat-chip>
-    <mat-chip *ngIf="priceMin && checkNumber(priceMin)">min Price: {{priceMin}} CHF
+    <mat-chip *ngIf="priceMin && checkNumber(priceMin)">min price: {{priceMin}} CHF
       <button class="clearIcon" matSuffix mat-icon-button (click)="priceMin = null; navigateTo()"><mat-icon>close</mat-icon></button>
     </mat-chip>
-    <mat-chip *ngIf="priceMax && checkNumber(priceMax)">max Price: {{priceMax}} CHF
+    <mat-chip *ngIf="priceMax && checkNumber(priceMax)">max price: {{priceMax}} CHF
       <button class="clearIcon" matSuffix mat-icon-button (click)="priceMax = null; navigateTo()"><mat-icon>close</mat-icon></button>
     </mat-chip>
     <mat-chip *ngIf="delivery !== null">Delivery: {{delivery}}

@@ -52,12 +52,21 @@ export class ProductFormComponent implements OnInit {
   picture: any = [];
   image: any;
 
-  constructor(private sanitizer : DomSanitizer, private _snackBar: MatSnackBar, private httpClient: HttpClient, private router: Router, private userService: UserService, private _ngZone: NgZone, private productService: ProductService, private route: ActivatedRoute, private location: Location) { }
+  constructor(private sanitizer: DomSanitizer,
+              private _snackBar: MatSnackBar,
+              private httpClient: HttpClient,
+              private router: Router,
+              private userService: UserService,
+              private _ngZone: NgZone,
+              private productService: ProductService,
+              private route: ActivatedRoute,
+              private location: Location) { }
 
   ngOnInit(): void {
 
     this.userId = this.userService.getUserId();
     this.id = this.route.snapshot.paramMap.get('id');
+
 
     if(this.id==='0'){
       this.add = true;
@@ -162,12 +171,12 @@ export class ProductFormComponent implements OnInit {
 
 
       this.router.navigate(['/user']);
-      let action = "Ok";
+      let action = "X";
       let message = "Success";
       this.openSnackBar(message, action);
 
     }, (error: any) => {
-      let message = "Your Product Information is invalid!";
+      let message = "Your product information is invalid!";
       let action = "X";
       this.openSnackBar(message, action);
     });

@@ -9,13 +9,13 @@
       <mat-card>
         <mat-form-field>
 
-          <input matInput placeholder="Product Name*" [(ngModel)]="productName" name="productName">
+          <input matInput placeholder="Product name*" [(ngModel)]="productName" name="productName">
           <div *ngIf="empty(productName)" class="invalid-feedback">Product Name</div>
 
         </mat-form-field>
 
           <mat-form-field>
-            <mat-label>Describe your Product</mat-label>
+            <mat-label>Describe your product</mat-label>
             <textarea matInput
                       [(ngModel)]="productDescription"
                       cdkTextareaAutosize
@@ -29,7 +29,7 @@
           <br>
         <mat-card>
           <mat-form-field appearance="fill">
-            <mat-label>Select Product Category</mat-label>
+            <mat-label>Select product category</mat-label>
             <mat-select style="font-family:'Press Start 2P', cursive !important; font-size: x-small;" matNativeControl [(ngModel)]="productCategory" value="productCategory">
               <mat-option style="font-family:'Press Start 2P', cursive !important; font-size: x-small;" [value]="">None</mat-option>
               <mat-option style="font-family:'Press Start 2P', cursive !important; font-size: x-small;" *ngFor="let category of categories" [value]="category.value">{{category.value}}</mat-option>
@@ -87,7 +87,7 @@
         <mat-card>
 
           <div *ngIf="!imageSelected">
-    <p>Please add a Photo(.png, .jpg, .jpeg):</p>
+    <p>Please add a photo(.png, .jpg, .jpeg):</p>
     <input
       style="display: none"
       type="file" (change)="onFileChanged($event)"
@@ -122,14 +122,14 @@
       <mat-card>
         <mat-form-field>
 
-          <input matInput placeholder="Product Name" [(ngModel)]="productName" name="productName">
+          <input matInput placeholder="Product name" [(ngModel)]="productName" name="productName">
           <div *ngIf="empty(productName)" class="invalid-feedback">Product Name</div>
 
         </mat-form-field>
 
 
         <mat-form-field>
-          <mat-label>Describe your Product</mat-label>
+          <mat-label>Describe your product</mat-label>
           <textarea matInput
                     [(ngModel)]="productDescription"
                     cdkTextareaAutosize
@@ -140,7 +140,7 @@
 
         <mat-form-field appearance="fill">
 
-          <mat-label>Select Product Category</mat-label>
+          <mat-label>Select Product category</mat-label>
           <mat-select style="font-family:'Press Start 2P', cursive !important; font-size: x-small;" matNativeControl [(ngModel)]="productCategory" value="productCategory" >
             <mat-option style="font-family:'Press Start 2P', cursive !important; font-size: x-small;" value="">None</mat-option>
             <mat-option style="font-family:'Press Start 2P', cursive !important; font-size: x-small;" *ngFor="let category of categories" [value]="category.value">{{category.value}}</mat-option>
@@ -190,7 +190,7 @@
           type="file" (change)="onFileChanged($event)"
           #fileInput>
         <button mat-flat-button class="button_standard" (click)="fileInput.click()">Select file </button>
-        <button mat-flat-button class="button_standard" (click)="onUpload()">Upload Selected</button>
+        <button mat-flat-button class="button_standard" (click)="onUpload()">Upload Upload selected file</button>
 
         <div *ngIf="imageSelected">
           {{imageName}}
@@ -208,4 +208,4 @@
 
 
 </div>
-  <p>*Required Fields</p>
+  <p>*Required fields</p>

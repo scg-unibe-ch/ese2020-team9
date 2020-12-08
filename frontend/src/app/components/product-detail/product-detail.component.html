@@ -22,7 +22,7 @@
     <br>
     <span class="backIcon" [routerLink]="['/s']" [queryParams]="{c: productCategory}" routerLinkActive="active" ><mat-icon >chevron_right</mat-icon>{{productCategory}} </span> <br>
     <span class="backIcon"[routerLink]="['/s']" [queryParams]="{z: productLocation}" routerLinkActive="active"><mat-icon >place</mat-icon>{{productLocation}} </span>
-  
+
     <br>
   </mat-card-content>
 </mat-card>
@@ -37,7 +37,7 @@
 </mat-card-actions>
 
   <mat-card>
-    <mat-card-content>Sellerinfo:</mat-card-content>
+    <mat-card-content>Seller information:</mat-card-content>
     <br><br>
     <button mat-button class="button_fill" [routerLink]="['/user', sellerId]" routerLinkActive="active" ><mat-icon >account_circle</mat-icon>{{sellerName}}</button>
 

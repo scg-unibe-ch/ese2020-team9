@@ -102,19 +102,19 @@ export class UserService {
   }
 
   getToken(){
-    return this.userToken;
+    return this.userToken = localStorage.getItem('userToken');
   }
 
   getUserName(){
-    return this.userName;
+    return this.userName = localStorage.getItem('userName');
   }
 
   getUserId(){
-    return localStorage.userId;
+    return this.userId = localStorage.getItem('userId');
   }
 
   getUserWallet(){
-    return this.userWallet;
+    return this.userWallet = Number.parseInt(localStorage.getItem('userWallet'), 10);
   }
 
   getUserHighscore(): number {

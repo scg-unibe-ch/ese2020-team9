@@ -3,3 +3,9 @@
   justify-content: space-between;
   flex-direction: row;
 }
+
+.dialog {
+
+  font-family: 'Press Start 2P', cursive;
+
+}

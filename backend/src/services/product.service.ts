@@ -1,9 +1,6 @@
-import { promises } from 'fs';
-import { Multer } from 'multer';
-import { ImageAttributes, ImageGetAttributes, ProductImage } from '../models/productimage.model';
-import {  Product, ProductAttributes } from './../models/product.model';
+import { ImageGetAttributes, ProductImage } from '../models/productimage.model';
+import { Product, ProductAttributes } from './../models/product.model';
 import {SearchRequest} from './../models/search.model';
-import sequelize from 'sequelize';
 
 export class ProductService {
 
@@ -25,8 +22,6 @@ export class ProductService {
         .catch(err => Promise.reject({message: err}));
     }
 
-
-
     public getProduct(productId: number): Promise<Product> {
         return Product.findByPk(productId).then(product => {
             if (product) {
@@ -37,7 +32,6 @@ export class ProductService {
         })
         .catch(err => Promise.reject({message: err}));
     }
-
 
     public getProductsOfCategory(category: string): Promise<Product[]> {
         const { Op } = require('sequelize');

@@ -142,14 +142,6 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
         );
     }
 
-
-    /*public static calculateOverallScore(gameScore: number, activityScore: number) {
-        User.rawAttributes;
-        const overallScore = gameScore + activityScore;
-        return overallScore;
-    } */
-
-
     public static createAssociations() {
         User.hasMany(Product, {
             as: 'products',

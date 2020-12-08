@@ -54,12 +54,12 @@ It depends on the user which landing page is displayed.
 Nora as an administrator will see the "adminpanel" whereas user will see the "dashboard" where products
 which are currently offered are displayed.
 
-####Adminpanel
+Adminpanel
 - Display all users
 - Displays products to be approved
 
 Clicking on the icon in the top right corner will lead you to your userprofile.
-####Userprofile
+Userprofile
 - Displays address of user
 - Displays products of user
 - Displays sold products of user

@@ -59,6 +59,7 @@ Adminpanel
 - Displays products to be approved
 
 Clicking on the icon in the top right corner will lead you to your userprofile.
+
 Userprofile
 - Displays address of user
 - Displays products of user

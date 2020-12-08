@@ -238,8 +238,6 @@ describe('Test checkAuth middlewares', () => {
         });
 
         it('should call next when token is valid', function(done) {
-            
-            User.findByPk(1).then(user => console.log(user));
             const token: string = jwt.sign({ userName: 'test', userId: 1, admin: false }, process.env.JWT_SECRET, { expiresIn: '2h' });
             const req = mockRequest({
                 headers: {
@@ -249,14 +247,13 @@ describe('Test checkAuth middlewares', () => {
                     productId: 1
                 }
             })
-            Product.findByPk(1).then(product => console.log(product)).then(() => {
-                console.log('#########################')
-                productBelongsToUser(req, res, nextSpy);
+            productBelongsToUser(req, res, nextSpy);
+            setTimeout(() => {
                 expect(statusStub.called).to.be.eq(false);
                 expect(sendSpy.called).to.be.eq(false);
                 expect(nextSpy.called).to.be.eq(true);
                 done();
-            });
+            }, 1500);
         });
     });
     after('clean up', function(done) {

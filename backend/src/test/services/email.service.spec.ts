@@ -12,17 +12,14 @@ describe('EmailService Test', () => {
             testedEmailService.sendPasswordRestorationMail('Testuser', 'testuser@example.com', 'abcd').then(info => {
                 expect(info.messageId).not.to.be.eq(null);
                 expect(info.envelope.to[0]).to.be.eq('testuser@example.com');
-                console.log(nodemailer.getTestMessageUrl(info));
                 done();
             }).catch(err => {
-                console.log(err);
                 expect(true).to.be.eq(false); // test should not reach here!
                 done();
             });
         });
         it('should return error, when invalid receiver email', function(done) {
             testedEmailService.sendPasswordRestorationMail('Testuser', 'tesple.com', 'abcd').then(info => {
-                console.log(info);
                 expect(true).to.be.eq(false); // test should not reach here!
                 done();
             }).catch(err => {

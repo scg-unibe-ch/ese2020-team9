@@ -36,7 +36,6 @@ export function productBelongsToUser(req: Request, res: Response, next: any) {
     try {
         const {userId} = decodeToken(req, res);
         const id = parseInt(req.params.productId, 10);
-        Product.findByPk(id).then(b => console.log(b + "not finding the product ???"))
         Product.findByPk(id).then(product => {
             if (product && product.userId === userId) {
                 next();

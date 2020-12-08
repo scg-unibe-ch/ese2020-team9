@@ -3,7 +3,46 @@ import { Response } from 'express';
 import { expect } from 'chai';
 import { mockRequest, mockResponse } from 'mock-req-res';
 import sinon, { SinonSpy, SinonStub } from 'sinon';
-import { verifyToken, verifyAdmin, verifyPasswordToken } from './../../middlewares/checkAuth';
+import { verifyToken, verifyAdmin, verifyPasswordToken, productBelongsToUser } from './../../middlewares/checkAuth';
+import { Product, ProductAttributes   } from './../../models/product.model';
+import { User, UserAttributes } from '../../models/user.model';
+
+const product: ProductAttributes = {
+    productId : 1,
+    productName: 'Schoggi',
+    productDescription: 'E feini Schoggi us Guetemala.',
+    productPrice: 10,
+    productCategory: 'food',
+    productLocation: null,
+    productDelivery: true,
+    uploadDate: new Date(Date.now()),
+    sellDate: null,
+    isApproved: false,
+    isService: false,
+    isRentable: false,
+    isAvailable: true,
+    userId: 1,
+    buyerId: null
+};
+const user: UserAttributes = {
+    userId: 1,
+    admin: false,
+    wallet: 500,
+    userName: 'test',
+    password: 'test123',
+    userMail: 'test@gmail.com',
+    firstName: 'Test',
+    lastName: 'Tester',
+    gender: 'male',
+    phoneNumber: 123456,
+    addressStreet: 'Test Street',
+    addressPin: '77889',
+    addressCity: 'Test Town',
+    addressCountry: 'Test County',
+    gameScore: 0,
+    activityScore: 0,
+    overallScore: 0
+};
 
 describe('Test checkAuth middlewares', () => {
     const res: Response = mockResponse();
@@ -114,8 +153,9 @@ describe('Test checkAuth middlewares', () => {
             done();
         });
     });
-    describe('Test verifyPasswordToken', () => {
 
+    describe('Test verifyPasswordToken', () => {
+        
         const secret = process.env.JWT_PW_SECRET;
 
         afterEach('reset the spies', function(done) {
@@ -158,6 +198,74 @@ describe('Test checkAuth middlewares', () => {
             expect(statusStub.calledWith(sinon.match(403))).to.be.eq(true);
             expect(sendSpy.calledWith(sinon.match({message: 'Unauthorized'}))).to.be.eq(true);
             expect(nextSpy.called).to.be.eq(false);
+            done();
+        });
+    });
+    describe('Test productBelongsToUser function', () => {
+        before('add user and product to db', function(done) {
+            User.create(user).then(() => {
+                Product.create(product)
+                }).then(() => {
+                    done();
+            });
+       });
+
+        afterEach('reset the spies', function(done) {
+            resetStubs();
+            done();
+        }); 
+    
+        it('should return 403 when invalid token', function(done) {
+            const req = mockRequest({
+                headers: {
+                    authorization: 'Bearer abcd'
+                }
+            });
+            productBelongsToUser(req, res, nextSpy);
+            expect(statusStub.calledWith(sinon.match(403))).to.be.eq(true);
+            expect(sendSpy.calledWith(sinon.match({message: 'Product does not belong to User'}))).to.be.eq(true);
+            expect(nextSpy.called).to.be.eq(false);
+            done();
+        });
+
+        it('should return 403 when no token', function(done) {
+            const req = mockRequest();
+            productBelongsToUser(req, res, nextSpy);
+            expect(statusStub.calledWith(sinon.match(403))).to.be.eq(true);
+            expect(sendSpy.calledWith(sinon.match({message: 'Product does not belong to User'}))).to.be.eq(true);
+            expect(nextSpy.called).to.be.eq(false);
+            done();
+        });
+
+        it('should call next when token is valid', function(done) {
+            const token: string = jwt.sign({ userName: 'test', userId: 1, admin: false }, process.env.JWT_SECRET, { expiresIn: '2h' });
+            const req = mockRequest({
+                headers: {
+                    authorization: 'Bearer ' + token
+                },
+                params: {
+                    productId: 1
+                }
+            })
+            productBelongsToUser(req, res, nextSpy);
+            setTimeout(() => {
+                expect(statusStub.called).to.be.eq(false);
+                expect(sendSpy.called).to.be.eq(false);
+                expect(nextSpy.called).to.be.eq(true);
+                done();
+            }, 1500);
+        });
+    });
+    after('clean up', function(done) {
+        User.destroy({
+            truncate: true,
+            restartIdentity: true
+        }).then(() => {
+            Product.destroy({
+                truncate: true,
+                restartIdentity: true
+            })
+        }).then(() => {
             done();
         });
     });
